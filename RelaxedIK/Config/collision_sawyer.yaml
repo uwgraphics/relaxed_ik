@@ -1,0 +1,34 @@
+robot_link_radius: 0.05
+sample_states: [
+[ 0.48447183,  0.08287597, -0.82051645,  1.05341202, -2.55707645,  0.80790254, 3.61580809],
+[ 0.40956107, -1.90868699, -1.70599329,  1.62472153, -1.86797066, -1.26261938, 1.46629471],
+[-1.07884118,  0.12538496, -1.3146087,   2.05850823, -2.76288386,  2.9761, 4.7124    ],
+[-1.67219497,  1.16247961, -1.56228331,  1.62699229, -1.85329698,  2.9761, 4.7124    ]]
+boxes:
+  - name: box1
+    parameters: [1,1,0.1] # r
+    coordinate_frame: 0
+    rotation: [0,0,0]
+    translation: [1,0,0]
+  - name: box2
+    parameters: [.01,.18,0.16] # r
+    coordinate_frame: 1
+    rotation: [0,0,0]
+    translation: [0,0,0.4]
+spheres:
+  - name: sphere1
+    parameters: .05
+    coordinate_frame: 9
+    rotation: [0,0,0]
+    translation: [0,0,0]
+ellipsoids:
+capsules:
+cones:
+cylinders:
+  - name: base
+    parameters: [0.15,.7]
+    coordinate_frame: 0
+    rotation: [0,0,0]
+    translation: [0,0,-0.5]
+meshes:
+
