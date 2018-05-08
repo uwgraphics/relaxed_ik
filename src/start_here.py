@@ -13,16 +13,26 @@ kinematic-singularities, or joint-space discontinuities.  Our solver has been us
 
 To get started, just follow the instructions found here.
 
-If anything with the solver is not working as expected, or if you have any feedback, feel free to let us know (rakita@cs.wisc.edu)!
+If anything with the solver is not working as expected, or if you have any feedback, feel free to let us know! (rakita@cs.wisc.edu)
 We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive
 or negative experiences in using it.
 '''
 
-import rospy
+######################################################################################################
+# Step 1: Please add your robot urdf to the directory "urdfs", found in the project root directory
+######################################################################################################
 
-##########
-# Step 1: Please set the  #
-##########
+
+######################################################################################################
+# Step 2: Please set the following variable to the file name of your robot urdf.  For example, for the
+#   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
+#   ex: urdf_file_name = 'ur5.urdf'
+urdf_file_name = 'ur5.urdf'
+######################################################################################################
+
+
+######################################################################################################
+# Step 3: Please provide
 
 
 
