@@ -17,6 +17,19 @@ If anything with the solver is not working as expected, or if you have any feedb
 We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive
 or negative experiences in using it.
 '''
+######################################################################################################
+
+
+# Step-by-step guide starts here!
+
+
+######################################################################################################
+# Step 0: The RelaxedIK project should be included as a package within a catkin workspace
+#   for more info on this step, see http://wiki.ros.org/catkin/workspaces
+#   Make sure the package builds correctly (using catkin_make in the workspace root directory)
+#   and source is workspace such that the package is visible to the ROS environment
+######################################################################################################
+
 
 ######################################################################################################
 # Step 1: Please add your robot urdf to the directory "urdfs", found in the project root directory
