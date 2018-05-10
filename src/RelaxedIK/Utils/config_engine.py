@@ -14,23 +14,25 @@ class Config_Engine:
         dirname = os.path.dirname(__file__)
         self.path = os.path.join(dirname, '../Config/')
 
-        config_file = self.check_for_config_file()
-        if config_file == None or override:
+        if override:
             self.robot_name, self.collision_nn = self.generate_config_file()
-
-
         else:
-            self.config_data = joblib.load(self.path + config_file)
-            self.robot_name = self.config_data[0]
-            self.collision_nn = self.config_data[1]
+            config_file = self.check_for_config_file()
+            if config_file == None:
+                self.robot_name, self.collision_nn = self.generate_config_file()
+
+            else:
+                self.config_data = joblib.load(self.path + config_file)
+                self.robot_name = self.config_data[0]
+                self.collision_nn = self.config_data[1]
 
     def check_for_config_file(self):
         files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
         if self.config_fn in files:
             return self.config_fn
 
-        elif 'ur5.config' in files:
-            return 'ur5.config'
+        elif 'relaxedIK.config' in files:
+            return 'relaxedIK.config'
 
         for f in files:
             f_arr = f.split('.')
@@ -60,7 +62,7 @@ class Config_Engine:
 
         file_vars = [robot_name, collision_nn]
 
-        joblib.dump(file_vars,self.path + 'ur5.config')
+        joblib.dump(file_vars,self.path + 'relaxedIK.config')
 
         return robot_name, collision_nn
 

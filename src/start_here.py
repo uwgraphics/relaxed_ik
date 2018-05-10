@@ -258,7 +258,17 @@ collision_file_name = 'collision_ur5.yaml'
 
 
 ######################################################################################################
-# Step 5c: Once the configuration process in Step 5b is done, there will now be a config file named
+# Step 5c: To see that your collision file was put together accurately, use the following command:
+#   roslaunch RelaxedIK-MC collision_viewer.launch
+#
+#   You will see an rviz scene with collision objects in their specified locations, including the
+#   collision capsules on the robot's links.
+#   The robot in this scene will be cycling through the sample states you provided in the yaml file
+######################################################################################################
+
+
+######################################################################################################
+# Step 5d: Once the configuration process in Step 5b is done, there will now be a config file named
 #   ur5.config in the RelaxedIK/Config directory.  Please rename this to something you will
 #   recognize and be able to use going forward.  When renaming, you should leave the file in the
 #   RelaxedIK/Config directory.

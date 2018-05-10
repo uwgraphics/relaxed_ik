@@ -33,14 +33,11 @@ if __name__ == '__main__':
 
     ####################################################################################################################
 
-
-
     # Only change this if you want to extend/ adapt the solver to have more functionality ##############################
     vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
                           joint_ordering,init_state=starting_config, collision_file=collision_file_name,
                           config_file_name=config_file_name)
     relaxedIK = RelaxedIK(vars)
-    print relaxedIK
     ####################################################################################################################
 
 
@@ -57,11 +54,11 @@ if __name__ == '__main__':
     rospy.sleep(1.0)
 
     counter = 0.0
-    stride = 0.1
+    stride = 0.06
     while not rospy.is_shutdown():
         c = math.cos(counter)
-        s = 0.1
-        xopt = relaxedIK.solve([[s*c,0,0]],[[1,0,0,0]])
+        s = 0.3
+        xopt = relaxedIK.solve([[0,0,s*c]],[[1,0,0,0]])
 
         js = joint_state_define(xopt)
         if js == None:

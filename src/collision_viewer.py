@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
     sample_states = vars.collision_graph.sample_states
     idx = 0
-    rate = rospy.Rate(0.4)
+    rate = rospy.Rate(0.8)
     while not rospy.is_shutdown():
         if idx >= len(sample_states): idx = 0
 
