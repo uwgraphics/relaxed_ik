@@ -243,12 +243,12 @@ collision_file_name = 'collision_ur5.yaml'
 
 ######################################################################################################
 # Step 5b: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
-#   the solver will need to go through a one-time configuration process.  In this process, our method
+#   the solver will need to go through a one-time pre-processing step.  In this process, our method
 #   trains a neural network so that the robot can learn about its own geometry so that it avoids
 #   collisions with itself and other items defined in your collision yaml file, as well as learns
 #   to avoid kinematic singularities.
 #   To start this process, run the following command:
-#   roslaunch RelaxedIK-MC configuration.launch
+#   roslaunch RelaxedIK-MC preprocessing.launch
 #
 #   The system will immediately start producing input-output pairs for the neural network
 #   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
@@ -268,8 +268,8 @@ collision_file_name = 'collision_ur5.yaml'
 
 
 ######################################################################################################
-# Step 5d: Once the configuration process in Step 5b is done, there will now be a config file named
-#   ur5.config in the RelaxedIK/Config directory.  Please rename this to something you will
+# Step 5d: Once the preprocessing in Step 5b is done, there will now be a config file named
+#   relaxedIK.config in the RelaxedIK/Config directory.  Please rename this to something you will
 #   recognize and be able to use going forward.  When renaming, you should leave the file in the
 #   RelaxedIK/Config directory.
 #   Please provide the name of the file that you renamed your config file to
@@ -282,7 +282,7 @@ config_file_name = 'ur5.config'
 # Step 6: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
 #   roslaunch RelaxedIK-MC sample.launch
 #
-#   You should see your robot in rviz moving its end effector(s) forward and back
+#   You should see your robot in rviz moving its end effector up and down
 ######################################################################################################
 
 
