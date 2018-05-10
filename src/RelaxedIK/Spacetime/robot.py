@@ -35,8 +35,8 @@ class Robot:
             if jt_name == self.joint_order[j]:
                 return j
 
-        raise Exception('Error in Robot Class.  It appears your full_joint_lists and joint_order lists are not congruent.'
-                        'The joint {} was not found in joint_order.  Is there perhaps a misspelling?'.format(jt_name))
+        raise Exception('Error in Robot Class.  It appears your full_joint_lists and joint_order lists are not congruent '
+                        'The joint {} was not found in joint_order.  Is there perhaps a misspelling?'.format(jt_name) )
 
     def __initialize_bounds(self):
         bounds = self.numDOF*[0.0]

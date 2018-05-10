@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="RelaxedIK-MC" type="collision_viewer.py" name="collision_viewer" output="screen"/>
+</launch>

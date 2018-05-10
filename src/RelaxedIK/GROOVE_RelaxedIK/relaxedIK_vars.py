@@ -30,7 +30,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight()),
-                 weight_priors=(15.0,15.0, 1.0,1.0,1.0, 2.0),
+                 weight_priors=(40.0,30.0, 0.1,1.0,1.0,2.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -90,15 +90,15 @@ class RelaxedIK_vars(Vars):
         else:
             self.bounds = bounds
 
-        if not pre_config:
-            dirname = os.path.dirname(__file__)
-            if collision_file == '':
-                cf = os.path.join(dirname, '../Config/collision.yaml')
-                # cf = 'RelaxedIK/Config/collision.yaml'
-            else:
-                cf = os.path.join(dirname, '../Config/' + collision_file)
-                # cf = 'RelaxedIK/Config/' + collision_file
-            self.collision_graph = Collision_Graph(cf, self.robot, collision_link_exclusion_list)
+        # if not pre_config:
+        dirname = os.path.dirname(__file__)
+        if collision_file == '':
+            cf = os.path.join(dirname, '../Config/collision.yaml')
+            # cf = 'RelaxedIK/Config/collision.yaml'
+        else:
+            cf = os.path.join(dirname, '../Config/' + collision_file)
+            # cf = 'RelaxedIK/Config/' + collision_file
+        self.collision_graph = Collision_Graph(cf, self.robot, collision_link_exclusion_list)
 
 
         if pre_config:

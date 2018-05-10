@@ -1,8 +1,9 @@
+#! /usr/bin/env python
 '''
 author: Danny Rakita
 website: http://pages.cs.wisc.edu/~rakita/
 email: rakita@cs.wisc.edu
-last update: 5/8/18
+last update: 5/9/18
 
 Intro: Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm up to position X, while maintaining an end-effector
@@ -33,12 +34,12 @@ or negative experiences in using it.
 
 
 ######################################################################################################
-# Step 1: Please add your robot urdf to the directory "urdfs", found in the project root directory
+# Step 1a: Please add your robot urdf to the directory "urdfs", found in the project root directory
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 2: Please set the following variable to the file name of your robot urdf.  For example, for the
+# Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
 urdf_file_name = 'ur5.urdf'
@@ -46,9 +47,28 @@ urdf_file_name = 'ur5.urdf'
 
 
 ######################################################################################################
-# Step 3: Please provide the names of the joints for all chains.
+# Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
+#   ex: 'base_link'
+fixed_frame = 'base_link'
+######################################################################################################
+
+
+######################################################################################################
+# Step 2b: To test that your urdf is being read correctly, run the following command:
+#   roslaunch RelaxedIK-MC urdf_viewer.launch
+#
+#   you should see rviz start up, and your robot platform should be visible.  You can rotate the joints
+#       in rviz by using the GUI pop-up
+#   NOTE: if some of your robot links appear blank white in rviz, you may have to change the Fixed Frame
+#       option in the upper left to match the fixed frame link for your robot
+######################################################################################################
+
+
+
+######################################################################################################
+# Step 3a: Please provide the names of the joints for all chains.
 #   This variable will be a list of lits, where each list specifies the names of joints in the particular
-#   chain, adhering to the naming scheme in the urdf supplied in step 2.
+#   chain, adhering to the naming scheme in the urdf supplied in step 2a.
 #   example 1 shows what this would be for a multi-end effector robot, specifically to use the DRC-Hubo+ robots
 #   right and left arm with waist rotation (15 DOF total)
 #   ex1: [ ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
@@ -57,50 +77,60 @@ urdf_file_name = 'ur5.urdf'
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single-end effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [  ]
+joint_names = [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']  ]
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 4: Please provide the order that you want joints to appear in the final returned joint configurations,
-#   using the names specified in step 3.  ALL JOINTS specified in step 3 should appear somewhere in
-#   this list.  If the same joint appears in separate chains in step 3, it should only appear once in
+# Step 3b: Please provide the order that you want joints to appear in the final returned joint configurations,
+#   using the names specified in step 3a.  ALL JOINTS specified in step 3a should appear somewhere in
+#   this list.  If the same joint appears in separate chains in step 3a, it should only appear once in
 #   the list here.  If you are using a single chain robot, feel free to use the exact same list
-#   that appears in step 3.
-#   example 1 shows one possible ordering for example 1 in Step 3.  Notice how in this example, the 'WAIST'
+#   that appears in step 3a.
+#   example 1 shows one possible ordering for example 1 in Step 3a.  Notice how in this example, the 'WAIST'
 #   joint only shows up once in the joint ordering list, even though it was a part of two separate subchains in
-#   Step 3.
+#   Step 3a.
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering = [  ]
+joint_ordering = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 5: Please provide the name(s) of all end-effector fixed joints.  These joints are usually labeled as
+# Step 3c: Please provide the name(s) of all end-effector fixed joints.  These joints are usually labeled as
 #   "fixed" in the urdf, and specify the exact "grasping point" of the robot's hand.  If it appears
 #   that your urdf does not specify this ahead of time, please add it to the urdf.  Make sure to provide
 #   one end-effector joint name per chain (i.e., each chain will have its own end-effector).  The order of
-#   these joint names should correspond to the ordering of the chains specified in Step 3.
+#   these joint names should correspond to the ordering of the chains specified in Step 3b.
 #   For example 1, using the DRC-Hubo+ robot, we should specify two separate fixed joint names, one
 #   for the right hand and one for the left hand
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [  ]
+ee_fixed_joints = ['ee_fixed_joint']
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 6: Please provide a function that takes in a vector corresponding to a robot configuration (x) and
+# Step 3d: Please provide a starting configuration for the robot.  If you leave this blank, the starting
+#   configuration will be considered zeros for all joints
+#   The configuration should be a single list of values for each joint's rotation (in radians) adhering
+#   to the joint order you specified in Step 3b
+#   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
+starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
+######################################################################################################
+
+
+######################################################################################################
+# Step 4: Please provide a function that takes in a vector corresponding to a robot configuration (x) and
 #   returns a sensor_msg.JointState message in ROS.  http://docs.ros.org/api/sensor_msgs/html/msg/JointState.html
 #   You do not have to include velocity or effort information, just the joint positions.
 #   The point of having you manually provide a function that does this is to account for situations
-#   where joints other than the ones included in Step 4 are part of a larger robot platform.  If you would
+#   where joints other than the ones included in Step 3b are part of a larger robot platform.  If you would
 #   rather not manually provide a function to do this, just leave it how it is by default (returning None), and
 #   we will provide a simple function that does this automatically.  But note, if you decide to do this, there may be
-#   errors when viewing things in rviz as only the default joints listed in Step 4 will be visible, while
+#   errors when viewing things in rviz as only the default joints listed in Step 3b will be visible, while
 #   the other joints in the urdf are not published to.
 #
 # example function for the UR5:
@@ -159,7 +189,7 @@ def joint_state_define(x):
 
 
 ######################################################################################################
-# Step 7: We will now set up collision information.  RelaxedIK avoids self-collisions by
+# Step 5: We will now set up collision information.  RelaxedIK avoids self-collisions by
 #   first receiving a potential function for "how close" it is to a collision state,
 #   then learning that potential function using a neural network such that it can be quickly run
 #   in the context of a real-time optimization.  RelaxedIK uses fcl (flexible
@@ -180,7 +210,9 @@ def joint_state_define(x):
 #   a configuration where two links are natively and safely close together.  THIS STEP IS VERY IMPORTANT FOR THE NEURAL
 #   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
 #   seen to work well, but more will always be better.  Add these collision-free sample states as lists next to the samples_states
-#   field in your yaml file, as seen in the collision_example.yaml file.
+#   field in your yaml file, as seen in the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided
+#   in this project to pick out collision-free sample states.  To start this tool, use the command:
+#       roslaunch RelaxedIK-MC urdf_viewer.launch
 #
 #   The next fields in the yaml file (boxes, spheres, ellipsoids, capsules, cylinders) are used to specify additional
 #   static objects around the environment that the robot should avoid.
@@ -204,6 +236,21 @@ def joint_state_define(x):
 #       likely won't include the robot's end effector since its geometry is often not included in the urdf, so a common
 #       strategy is to tightly envelope your end effector using an ellipsoid or box object in the yaml file
 #       so collisions with the end effector are avoided as best as possible.
+#
+#   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
+#   ex: collision_file_name = 'collision.yaml'
+collision_file_name = 'collision_ur5.yaml'
 ###########################################################################################################
+
+
+# Step-by-step guide ends here!
+
+
+
+
+
+
+
+
 
 
