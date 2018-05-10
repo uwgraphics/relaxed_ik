@@ -11,12 +11,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="start_here.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="start_here.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_here.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="102" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sample.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sample.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="61" column="40" lean-forward="false" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
+              <folding>
+                <element signature="e#245#405#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,23 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relaxedIK_processing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/relaxedIK_processing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding>
-                <element signature="e#413#496#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="collision_viewer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/collision_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+            <state relative-caret-position="522">
+              <caret line="71" column="44" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="71" selection-end-column="44" />
               <folding>
                 <element signature="e#414#574#0" expanded="true" />
               </folding>
@@ -130,6 +130,7 @@
         <option value="$PROJECT_DIR$/urdf_viewer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_ur5.yaml" />
         <option value="$PROJECT_DIR$/collision_viewer.py" />
+        <option value="$PROJECT_DIR$/sample.py" />
       </list>
     </option>
   </component>
@@ -170,7 +171,7 @@
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,7 +202,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.load_urdf">
+  <component name="RunManager" selected="Python.sample">
     <configuration name="collision_viewer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -253,16 +254,35 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="3">
+    <configuration name="sample" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="src" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sample.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.relaxedIK_processing" />
       <item index="1" class="java.lang.String" itemvalue="Python.load_urdf" />
       <item index="2" class="java.lang.String" itemvalue="Python.collision_viewer" />
+      <item index="3" class="java.lang.String" itemvalue="Python.sample" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.load_urdf" />
-        <item index="1" class="java.lang.String" itemvalue="Python.collision_viewer" />
-        <item index="2" class="java.lang.String" itemvalue="Python.relaxedIK_processing" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.sample" />
+        <item index="1" class="java.lang.String" itemvalue="Python.load_urdf" />
+        <item index="2" class="java.lang.String" itemvalue="Python.collision_viewer" />
+        <item index="3" class="java.lang.String" itemvalue="Python.relaxedIK_processing" />
       </list>
     </recent_temporary>
   </component>
@@ -446,9 +466,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#413#496#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -520,21 +538,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/start_here.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-216">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/collision_viewer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="46" column="25" lean-forward="false" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+        <state relative-caret-position="522">
+          <caret line="71" column="44" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="71" selection-end-column="44" />
           <folding>
             <element signature="e#414#574#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start_here.py">
+    <entry file="file://$PROJECT_DIR$/sample.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="342">
+          <caret line="61" column="40" lean-forward="false" selection-start-line="61" selection-start-column="40" selection-end-line="61" selection-end-column="40" />
+          <folding>
+            <element signature="e#245#405#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
