@@ -36,7 +36,8 @@ class RelaxedIK_vars(Vars):
                  collision_file='',
                  collision_link_exclusion_list=[],
                  config_file_name='',
-                 pre_config=False
+                 pre_config=False,
+                 config_override=False
                  ):
 
         Vars.__init__(self,name, objective_function, init_state,objectives,weight_funcs,weight_priors,constraints,bounds)
@@ -173,7 +174,7 @@ class RelaxedIK_vars(Vars):
         self.solverCounter = 0
 
         if pre_config == False:
-            self.ce = Config_Engine(self.collision_graph, config_fn=config_file_name)
+            self.ce = Config_Engine(self.collision_graph, config_fn=config_file_name, override=config_override)
             self.collision_nn = self.ce.collision_nn
 
     def update(self, xopt, f_obj, publish_objectives=True,publish_constraints=True, publish_weight_funcs=True):

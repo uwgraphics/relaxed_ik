@@ -59,8 +59,6 @@ fixed_frame = 'base_link'
 #
 #   you should see rviz start up, and your robot platform should be visible.  You can rotate the joints
 #       in rviz by using the GUI pop-up
-#   NOTE: if some of your robot links appear blank white in rviz, you may have to change the Fixed Frame
-#       option in the upper left to match the fixed frame link for your robot
 ######################################################################################################
 
 
@@ -189,7 +187,7 @@ def joint_state_define(x):
 
 
 ######################################################################################################
-# Step 5: We will now set up collision information.  RelaxedIK avoids self-collisions by
+# Step 5a: We will now set up collision information.  RelaxedIK avoids self-collisions by
 #   first receiving a potential function for "how close" it is to a collision state,
 #   then learning that potential function using a neural network such that it can be quickly run
 #   in the context of a real-time optimization.  RelaxedIK uses fcl (flexible
@@ -241,6 +239,41 @@ def joint_state_define(x):
 #   ex: collision_file_name = 'collision.yaml'
 collision_file_name = 'collision_ur5.yaml'
 ###########################################################################################################
+
+
+######################################################################################################
+# Step 5b: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
+#   the solver will need to go through a one-time configuration process.  In this process, our method
+#   trains a neural network so that the robot can learn about its own geometry so that it avoids
+#   collisions with itself and other items defined in your collision yaml file, as well as learns
+#   to avoid kinematic singularities.
+#   To start this process, run the following command:
+#   roslaunch RelaxedIK-MC configuration.launch
+#
+#   The system will immediately start producing input-output pairs for the neural network
+#   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
+#   WARNING: THIS PROCESS WILL WRITE TO A FILE NAMED ur5.config IN THE RelaxedIK/Config DIRECTORY
+#       IF YOU DO NOT WANT THIS FILE OVERWRITTEN, PLEASE RENAME THAT FILE BEFORE RUNNING THIS PROCEDURE
+######################################################################################################
+
+
+######################################################################################################
+# Step 5c: Once the configuration process in Step 5b is done, there will now be a config file named
+#   ur5.config in the RelaxedIK/Config directory.  Please rename this to something you will
+#   recognize and be able to use going forward.  When renaming, you should leave the file in the
+#   RelaxedIK/Config directory.
+#   Please provide the name of the file that you renamed your config file to
+#   ex: config_file_name = 'ur5.config'
+config_file_name = 'ur5.config'
+######################################################################################################
+
+
+######################################################################################################
+# Step 6: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
+#   roslaunch RelaxedIK-MC sample.launch
+#
+#   You should see your robot in rviz moving its end effector(s) forward and back
+######################################################################################################
 
 
 # Step-by-step guide ends here!

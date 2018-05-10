@@ -8,14 +8,14 @@ import os
 
 
 class Config_Engine:
-    def __init__(self, collision_graph, config_fn=''):
+    def __init__(self, collision_graph, config_fn='', override=False):
         self.collision_graph = collision_graph
         self.config_fn = config_fn
         dirname = os.path.dirname(__file__)
         self.path = os.path.join(dirname, '../Config/')
 
         config_file = self.check_for_config_file()
-        if config_file == None:
+        if config_file == None or override:
             self.robot_name, self.collision_nn = self.generate_config_file()
 
 
@@ -29,8 +29,8 @@ class Config_Engine:
         if self.config_fn in files:
             return self.config_fn
 
-        elif 'relaxedIK.config' in files:
-            return 'relaxedIK.config'
+        elif 'ur5.config' in files:
+            return 'ur5.config'
 
         for f in files:
             f_arr = f.split('.')
@@ -60,7 +60,7 @@ class Config_Engine:
 
         file_vars = [robot_name, collision_nn]
 
-        joblib.dump(file_vars,self.path + 'relaxedIK.config')
+        joblib.dump(file_vars,self.path + 'ur5.config')
 
         return robot_name, collision_nn
 

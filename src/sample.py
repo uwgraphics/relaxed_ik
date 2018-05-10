@@ -3,12 +3,12 @@
 author: Danny Rakita
 website: http://pages.cs.wisc.edu/~rakita/
 email: rakita@cs.wisc.edu
-last update: 5/9/18
+last update: 5/10/18
 '''
 ######################################################################################################
 
 from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joints, starting_config, \
-    joint_state_define, collision_file_name, fixed_frame
+    joint_state_define, collision_file_name, fixed_frame, config_file_name
 from RelaxedIK.relaxedIK import RelaxedIK
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from sensor_msgs.msg import JointState
@@ -37,8 +37,10 @@ if __name__ == '__main__':
 
     # Only change this if you want to extend/ adapt the solver to have more functionality ##############################
     vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
-                          joint_ordering,init_state=starting_config, collision_file=collision_file_name)
+                          joint_ordering,init_state=starting_config, collision_file=collision_file_name,
+                          config_file_name=config_file_name)
     relaxedIK = RelaxedIK(vars)
+    print relaxedIK
     ####################################################################################################################
 
 
@@ -55,7 +57,7 @@ if __name__ == '__main__':
     rospy.sleep(1.0)
 
     counter = 0.0
-    stride = 0.02
+    stride = 0.1
     while not rospy.is_shutdown():
         c = math.cos(counter)
         s = 0.1

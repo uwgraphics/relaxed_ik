@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="RelaxedIK-MC" type="configuration.py" name="configuration" output="screen"/>
+</launch>
