@@ -77,7 +77,7 @@ class Collision_Object_Container:
                     ptB = jtPts[l+1]
                     midPt = ptA + 0.5*(ptB - ptA)
                     dis = np.linalg.norm(ptA - ptB)
-                    if dis < 0.1:
+                    if dis < 0.02:
                         continue
 
                     cylinder = Collision_Cylinder.init_with_arguments('robotLink_' + str(arm_idx) + '_' + str(l),
