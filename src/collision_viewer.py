@@ -15,6 +15,7 @@ from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joi
     joint_state_define, collision_file_name, fixed_frame
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from sensor_msgs.msg import JointState
+from visualization_msgs.msg import Marker
 import rospy
 import roslaunch
 import os
@@ -28,6 +29,7 @@ if __name__ == '__main__':
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     js_pub = rospy.Publisher('joint_states',JointState,queue_size=5)
+    marker_pub = rospy.Publisher('visualization_marker',Marker,queue_size=5)
     tf_pub = tf.TransformBroadcaster()
 
     rospy.sleep(0.2)
@@ -70,6 +72,21 @@ if __name__ == '__main__':
                              rospy.Time.now(),
                              fixed_frame,
                              'common_world')
+
+        marker = Marker()
+        marker.type = marker.TEXT_VIEW_FACING
+        marker.header.frame_id = 'common_world'
+        marker.header.stamp.nsecs = now.nsecs
+        marker.header.stamp.secs = now.secs
+        marker.text = str(idx)
+        marker.scale.x = 0.1
+        marker.scale.y = 0.1
+        marker.scale.z = 0.1
+        marker.pose.position.z = 0.3
+        marker.pose.position.x = -0.3
+        marker.color.a = 1.0
+        marker_pub.publish(marker)
+
 
         idx += 1
 

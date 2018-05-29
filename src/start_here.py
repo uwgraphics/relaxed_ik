@@ -6,11 +6,11 @@ email: rakita@cs.wisc.edu
 last update: 5/9/18
 
 Intro: Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
-between Cartesian end-effector pose goals (such as "move the robot's right arm up to position X, while maintaining an end-effector
+between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
 orientation Y") to Joint-Space (i.e., the robot's rotation values for each joint degree-of-freedom at a particular time-point) is
 done both ACCURATELY and FEASIBLY.  By this, we mean that RelaxedIK attempts to find the closest possible solution to the
 desired end-effector pose goals without exhibiting negative effects such as self-collisions, environment collisions,
-kinematic-singularities, or joint-space discontinuities.  Our solver has been used...
+kinematic-singularities, or joint-space discontinuities.
 
 To get started, just follow the instructions found here.
 
@@ -34,7 +34,7 @@ or negative experiences in using it.
 
 
 ######################################################################################################
-# Step 1a: Please add your robot urdf to the directory "urdfs", found in the project root directory
+# Step 1a: Please add your robot urdf to the directory "urdfs", found in the project root directory.
 ######################################################################################################
 
 
@@ -48,14 +48,14 @@ urdf_file_name = 'mico.urdf'
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
-#   ex: 'base_link'
+#   ex: fixed_frame  = 'base_link'
 fixed_frame = 'm1n6s200_link_base'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 2b: To test that your urdf is being read correctly, run the following command:
-#   roslaunch RelaxedIK-MC urdf_viewer.launch
+#   roslaunch relaxed_ik- urdf_viewer.launch
 #
 #   you should see rviz start up, and your robot platform should be visible.  You can rotate the joints
 #       in rviz by using the GUI pop-up
@@ -209,8 +209,10 @@ def joint_state_define(x):
 #   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
 #   seen to work well, but more will always be better.  Add these collision-free sample states as lists next to the samples_states
 #   field in your yaml file, as seen in the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided
-#   in this project to pick out collision-free sample states.  To start this tool, use the command:
-#       roslaunch RelaxedIK-MC urdf_viewer.launch
+#   in this project to pick out collision-free sample states.
+#
+#   To start this tool, use the command:
+#       roslaunch relaxed_ik urdf_viewer.launch
 #
 #   The next fields in the yaml file (boxes, spheres, ellipsoids, capsules, cylinders) are used to specify additional
 #   static objects around the environment that the robot should avoid.
@@ -233,7 +235,7 @@ def joint_state_define(x):
 #   REMEMBER: The robot's links are AUTOMATICALLY added, so no need to add these into the yaml file.  However, this
 #       likely won't include the robot's end effector since its geometry is often not included in the urdf, so a common
 #       strategy is to tightly envelope your end effector using an ellipsoid or box object in the yaml file
-#       so collisions with the end effector are avoided as best as possible.
+#       so collisions with the end-effector are avoided as best as possible.
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
@@ -244,7 +246,7 @@ collision_file_name = 'collision_mico.yaml'
 
 ######################################################################################################
 # Step 5b: To see that your collision file was put together accurately, use the following command:
-#   roslaunch RelaxedIK-MC collision_viewer.launch
+#   roslaunch relaxed_ik collision_viewer.launch
 #
 #   You will see an rviz scene with collision objects in their specified locations, including the
 #   collision capsules on the robot's links.
@@ -259,11 +261,11 @@ collision_file_name = 'collision_mico.yaml'
 #   collisions with itself and other items defined in your collision yaml file, as well as learns
 #   to avoid kinematic singularities.
 #   To start this process, run the following command:
-#   roslaunch RelaxedIK-MC preprocessing.launch
+#   roslaunch relaxed_ik preprocessing.launch
 #
 #   The system will immediately start producing input-output pairs for the neural network
 #   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
-#   WARNING: THIS PROCESS WILL WRITE TO A FILE NAMED ur5.config IN THE RelaxedIK/Config DIRECTORY
+#   WARNING: THIS PROCESS WILL WRITE TO A FILE NAMED relaxedIK.config IN THE RelaxedIK/Config DIRECTORY
 #       IF YOU DO NOT WANT THIS FILE OVERWRITTEN, PLEASE RENAME THAT FILE BEFORE RUNNING THIS PROCEDURE
 ######################################################################################################
 
@@ -281,7 +283,7 @@ config_file_name = 'mico.config'
 
 ######################################################################################################
 # Step 6: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
-#   roslaunch RelaxedIK-MC sample.launch
+#   roslaunch relaxed_ik sample.launch
 #
 #   You should see your robot in rviz moving its end effector up and down
 ######################################################################################################

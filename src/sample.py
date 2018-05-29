@@ -33,15 +33,8 @@ if __name__ == '__main__':
     rospy.sleep(0.3)
 
     ####################################################################################################################
-
-    # Only change this if you want to extend/ adapt the solver to have more functionality ##############################
-    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
-                          joint_ordering,init_state=starting_config, collision_file=collision_file_name,
-                          config_file_name=config_file_name)
-    relaxedIK = RelaxedIK(vars)
+    relaxedIK = RelaxedIK.init_from_config(config_file_name)
     ####################################################################################################################
-
-
 
     # Don't change this code ###########################################################################################
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
@@ -51,7 +44,6 @@ if __name__ == '__main__':
     launch.start()
     ####################################################################################################################
 
-
     rospy.sleep(1.0)
 
     counter = 0.0
@@ -60,6 +52,9 @@ if __name__ == '__main__':
         c = math.cos(counter)
         s = 0.3
         xopt = relaxedIK.solve([[s*c,0,0]],[[1,0,0,0]])
+        # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
+        print xopt
+
 
         js = joint_state_define(xopt)
         if js == None:

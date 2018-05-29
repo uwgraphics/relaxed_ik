@@ -59,6 +59,11 @@ class RelaxedIK_vars(Vars):
             raise ValueError('Invalid function arguments.')
         ###################################################################################################################################
 
+        self.full_joint_lists = full_joint_lists
+        self.fixed_ee_joints = fixed_ee_joints
+        self.joint_order = joint_order
+        self.urdf_path = urdf_path
+        self.collision_file = collision_file
         self.num_chains = len(full_joint_lists)
         self.arms = []
         self.urdf_robots = []
@@ -173,8 +178,8 @@ class RelaxedIK_vars(Vars):
         self.start_time = rospy.get_time()
         self.solverCounter = 0
 
-        if pre_config == False:
-            self.ce = Config_Engine(self.collision_graph, config_fn=config_file_name, override=config_override)
+        if not pre_config:
+            self.ce = Config_Engine(self.collision_graph, self, config_fn=config_file_name, override=config_override)
             self.collision_nn = self.ce.collision_nn
 
     def update(self, xopt, f_obj, publish_objectives=True,publish_constraints=True, publish_weight_funcs=True):

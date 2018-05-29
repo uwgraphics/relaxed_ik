@@ -1,8 +1,6 @@
 import objective as obj
 import constraint as con
 from colors import bcolors
-import nlopt as N
-
 
 class GrooveType:
     def __init__(self, vars):
@@ -23,8 +21,6 @@ class GrooveType:
             constraint_dicts.append(d)
 
         return tuple(constraint_dicts)
-
-
 
 
 class GrooveType_scipy(GrooveType):
@@ -61,6 +57,11 @@ class GrooveType_scipy(GrooveType):
 
 class GrooveType_nlopt(GrooveType):
     def __init__(self, vars, solver_name):
+        try:
+            import nlopt as N
+        except:
+            raise Exception('Error: In order to use an NLopt solver, you must have NLopt installed.')
+
         GrooveType.__init__(self, vars)
         self.solver_name = solver_name
 

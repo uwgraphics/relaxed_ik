@@ -8,23 +8,32 @@ import os
 
 
 class Config_Engine:
-    def __init__(self, collision_graph, config_fn='', override=False):
+    def __init__(self, collision_graph, vars, config_fn='', override=False):
         self.collision_graph = collision_graph
         self.config_fn = config_fn
+        self.vars = vars
         dirname = os.path.dirname(__file__)
         self.path = os.path.join(dirname, '../Config/')
 
         if override:
-            self.robot_name, self.collision_nn = self.generate_config_file()
+            self.robot_name, self.collision_nn, self.init_state, self.full_joint_lists, self.fixed_ee_joints, \
+               self.joint_order, self.urdf_path, self.collision_file = self.generate_config_file()
         else:
             config_file = self.check_for_config_file()
             if config_file == None:
-                self.robot_name, self.collision_nn = self.generate_config_file()
+                self.robot_name, self.collision_nn, self.init_state, self.full_joint_lists, self.fixed_ee_joints, \
+                self.joint_order, self.urdf_path, self.collision_file = self.generate_config_file()
 
             else:
                 self.config_data = joblib.load(self.path + config_file)
                 self.robot_name = self.config_data[0]
                 self.collision_nn = self.config_data[1]
+                self.init_state = self.config_data[2]
+                self.full_joint_lists = self.config_data[3]
+                self.fixed_ee_joints = self.config_data[4]
+                self.joint_order = self.config_data[5]
+                self.urdf_path = self.config_data[6]
+                self.collision_file = self.config_data[7]
 
     def check_for_config_file(self):
         files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
@@ -60,11 +69,13 @@ class Config_Engine:
         collision_nn = trainer.clf
         robot_name = trainer.robot.__name__
 
-        file_vars = [robot_name, collision_nn]
+        file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
+               self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]
 
         joblib.dump(file_vars,self.path + 'relaxedIK.config')
 
-        return robot_name, collision_nn
+        return robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
+               self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file
 
 if __name__ == '__main__':
     ce = Config_Engine()
