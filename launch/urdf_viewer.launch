@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <launch>
-   <node pkg="RelaxedIK-MC" type="urdf_viewer.py" name="urdf_viewer" output="screen"/>
+   <node pkg="relaxed_ik" type="urdf_viewer.py" name="urdf_viewer" output="screen"/>
 </launch>
