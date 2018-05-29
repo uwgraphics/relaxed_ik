@@ -17,7 +17,6 @@ import roslaunch
 import os
 import tf
 import math
-import dill
 
 
 if __name__ == '__main__':
