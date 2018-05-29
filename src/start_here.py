@@ -76,7 +76,8 @@ fixed_frame = 'Body_WST'
 #   example 2 shows what this would be for a single-end effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
 joint_names = [ ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
-               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2'] ]
+               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2'], ['WAIST', 'LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
+                'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 ######################################################################################################
 
 
@@ -92,8 +93,10 @@ joint_names = [ ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering = [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
-               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2' ]
+joint_ordering = ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
+               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2',
+                  'LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW',
+               'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2']
 ######################################################################################################
 
 
@@ -108,7 +111,7 @@ joint_ordering = [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGH
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = ['RIGHT_HAND']
+ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 ######################################################################################################
 
 
@@ -118,7 +121,8 @@ ee_fixed_joints = ['RIGHT_HAND']
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [0.0, 0.78852112, -0.14649155, -0.17695991, -1.86374666, -0.09144152, -0.46006443, -0.1494651]
+starting_config = [0, 0.78852112, -0.14649155, -0.17695991, -1.86374666, -0.09144152, -0.46006443, -0.1494651,
+                   0.78852112, 0.14649155, 0.17695991, -1.86374666, 0.09144152, -0.46006443, 0.1494651]
 ######################################################################################################
 
 
@@ -207,6 +211,13 @@ def joint_state_define(x):
     js.position[21] = x[5]
     js.position[22] = x[6]
     js.position[24] = x[7]
+    js.position[0] =  x[8]
+    js.position[1] =  x[9]
+    js.position[2] =  x[10]
+    js.position[3] =  x[11]
+    js.position[4] =  x[12]
+    js.position[5] =  x[13]
+    js.position[7] =  x[14]
     js.position = tuple(js.position)
     return js
 
@@ -304,7 +315,7 @@ collision_file_name = 'collision_hubo.yaml'
 #   RelaxedIK/Config directory.
 #   Please provide the name of the file that you renamed your config file to
 #   ex: config_file_name = 'ur5.config'
-config_file_name = ''
+config_file_name = 'hubo.config'
 ######################################################################################################
 
 

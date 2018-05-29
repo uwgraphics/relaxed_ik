@@ -3,6 +3,7 @@ import Utils.transformations as T
 import math as M
 import numpy as np
 import numpy.random as r
+from RelaxedIK.Utils.filter import EMA_filter
 
 def rand_vec(bounds):
     vec = []
@@ -21,6 +22,8 @@ class RelaxedIK(object):
         self.optimization_package = optimization_package
         self.solver_name = solver_name
         self.groove = get_groove(vars, optimization_package,solver_name)
+        self.filter = EMA_filter(self.vars.init_state,a=0.6)
+
 
     @classmethod
     def init_from_config(self, config_name):
@@ -46,7 +49,7 @@ class RelaxedIK(object):
         return RelaxedIK(vars)
 
 
-    def solve(self, goal_positions, goal_quats, prev_state=None, vel_objectives_on=True, unconstrained=False, verbose_output=False, max_iter=8, maxtime=.05, rand_start=False):
+    def solve(self, goal_positions, goal_quats, prev_state=None, vel_objectives_on=True, unconstrained=False, verbose_output=False, max_iter=12, maxtime=.05, rand_start=False):
 
         if self.vars.rotation_mode == 'relative':
             self.vars.goal_quats = []
@@ -94,6 +97,7 @@ class RelaxedIK(object):
             raise Exception('Invalid optimization package in relaxedIK.  Valid inputs are [scipy] and [nlopt].  Exiting.')
         ################################################################################################################
 
+        xopt = self.filter.filter(xopt)
         self.vars.relaxedIK_vars_update(xopt)
 
         return xopt
