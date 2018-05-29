@@ -7,3 +7,5 @@ orientation Y") to Joint-Space (i.e., the robot's rotation values for each joint
 done both ACCURATELY and FEASIBLY.  By this, we mean that RelaxedIK attempts to find the closest possible solution to the
 desired end-effector pose goals without exhibiting negative effects such as self-collisions, environment collisions,
 kinematic-singularities, or joint-space discontinuities.
+
+To start using the solver, please follow the step-by-step instructions in the file start_here.py (in the root directory)
