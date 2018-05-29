@@ -103,7 +103,7 @@
 		<parent link="Body_LSR"/>
 		<child link="Body_LSY"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="7.644542123735163"/>
+		<limit effort="100000" lower="-2.2" upper="2.2" velocity="7.644542123735163"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_LSY">
@@ -133,7 +133,7 @@
 		<parent link="Body_LSY"/>
 		<child link="Body_LEB"/>
 		<axis xyz="0 1 0"/>
-		<limit effort="100000" lower="-2.96705972839036" upper="0.8726646259971648" velocity="7.644542123735163"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="-0.5" velocity="7.644542123735163"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_LEB">
@@ -634,7 +634,7 @@
 		<parent link="Body_RSR"/>
 		<child link="Body_RSY"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="7.644542123735163"/>
+		<limit effort="100000" lower="-2.2" upper="2.2" velocity="7.644542123735163"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_RSY">
@@ -664,7 +664,7 @@
 		<parent link="Body_RSY"/>
 		<child link="Body_REB"/>
 		<axis xyz="0 1 0"/>
-		<limit effort="100000" lower="-2.96705972839036" upper="0.8726646259971648" velocity="7.644542123735163"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="-0.5" velocity="7.644542123735163"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_REB">

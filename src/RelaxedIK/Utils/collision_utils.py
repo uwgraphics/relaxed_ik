@@ -57,7 +57,6 @@ class Collision_Object_Container:
         self.request = fcl.DistanceRequest()
         self.result = fcl.DistanceResult()
 
-
         ret = fcl.distance(obja, objb, self.request, self.result)
         return self.result.min_distance
 

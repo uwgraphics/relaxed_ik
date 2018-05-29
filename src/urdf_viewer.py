@@ -10,13 +10,11 @@ AND FOLLOW THE STEP-BY-STEP INSTRUCTIONS THERE.  Thanks!
 '''
 ######################################################################################################
 
-
 from start_here import urdf_file_name, fixed_frame
 import rospy
 import roslaunch
 import tf
 import os
-
 
 if __name__ == '__main__':
     rospy.init_node('urdf_viewer')
@@ -27,6 +25,8 @@ if __name__ == '__main__':
     tf_pub = tf.TransformBroadcaster()
 
     rospy.sleep(1.0)
+
+    print fixed_frame
 
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
     roslaunch.configure_logging(uuid)
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         tf_pub.sendTransform((0,0,0),
                              tf.transformations.quaternion_from_euler(0, 0, 0),
                              rospy.Time.now(),
-                             fixed_frame,
-                             'common_world')
+                             'common_world',
+                             fixed_frame)
 
     rate.sleep()

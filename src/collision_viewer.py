@@ -70,8 +70,8 @@ if __name__ == '__main__':
         tf_pub.sendTransform((0,0,0),
                              tf.transformations.quaternion_from_euler(0, 0, 0),
                              rospy.Time.now(),
-                             fixed_frame,
-                             'common_world')
+                             'common_world',
+                             fixed_frame)
 
         marker = Marker()
         marker.type = marker.TEXT_VIEW_FACING

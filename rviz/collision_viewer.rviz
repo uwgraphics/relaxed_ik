@@ -55,58 +55,317 @@ Visualization Manager:
       Enabled: true
       Links:
         All Links Enabled: true
+        Body_Face:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        Body_LAFT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LAP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LAR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LEB:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_a1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_a2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_a3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_b1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_b2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_b3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_c1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_c2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LF2_c3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LFUNI:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LFWH:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LHAND:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LHP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LHR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LHY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LKN:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LSP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LSR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LSY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LWFT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LWH:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LWP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_LWY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_NKP1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        Body_NKP2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        Body_NKY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        Body_RAFT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RAP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RAR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_REB:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_a1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_a2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_a3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_b1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_b2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_b3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_c1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_c2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RF2_c3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RFUNI:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RFWH:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RHAND:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RHP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RHR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RHY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RKN:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RSP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RSR:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RSY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RWFT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RWH:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RWP:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_RWY:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_TORSO:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Body_WST:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        ee_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        forearm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        shoulder_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        upper_arm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        wrist_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_3_link:
+        base_footprint:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -136,7 +395,7 @@ Visualization Manager:
       Marker Topic: visualization_marker
       Name: Marker
       Namespaces:
-        {}
+        "": true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -164,7 +423,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.83988369
+      Distance: 1.68653178
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -179,10 +438,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.375399053
+      Pitch: 0.660399258
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.5399003
+      Yaw: 6.10489607
     Saved: ~
 Window Geometry:
   Displays:
