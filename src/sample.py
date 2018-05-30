@@ -50,7 +50,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         c = math.cos(counter)
         s = 0.3
-        xopt = relaxedIK.solve([[s*c,0,0], [0,0,0]],[[1,0,0,0],[1,0,0,0]])
+        xopt = relaxedIK.solve([[0,0,s*c], [0,0,s*c]],[[1,0,0,0],[1,0,0,0]])
         # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
         print xopt
 
