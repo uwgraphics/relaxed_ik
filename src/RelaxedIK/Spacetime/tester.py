@@ -16,7 +16,7 @@ ac = Arm_ext.Arm(a.axes, a.displacements, a.rotOffsets, a.dispOffset)
 
 # mat = np.array(ac.getFrames(state)[1][1])
 
-test_size = 100000
+test_size = 200000
 
 start = time.time()
 for i in xrange(test_size):

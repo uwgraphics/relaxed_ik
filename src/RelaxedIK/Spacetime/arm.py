@@ -363,6 +363,7 @@ class Arm(robot_function.RobotFunction):
             pts.append( pt )
         return pts
 
+
     def getFrames(self,state):
         """
         given the state vector, return all the points
@@ -401,7 +402,10 @@ class Arm(robot_function.RobotFunction):
                     rot = rot.dot(self.rotOffsets[i])
             rmat = rot3(axis,s,c)
             rot = rot.dot(rmat)
+            start = time.clock()
             pt = rot.dot(self.displacements[i]) + pt
+            end = time.clock()
+            # print end - start
             pts.append( pt )
             frames.append(rot)
         return pts,frames

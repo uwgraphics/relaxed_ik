@@ -4,12 +4,15 @@
 #include <Eigen/Dense>
 #include <boost/python.hpp>
 #include <math.h>
+#include <chrono>
 // #include <python/numpy.hpp>
 
 
 using namespace std;
 using namespace boost::python;
 using namespace Eigen;
+using namespace std::chrono;
+
 
 #define PI 3.14159265
 
@@ -19,31 +22,31 @@ public:
   list displacements;
   list axes;
   list rotOffsets;
-  tuple dispOffset;
+  boost::python::tuple dispOffset;
   list velocity_limits;
   list joint_limits;
-  Matrix3f rotX;
-  Matrix3f rotY;
-  Matrix3f rotZ;
+  Matrix3d rotX;
+  Matrix3d rotY;
+  Matrix3d rotZ;
 
 
-  Arm(list axes, list displacements, list rotOffsets, tuple dispOffset) {
+  Arm(list axes, list displacements, list rotOffsets, boost::python::tuple dispOffset) {
     this->axes = axes;
     this->displacements = displacements;
     this->rotOffsets = rotOffsets;
     this->dispOffset = dispOffset;
     this->numDOF = len(displacements);
 
-    this->rotX = MatrixXf::Zero(3,3);
-    this->rotY = MatrixXf::Zero(3,3);
-    this->rotZ = MatrixXf::Zero(3,3);
+    this->rotX = MatrixXd::Zero(3,3);
+    this->rotY = MatrixXd::Zero(3,3);
+    this->rotZ = MatrixXd::Zero(3,3);
 
     this->rotX(0,0) = 1.0;
     this->rotY(1,1) = 1.0;
     this->rotZ(2,2) = 1.0;
   }
 
-  Matrix3f& rot3(char axis, float s, float c) {
+  Matrix3d& rot3(char axis, float s, float c) {
     if (axis == 'z' || axis == 'Z') {
       this->rotX(0,0) = c;
       this->rotX(0,1) = -s;
@@ -73,10 +76,10 @@ public:
   list getFrames(list state) {
     list ret;
     list pts;
-    Vector3f pt = this->array(this->dispOffset);
+    Vector3d pt = this->array(this->dispOffset);
     pts.append(this->dispOffset);
     list frames;
-    Matrix3f rot = MatrixXf::Zero(3,3);
+    Matrix3d rot = MatrixXd::Zero(3,3);
     rot(0,0) = 1.0;
     rot(1,1) = 1.0;
     rot(2,2) = 1.0;
@@ -90,15 +93,20 @@ public:
 
       char curr_axis = extract<char>(this->axes[i]);
 
-      Matrix3f rmat = this->rot3(curr_axis,s,c);
+      Matrix3d rmat = this->rot3(curr_axis,s,c);
       rot = rot*rmat;
-      Vector3f disp;
+      Vector3d disp;
       disp(0) = extract<float>((this->displacements[i])[0]);
       disp(1) = extract<float>((this->displacements[i])[1]);
       disp(2) = extract<float>((this->displacements[i])[2]);
       // cout << rot(1,1);
       // cout << "\n";
+      // high_resolution_clock::time_point t1 = high_resolution_clock::now();
       pt = rot*disp + pt;
+      // high_resolution_clock::time_point t2 = high_resolution_clock::now();
+      // duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+      // std::cout << "It took me " << time_span.count() << " seconds.\n";
+
       pts.append(this->tolist(pt));
       frames.append(this->tolist(rot));
     }
@@ -110,23 +118,23 @@ public:
 
 private:
 
-  Vector3f array(list input) {
-    Vector3f v;
+  Vector3d array(list input) {
+    Vector3d v;
     v(0) = extract<float>(input[0]);
     v(1) = extract<float>(input[1]);
     v(2) = extract<float>(input[2]);
     return v;
   }
 
-  Vector3f array(tuple input) {
-    Vector3f v;
+  Vector3d array(boost::python::tuple input) {
+    Vector3d v;
     v(0) = extract<float>(input[0]);
     v(1) = extract<float>(input[1]);
     v(2) = extract<float>(input[2]);
     return v;
   }
 
-  list tolist(Vector3f v) {
+  list tolist(Vector3d v) {
     list l;
     l.append(v(0));
     l.append(v(1));
@@ -134,7 +142,7 @@ private:
     return l;
   }
 
-  list tolist(Matrix3f m) {
+  list tolist(Matrix3d m) {
     list ret;
     list row1;
     list row2;
@@ -161,7 +169,7 @@ private:
 };
 
 BOOST_PYTHON_MODULE(Arm_ext) {
-    class_<Arm>("Arm", init<list, list, list, tuple>())
+    class_<Arm>("Arm", init<list, list, list, boost::python::tuple>())
         .def("getFrames", &Arm::getFrames)
         .def_readwrite("numDOF", &Arm::numDOF)
         .def_readwrite("velocity_limits", &Arm::velocity_limits)
