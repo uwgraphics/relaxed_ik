@@ -26,6 +26,6 @@ if __name__ == '__main__':
     # Don't change this code####################################################################################
     rospy.init_node('configuration')
 
-    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
+    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
                           joint_ordering,init_state=starting_config, collision_file=collision_file_name, config_override=True)
 

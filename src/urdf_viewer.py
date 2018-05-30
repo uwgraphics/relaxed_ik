@@ -19,7 +19,7 @@ import os
 if __name__ == '__main__':
     rospy.init_node('urdf_viewer')
 
-    urdf_file = open(os.path.dirname(__file__) + '/urdfs/' + urdf_file_name, 'r')
+    urdf_file = open(os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     tf_pub = tf.TransformBroadcaster()

@@ -25,7 +25,7 @@ import tf
 if __name__ == '__main__':
     rospy.init_node('collision_viewer')
 
-    urdf_file = open(os.path.dirname(__file__) + '/urdfs/' + urdf_file_name, 'r')
+    urdf_file = open(os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     js_pub = rospy.Publisher('joint_states',JointState,queue_size=5)
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
     launch.start()
 
-    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
+    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
                           joint_ordering,init_state=starting_config, collision_file=collision_file_name, pre_config=True)
 
     sample_states = vars.collision_graph.sample_states

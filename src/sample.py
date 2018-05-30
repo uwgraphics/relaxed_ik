@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # Don't change this code####################################################################################
     rospy.init_node('sample_node')
 
-    urdf_file = open(os.path.dirname(__file__) + '/urdfs/' + urdf_file_name, 'r')
+    urdf_file = open(os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     js_pub = rospy.Publisher('joint_states',JointState,queue_size=5)
