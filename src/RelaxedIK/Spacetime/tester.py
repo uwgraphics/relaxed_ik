@@ -6,23 +6,25 @@ import time
 a = Hubo_R()
 axes = a.axes
 
-state = [0.1,0.3,0.5,0.1,0.1,0.2,0.1]
+state = [0.0,0.3,0.5,0.1,0.1,0.2,0.1]
 
-ac = Arm_ext.Arm(a.axes, a.displacements, a.rotOffsets, a.dispOffset)
+ac = Arm_ext.Arm(a.axes, a.displacements, a.rotOffsets, a.dispOffset, 'name')
 
-test_size = 100000
+test_size = 1
 # print a.dispOffset
 
 start = time.clock()
 for i in xrange(test_size):
-    frames = ac.getFrames(state)
+    frames = a.getFrames(state)
+    print frames[0]
 end = time.clock()
 
 print end - start
 
 start = time.clock()
 for i in xrange(test_size):
-    a.getFrames(state)
+    frames = ac.getFrames(state)
+    print frames[0]
 end = time.clock()
 
 print end - start

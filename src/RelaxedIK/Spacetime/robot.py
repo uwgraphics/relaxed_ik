@@ -19,7 +19,7 @@ class Robot:
         self.velocity_limits = []
         self.__initialize_velocity_limits()
 
-        self.__name__ = self.arms[0].__name__
+        # self.__name__ = self.arms[0].__name__
 
     def __initialize_subchain_indices(self):
         for i in range(self.numChains):

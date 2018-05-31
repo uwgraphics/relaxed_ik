@@ -5,37 +5,41 @@
 #include <boost/python.hpp>
 #include <math.h>
 #include <chrono>
-// #include <python/numpy.hpp>
+#include <boost/python/numpy.hpp>
 
 
 using namespace std;
 using namespace boost::python;
 using namespace Eigen;
-using namespace std::chrono;
-
+namespace np = boost::python::numpy;
 
 #define PI 3.14159265
 
 class Arm {
 public:
   int numDOF;
-  list displacements;
-  list axes;
-  list rotOffsets;
+  boost::python::list displacements;
+  boost::python::list axes;
+  boost::python::list rotOffsets;
   boost::python::tuple dispOffset;
-  list velocity_limits;
-  list joint_limits;
+  boost::python::list velocity_limits;
+  boost::python::list joint_limits;
+  char* name;
   Matrix3d rotX;
   Matrix3d rotY;
   Matrix3d rotZ;
 
 
-  Arm(list axes, list displacements, list rotOffsets, boost::python::tuple dispOffset) {
+  Arm(boost::python::list axes, boost::python::list displacements,
+    boost::python::list rotOffsets, boost::python::tuple dispOffset, char* name) {
+    Py_Initialize();
+    np::initialize();
     this->axes = axes;
     this->displacements = displacements;
     this->rotOffsets = rotOffsets;
     this->dispOffset = dispOffset;
     this->numDOF = len(displacements);
+    this->name = name;
 
     this->rotX = MatrixXd::Zero(3,3);
     this->rotY = MatrixXd::Zero(3,3);
@@ -73,17 +77,17 @@ public:
     }
   }
 
-  list getFrames(list state) {
-    list ret;
-    list pts;
+  boost::python::list getFrames(boost::python::list state) {
+    boost::python::list ret;
+    boost::python::list pts;
     Vector3d pt = this->array(this->dispOffset);
     pts.append(this->tolist(pt));
-    list frames;
+    boost::python::list frames;
     Matrix3d rot = MatrixXd::Zero(3,3);
     rot(0,0) = 1.0;
     rot(1,1) = 1.0;
     rot(2,2) = 1.0;
-    frames.append(this->tolist(rot));
+    frames.append(np::array(this->tolist(rot)));
 
     for(int i = 0; i < this->numDOF; i++) {
       float s = sin(extract<float>(state[i]));
@@ -107,8 +111,8 @@ public:
       // duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
       // std::cout << "It took me " << time_span.count() << " seconds.\n";
 
-      pts.append(this->tolist(pt));
-      frames.append(this->tolist(rot));
+      pts.append(np::array(this->tolist(pt)));
+      frames.append(np::array(this->tolist(rot)));
     }
 
     ret.append(pts);
@@ -118,7 +122,7 @@ public:
 
 private:
 
-  Vector3d array(list input) {
+  Vector3d array(boost::python::list input) {
     Vector3d v;
     v(0) = extract<float>(input[0]);
     v(1) = extract<float>(input[1]);
@@ -134,19 +138,19 @@ private:
     return v;
   }
 
-  list tolist(Vector3d v) {
-    list l;
+  boost::python::list tolist(Vector3d v) {
+    boost::python::list l;
     l.append(v(0));
     l.append(v(1));
     l.append(v(2));
     return l;
   }
 
-  list tolist(Matrix3d m) {
-    list ret;
-    list row1;
-    list row2;
-    list row3;
+  boost::python::list tolist(Matrix3d m) {
+    boost::python::list ret;
+    boost::python::list row1;
+    boost::python::list row2;
+    boost::python::list row3;
 
     row1.append(m(0,0));
     row1.append(m(0,1));
@@ -168,10 +172,13 @@ private:
   }
 };
 
+
 BOOST_PYTHON_MODULE(Arm_ext) {
-    class_<Arm>("Arm", init<list, list, list, boost::python::tuple>())
+    class_<Arm>("Arm", init<boost::python::list, boost::python::list,
+    boost::python::list, boost::python::tuple, char*>())
         .def("getFrames", &Arm::getFrames)
         .def_readwrite("numDOF", &Arm::numDOF)
+        .def_readwrite("name", &Arm::name)
         .def_readwrite("velocity_limits", &Arm::velocity_limits)
         .def_readwrite("rotOffsets", &Arm::rotOffsets)
         .def_readwrite("dispOffset", &Arm::dispOffset)

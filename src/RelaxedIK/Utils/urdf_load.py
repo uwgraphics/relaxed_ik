@@ -3,6 +3,7 @@ __author__ = 'drakita'
 
 from urdf_parser_py.urdf import URDF
 from ..Spacetime.arm import *
+# from ..Spacetime import Arm_ext
 from colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl
@@ -106,6 +107,7 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
         print outStr
 
     arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
+    # arm = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
     return arm
@@ -192,6 +194,7 @@ def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
         print outStr
 
     arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
+    # arm = Arm_ext.Arm(axes, displacements, rotOffsets, offset, name)
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
     return arm
