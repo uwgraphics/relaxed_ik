@@ -114,7 +114,7 @@ public:
       // duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
       // std::cout << "It took me " << time_span.count() << " seconds.\n";
 
-      pts.append(np::array(this->tolist(pt)));
+      pts.append(this->tomat(pt));
       frames.append(np::array(this->tolist(rot)));
     }
 
@@ -149,10 +149,14 @@ private:
     return l;
   }
 
-  vec tovec(Vector3d v) {
-    vec ret;
-    
-
+  mat tomat(Vector3d v) {
+    mat ret;
+    vec ve;
+    ve.push_back(v(0));
+    ve.push_back(v(1));
+    ve.push_back(v(2));
+    ret.push_back(ve);
+    return ret;
   }
 
   mat tomat(Matrix3d m) {
