@@ -48,17 +48,17 @@ public:
 
   Matrix3d& rot3(char axis, float s, float c) {
     if (axis == 'z' || axis == 'Z') {
-      this->rotX(0,0) = c;
-      this->rotX(0,1) = -s;
-      this->rotX(1,0) = s;
-      this->rotX(1,1) = c;
+      this->rotZ(0,0) = c;
+      this->rotZ(0,1) = -s;
+      this->rotZ(1,0) = s;
+      this->rotZ(1,1) = c;
       return this->rotZ;
     }
     else if(axis == 'y' || axis == 'Y') {
-      this->rotX(0,0) = c;
-      this->rotX(0,2) = s;
-      this->rotX(2,0) = -s;
-      this->rotX(2,2) = c;
+      this->rotY(0,0) = c;
+      this->rotY(0,2) = s;
+      this->rotY(2,0) = -s;
+      this->rotY(2,2) = c;
       return this->rotY;
     }
     else if(axis == 'x' || axis == 'X') {
@@ -77,7 +77,7 @@ public:
     list ret;
     list pts;
     Vector3d pt = this->array(this->dispOffset);
-    pts.append(this->dispOffset);
+    pts.append(this->tolist(pt));
     list frames;
     Matrix3d rot = MatrixXd::Zero(3,3);
     rot(0,0) = 1.0;
@@ -102,7 +102,7 @@ public:
       // cout << rot(1,1);
       // cout << "\n";
       // high_resolution_clock::time_point t1 = high_resolution_clock::now();
-      pt = rot*disp + pt;
+      pt = (rot*disp) + pt;
       // high_resolution_clock::time_point t2 = high_resolution_clock::now();
       // duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
       // std::cout << "It took me " << time_span.count() << " seconds.\n";
