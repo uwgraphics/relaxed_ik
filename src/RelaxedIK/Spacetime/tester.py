@@ -13,16 +13,16 @@ ac = Arm_ext.Arm(a.axes, a.displacements, a.rotOffsets, a.dispOffset)
 test_size = 100000
 # print a.dispOffset
 
-start = time.time()
+start = time.clock()
 for i in xrange(test_size):
-    ac.getFrames(state)[0][6]
-end = time.time()
+    frames = ac.getFrames(state)
+end = time.clock()
 
 print end - start
 
 start = time.clock()
 for i in xrange(test_size):
-    a.getFrames(state)[0][6]
+    a.getFrames(state)
 end = time.clock()
 
 print end - start
