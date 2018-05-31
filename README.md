@@ -9,3 +9,6 @@ desired end-effector pose goals without exhibiting negative effects such as self
 kinematic-singularities, or joint-space discontinuities.
 
 To start using the solver, please follow the step-by-step instructions in the file start_here.py (in the root directory)
+
+If anything with the solver is not working as expected, or if you have any feedback, feel free to let us know! (rakita@cs.wisc.edu)
+We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive or negative experiences in using it.
