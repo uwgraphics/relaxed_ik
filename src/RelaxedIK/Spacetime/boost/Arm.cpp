@@ -13,6 +13,9 @@ using namespace boost::python;
 using namespace Eigen;
 namespace np = boost::python::numpy;
 
+typedef vector<double> vec;
+typedef vector<vec> mat;
+
 #define PI 3.14159265
 
 class Arm {
@@ -146,6 +149,20 @@ private:
     return l;
   }
 
+  vec tovec(Vector3d v) {
+    vec ret;
+    
+
+  }
+
+  mat tomat(Matrix3d m) {
+    mat ret;
+    vec row1;
+    vec row2;
+    vec row3;
+
+  }
+
   boost::python::list tolist(Matrix3d m) {
     boost::python::list ret;
     boost::python::list row1;
@@ -170,6 +187,24 @@ private:
 
     return ret;
   }
+
+  np::ndarray convert_to_numpy(mat const & input) {
+    u_int n_rows = input.size();
+    u_int n_cols = input[0].size();
+    boost::python::tuple shape = boost::python::make_tuple(n_rows, n_cols);
+    boost::python::tuple stride = boost::python::make_tuple(sizeof(double));
+    np::dtype dtype = np::dtype::get_builtin<double>();
+    boost::python::object own;
+    np::ndarray converted = np::zeros(shape, dtype);
+
+    for (u_int i = 0; i < n_rows; i++)
+    {
+        shape = boost::python::make_tuple(n_cols);
+        converted[i] = np::from_data(input[i].data(), dtype, shape, stride, own);
+    }
+    return converted;
+  }
+
 };
 
 
