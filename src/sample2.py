@@ -12,6 +12,7 @@ from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joi
 from RelaxedIK.relaxedIK import RelaxedIK
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from sensor_msgs.msg import JointState
+import RelaxedIK.Spacetime.Arm_ext as Arm_ext
 import rospy
 import roslaunch
 import os
@@ -35,14 +36,28 @@ if __name__ == '__main__':
     relaxedIK = RelaxedIK.init_from_config(config_file_name)
     ####################################################################################################################
 
+    state = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+    for i in xrange(1):
+        state[1] = i
+        state[2] = i
+        state[3] = i
+        state[5] = i
+        state[6] = i
+        state[7] = i
+
+        a = relaxedIK.vars.robot
+        print a.getFrames(state)[0][0]
+
+
     # Don't change this code ###########################################################################################
-    uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
-    roslaunch.configure_logging(uuid)
-    launch_path = os.path.dirname(__file__) + '/../launch/robot_state_pub.launch'
-    launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
-    launch.start()
+    # uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
+    # roslaunch.configure_logging(uuid)
+    # launch_path = os.path.dirname(__file__) + '/../launch/robot_state_pub.launch'
+    # launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
+    # launch.start()
     ####################################################################################################################
 
+    '''
     rospy.sleep(1.0)
 
     counter = 0.0
@@ -50,7 +65,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         c = math.cos(counter)
         s = 0.3
-        xopt = relaxedIK.solve([[0,0,s*c], [s*c,0,0]],[[1,0,0,0],[1,0,0,0]], max_iter=100, unconstrained=False)
+        xopt = relaxedIK.solve([[0,0,s*c]],[[1,0,0,0]], max_iter=10, unconstrained=False)
         # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
         # print xopt
 
@@ -73,3 +88,4 @@ if __name__ == '__main__':
                              fixed_frame)
 
         counter += stride
+    '''

@@ -114,7 +114,7 @@ public:
       // duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
       // std::cout << "It took me " << time_span.count() << " seconds.\n";
 
-      pts.append(this->tomat(pt));
+      pts.append(np::array(this->tolist(pt)));
       frames.append(np::array(this->tolist(rot)));
     }
 
@@ -165,6 +165,23 @@ private:
     vec row2;
     vec row3;
 
+    row1.push_back(m(0,0));
+    row1.push_back(m(0,1));
+    row1.push_back(m(0,2));
+
+    row2.push_back(m(1,0));
+    row2.push_back(m(1,1));
+    row2.push_back(m(1,2));
+
+    row3.push_back(m(2,0));
+    row3.push_back(m(2,1));
+    row3.push_back(m(2,2));
+
+    ret.push_back(row1);
+    ret.push_back(row2);
+    ret.push_back(row3);
+
+    return ret;
   }
 
   boost::python::list tolist(Matrix3d m) {
@@ -224,6 +241,5 @@ BOOST_PYTHON_MODULE(Arm_ext) {
         .def_readwrite("joint_limits", &Arm::joint_limits)
         .def_readwrite("displacements", &Arm::displacements)
         .def_readwrite("axes", &Arm::axes)
-
     ;
 }

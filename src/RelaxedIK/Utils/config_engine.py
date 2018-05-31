@@ -67,7 +67,8 @@ class Config_Engine:
     def generate_config_file(self):
         trainer = Collision_NN_Trainer(self.collision_graph)
         collision_nn = trainer.clf
-        robot_name = trainer.robot.__name__
+        # robot_name = trainer.robot.__name__
+        robot_name = 'robot'
 
         file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
                self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]

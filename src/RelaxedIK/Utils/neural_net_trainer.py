@@ -46,7 +46,7 @@ class Collision_NN_Trainer:
 
 
         inputs_and_outputs = [self.inputs, self.outputs]
-        file_name = self.robot.__name__ + '_' + str(time.time()) + '.pkl'
+        # file_name = self.robot.__name__ + '_' + str(time.time()) + '.pkl'
         # joblib.dump(inputs_and_outputs, file_name)
 
         self.clf = MLPRegressor(solver='adam', alpha=1,

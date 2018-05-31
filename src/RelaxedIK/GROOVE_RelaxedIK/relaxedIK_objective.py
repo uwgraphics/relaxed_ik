@@ -9,6 +9,7 @@ from ..Utils.joint_utils import *
 def objective_master_relaxedIK(x):
     vars = get_groove_global_vars()
     vars.frames = vars.robot.getFrames(x)
+
     return objective_master(x)
 
 ########################################################################################################################
