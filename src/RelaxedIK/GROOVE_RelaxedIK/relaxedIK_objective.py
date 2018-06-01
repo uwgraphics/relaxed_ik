@@ -115,7 +115,6 @@ class Orientation_MultiEE_Obj(Objective):
     def __call__(self, x, vars):
         x_val_sum = 0.0
 
-        print objectives_ext.orientation_multiEE_obj(vars.frames, vars.goal_quats, [1.0,1.0])
         for i, f in enumerate(vars.frames):
             eeMat = f[1][-1]
 
@@ -125,6 +124,8 @@ class Orientation_MultiEE_Obj(Objective):
             new_mat[3, 3] = 1
 
             ee_quat = Tf.quaternion_from_matrix(new_mat)
+
+            w = objectives_ext.orientation_multiEE_obj(vars.frames, vars.goal_quats, [1.0, 1.0])
 
             q = ee_quat
             ee_quat2 = [-q[0], -q[1], -q[2], -q[3]]

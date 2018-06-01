@@ -1325,6 +1325,7 @@ def quaternion_from_matrix(matrix, isprecise=False):
             q[2] = M[0, 2] - M[2, 0]
             q[1] = M[2, 1] - M[1, 2]
         else:
+            print('got here')
             i, j, k = 1, 2, 3
             if M[1, 1] > M[0, 0]:
                 i, j, k = 2, 3, 1
