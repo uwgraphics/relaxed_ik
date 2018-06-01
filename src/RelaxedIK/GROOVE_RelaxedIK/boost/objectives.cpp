@@ -3,6 +3,7 @@
 #include <string>
 #include <math.h>
 #include <vector>
+#include <Eigen/Dense>
 
 using namespace std;
 namespace np = boost::python::numpy;
@@ -23,7 +24,33 @@ double orientation_multiEE_obj(p::object frames, p::object goal_quats, p::list w
     double sum = 0.0;
 
     for(int i=0; i < num_ee; i++) {
-        
+        p::list f = p::extract<p::list>(frames[i]);
+
+        p::list rot_mats = p::extract<p::list>(f[1]);
+        int num_jts = p::len(rot_mats);
+
+        np::ndarray ee_rot = p::extract<np::ndarray>(rot_mats[num_jts-1]);
+        double m00 = p::extract<double>(ee_rot[0][0]);
+        double m01 = p::extract<double>(ee_rot[0][1]);
+        double m02 = p::extract<double>(ee_rot[0][2]);
+        double m10 = p::extract<double>(ee_rot[1][0]);
+        double m11 = p::extract<double>(ee_rot[1][1]);
+        double m12 = p::extract<double>(ee_rot[1][2]);
+        double m20 = p::extract<double>(ee_rot[2][0]);
+        double m21 = p::extract<double>(ee_rot[2][1]);
+        double m22 = p::extract<double>(ee_rot[2][2]);
+
+        vector<double> ee_quat(4);
+        double t = m00 + m11 + m22;
+        if(t > m22) {
+            ee_quat[0] = t;
+            ee_quat[3] = m10 - m01;
+            ee_quat[2] = m02 - m20;
+            ee_quat[1] = m21 - m12;
+        }
+
+        return m22;
+
     }
 }
 

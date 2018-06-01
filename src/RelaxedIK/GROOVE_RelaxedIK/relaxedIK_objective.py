@@ -115,6 +115,7 @@ class Orientation_MultiEE_Obj(Objective):
     def __call__(self, x, vars):
         x_val_sum = 0.0
 
+        print objectives_ext.orientation_multiEE_obj(vars.frames, vars.goal_quats, [1.0,1.0])
         for i, f in enumerate(vars.frames):
             eeMat = f[1][-1]
 
