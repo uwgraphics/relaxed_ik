@@ -8,7 +8,6 @@ axes = a.axes
 
 state = [0, 0.78852112, -0.14649155, -0.17695991, -1.86374666, -0.09144152, -0.46006443, -0.1494651]
 
-
 ac = Arm_ext.Arm(a.axes, a.displacements, a.rotOffsets, a.dispOffset, 'name')
 
 print a.axes
