@@ -50,7 +50,7 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         c = math.cos(counter)
         s = 0.3
-        xopt = relaxedIK.solve([[0,0,s*c], [s*c,0,0]],[[1,0,0,0],[1,0,0,0]], max_iter=100, unconstrained=False)
+        xopt = relaxedIK.solve([[0,0,s*c], [0,0,0]],[[1,0,0,0],[1,0,0,0]], max_iter=17, unconstrained=True)
         # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
         # print xopt
 
@@ -65,6 +65,7 @@ if __name__ == '__main__':
         js.header.stamp.secs = now.secs
         js.header.stamp.nsecs = now.nsecs
         js_pub.publish(js)
+
 
         tf_pub.sendTransform((0, 0, 0),
                              tf.transformations.quaternion_from_euler(0, 0, 0),

@@ -53,7 +53,7 @@ public:
     this->rotZ(2,2) = 1.0;
   }
 
-  Matrix3d& rot3(char axis, float s, float c) {
+  Matrix3d& rot3(char axis, double s, double c) {
     if (axis == 'z' || axis == 'Z') {
       this->rotZ(0,0) = c;
       this->rotZ(0,1) = -s;
@@ -93,8 +93,8 @@ public:
     frames.append(np::array(this->tolist(rot)));
 
     for(int i = 0; i < this->numDOF; i++) {
-      float s = sin(extract<float>(state[i]));
-      float c = cos(extract<float>(state[i]));
+      double s = sin(extract<double>(state[i]));
+      double c = cos(extract<double>(state[i]));
 
       //TODO: do rotation offsets
 
@@ -103,9 +103,9 @@ public:
       Matrix3d rmat = this->rot3(curr_axis,s,c);
       rot = rot*rmat;
       Vector3d disp;
-      disp(0) = extract<float>((this->displacements[i])[0]);
-      disp(1) = extract<float>((this->displacements[i])[1]);
-      disp(2) = extract<float>((this->displacements[i])[2]);
+      disp(0) = extract<double>((this->displacements[i])[0]);
+      disp(1) = extract<double>((this->displacements[i])[1]);
+      disp(2) = extract<double>((this->displacements[i])[2]);
       // cout << rot(1,1);
       // cout << "\n";
       // high_resolution_clock::time_point t1 = high_resolution_clock::now();
@@ -127,17 +127,17 @@ private:
 
   Vector3d array(boost::python::list input) {
     Vector3d v;
-    v(0) = extract<float>(input[0]);
-    v(1) = extract<float>(input[1]);
-    v(2) = extract<float>(input[2]);
+    v(0) = extract<double>(input[0]);
+    v(1) = extract<double>(input[1]);
+    v(2) = extract<double>(input[2]);
     return v;
   }
 
   Vector3d array(boost::python::tuple input) {
     Vector3d v;
-    v(0) = extract<float>(input[0]);
-    v(1) = extract<float>(input[1]);
-    v(2) = extract<float>(input[2]);
+    v(0) = extract<double>(input[0]);
+    v(1) = extract<double>(input[1]);
+    v(2) = extract<double>(input[2]);
     return v;
   }
 

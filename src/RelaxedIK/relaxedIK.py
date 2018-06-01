@@ -22,7 +22,7 @@ class RelaxedIK(object):
         self.optimization_package = optimization_package
         self.solver_name = solver_name
         self.groove = get_groove(vars, optimization_package,solver_name)
-        self.filter = EMA_filter(self.vars.init_state,a=0.8)
+        self.filter = EMA_filter(self.vars.init_state,a=0.5)
 
 
     @classmethod

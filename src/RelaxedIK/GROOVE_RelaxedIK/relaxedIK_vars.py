@@ -30,7 +30,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0,50.0,1.0,2.0,3.0,1.0),
+                 weight_priors=(50.0,30.0,3.0,2.0,3.0,2.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -66,15 +66,13 @@ class RelaxedIK_vars(Vars):
         self.collision_file = collision_file
         self.num_chains = len(full_joint_lists)
         self.arms = []
-        self.arm_cs = []
         self.urdf_robots = []
         self.trees = []
 
         if full_arms == []:
             for i in xrange(self.num_chains):
-                urdf_robot, arm, arm_c, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
-                self.arms.append(arm_c)
-                self.arm_cs.append(arm)
+                urdf_robot, arm, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
+                self.arms.append(arm)
                 self.urdf_robots.append(urdf_robot)
                 self.trees.append(tree)
         else:

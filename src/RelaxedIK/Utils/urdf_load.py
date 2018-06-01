@@ -21,7 +21,7 @@ commands to install these:
 '''
 
 
-arm_c = False
+arm_c = True
 def urdf_load(urdfString, startJoint, endJoint, full_joint_list, fixed_ee_joint = None, Debug=False):
     '''
     Takes in a urdf file and parses that into different object representations of the robot arm
@@ -45,15 +45,15 @@ def urdf_load(urdfString, startJoint, endJoint, full_joint_list, fixed_ee_joint 
     if not (startJoint == '' or endJoint == ''):
         chain = kdl_tree.getChain(startJoint, endJoint)
     if full_joint_list == ():
-        arm, arm_c = convertToArm(urdf_robot, startJoint, endJoint, fixed_ee_joint, Debug=Debug)
+        arm = convertToArm(urdf_robot, startJoint, endJoint, fixed_ee_joint, Debug=Debug)
     else:
-        arm, arm_c = convertToArmJointList(urdf_robot, full_joint_list, fixed_ee_joint, Debug=Debug)
+        arm = convertToArmJointList(urdf_robot, full_joint_list, fixed_ee_joint, Debug=Debug)
 
     if Debug:
         o = open('out', 'w')
         o.write(str(urdf_robot))
 
-    return urdf_robot, arm, arm_c, kdl_tree
+    return urdf_robot, arm, kdl_tree
 
 def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
     if urdf_robot == None:
@@ -108,13 +108,13 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
 
         print outStr
 
-    arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
-    arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    if not arm_c:
+        arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
+    else:
+        arm = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
-    arm_c.velocity_limits = velocity_limits
-    arm_c.joint_limits = joint_limits
-    return arm, arm_c
+    return arm
 
 
 def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
@@ -197,13 +197,13 @@ def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
 
         print outStr
 
-    arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
-    arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    if not arm_c:
+        arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
+    else:
+        arm = Arm_ext.Arm(tuple(axes), displacements, rotOffsets, offset, name)
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
-    arm_c.velocity_limits = velocity_limits
-    arm_c.joint_limits = joint_limits
-    return arm, arm_c
+    return arm
 
 def toAxisLetter(ax):
     if ax == None:
