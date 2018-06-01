@@ -37,7 +37,8 @@ class RelaxedIK_vars(Vars):
                  collision_link_exclusion_list=[],
                  config_file_name='',
                  pre_config=False,
-                 config_override=False
+                 config_override=False,
+                 c_boost=True
                  ):
 
         Vars.__init__(self,name, objective_function, init_state,objectives,weight_funcs,weight_priors,constraints,bounds)
@@ -64,6 +65,7 @@ class RelaxedIK_vars(Vars):
         self.joint_order = joint_order
         self.urdf_path = urdf_path
         self.collision_file = collision_file
+        self.c_boost = c_boost
         self.num_chains = len(full_joint_lists)
         self.arms = []
         self.urdf_robots = []
@@ -71,8 +73,11 @@ class RelaxedIK_vars(Vars):
 
         if full_arms == []:
             for i in xrange(self.num_chains):
-                urdf_robot, arm, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
-                self.arms.append(arm)
+                urdf_robot, arm, arm_c, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
+                if self.c_boost:
+                    self.arms.append(arm_c)
+                else:
+                    self.arms.append(arm)
                 self.urdf_robots.append(urdf_robot)
                 self.trees.append(tree)
         else:
