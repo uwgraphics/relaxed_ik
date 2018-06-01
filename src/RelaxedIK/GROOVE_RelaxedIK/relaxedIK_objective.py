@@ -125,8 +125,6 @@ class Orientation_MultiEE_Obj(Objective):
 
             ee_quat = Tf.quaternion_from_matrix(new_mat)
 
-            w = objectives_ext.orientation_multiEE_obj(vars.frames, vars.goal_quats, [1.0, 1.0])
-
             q = ee_quat
             ee_quat2 = [-q[0], -q[1], -q[2], -q[3]]
 

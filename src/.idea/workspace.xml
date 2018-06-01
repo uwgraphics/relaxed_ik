@@ -10,7 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49056605">
+    <splitter split-orientation="horizontal" split-proportion="0.45769933">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="sample.py" pinned="false" current-in-tab="false">
@@ -49,11 +49,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="relaxedIK_objective.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="relaxedIK_objective.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="363">
-                  <caret line="127" column="96" lean-forward="false" selection-start-line="127" selection-start-column="96" selection-end-line="127" selection-end-column="96" />
+                <state relative-caret-position="345">
+                  <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#28#0" expanded="true" />
                   </folding>
@@ -61,11 +61,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="transformations.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="transformations.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="407">
-                  <caret line="1358" column="18" lean-forward="true" selection-start-line="1358" selection-start-column="18" selection-end-line="1358" selection-end-column="18" />
+                <state relative-caret-position="299">
+                  <caret line="1402" column="5" lean-forward="false" selection-start-line="1402" selection-start-column="0" selection-end-line="1403" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -74,8 +74,8 @@
           <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="54">
-                  <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+                <state relative-caret-position="234">
+                  <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#18#0" expanded="true" />
                   </folding>
@@ -119,7 +119,7 @@
             <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/objectives.cpp">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="378">
-                  <caret line="215" column="1" lean-forward="true" selection-start-line="215" selection-start-column="1" selection-end-line="215" selection-end-column="1" />
+                  <caret line="237" column="1" lean-forward="true" selection-start-line="237" selection-start-column="1" selection-end-line="237" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -132,9 +132,11 @@
           <file leaf-file-name="objectives.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/objectives.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="541">
-                  <caret line="111" column="26" lean-forward="true" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
-                  <folding />
+                <state relative-caret-position="326">
+                  <caret line="100" column="33" lean-forward="false" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+                  <folding>
+                    <element signature="e#0#5794#0" expanded="false" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -162,7 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fixed</find>
       <find>fixed_ee_joint</find>
       <find>Step</find>
       <find>collision_graph</find>
@@ -192,6 +193,7 @@
       <find>__name__</find>
       <find>goal_pos</find>
       <find>quaternion_from_matrix</find>
+      <find>quaternion_inv</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -229,10 +231,10 @@
         <option value="$PROJECT_DIR$/sample2.py" />
         <option value="$PROJECT_DIR$/sample.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/objectives.cpp" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/objectives.cpp" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -731,28 +733,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="29" lean-forward="false" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="1358" column="18" lean-forward="true" selection-start-line="1358" selection-start-column="18" selection-end-line="1358" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="127" column="96" lean-forward="false" selection-start-line="127" selection-start-column="96" selection-end-line="127" selection-end-column="96" />
+        <state relative-caret-position="345">
+          <caret line="129" column="0" lean-forward="true" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -761,8 +745,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/objectives.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="111" column="26" lean-forward="true" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
+        <state relative-caret-position="378">
+          <caret line="237" column="1" lean-forward="true" selection-start-line="237" selection-start-column="1" selection-end-line="237" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="1402" column="5" lean-forward="false" selection-start-line="1402" selection-start-column="0" selection-end-line="1403" selection-end-column="32" />
           <folding />
         </state>
       </provider>

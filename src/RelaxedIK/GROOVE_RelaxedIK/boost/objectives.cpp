@@ -1,3 +1,5 @@
+// author: Danny Rakita
+
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 #include <string>
@@ -95,6 +97,19 @@ vector<double> mRot2Quat(np::ndarray m) {
 	return res;
 }
 
+
+vector<double> quaternion_inverse(vector<double> q) {
+
+}
+
+vector<double> quaternion_log(vector<double> q) {
+
+}
+
+vector<double> quaternion_disp(vector<double> q1, vector<double> q2) {
+
+}
+
 double orientation_multiEE_obj(p::object frames, p::object goal_quats, p::list weights) {
     double num_ee = p::len(frames);
 
@@ -109,7 +124,13 @@ double orientation_multiEE_obj(p::object frames, p::object goal_quats, p::list w
         np::ndarray ee_rot = p::extract<np::ndarray>(rot_mats[num_jts-1]);
 
         vector<double> ee_quat = mRot2Quat(ee_rot);
-        return ee_quat[0];
+        vector<double> ee_quat2(4);
+        ee_quat[0] = -ee_quat[0];
+        ee_quat[1] = -ee_quat[1];
+        ee_quat[2] = -ee_quat[2];
+        ee_quat[3] = -ee_quat[3];
+
+
     }
 }
 
@@ -199,6 +220,7 @@ double min_jt_vel_obj(np::ndarray x, p::object prev) {
 double nloss(double x_val, double t, double d, double c, double f, double g) {
     return -exp( (- pow( (x_val - t), d) ) / (2.0 * pow(c,2.0))) + f * pow( (x_val - t), g);
 }
+
 
 
 
