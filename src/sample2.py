@@ -12,12 +12,15 @@ from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joi
 from RelaxedIK.relaxedIK import RelaxedIK
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from sensor_msgs.msg import JointState
-import RelaxedIK.Spacetime.Arm_ext as Arm_ext
+import RelaxedIK.Spacetime.boost.Arm_ext as Arm_ext
+from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_objective import *
 import rospy
 import roslaunch
 import os
 import tf
 import math
+import numpy as np
+import time
 
 
 if __name__ == '__main__':
@@ -36,23 +39,36 @@ if __name__ == '__main__':
     relaxedIK = RelaxedIK.init_from_config(config_file_name)
     ####################################################################################################################
 
-    state = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
-    for i in xrange(1):
-        state[1] = i
-        state[2] = i
-        state[3] = i
-        state[5] = i
-        state[6] = i
-        state[7] = i
+    # relaxedIK.solve([[0,0,0], [0,0,0]],[[1,0,0,0],[1,0,0,0]])
 
-        a = relaxedIK.vars.robot
-        print a.getFrames(state)[0][0]
+    obj = Position_MultiEE_Obj()
+    vars = relaxedIK.vars
+    vars.c_boost = True
 
+    num_trials = 1000000
 
-    # Don't change this code ###########################################################################################
-    # uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
-    # roslaunch.configure_logging(uuid)
-    # launch_path = os.path.dirname(__file__) + '/../launch/robot_state_pub.launch'
-    # launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
-    # launch.start()
-    ####################################################################################################################
+    rand_state = np.random.uniform(-3.0, 3.0, 15)
+
+    start = time.clock()
+    for i in xrange(num_trials):
+        val = obj.__call__(np.array(rand_state), vars)
+        # objective_master_relaxedIK(rand_state)
+    print val
+    end = time.clock()
+
+    print end - start
+    print (end - start) / num_trials
+
+    vars.c_boost = False
+    print
+
+    start = time.clock()
+    for i in xrange(num_trials):
+        val = obj.__call__(rand_state, vars)
+        # objective_master_relaxedIK(rand_state)
+    print val
+    end = time.clock()
+
+    print end - start
+    print (end - start) / num_trials
+

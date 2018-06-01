@@ -3,7 +3,7 @@ __author__ = 'drakita'
 
 from urdf_parser_py.urdf import URDF
 from ..Spacetime.arm import *
-from ..Spacetime import Arm_ext
+from ..Spacetime.boost import Arm_ext
 from colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl

@@ -30,7 +30,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0,30.0,3.0,2.0,3.0,2.0),
+                 weight_priors=(50.0,30.0,4.0,2.0,3.0,2.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -148,7 +148,7 @@ class RelaxedIK_vars(Vars):
 
         self.goal_positions = []
         for i in range(self.num_chains):
-            self.goal_positions.append([0,0,0])
+            self.goal_positions.append(np.array([0,0,0]))
         self.prev_goal_positions3 = self.goal_positions
         self.prev_goal_positions2 = self.goal_positions
         self.prev_goal_positions = self.goal_positions

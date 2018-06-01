@@ -1,4 +1,4 @@
-import Arm_ext
+import boost.Arm_ext as Arm_ext
 from arm import UR5, Mico, IIWA7, Hubo_R
 import numpy as np
 import time
@@ -23,7 +23,7 @@ for i in xrange(test_size):
     # print frames[0][0]
 end = time.clock()
 
-print end - start
+print (end - start) / test_size
 
 start = time.clock()
 for i in xrange(test_size):
@@ -32,7 +32,7 @@ for i in xrange(test_size):
     # print frames[0][0]
 end = time.clock()
 
-print end - start
+print (end - start) / test_size
 
 print 'l1: ' + str(np.linalg.norm(ee_pos_c - ee_pos, ord=1))
 print 'l2: ' + str(np.linalg.norm(ee_pos_c - ee_pos))

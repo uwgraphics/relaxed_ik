@@ -49,8 +49,8 @@ if __name__ == '__main__':
     stride = 0.08
     while not rospy.is_shutdown():
         c = math.cos(counter)
-        s = 0.3
-        xopt = relaxedIK.solve([[0,0,s*c], [0,0,0]],[[1,0,0,0],[1,0,0,0]], max_iter=17, unconstrained=True)
+        s = 0.5
+        xopt = relaxedIK.solve([[0.2,0,s*c], [0.2,0,s*c]],[[1,0,0,0],[1,0,0,0]], max_iter=14, unconstrained=True)
         # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
         # print xopt
 
