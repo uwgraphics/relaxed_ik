@@ -1,5 +1,5 @@
 # relaxed_ik
-RelaxedIK Solver
+<b> RelaxedIK Solver </b>
 
 Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
@@ -14,7 +14,7 @@ If anything with the solver is not working as expected, or if you have any feedb
 We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive or negative experiences in using it.
 
 
-Dependencies: 
+<b> Dependencies: </b> 
 
 KDL urdf parser - 
   sudo apt-get install ros-[your ros distro]-urdfdom-py
