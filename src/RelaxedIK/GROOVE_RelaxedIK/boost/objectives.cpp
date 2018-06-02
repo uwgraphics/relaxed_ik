@@ -97,17 +97,51 @@ vector<double> mRot2Quat(np::ndarray m) {
 	return res;
 }
 
+vector<double> quaternion_multiply(vector<double> q1, vector<double> q0) {
+    vector<double> q(4);
+    q[0] = -q1[1]*q0[1] - q1[2]*q0[2] - q1[3]*q0[3] + q1[0]*q0[0];
+    q[1] =  q1[1]*q0[0] + q1[2]*q0[3] - q1[3]*q0[2] + q1[0]*q0[1];
+    q[2] = -q1[1]*q0[3] + q1[2]*q0[0] + q1[3]*q0[1] + q1[0]*q0[2];
+    q[3] =  q1[1]*q0[2] - q1[2]*q0[1] + q1[3]*q0[0] + q1[0]*q0[3];
+    return q;
+}
 
 vector<double> quaternion_inverse(vector<double> q) {
-
+    vector<double> q_i(4);
+    q_i[0] = q[0];
+    q_i[1] = -q[1];
+    q_i[2] = -q[2];
+    q_i[3] = -q[3];
+    double dot = q_i[0]*q_i[0] + q_i[1]*q_i[1] + q_i[2]*q_i[2] + q_i[3]*q_i[3];
+    q_i[0] = q_i[0] / dot;
+    q_i[1] = q_i[1] / dot;
+    q_i[2] = q_i[2] / dot;
+    q_i[3] = q_i[3] / dot;
+    return q_i;
 }
 
 vector<double> quaternion_log(vector<double> q) {
+    vector<double> rot_vec(3);
+    rot_vec[0] = q[1]; rot_vec[1] = q[2]; rot_vec[2] = q[3];
+    if(abs(q[0]) < 1.0) {
+        double a = acos(q[0]);
+        double sina = sin(a);
+        if (abs(sina) >= 0.05) {
+           double c = a/sina;
+           rot_vec[0] *= c;
+           rot_vec[1] *= c;
+           rot_vec[2] *= c;
+        }
+    }
+
+    return rot_vec;
 
 }
 
 vector<double> quaternion_disp(vector<double> q1, vector<double> q2) {
-
+    vector<double> inv = quaternion_inverse(q1);
+    vector<double> m = quaternion_multiply(inv, q2);
+    return quaternion_log(m);
 }
 
 double orientation_multiEE_obj(p::object frames, p::object goal_quats, p::list weights) {
@@ -125,13 +159,29 @@ double orientation_multiEE_obj(p::object frames, p::object goal_quats, p::list w
 
         vector<double> ee_quat = mRot2Quat(ee_rot);
         vector<double> ee_quat2(4);
-        ee_quat[0] = -ee_quat[0];
-        ee_quat[1] = -ee_quat[1];
-        ee_quat[2] = -ee_quat[2];
-        ee_quat[3] = -ee_quat[3];
+        ee_quat2[0] = -ee_quat[0];
+        ee_quat2[1] = -ee_quat[1];
+        ee_quat2[2] = -ee_quat[2];
+        ee_quat2[3] = -ee_quat[3];
 
+        p::object goal_quat_py = p::extract<p::object>(goal_quats[q]);
+        vector<double> goal_quat(4);
+        goal_quat[0] = p::extract<double>(goal_quat_py[0]);
+        goal_quat[1] = p::extract<double>(goal_quat_py[1]);
+        goal_quat[2] = p::extract<double>(goal_quat_py[2]);
+        goal_quat[3] = p::extract<double>(goal_quat_py[3]);
+
+        vector<double> r1 = quaternion_disp(goal_quat, ee_quat);
+        vector<double> r2 = quaternion_disp(goal_quat, ee_quat2);
+
+        double disp = sqrt(r1[0]*r1[0] + r1[1]*r1[1] + r1[2]*r1[2]);
+        double disp2 = sqrt(r2[0]*r2[0] + r2[1]*r2[1] + r2[2]*r2[2]);
+
+        sum += p::extract<double>(weights[q])*min(disp, disp2);
 
     }
+
+    return sum;
 }
 
 double position_multiEE_obj(p::object frames, p::object eeGoals, p::list weights) {
@@ -159,7 +209,6 @@ double position_multiEE_obj(p::object frames, p::object eeGoals, p::list weights
         double val = pow(eX-gX, 2.0) + pow(eY-gY, 2.0) + pow(eZ-gZ, 2.0);
         val = sqrt(val);
         sum += p::extract<double>(weights[i]) * val;
-        // return p::extract<double>(eePos[0]);
     }
 
     return sum;

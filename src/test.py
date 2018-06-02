@@ -13,3 +13,9 @@ quaternion = [1,1,1,0]
 q = np.array(quaternion, dtype=np.float64, copy=True)
 print np.negative(q[1:])
 print q[1:]
+
+rand= [-0.65206257,  0.3991842,  -0.51618717,  0.38602744]
+rand2 = [-0.7590526,   0.60430621,  0.24175231, -0.01445611]
+
+print rand2
+print T.quaternion_disp(rand, rand2)

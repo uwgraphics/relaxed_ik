@@ -1415,7 +1415,7 @@ def quaternion_log(quaternion):
     :return:
     """
     v = numpy.array([quaternion[1], quaternion[2], quaternion[3]])
-    if abs(quaternion[0] < 1.0):
+    if abs(quaternion[0]) < 1.0:
         a = 1
         try:
             a = math.acos(quaternion[0])

@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     # relaxedIK.solve([[0,0,0], [0,0,0]],[[1,0,0,0],[1,0,0,0]])
 
-    obj = Position_MultiEE_Obj()
+    obj = Collision_Avoidance_nn()
     vars = relaxedIK.vars
     vars.c_boost = True
 

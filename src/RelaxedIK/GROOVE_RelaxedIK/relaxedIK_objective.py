@@ -113,29 +113,33 @@ class Orientation_MultiEE_Obj(Objective):
     def name(self): return 'Orientation_MultiEE'
 
     def __call__(self, x, vars):
-        x_val_sum = 0.0
+        if vars.c_boost:
+            x_val = objectives_ext.orientation_multiEE_obj(vars.frames, vars.goal_quats, [1.0, 1.0])
+        else:
+            x_val_sum = 0.0
 
-        for i, f in enumerate(vars.frames):
-            eeMat = f[1][-1]
+            for i, f in enumerate(vars.frames):
+                eeMat = f[1][-1]
 
-            goal_quat = vars.goal_quats[i]
-            new_mat = np.zeros((4, 4))
-            new_mat[0:3, 0:3] = eeMat
-            new_mat[3, 3] = 1
+                goal_quat = vars.goal_quats[i]
+                new_mat = np.zeros((4, 4))
+                new_mat[0:3, 0:3] = eeMat
+                new_mat[3, 3] = 1
 
-            ee_quat = Tf.quaternion_from_matrix(new_mat)
+                ee_quat = Tf.quaternion_from_matrix(new_mat)
 
-            q = ee_quat
-            ee_quat2 = [-q[0], -q[1], -q[2], -q[3]]
+                q = ee_quat
+                ee_quat2 = [-q[0], -q[1], -q[2], -q[3]]
 
-            norm_ord = 2
-            disp = np.linalg.norm(Tf.quaternion_disp(goal_quat, ee_quat), ord=norm_ord)
-            disp2 = np.linalg.norm(Tf.quaternion_disp(goal_quat, ee_quat2), ord=norm_ord)
+                norm_ord = 2
+                disp = np.linalg.norm(Tf.quaternion_disp(goal_quat, ee_quat), ord=norm_ord)
+                disp2 = np.linalg.norm(Tf.quaternion_disp(goal_quat, ee_quat2), ord=norm_ord)
 
-            x_val = min(disp, disp2)
-            x_val_sum += x_val
+                x_val = min(disp, disp2)
+                x_val_sum += x_val
 
-        x_val = x_val_sum
+            x_val = x_val_sum
+
         t = 0.0
         d = 2.0
         c = .1
