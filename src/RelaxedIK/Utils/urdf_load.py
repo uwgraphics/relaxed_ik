@@ -3,7 +3,13 @@ __author__ = 'drakita'
 
 from urdf_parser_py.urdf import URDF
 from ..Spacetime.arm import *
-from ..Spacetime.boost import Arm_ext
+try:
+    from ..Spacetime.boost import Arm_ext
+except:
+    print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
+          'To get speed boost, please install and configure the boost python library: ' \
+          'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
+    arm_c = False
 from colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl
@@ -21,7 +27,6 @@ commands to install these:
 '''
 
 
-arm_c = False
 def urdf_load(urdfString, startJoint, endJoint, full_joint_list, fixed_ee_joint = None, Debug=False):
     '''
     Takes in a urdf file and parses that into different object representations of the robot arm

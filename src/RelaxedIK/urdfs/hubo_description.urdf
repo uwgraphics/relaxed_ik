@@ -604,7 +604,7 @@
 		<parent link="Body_RSP"/>
 		<child link="Body_RSR"/>
 		<axis xyz="1 0 0"/>
-		<limit effort="100000" lower="-0.5235987755982988" upper="3.6651914291880923" velocity="4.254240051736178"/>
+		<limit effort="100000" lower="-3.6651914291880923" upper="0.52" velocity="4.254240051736178"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_RSR">

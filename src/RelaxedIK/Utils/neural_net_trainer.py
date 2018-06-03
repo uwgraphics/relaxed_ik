@@ -2,6 +2,8 @@ import numpy as np
 from collision_graph import Collision_Graph
 from sklearn.neural_network import MLPClassifier, MLPRegressor
 from sklearn.externals import joblib
+import pickle
+
 import time
 import numpy.random as r
 
@@ -24,10 +26,10 @@ def rand_vec(bounds):
         rand = r.uniform(low=b1, high=b2, size=(1))[0]
         vec.append(rand)
 
-    return vec
+    return np.array(vec)
 
 class Collision_NN_Trainer:
-    def __init__(self, collision_graph, num_samples=200000):
+    def __init__(self, collision_graph, num_samples=500000):
         self.num_samples = num_samples
         self.cg = collision_graph
         self.inputs = []
@@ -49,11 +51,26 @@ class Collision_NN_Trainer:
         # file_name = self.robot.__name__ + '_' + str(time.time()) + '.pkl'
         # joblib.dump(inputs_and_outputs, file_name)
 
+
         self.clf = MLPRegressor(solver='adam', alpha=1,
                            hidden_layer_sizes=(70, 70, 70, 70, 70, 70), max_iter=3000, verbose=True,
                            learning_rate='adaptive')
 
         self.clf.fit(self.inputs, self.outputs)
+
+        '''
+        self.clf = Sequential()
+        self.clf.add(Dense(units=70, activation='relu', input_dim=len(self.inputs[0])))
+        self.clf.add(Dense(units=70, activation='relu'))
+        self.clf.add(Dense(units=70, activation='relu'))
+        self.clf.add(Dense(units=70, activation='relu'))
+        self.clf.add(Dense(units=70, activation='relu'))
+        self.clf.add(Dense(units=70, activation='relu'))
+        self.clf.add(Dense(units=1, activation='relu'))
+
+        self.clf.compile(optimizer='adam',loss='mean_squared_error')
+        self.clf.fit(np.array(self.inputs), np.array(self.outputs))
+        '''
 
         self.output_comparisons()
 

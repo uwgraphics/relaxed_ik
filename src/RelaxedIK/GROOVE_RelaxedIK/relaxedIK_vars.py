@@ -30,7 +30,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0,30.0,4.0,2.0,3.0,2.0),
+                 weight_priors=(50.0,30.0,4.0,2.0,3.0,1.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -60,6 +60,7 @@ class RelaxedIK_vars(Vars):
             raise ValueError('Invalid function arguments.')
         ###################################################################################################################################
 
+
         self.full_joint_lists = full_joint_lists
         self.fixed_ee_joints = fixed_ee_joints
         self.joint_order = joint_order
@@ -70,6 +71,12 @@ class RelaxedIK_vars(Vars):
         self.arms = []
         self.urdf_robots = []
         self.trees = []
+
+        try:
+            from boost import objectives_ext
+        except:
+            self.c_boost = False
+
 
         if full_arms == []:
             for i in xrange(self.num_chains):
