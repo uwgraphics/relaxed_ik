@@ -10,6 +10,10 @@ start_here_*.py
 keras_test2.py
 keras_test.py
 sample2.py
+*.config
+collision_hubo.yaml
+collision_hubo_l.yaml
+collision_hubo_r.yaml
 
 # Distribution / packaging
 .Python
