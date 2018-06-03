@@ -6,9 +6,10 @@ __pycache__/
 # C extensions
 # *.so
 
-start_here_hubo.py
+start_here_*.py
 keras_test2.py
 keras_test.py
+sample2.py
 
 # Distribution / packaging
 .Python
