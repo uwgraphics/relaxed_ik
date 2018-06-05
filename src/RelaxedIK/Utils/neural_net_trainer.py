@@ -29,7 +29,7 @@ def rand_vec(bounds):
     return np.array(vec)
 
 class Collision_NN_Trainer:
-    def __init__(self, collision_graph, num_samples=500000):
+    def __init__(self, collision_graph, num_samples=300000):
         self.num_samples = num_samples
         self.cg = collision_graph
         self.inputs = []
