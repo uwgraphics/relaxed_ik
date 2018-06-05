@@ -11,7 +11,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sample.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sample.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sample.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relaxedIK_vars.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="relaxedIK_vars.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="66" column="22" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="22" />
+            <state relative-caret-position="450">
+              <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -165,12 +165,12 @@
         <option value="$PROJECT_DIR$/keras_test.py" />
         <option value="$PROJECT_DIR$/keras_test2.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_hubo.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
         <option value="$PROJECT_DIR$/start_here.py" />
         <option value="$PROJECT_DIR$/sample.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
       </list>
     </option>
   </component>
@@ -628,14 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/start_here.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1349">
@@ -648,14 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="864">
           <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="66" column="22" lean-forward="false" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -675,6 +659,22 @@
           <folding>
             <element signature="e#246#424#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="32" column="33" lean-forward="true" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="40" column="30" lean-forward="false" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

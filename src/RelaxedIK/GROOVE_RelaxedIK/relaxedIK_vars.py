@@ -38,7 +38,7 @@ class RelaxedIK_vars(Vars):
                  config_file_name='',
                  pre_config=False,
                  config_override=False,
-                 c_boost=True
+                 c_boost=False
                  ):
 
         Vars.__init__(self,name, objective_function, init_state,objectives,weight_funcs,weight_priors,constraints,bounds)
