@@ -16,9 +16,9 @@ We are actively supporting and extending this code, so we are interested to hear
 <b> Dependencies </b>
 
 kdl urdf parser:
->> sudo apt-get install ros-[your ros distro]-urdfdom-py
->> sudo apt-get install ros-[your ros distro]-kdl-parser-py
->> sudo apt-get install ros-[your ros distro]-kdl-conversions
+sudo apt-get install ros-[your ros distro]-urdfdom-py
+sudo apt-get install ros-[your ros distro]-kdl-parser-py
+sudo apt-get install ros-[your ros distro]-kdl-conversions
 
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
