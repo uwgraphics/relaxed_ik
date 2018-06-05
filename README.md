@@ -20,7 +20,7 @@ kdl urdf parser:
 <div> >> sudo apt-get install ros-[your ros distro]-kdl-parser-py </div>
 <div> >> sudo apt-get install ros-[your ros distro]-kdl-conversions </div> 
 
-<div></div>
+<br>
 
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
