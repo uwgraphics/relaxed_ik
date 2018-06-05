@@ -35,6 +35,10 @@ or negative experiences in using it.
 
 ######################################################################################################
 # Step 1a: Please add your robot urdf to the directory "urdfs", found in the project root directory.
+#   Make sure that the robot corresponding to the urdf links to some visible robot description ros pacakge,
+#   otherwise the references described in the urdf will be meaningless.  For instance, if you are
+#   setting up the ur5 robot with a urdf ur5.urdf, there should be some associated ros package such as
+#   ur5_description built and sourced in your catkin workspace.
 ######################################################################################################
 
 
