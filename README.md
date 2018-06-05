@@ -1,5 +1,5 @@
 # relaxed_ik
-RelaxedIK Solver
+<b> RelaxedIK Solver </b>
 
 Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
@@ -12,3 +12,7 @@ To start using the solver, please follow the step-by-step instructions in the fi
 
 If anything with the solver is not working as expected, or if you have any feedback, feel free to let us know! (rakita@cs.wisc.edu)
 We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive or negative experiences in using it.
+
+<b> Dependencies </b>
+
+
