@@ -23,17 +23,17 @@ if __name__ == '__main__':
     # Don't change this code####################################################################################
     rospy.init_node('sample_node')
 
-    urdf_file = open(os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
+    ####################################################################################################################
+    relaxedIK = RelaxedIK.init_from_config(config_file_name)
+    ####################################################################################################################
+
+    urdf_file = open(relaxedIK.vars.urdf_path, 'r')
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     js_pub = rospy.Publisher('joint_states',JointState,queue_size=5)
     tf_pub = tf.TransformBroadcaster()
 
     rospy.sleep(0.3)
-
-    ####################################################################################################################
-    relaxedIK = RelaxedIK.init_from_config(config_file_name)
-    ####################################################################################################################
 
     # Don't change this code ###########################################################################################
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
@@ -49,11 +49,19 @@ if __name__ == '__main__':
     stride = 0.08
     while not rospy.is_shutdown():
         c = math.cos(counter)
-        s = 0.5
-        xopt = relaxedIK.solve([[0.3,s*c,0], [0.3,-s*c,0]],[[1,0,0,0],[1,0,0,0]], max_iter=14, unconstrained=True)
-        # xopt = relaxedIK.solve([[0,0,0]],[[1,0,0,0]])
-        # print xopt
+        s = 0.4
+        num_ee = relaxedIK.vars.robot.numChains
+        goal_pos = []
+        goal_quat = []
+        goal_pos.append([0,0,s*c])
+        for i in range(num_ee):
+            goal_quat.append([1,0,0,0])
+            if i == 0:
+                continue
+            else:
+                goal_pos.append([0,0,0])
 
+        xopt = relaxedIK.solve(goal_pos, goal_quat)
 
         js = joint_state_define(xopt)
         if js == None:
