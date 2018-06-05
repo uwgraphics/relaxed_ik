@@ -15,4 +15,20 @@ We are actively supporting and extending this code, so we are interested to hear
 
 <b> Dependencies </b>
 
+kdl urdf parser:
+>> sudo apt-get install ros-[your ros distro]-urdfdom-py
+>> sudo apt-get install ros-[your ros distro]-kdl-parser-py
+>> sudo apt-get install ros-[your ros distro]-kdl-conversions
+
+fcl collision library:
+https://github.com/BerkeleyAutomation/python-fcl
+
+boost:
+The boost c++ libraries are used to interface between c++ and python code in the solver.  The solver will look for boost library files in the directory /usr/local/lib/ (the default install directory); if the library files are not found, the solver will try to move on anyway using the default python implementation, though performance will be slower. 
+https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html
+
+scikit learn:
+http://scikit-learn.org/stable/index.html
+
+
 
