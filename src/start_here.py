@@ -35,7 +35,7 @@ or negative experiences in using it.
 
 ######################################################################################################
 # Step 1a: Please add your robot urdf to the directory "urdfs", found in the project root directory.
-#   Make sure that the robot corresponding to the urdf links to some visible robot description ros pacakge,
+#   Make sure that the robot corresponding to the urdf links to some visible robot description ros package,
 #   otherwise the references described in the urdf will be meaningless.  For instance, if you are
 #   setting up the ur5 robot with a urdf ur5.urdf, there should be some associated ros package such as
 #   ur5_description built and sourced in your catkin workspace.
@@ -59,7 +59,7 @@ fixed_frame = ''
 
 ######################################################################################################
 # Step 2b: To test that your urdf is being read correctly, run the following command:
-#   roslaunch relaxed_ik- urdf_viewer.launch
+#   roslaunch relaxed_ik urdf_viewer.launch
 #
 #   you should see rviz start up, and your robot platform should be visible.  You can rotate the joints
 #       in rviz by using the GUI pop-up
@@ -69,15 +69,15 @@ fixed_frame = ''
 
 ######################################################################################################
 # Step 3a: Please provide the names of the joints for all chains.
-#   This variable will be a list of lits, where each list specifies the names of joints in the particular
-#   chain, adhering to the naming scheme in the urdf supplied in step 2a.
-#   example 1 shows what this would be for a multi-end effector robot, specifically to use the DRC-Hubo+ robots
+#   This variable will be a list of lists, where each list specifies the names of joints in the particular
+#   chain, adhering to the naming scheme in the urdf supplied in step 1b.
+#   example 1 shows what this would be for a multi-end effector robot, specifically to use the DRC-Hubo+ robot's
 #   right and left arm with waist rotation (15 DOF total)
 #   ex1: [ ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2'],
 #         ['WAIST', 'LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW',
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
-#   example 2 shows what this would be for a single-end effector robot, specifically using the UR5 robot
+#   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
 joint_names = [ ]
 ######################################################################################################
@@ -194,17 +194,17 @@ def joint_state_define(x):
 ######################################################################################################
 # Step 5a: We will now set up collision information.  RelaxedIK avoids self-collisions by
 #   first receiving a potential function for "how close" it is to a collision state,
-#   then learning that potential function using a neural network such that it can be quickly run
+#   then learning this potential function using a neural network such that it can be quickly run
 #   in the context of a real-time optimization.  RelaxedIK uses fcl (flexible
 #   collision library) to do distance checking between links and any environment objects.  Collision objects
 #   will automatically envelope the robot's links based on its geometry defined in the urdf, but you
 #   must supply a few other pieces of information for collision avoidance to work well.
 #
-#   To start, duplicate the collision_example.yaml file found in the RelaxedIK/Config directory, and rename it
+#   To start, duplicate the collision_example.yaml file found in the RelaxedIK/Config directory, and rename the duplicate.
 #   The renamed file should retain its yaml file extension and should also be in the RelaxedIK/Config
 #   directory.
 #
-#   Now, we'll work in this new file and make some adjustments to tailer the collision information to your robot platform.
+#   Now, we'll work in this new file and make some adjustments to tailor the collision information to your robot platform.
 #   You can first set the desired radius for the robot's links.  The default option of 0.05 has been
 #   found to work well in most cases, but feel free to change that however you like.
 #
