@@ -4,7 +4,6 @@ from ..GROOVE_RelaxedIK.relaxedIK_weight_function import Position_Weight
 from ..Spacetime.robot import Robot
 from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
-from relaxed_ik_rss.msg import JointAngles
 from std_msgs.msg import Float32
 from ..Utils.urdf_load import *
 from ..GROOVE_RelaxedIK.relaxedIK_constraint import Singularity_Avoidance_Constraint, Joint_Velocity_Constraint
@@ -168,12 +167,7 @@ class RelaxedIK_vars(Vars):
         self.frames = self.robot.getFrames(self.init_state)
         self.joint_limit_obj_value = 0.0
 
-        # self.init_ee_pos = self.arm.getFrames(self.init_state)[0][-1]
         self.init_ee_positions = self.robot.get_ee_positions(self.init_state)
-        # new_mat = np.zeros((4, 4))
-        # new_mat[0:3, 0:3] = self.arm.getFrames(self.init_state)[1][-1]
-        # new_mat[3, 3] = 1
-        # self.init_ee_quat = Tf.quaternion_from_matrix(new_mat)
         self.init_ee_quats = self.robot.get_ee_rotations(self.init_state)
         self.ee_positions = self.init_ee_positions
         self.prev_ee_positions3 = self.init_ee_positions
@@ -182,7 +176,6 @@ class RelaxedIK_vars(Vars):
         self.first = True
         self.unconstrained = False
         self.marker_pub = rospy.Publisher('visualization_marker',Marker,queue_size=5)
-        self.jointAnlges_pub = rospy.Publisher('relaxedIK_jointAngles', JointAngles,queue_size=5)
 
         self.solveID = 1.0
         self.avg_solution_time = 0.0
@@ -213,10 +206,6 @@ class RelaxedIK_vars(Vars):
         self.total_run_time = rospy.get_time() - self.start_time
         self.avg_solution_time = self.total_run_time / self.solveID
 
-        ja = JointAngles()
-        for x in xopt:
-            ja.angles.append(Float32(x))
-        self.jointAnlges_pub.publish(ja)
 
 
 
