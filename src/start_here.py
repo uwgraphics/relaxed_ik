@@ -220,7 +220,7 @@ def joint_state_define(x):
 #       roslaunch relaxed_ik urdf_viewer.launch
 #
 #   The next fields in the yaml file (boxes, spheres, ellipsoids, capsules, cylinders) are used to specify additional
-#   static objects around the environment that the robot should avoid.
+#   objects around the environment that the robot should avoid.
 #   These fields all follow a similar pattern:
 #   1. Provide a name for the object under "name"
 #   2. Provide parameters for the respective shape
