@@ -47,10 +47,6 @@ class Collision_NN_Trainer:
             print str(i) + ' of ' + str(num_samples) + ' samples' + ': ' + str(score)
 
 
-        inputs_and_outputs = [self.inputs, self.outputs]
-        file_name = self.robot.__name__ + '_' + str(time.time()) + '.pkl'
-        joblib.dump(inputs_and_outputs, file_name)
-
 
         self.clf = MLPRegressor(solver='adam', alpha=1,
                            hidden_layer_sizes=(70, 70, 70, 70, 70, 70), max_iter=3000, verbose=True,
@@ -58,19 +54,6 @@ class Collision_NN_Trainer:
 
         self.clf.fit(self.inputs, self.outputs)
 
-        '''
-        self.clf = Sequential()
-        self.clf.add(Dense(units=70, activation='relu', input_dim=len(self.inputs[0])))
-        self.clf.add(Dense(units=70, activation='relu'))
-        self.clf.add(Dense(units=70, activation='relu'))
-        self.clf.add(Dense(units=70, activation='relu'))
-        self.clf.add(Dense(units=70, activation='relu'))
-        self.clf.add(Dense(units=70, activation='relu'))
-        self.clf.add(Dense(units=1, activation='relu'))
-
-        self.clf.compile(optimizer='adam',loss='mean_squared_error')
-        self.clf.fit(np.array(self.inputs), np.array(self.outputs))
-        '''
 
         self.output_comparisons()
 
