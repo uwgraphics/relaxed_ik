@@ -31,6 +31,31 @@ http://www.roboticsproceedings.org/rss14/p43.html
 } 
 </pre>
 
+If you use our solver for a robot teleoperation interface, also consider citing our prior work that shows the effectiveness of RelaxedIK in this setting:
+
+<pre>
+@inproceedings{rakita2017motion,
+  title={A motion retargeting method for effective mimicry-based teleoperation of robot arms},
+  author={Rakita, Daniel and Mutlu, Bilge and Gleicher, Michael},
+  booktitle={Proceedings of the 2017 ACM/IEEE International Conference on Human-Robot Interaction},
+  pages={361--370},
+  year={2017},
+  organization={ACM}
+}
+</pre>
+
+<pre>
+@inproceedings{rakita2018autonomous,
+  title={An autonomous dynamic camera method for effective remote teleoperation},
+  author={Rakita, Daniel and Mutlu, Bilge and Gleicher, Michael},
+  booktitle={Proceedings of the 2018 ACM/IEEE International Conference on Human-Robot Interaction},
+  pages={325--333},
+  year={2018},
+  organization={ACM}
+}
+
+</pre>
+
 <b> Dependencies </b>
 
 kdl urdf parser:
