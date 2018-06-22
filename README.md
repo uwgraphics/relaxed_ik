@@ -35,4 +35,8 @@ scikit learn:
 http://scikit-learn.org/stable/index.html
 
 
+<b> Coming Soon </b>
+
+Performance critical code will be moved to C++ using Boost Python to speed up the solver.  We are currently testing these features and will push it to the central branch when it is stable.
+
 
