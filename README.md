@@ -35,6 +35,9 @@ http://www.roboticsproceedings.org/rss14/p43.html
 
 If you use our solver for a robot teleoperation interface, also consider citing our prior work that shows the effectiveness of RelaxedIK in this setting:
 
+
+A Motion Retargeting Method for Effective Mimicry-based Teleoperation of Robot Arms
+https://dl.acm.org/citation.cfm?id=3020254
 <pre>
 @inproceedings{rakita2017motion,
   title={A motion retargeting method for effective mimicry-based teleoperation of robot arms},
