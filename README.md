@@ -1,9 +1,4 @@
 # relaxed_ik
-<b> Citation </b>
-
-If you use our solver, please cite our RSS paper RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion
-http://www.roboticsproceedings.org/rss14/p43.html
-
 
 <b> RelaxedIK Solver </b>
 
@@ -18,6 +13,11 @@ To start using the solver, please follow the step-by-step instructions in the fi
 
 If anything with the solver is not working as expected, or if you have any feedback, feel free to let us know! (email: rakita@cs.wisc.edu, website: http://pages.cs.wisc.edu/~rakita/)
 We are actively supporting and extending this code, so we are interested to hear about how the solver is being used and any positive or negative experiences in using it.
+
+<b> Citation </b>
+
+If you use our solver, please cite our RSS paper RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion
+http://www.roboticsproceedings.org/rss14/p43.html
 
 <b> Dependencies </b>
 
