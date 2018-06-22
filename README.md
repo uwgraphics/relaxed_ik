@@ -25,8 +25,10 @@ kdl urdf parser:
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
 
+<!--
 boost: https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html
-The boost c++ libraries are used to interface between c++ and python code in the solver.  The solver will look for boost library files in the directory /usr/local/lib/ (the default install directory); if the library files are not found, the solver will try to move on anyway using the default python implementation, though performance will be slower. 
+The boost c++ libraries are used to interface between c++ and python code in the solver.  The solver will look for boost library files in the directory /usr/local/lib/ (the default install directory); if the library files are not found, the solver will try to move on anyway using the default python implementation, though performance will be slower. (UPDATE: Boost implementations are not turned on in the current version, but these will be included in the next RelaxedIK update after some testing).
+-->
 
 
 scikit learn:
