@@ -19,6 +19,18 @@ We are actively supporting and extending this code, so we are interested to hear
 If you use our solver, please cite our RSS paper RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion
 http://www.roboticsproceedings.org/rss14/p43.html
 
+<pre>
+@INPROCEEDINGS{Rakita-RSS-18, 
+    AUTHOR    = {Daniel Rakita AND Bilge Mutlu AND Michael Gleicher}, 
+    TITLE     = {RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion}, 
+    BOOKTITLE = {Proceedings of Robotics: Science and Systems}, 
+    YEAR      = {2018}, 
+    ADDRESS   = {Pittsburgh, Pennsylvania}, 
+    MONTH     = {June}, 
+    DOI       = {10.15607/RSS.2018.XIV.043} 
+} 
+</pre>
+
 <b> Dependencies </b>
 
 kdl urdf parser:
