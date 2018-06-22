@@ -2,7 +2,9 @@
 
 <b> RelaxedIK Solver </b>
 
-Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
+Welcome to RelaxedIK! This solver implements the methods discussed in our work <it> RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion </it>
+
+RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
 orientation Y") to Joint-Space (i.e., the robot's rotation values for each joint degree-of-freedom at a particular time-point) is
 done both ACCURATELY and FEASIBLY.  By this, we mean that RelaxedIK attempts to find the closest possible solution to the
