@@ -46,6 +46,9 @@ If you use our solver for a robot teleoperation interface, also consider citing 
 }
 </pre>
 
+
+An Autonomous Dynamic Camera Method for Effective Remote Teleoperation
+https://dl.acm.org/citation.cfm?id=3171221.3171279
 <pre>
 @inproceedings{rakita2018autonomous,
   title={An autonomous dynamic camera method for effective remote teleoperation},
