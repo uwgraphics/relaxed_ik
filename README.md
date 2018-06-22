@@ -1,4 +1,10 @@
 # relaxed_ik
+<b> Citation </b>
+
+If you use our solver, please cite our RSS paper RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion
+http://www.roboticsproceedings.org/rss14/p43.html
+
+
 <b> RelaxedIK Solver </b>
 
 Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
