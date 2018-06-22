@@ -43,7 +43,7 @@
 		<parent link="Body_TORSO"/>
 		<child link="Body_LSP"/>
 		<axis xyz="0 1 0"/>
-		<limit effort="100000" lower="-1.3962634015954636" upper="4.537856055185257" velocity="4.254240051736178"/>
+		<limit effort="100000" lower="-4.537856055185257" upper="1.3962634015954636" velocity="4.254240051736178"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_LSP">
@@ -574,7 +574,7 @@
 		<parent link="Body_TORSO"/>
 		<child link="Body_RSP"/>
 		<axis xyz="0 1 0"/>
-		<limit effort="100000" lower="-1.3962634015954636" upper="4.537856055185257" velocity="4.254240051736178"/>
+		<limit effort="100000" lower="-4.537856055185257" upper="1.3962634015954636" velocity="4.254240051736178"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_RSP">
@@ -1105,7 +1105,7 @@
 		<parent link="Body_TORSO"/>
 		<child link="Body_WST"/>
 		<axis xyz="0 0 1"/>
-		<limit effort="100000" lower="-6.1086523819801535" upper="6.1086523819801535" velocity="2.0"/>
+		<limit effort="100000" lower="-1.0" upper="1.0" velocity="2.0"/>
 		<dynamics damping="200" friction="200"/>
 	</joint>
 	<link name="Body_WST">
