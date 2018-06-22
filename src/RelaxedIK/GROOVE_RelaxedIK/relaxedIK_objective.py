@@ -5,12 +5,12 @@ from ..Utils import tf_fast as Tf
 from ..Utils.geometry_utils import *
 from ..Utils.joint_utils import *
 
-try:
-    from boost import objectives_ext
-except:
-    print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
-          'To get speed boost, please install and configure the boost python library: ' \
-          'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
+# try:
+#     from boost import objectives_ext
+# except:
+#     print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
+#           'To get speed boost, please install and configure the boost python library: ' \
+#           'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
 
 
 def objective_master_relaxedIK(x):
