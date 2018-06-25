@@ -3,13 +3,16 @@ __author__ = 'drakita'
 
 from urdf_parser_py.urdf import URDF
 from ..Spacetime.arm import *
-try:
-    from ..Spacetime.boost import Arm_ext
-except:
-    print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
-          'To get speed boost, please install and configure the boost python library: ' \
-          'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
-    arm_c = False
+
+
+# try:
+#     from ..Spacetime.boost import Arm_ext
+# except:
+#     print 'ERROR when importing boost library extension.  Defaulting to python implementation (which will be slower).  ' \
+#           'To get speed boost, please install and configure the boost python library: ' \
+#           'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
+#     arm_c = False
+
 from colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl
@@ -119,12 +122,15 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
     #     arm = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
     # arm.velocity_limits = velocity_limits
     # arm.joint_limits = joint_limits
+
+
     arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
-    arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    # arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    arm_c = None
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
-    arm_c.velocity_limits = velocity_limits
-    arm_c.joint_limits = joint_limits
+    # arm_c.velocity_limits = velocity_limits
+    # arm_c.joint_limits = joint_limits
     return arm, arm_c
 
 
@@ -208,12 +214,14 @@ def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
 
         print outStr
 
+
     arm = Arm(tuple(axes), displacements, rotOffsets, offset, name)
-    arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    # arm_c = Arm_ext.Arm(list(axes), displacements, rotOffsets, offset, name)
+    arm_c = None
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
-    arm_c.velocity_limits = velocity_limits
-    arm_c.joint_limits = joint_limits
+    # arm_c.velocity_limits = velocity_limits
+    # arm_c.joint_limits = joint_limits
     return arm, arm_c
 
 def toAxisLetter(ax):
