@@ -49,7 +49,7 @@ class RelaxedIK(object):
         return RelaxedIK(vars)
 
 
-    def solve(self, goal_positions, goal_quats, prev_state=None, vel_objectives_on=True, unconstrained=False, verbose_output=False, max_iter=8, maxtime=.05, rand_start=False):
+    def solve(self, goal_positions, goal_quats, prev_state=None, vel_objectives_on=True, unconstrained=False, verbose_output=False, max_iter=11, maxtime=.05, rand_start=False):
 
         if self.vars.rotation_mode == 'relative':
             self.vars.goal_quats = []
