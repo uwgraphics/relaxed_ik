@@ -330,7 +330,7 @@ class Joint_Limit_Obj(Objective):
         sum = 0.0
         penalty = 50.0
         d = 8
-        joint_limits = vars.arm.joint_limits
+        joint_limits = vars.robot.bounds
         for i in xrange(vars.arm.numDOF):
             l = joint_limits[i][0]
             u = joint_limits[i][1]
