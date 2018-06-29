@@ -43,11 +43,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relaxedIK.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="relaxedIK.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="51" column="143" lean-forward="false" selection-start-line="51" selection-start-column="143" selection-end-line="51" selection-end-column="143" />
+            <state relative-caret-position="252">
+              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="collision_utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -97,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="neural_net_trainer.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="neural_net_trainer.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="542">
+              <caret line="51" column="87" lean-forward="false" selection-start-line="51" selection-start-column="87" selection-end-line="51" selection-end-column="87" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -188,13 +198,13 @@
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_hubo.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
         <option value="$PROJECT_DIR$/start_here.py" />
         <option value="$PROJECT_DIR$/sample.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/arm.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py" />
       </list>
     </option>
   </component>
@@ -230,6 +240,12 @@
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -439,13 +455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/filter.py" />
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_hubo_l.yaml" />
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
@@ -643,16 +652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4446">
@@ -691,9 +690,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="51" column="143" lean-forward="false" selection-start-line="51" selection-start-column="143" selection-end-line="51" selection-end-column="143" />
+        <state relative-caret-position="252">
+          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="542">
+          <caret line="51" column="87" lean-forward="false" selection-start-line="51" selection-start-column="87" selection-end-line="51" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

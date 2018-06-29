@@ -49,7 +49,7 @@ class Collision_NN_Trainer:
 
 
         self.clf = MLPRegressor(solver='adam', alpha=1,
-                           hidden_layer_sizes=(70, 70, 70, 70, 70, 70), max_iter=3000, verbose=True,
+                           hidden_layer_sizes=(70, 70, 70, 70, 70, 70), max_iter=300000, verbose=True,
                            learning_rate='adaptive')
 
         self.clf.fit(self.inputs, self.outputs)
