@@ -84,11 +84,11 @@ def rot3(axis, s, c):
     :param t: translation (a 3 tuple)
     :return:
     """
-    if axis=="Z" or axis=="z":
+    if axis=="Z" or axis=="z" or axis=='-z':
         return N.array([[c,-s,0.0], [s,c,0.0], [0.0,0.0,1.0] ])
-    elif axis=="Y" or axis=="y":
+    elif axis=="Y" or axis=="y" or axis == '-y':
         return N.array([[c,0.0,s], [0.0,1.0,0.0], [-s,0.0,c] ])
-    elif axis=="X" or axis=="x":
+    elif axis=="X" or axis=="x" or axis == '-x':
         return N.array([[1.0,0.0,0.0], [0.0,c,-s], [0.0,s,c] ])
     else:
         print "Unsupported Axis:", axis
@@ -278,7 +278,7 @@ class Arm(robot_function.RobotFunction):
         robot_function.RobotFunction.__init__(self, _nvars=len(self.axes) * self.varsPerJoint, _npoints=len(self.axes) + 1, _name=name)
         self.noZ = noZ
         if self.rep == "angle":
-            self.varnames = [ "J%d.%c" % (jn,ax) for jn,ax in enumerate(self.axes)]
+            # self.varnames = [ "J%d.%c" % (jn,ax) for jn,ax in enumerate(self.axes)]
 
             self.cleanupCallback = deSpinCB # not always what we want
             self.xUBounds = N.full(self.nvars, twopi)
@@ -380,6 +380,7 @@ class Arm(robot_function.RobotFunction):
         except:
             do_ad = True        # be conservative
 
+        do_ad = False
         pt = N.array(self.dispOffset)
         pts = [ self.dispOffset ]
         rot = N.eye(3)
@@ -387,11 +388,20 @@ class Arm(robot_function.RobotFunction):
         for i,axis in enumerate(self.axes):
             if self.varsPerJoint == 1:
                 if do_ad == False:
-                    s = math.sin(state[i])
-                    c = math.cos(state[i])
+                    if axis[0] == '-':
+                        s = math.sin(-state[i])
+                        c = math.cos(-state[i])
+                    else:
+                        s = math.sin(state[i])
+                        c = math.cos(state[i])
                 else:
-                    s = sin(state[i])
-                    c = cos(state[i])
+                    if axis[0] == '-':
+                        s = sin(-state[i])
+                        c = cos(-state[i])
+                    else:
+                        s = sin(state[i])
+                        c = cos(state[i])
+
             else:
                 s,c = normSC(state[i*2], state[i*2+1])
             # since we know that the rot matrix doesn't change, and that

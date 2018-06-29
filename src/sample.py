@@ -24,7 +24,8 @@ if __name__ == '__main__':
     rospy.init_node('sample_node')
 
     ####################################################################################################################
-    relaxedIK = RelaxedIK.init_from_config('hubo.config')
+    print config_file_name
+    relaxedIK = RelaxedIK.init_from_config(config_file_name)
     ####################################################################################################################
 
     urdf_file = open(relaxedIK.vars.urdf_path, 'r')
@@ -49,11 +50,11 @@ if __name__ == '__main__':
     stride = 0.08
     while not rospy.is_shutdown():
         c = math.cos(counter)
-        s = 0.4
+        s = 0.2
         num_ee = relaxedIK.vars.robot.numChains
         goal_pos = []
         goal_quat = []
-        goal_pos.append([0,0,s*c])
+        goal_pos.append([0,s*c,0])
         for i in range(num_ee):
             goal_quat.append([1,0,0,0])
             if i == 0:

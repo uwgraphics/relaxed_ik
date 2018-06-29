@@ -203,8 +203,6 @@ def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
             print bcolors.FAIL + 'fixed_ee_joint: {} not found!'.format(fixedJoint) + bcolors.ENDC
             raise Exception('Invalid fixed_ee_joint.  Exiting.')
 
-
-
     numDOF = len(axes)
     rotOffsets = rotOffsets[0:numDOF]
 
@@ -228,12 +226,18 @@ def toAxisLetter(ax):
     if ax == None:
         return ''
     ax_val = ''
-    if ax[0] == 1 or ax[0] == -1:
+    if ax[0] == 1:
         ax_val = 'x'
-    elif ax[1] == 1 or ax[1] == -1:
+    elif ax[0] == -1:
+        ax_val = '-x'
+    elif ax[1] == 1:
         ax_val = 'y'
-    elif ax[2] == 1 or ax[2] == -1:
+    elif  ax[1] == -1:
+        ax_val = '-y'
+    elif ax[2] == 1:
         ax_val = 'z'
+    elif ax[2] == -1:
+        ax_val = '-z'
     return ax_val
 
 def findNextJoint(joints, child):
