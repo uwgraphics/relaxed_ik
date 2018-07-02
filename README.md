@@ -86,6 +86,10 @@ scikit learn:
 http://scikit-learn.org/stable/index.html
 
 
+<b> Tutorial </b>
+
+For full setup and usage details, please refer to start_here.py in the src directory.
+
 <b> Coming Soon </b>
 
 Performance critical code will be moved to C++ using Boost Python to speed up the solver.  We are currently testing these features and will push it to the central branch when it is stable.
