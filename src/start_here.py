@@ -223,8 +223,9 @@ def joint_state_define(x):
 #   collision states without colliding.
 #
 #   Add these collision-free sample states as lists next to the samples_states field in your yaml file, as seen in
-#   the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided in this project to pick out
-#   collision-free sample states.
+#   the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided in the relaxed_ik package to pick out
+#   collision-free sample states.  Joint states are displayed in the console window when using this tool to make
+#   them easier to copy and paste into the collision yaml file.
 #
 #   To start this tool, use the command:
 #       roslaunch relaxed_ik urdf_viewer.launch

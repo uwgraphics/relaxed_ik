@@ -17,6 +17,10 @@ import tf
 import os
 from sensor_msgs.msg import JointState
 
+joint_state = None
+def joint_state_cb(data):
+    global  joint_state
+    joint_state = data
 
 if __name__ == '__main__':
     rospy.init_node('urdf_viewer')
@@ -25,10 +29,9 @@ if __name__ == '__main__':
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     tf_pub = tf.TransformBroadcaster()
+    rospy.Subscriber('joint_states', JointState, joint_state_cb)
 
     rospy.sleep(1.0)
-
-    print fixed_frame
 
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
     roslaunch.configure_logging(uuid)
@@ -43,5 +46,8 @@ if __name__ == '__main__':
                              rospy.Time.now(),
                              'common_world',
                              fixed_frame)
+
+        if not joint_state == None:
+            print 'current joint state: ' + str(list(joint_state.position))
 
     rate.sleep()
