@@ -23,12 +23,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="start_here.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="start_here.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_here.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="27" column="47" lean-forward="false" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+            <state relative-caret-position="344">
+              <caret line="220" column="84" lean-forward="true" selection-start-line="220" selection-start-column="84" selection-end-line="220" selection-end-column="84" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urdf_viewer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="e#413#463#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,16 +53,6 @@
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collision_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="24" column="21" lean-forward="false" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -177,7 +179,6 @@
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_hubo_l.yaml" />
-        <option value="$PROJECT_DIR$/urdf_viewer.py" />
         <option value="$PROJECT_DIR$/preprocessing.py" />
         <option value="$PROJECT_DIR$/collision_viewer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/test.py" />
@@ -208,6 +209,7 @@
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
         <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
         <option value="$PROJECT_DIR$/start_here.py" />
+        <option value="$PROJECT_DIR$/urdf_viewer.py" />
       </list>
     </option>
   </component>
@@ -471,13 +473,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/tester2.py" />
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="67" lean-forward="false" selection-start-line="21" selection-start-column="67" selection-end-line="21" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/test.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -709,9 +704,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/start_here.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="47" lean-forward="false" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+        <state relative-caret-position="344">
+          <caret line="220" column="84" lean-forward="true" selection-start-line="220" selection-start-column="84" selection-end-line="220" selection-end-column="84" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#413#463#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

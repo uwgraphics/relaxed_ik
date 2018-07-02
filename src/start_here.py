@@ -217,9 +217,14 @@ def joint_state_define(x):
 #   These sample states help the robot decide the difference between a configuration that is close to collision state and
 #   a configuration where two links are natively and safely close together.  THIS STEP IS VERY IMPORTANT FOR THE NEURAL
 #   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
-#   seen to work well, but more will always be better.  Add these collision-free sample states as lists next to the samples_states
-#   field in your yaml file, as seen in the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided
-#   in this project to pick out collision-free sample states.
+#   seen to work well, but more will always be better.  Good candition for "sample states" are robot configurations that are
+#   somewhat close to collisions states, but not colliding.  If it seems like the robot is being too cautious after training the
+#   neural network (i.e., it is staying too far away from collision states), include more sample states that are closer to
+#   collision states without colliding.
+#
+#   Add these collision-free sample states as lists next to the samples_states field in your yaml file, as seen in
+#   the collision_example.yaml file.  Feel free to use the urdf_viewer tool provided in this project to pick out
+#   collision-free sample states.
 #
 #   To start this tool, use the command:
 #       roslaunch relaxed_ik urdf_viewer.launch

@@ -15,6 +15,8 @@ import rospy
 import roslaunch
 import tf
 import os
+from sensor_msgs.msg import JointState
+
 
 if __name__ == '__main__':
     rospy.init_node('urdf_viewer')
