@@ -316,7 +316,7 @@ config_file_name = ''
 #
 #   Using this command, your relaxed_ik solver will initialize in its own node and will await
 #   end effector pose goal commands.  Refer to step 7b for instructions on publishing end effector
-#   pose goals.
+#   pose goals and receiving solutions.
 ######################################################################################################
 
 
