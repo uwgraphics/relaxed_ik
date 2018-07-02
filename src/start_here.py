@@ -97,6 +97,7 @@ joint_names = [  ]
 #   example 1 shows one possible ordering for example 1 in Step 3a.  Notice how in this example, the 'WAIST'
 #   joint only shows up once in the joint ordering list, even though it was a part of two separate subchains in
 #   Step 3a.
+#   NOTE: This is a single list NOT a list of lists like in Step 3a.
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
