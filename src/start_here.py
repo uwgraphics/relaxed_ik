@@ -282,7 +282,7 @@ collision_file_name = ''
 #   RelaxedIK/Config directory.
 #   Please provide the name of the file that you renamed your config file to
 #   ex: config_file_name = 'ur5.config'
-config_file_name = ''
+config_file_name = 'relaxedIK.config'
 ######################################################################################################
 
 

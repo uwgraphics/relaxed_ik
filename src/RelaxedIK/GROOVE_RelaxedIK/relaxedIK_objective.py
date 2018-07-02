@@ -331,7 +331,7 @@ class Joint_Limit_Obj(Objective):
         penalty = 50.0
         d = 8
         joint_limits = vars.robot.bounds
-        for i in xrange(vars.arm.numDOF):
+        for i in xrange(vars.robot.numDOF):
             l = joint_limits[i][0]
             u = joint_limits[i][1]
             mid = (u + l) / 2.0

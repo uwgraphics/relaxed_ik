@@ -7,7 +7,7 @@ project(relaxed_ik)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS std_msgs message_generation geometry_msgs)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -48,6 +48,11 @@ catkin_python_setup()
 #   Message1.msg
 #   Message2.msg
 # )
+add_message_files(
+   FILES
+   EEPoseGoals.msg
+   JointAngles.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,6 +73,11 @@ catkin_python_setup()
 #   DEPENDENCIES
 #   std_msgs  # Or other packages containing msgs
 # )
+generate_messages(
+   DEPENDENCIES
+   geometry_msgs  # Or other packages containing msgs
+   std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##

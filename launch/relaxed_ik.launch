@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+   <arg name="config_file_name" value="relaxedIK.config" />
+
+   <!-- ##################################################################################### -->
+
+   <param name="config_file_name" value="$(arg config_file_name)"/>
+   <node pkg="relaxed_ik" type="relaxed_ik_node.py" name="relaxed_ik_node" />
+
+</launch>
