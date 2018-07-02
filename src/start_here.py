@@ -349,7 +349,9 @@ config_file_name = ''
 #       std_msgs/Header header
 #       std_msgs/Float32[] angles
 #
-#   The header is a standard header that corresponds to the exact header from the input EEPoseGoals message.
+#   The header is a standard header that corresponds to the exact header from the input EEPoseGoals message 
+#   (the header sequence number can be used to get a correspondence between input pose goals and output joint solutions 
+#   in a stream of solutions)
 #   The angles field contains the joint angle solutions as Float32 values, adhering to the naming order
 #   provided in step 3b when the configuration file was created.
 #######################################################################################################
