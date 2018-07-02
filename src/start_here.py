@@ -23,6 +23,11 @@ or negative experiences in using it.
 
 # Step-by-step guide starts here!
 
+######################################################################################################
+# NOTE: IF YOU ALREADY HAVE A PRE-MADE RelaxedIK CONFIG FILE, MAKE SURE THIS IS IN THE RelaxedIK/Config
+#   DIRECTORY, AND FEEL FREE TO SKIP TO STEP 7a.
+######################################################################################################
+
 
 ######################################################################################################
 # Step 0: The RelaxedIK project should be included as a package within a catkin workspace
