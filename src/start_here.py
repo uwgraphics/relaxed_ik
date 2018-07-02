@@ -92,7 +92,7 @@ joint_names = [  ]
 # Step 3b: Please provide the order that you want joints to appear in the final returned joint configurations,
 #   using the names specified in step 3a.  ALL JOINTS specified in step 3a should appear somewhere in
 #   this list.  If the same joint appears in separate chains in step 3a, it should only appear once in
-#   the list here.  If you are using a single chain robot, feel free to use the exact same list
+#   the list here.  If you are using a single chain robot, feel free to use the same joint list
 #   that appears in step 3a.
 #   example 1 shows one possible ordering for example 1 in Step 3a.  Notice how in this example, the 'WAIST'
 #   joint only shows up once in the joint ordering list, even though it was a part of two separate subchains in
