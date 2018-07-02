@@ -140,7 +140,7 @@ starting_config = [ ]
 # from sensor_msgs.msg import JointState
 # def joint_state_define(x):
 #    js = JointState()
-#    js.name = joint_names[0]
+#    js.name = joint_ordering
 #    js.position = tuple(x)
 #    return js
 #
@@ -282,7 +282,7 @@ collision_file_name = ''
 #   RelaxedIK/Config directory.
 #   Please provide the name of the file that you renamed your config file to
 #   ex: config_file_name = 'ur5.config'
-config_file_name = 'relaxedIK.config'
+config_file_name = ''
 ######################################################################################################
 
 
@@ -292,6 +292,56 @@ config_file_name = 'relaxedIK.config'
 #
 #   You should see your robot in rviz moving its end effector up and down
 ######################################################################################################
+
+
+######################################################################################################
+# Step 7a: Now that you have a relaxedIK config file in the RelaxedIK/Config directory, you can use the relaxedIK
+#   solver as a standalone ROS node.  To start up the node, first go to the relaxed_ik.launch file (found in
+#   the launch directory) and set the 'config_file_name' argument to your desired configuration file
+#   example: <arg name="config_file_name" value="ur5.config" />
+#
+#   Next, start the node with the following command:
+#   roslaunch relaxed_ik relaxed_ik.launch
+#
+#   Using this command, your relaxed_ik solver will initialize in its own node and will await
+#   end effector pose goal commands.  Refer to step 7b for instructions on publishing end effector
+#   pose goals.
+######################################################################################################
+
+
+######################################################################################################
+# Step 7b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
+#   end effector pose goals for each of the end effectors in the kinematic chain.  The relaxed_ik package
+#   provides a custom message called EEPoseGoals which encapsulates all necessary pose goal information.
+#
+#   The EEPoseGoals message has the following fields:
+#      std_msgs/Header header
+#      geometry_msgs/Pose[] ee_poses
+#
+#   The header is a standard header that can include a time stamp, sequence number, or frame id.
+#   The ee_poses field should contain the end effector poses for all end effectors specified in Step 3c.
+#   These poses in ee_poses should consist of a position goal (x,y,z) and quaternion orientation goal (w,x,y,z)
+#   for all end effectors.
+#
+#   IMPORTANT: All position goals and orientation goals are specified with respect to the INITIAL CONFIGURATION
+#       specified in Step 3d.  For example, for a robot platform with two end effectors, ee_poses of
+#       < pose1: Point:[0,0,0],Orientation:[1,0,0,0], pose2: Point:[0,0,0],Orientation:[1,0,0,0] >
+#       will just return the initial configuration specified in Step 3d.
+#
+#   To get a solution from relaxed_ik, publish EEPoseGoals messages on the topic '/relaxed_ik/ee_pose_goals'
+#   A solution (i.e., a vector of joint angles) will be published on the topic '/relaxed_ik/joint_angle_solutions'
+#
+#   Solutions will be of a message type called JointAngles, which is another custom message type
+#   in the relaxed_ik package.
+#
+#   The JointAngles message has the following fields:
+#       std_msgs/Header header
+#       std_msgs/Float32[] angles
+#
+#   The header is a standard header that corresponds to the exact header from the input EEPoseGoals message.
+#   The angles field contains the joint angle solutions as Float32 values, adhering to the naming order
+#   provided in step 3b when the configuration file was created.
+#######################################################################################################
 
 
 # Step-by-step guide ends here!

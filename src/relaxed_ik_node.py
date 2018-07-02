@@ -23,7 +23,7 @@ def eePoseGoals_cb(data):
 
 if __name__ == '__main__':
     rospy.init_node('relaxed_ik_node')
-    angles_pub = rospy.Publisher('/relaxed_ik/joint_angles',JointAngles,queue_size=3)
+    angles_pub = rospy.Publisher('/relaxed_ik/joint_angle_solutions',JointAngles,queue_size=3)
     rospy.Subscriber('/relaxed_ik/ee_pose_goals', EEPoseGoals, eePoseGoals_cb)
     rospy.sleep(0.3)
 
