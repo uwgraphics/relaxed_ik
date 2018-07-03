@@ -110,7 +110,7 @@ joint_ordering = [  ]
 #   "fixed" in the urdf, and specify the exact "grasping point" of the robot's hand.  If it appears
 #   that your urdf does not specify this ahead of time, please add it to the urdf.  Make sure to provide
 #   one end-effector joint name per chain (i.e., each chain will have its own end-effector).  The order of
-#   these joint names should correspond to the ordering of the chains specified in Step 3b.
+#   these joint names should correspond to the ordering of the chains specified in Step 3a.
 #   For example 1, using the DRC-Hubo+ robot, we should specify two separate fixed joint names, one
 #   for the right hand and one for the left hand
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
