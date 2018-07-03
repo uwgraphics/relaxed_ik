@@ -302,7 +302,7 @@ config_file_name = ''
 # Step 6: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
 #   roslaunch relaxed_ik sample.launch
 #
-#   You should see your robot in rviz moving its end effector up and down
+#   You should see your robot in rviz moving its end effector back and forth
 ######################################################################################################
 
 
