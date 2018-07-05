@@ -218,9 +218,9 @@ def joint_state_define(x):
 #   These sample states help the robot decide the difference between a configuration that is close to collision state and
 #   a configuration where two links are natively and safely close together.  THIS STEP IS VERY IMPORTANT FOR THE NEURAL
 #   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
-#   seen to work well, but more will always be better.  Good candition for "sample states" are robot configurations that are
-#   somewhat close to collisions states, but not colliding.  If it seems like the robot is being too cautious after training the
-#   neural network (i.e., it is staying too far away from collision states), include more sample states that are closer to
+#   seen to work well, but more will always be better.  Good candidates for "sample states" are robot configurations that are
+#   somewhat close to collisions states, but do not exhibit a collision.  If it seems like the robot is being too cautious after 
+#   training the neural network (i.e., it is staying too far away from collision states), include more sample states that are closer to
 #   collision states without colliding.
 #
 #   Add these collision-free sample states as lists next to the samples_states field in your yaml file, as seen in
