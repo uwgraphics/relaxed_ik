@@ -64,7 +64,7 @@ if __name__ == '__main__':
             else:
                 goal_pos.append([0,0,0])
 
-        xopt = relaxedIK.solve(goal_pos, goal_quat, unconstrained=True)
+        xopt = relaxedIK.solve(goal_pos, goal_quat)
 
         js = joint_state_define(xopt)
         if js == None:

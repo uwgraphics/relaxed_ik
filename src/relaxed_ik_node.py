@@ -59,7 +59,7 @@ if __name__ == '__main__':
             pos_goals.append([pos_x, pos_y, pos_z])
             quat_goals.append([quat_w, quat_x, quat_y, quat_z])
 
-        xopt = relaxedIK.solve(pos_goals, quat_goals, unconstrained=True)
+        xopt = relaxedIK.solve(pos_goals, quat_goals)
         ja = JointAngles()
         ja.header = header
         for x in xopt:
