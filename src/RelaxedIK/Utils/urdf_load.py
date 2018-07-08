@@ -76,24 +76,30 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
     rotOffsets = []
     joint_limits = []
     velocity_limits = []
+    joint_types = []
     firstPass = True
 
     for j in full_joint_list:
         for js in joints:
             if js.name == j:
                 if firstPass:
-                    axes.append(toAxisLetter(js.axis))
+                    joint_types.append(js.type)
                     offset = tuple(js.origin.xyz)
                     rotOffsets.append(tuple(js.origin.rpy))
-                    joint_limits.append((js.limit.lower, js.limit.upper))
-                    velocity_limits.append(js.limit.velocity)
+                    if not js.type == 'fixed':
+                        axes.append(toAxisLetter(js.axis))
+                        joint_limits.append((js.limit.lower, js.limit.upper))
+                        velocity_limits.append(js.limit.velocity)
                     firstPass = False
                 else:
-                    axes.append(toAxisLetter(js.axis))
+                    joint_types.append(js.type)
                     displacements.append(tuple(js.origin.xyz))
                     rotOffsets.append(tuple(js.origin.rpy))
-                    joint_limits.append((js.limit.lower, js.limit.upper))
-                    velocity_limits.append(js.limit.velocity)
+                    if not js.type == 'fixed':
+                        axes.append(toAxisLetter(js.axis))
+                        joint_limits.append((js.limit.lower, js.limit.upper))
+                        velocity_limits.append(js.limit.velocity)
+
 
         # add any additional joints in the chain listed after the end joint
     if not fixedJoint == None:
@@ -129,6 +135,7 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
     arm_c = None
     arm.velocity_limits = velocity_limits
     arm.joint_limits = joint_limits
+    arm.joint_types = joint_types
     # arm_c.velocity_limits = velocity_limits
     # arm_c.joint_limits = joint_limits
     return arm, arm_c
