@@ -3,6 +3,7 @@
 <b> RelaxedIK Solver </b>
 
 Welcome to RelaxedIK! This solver implements the methods discussed in our paper <i> RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion </i> (http://www.roboticsproceedings.org/rss14/p43.html)
+
 Video of presentation at RSS:
 https://youtu.be/bih5e9MHc88?t=728
 
