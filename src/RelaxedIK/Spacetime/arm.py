@@ -7,7 +7,7 @@ import math
 import adInterface as AD
 import numpy as N
 from numbers import Number
-from numba import jitclass
+# from numba import jitclass
 import time
 
 
