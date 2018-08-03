@@ -199,7 +199,7 @@ import math
 
 import numpy
 
-import numba
+# import numba
 
 __version__ = '2015.07.18'
 __docformat__ = 'restructuredtext en'
