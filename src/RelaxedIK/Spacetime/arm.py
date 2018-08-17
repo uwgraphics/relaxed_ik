@@ -4,15 +4,17 @@ __author__ = 'gleicher'
 import robot_function
 
 import math
-import adInterface as AD
+# import adInterface as AD
 import numpy as N
 from numbers import Number
 # from numba import jitclass
 import time
 
 
-sin = AD.MATH.sin
-cos = AD.MATH.cos
+# sin = AD.MATH.sin
+# cos = AD.MATH.cos
+sin = math.sin
+cos = math.cos
 
 class TwoLink(robot_function.RobotFunction):
     """
@@ -45,6 +47,7 @@ def rotMatrix(axis, s, c):
         print "Unsupported Axis:", axis
         raise NotImplementedError
 
+'''
 def rotTransMatrix(axis, s, c, t):
     """
     build a rotate * translate matrix - MUCH faster for derivatives
@@ -73,6 +76,7 @@ def rotTransMatrix(axis, s, c, t):
     else:
         print "Unsupported Axis:", axis
         raise NotImplementedError
+'''
 
 def rot3(axis, s, c):
     """
@@ -219,7 +223,7 @@ def deSpinCB(dsv):
 def normSC(s,c):
     d2 = s*s+c*c
     if d2>.001:
-        d = AD.MATH.sqrt(d2)
+        d = math.sqrt(d2)
     else:
         d = math.sqrt(d2)
     if d > .1:
