@@ -3,7 +3,7 @@
 author: Danny Rakita
 website: http://pages.cs.wisc.edu/~rakita/
 email: rakita@cs.wisc.edu
-last update: 7/2/18
+last update: 8/16/18
 
 Intro: Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
@@ -76,6 +76,7 @@ fixed_frame = ''
 # Step 3a: Please provide the names of the joints for all chains.
 #   This variable will be a list of lists, where each list specifies the names of joints in the particular
 #   chain, adhering to the naming scheme in the urdf supplied in step 1b.
+#   These lists can include fixed, prismatic, or revolute joints making up their respective kinematic chains.
 #   example 1 shows what this would be for a multi-end effector robot, specifically to use the DRC-Hubo+ robot's
 #   right and left arm with waist rotation (15 DOF total)
 #   ex1: [ ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
@@ -84,14 +85,17 @@ fixed_frame = ''
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [  ]
+joint_names = [ ]
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 3b: Please provide the order that you want joints to appear in the final returned joint configurations,
-#   using the names specified in step 3a.  ALL JOINTS specified in step 3a should appear somewhere in
-#   this list.  If the same joint appears in separate chains in step 3a, it should only appear once in
+#   using the names specified in step 3a.  ALL ACTUATED JOINTS specified in step 3a should appear somewhere in
+#   this list.  In other words, every prismatic or revolute joint appearing in step 3a MUST be in the
+#   joint_ordering list below.  However, NONE of the fixed joints listed in step 3a should appear in
+#   the joint ordering list.
+#   If the same joint appears in separate chains in step 3a, it should only appear once in
 #   the list here.  If you are using a single chain robot, feel free to use the same joint list
 #   that appears in step 3a.
 #   example 1 shows one possible ordering for example 1 in Step 3a.  Notice how in this example, the 'WAIST'
@@ -101,7 +105,7 @@ joint_names = [  ]
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering = [  ]
+joint_ordering = [ ]
 ######################################################################################################
 
 

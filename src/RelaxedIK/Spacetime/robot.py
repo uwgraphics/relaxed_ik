@@ -28,15 +28,17 @@ class Robot:
         for i in range(self.numChains):
             for j in self.full_joint_lists[i]:
                 idx = self.__get_index_from_joint_order(j)
-                self.subchain_indices[i].append(idx)
+                if not idx == None:
+                    self.subchain_indices[i].append(idx)
 
     def __get_index_from_joint_order(self, jt_name):
         for j,joint in enumerate(self.joint_order):
             if jt_name == self.joint_order[j]:
                 return j
 
-        raise Exception('Error in Robot Class.  It appears your full_joint_lists and joint_order lists are not congruent '
-                        'The joint {} was not found in joint_order.  Is there perhaps a misspelling?'.format(jt_name) )
+        return None
+        # raise Exception('Error in Robot Class.  It appears your full_joint_lists and joint_order lists are not congruent '
+        #                'The joint {} was not found in joint_order.  Is there perhaps a misspelling?'.format(jt_name) )
 
     def __initialize_bounds(self):
         bounds = self.numDOF*[0.0]

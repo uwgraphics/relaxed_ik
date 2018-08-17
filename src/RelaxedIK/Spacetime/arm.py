@@ -7,6 +7,7 @@ import math
 # import adInterface as AD
 import numpy as N
 from numbers import Number
+import copy
 # from numba import jitclass
 import time
 
@@ -15,6 +16,7 @@ import time
 # cos = AD.MATH.cos
 sin = math.sin
 cos = math.cos
+
 
 class TwoLink(robot_function.RobotFunction):
     """
@@ -272,7 +274,7 @@ class Arm(robot_function.RobotFunction):
             raise NameError("Bad Angle Type to Arm!")
         # the displacements should be a list of tuples, but sometimes its convenient
         # to just give the X axis
-        self.displacements = [ ( (t,0,0) if isinstance(t,Number) else tuple(t) ) for t in displacements]
+        self.displacements = [ ( [t,0,0] if isinstance(t,Number) else list(t) ) for t in displacements]
         # create a list of the rotational offsets
         if rotOffsets == None:
             self.rotOffsets = None
@@ -301,10 +303,11 @@ class Arm(robot_function.RobotFunction):
         self.dispOffset = dispOffset
 
         # DR: initialze a Jacobian matrix
-        self.numDOF =  len(displacements)
+        self.numDOF =  len(axes)
         self.jacobianMat = N.zeros((6,self.numDOF))
         self.joint_limits = []
         self.velocity_limits = []
+        self.original_displacements = copy.deepcopy(self.displacements)
 
 
     def cleanupMode(self, mode="array"):
@@ -389,36 +392,56 @@ class Arm(robot_function.RobotFunction):
         pts = [ self.dispOffset ]
         rot = N.eye(3)
         frames = [ rot ]
-        for i,axis in enumerate(self.axes):
-            if self.varsPerJoint == 1:
-                if do_ad == False:
-                    if axis[0] == '-':
-                        s = math.sin(-state[i])
-                        c = math.cos(-state[i])
-                    else:
-                        s = math.sin(state[i])
-                        c = math.cos(state[i])
-                else:
-                    if axis[0] == '-':
-                        s = sin(-state[i])
-                        c = cos(-state[i])
-                    else:
-                        s = sin(state[i])
-                        c = cos(state[i])
+        axis_idx = 0
 
-            else:
-                s,c = normSC(state[i*2], state[i*2+1])
-            # since we know that the rot matrix doesn't change, and that
-            # this is an affine thing, we can do this a bit more quickly
-            #lmat = N.dot(rotMatrix(axis,s,c) , transMatrix(self.displacements[i]))
+        for i,disp in enumerate(self.displacements):
+            if self.joint_types[i] == 'revolute':
+                axis = self.axes[axis_idx]
+                if self.varsPerJoint == 1:
+                    if do_ad == False:
+                        if axis[0] == '-':
+                            s = math.sin(-state[axis_idx])
+                            c = math.cos(-state[axis_idx])
+                        else:
+                            s = math.sin(state[axis_idx])
+                            c = math.cos(state[axis_idx])
+                    else:
+                        if axis[0] == '-':
+                            s = sin(-state[axis_idx])
+                            c = cos(-state[axis_idx])
+                        else:
+                            s = sin(state[axis_idx])
+                            c = cos(state[axis_idx])
+                else:
+                    s,c = normSC(state[i*2], state[i*2+1])
+
+                axis_idx += 1
+
+
+            if self.joint_types[i] == 'prismatic':
+                axis = self.axes[axis_idx]
+                if axis == 'x':
+                    self.displacements[i][0] = self.original_displacements[i][0] + state[axis_idx]
+                elif axis == 'y':
+                    self.displacements[i][1] = self.original_displacements[i][1] + state[axis_idx]
+                elif axis == 'z':
+                    self.displacements[i][2] = self.original_displacements[i][2] + state[axis_idx]
+                else:
+                    raise Exception('invalid prismatic joint.  Axis must be [1 0 0], [0 1 0], or [0 0 1]')
+
+                axis_idx += 1
+                    # since we know that the rot matrix doesn't change, and that
+                # this is an affine thing, we can do this a bit more quickly
+                #lmat = N.dot(rotMatrix(axis,s,c) , transMatrix(self.displacements[i]))
             if self.rotOffsets:
                 if not (self.rotOffsets[i] is None):
                     rot = rot.dot(self.rotOffsets[i])
-            rmat = rot3(axis,s,c)
-            rot = rot.dot(rmat)
-            start = time.clock()
+
+            if self.joint_types[i] == 'revolute':
+                rmat = rot3(axis,s,c)
+                rot = rot.dot(rmat)
+
             pt = rot.dot(self.displacements[i]) + pt
-            end = time.clock()
             # print end - start
             pts.append( pt )
             frames.append(rot)

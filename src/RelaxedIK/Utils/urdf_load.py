@@ -114,7 +114,7 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
 
 
     numDOF = len(axes)
-    rotOffsets = rotOffsets[0:numDOF]
+    # rotOffsets = rotOffsets[0:numDOF]
 
     if Debug:
         outStr = 'name:\n {} \n axes:\n {} \n displacements:\n {} \n ' \
