@@ -4,7 +4,7 @@
 
 Welcome to RelaxedIK! This solver implements the methods discussed in our paper <i> RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion </i> (http://www.roboticsproceedings.org/rss14/p43.html)
 
-Video of presentation at RSS 2018:
+Video of presentation at RSS 2018 (RelaxedIK part starts around 12:00) :
 https://youtu.be/bih5e9MHc88?t=737
 
 RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
