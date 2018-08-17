@@ -98,6 +98,7 @@ For full setup and usage details, please refer to start_here.py in the src direc
 Performance critical code will be moved to C++ using Boost Python to speed up the solver.  We are currently testing these features and will push it to the central branch when it is stable.
 
 <b> Change Log </b>
+
 Version 1.1 (8/16/18): added support for prismatic and static joints
 
 
