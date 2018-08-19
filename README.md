@@ -99,6 +99,6 @@ Performance critical code will be moved to C++ using Boost Python to speed up th
 
 <b> Change Log </b>
 
-Version 1.1 (8/16/18): added support for prismatic and static joints
+Version 1.1 (8/16/18): added support for prismatic and fixed joints
 
 
