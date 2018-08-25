@@ -395,7 +395,7 @@ class Arm(robot_function.RobotFunction):
         axis_idx = 0
 
         for i,disp in enumerate(self.displacements):
-            if self.joint_types[i] == 'revolute':
+            if self.joint_types[i] == 'revolute' or self.joint_types[i] == 'continuous':
                 axis = self.axes[axis_idx]
                 if self.varsPerJoint == 1:
                     if do_ad == False:
@@ -437,7 +437,7 @@ class Arm(robot_function.RobotFunction):
                 if not (self.rotOffsets[i] is None):
                     rot = rot.dot(self.rotOffsets[i])
 
-            if self.joint_types[i] == 'revolute':
+            if self.joint_types[i] == 'revolute' or self.joint_types[i] == 'continuous':
                 rmat = rot3(axis,s,c)
                 rot = rot.dot(rmat)
 
