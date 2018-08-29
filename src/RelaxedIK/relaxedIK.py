@@ -86,7 +86,7 @@ class RelaxedIK(object):
 
         if rand_start:
             initSol = rand_vec(self.vars.arm.joint_limits)
-
+            self.reset(initSol)
 
         ################################################################################################################
         if self.optimization_package == 'scipy':
@@ -108,6 +108,7 @@ class RelaxedIK(object):
         self.vars.prev_state = reset_state
         self.vars.prev_state2 = reset_state
         self.vars.prev_state3 = reset_state
+        self.filter = EMA_filter(reset_state, a=0.5)
 
         self.vars.init_ee_pos = self.vars.arm.getFrames(reset_state)[0][-1]
         self.vars.init_ee_quat = T.quaternion_from_matrix(self.vars.arm.getFrames(reset_state)[1][-1])
