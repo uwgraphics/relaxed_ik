@@ -7,6 +7,7 @@ Welcome to RelaxedIK! This solver implements the methods discussed in our paper 
 Video of presentation at RSS 2018 (RelaxedIK part starts around 12:00) :
 https://youtu.be/bih5e9MHc88?t=737
 
+Video explaining relaxedIK
 https://youtu.be/AhsQFJzB8WQ
 
 RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
