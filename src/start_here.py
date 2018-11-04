@@ -5,6 +5,8 @@ website: http://pages.cs.wisc.edu/~rakita/
 email: rakita@cs.wisc.edu
 last update: 8/16/18
 
+DEVELOPMENT BRANCH
+
 Intro: Welcome to RelaxedIK! RelaxedIK is an inverse kinematics (IK) solver designed for robot platforms such that the conversion
 between Cartesian end-effector pose goals (such as "move the robot's right arm end-effector to position X, while maintaining an end-effector
 orientation Y") to Joint-Space (i.e., the robot's rotation values for each joint degree-of-freedom at a particular time-point) is
