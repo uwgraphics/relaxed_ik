@@ -2,3 +2,7 @@ path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
 urdf_file_name: "ur5.urdf"
 fixed_frame: "base_link"
 joint_names: [ [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ] ]
+joint_ordering: [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ]
+ee_fixed_joints: [ "ee_fixed_joint" ]
+starting_config: [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
+collision_file_name: "collision.yaml"

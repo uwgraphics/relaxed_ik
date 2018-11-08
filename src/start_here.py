@@ -114,7 +114,7 @@ joint_names = [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wr
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering = [ ]
+joint_ordering = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
 ######################################################################################################
 
 
@@ -129,7 +129,7 @@ joint_ordering = [ ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [ ]
+ee_fixed_joints = ['ee_fixed_joint']
 ######################################################################################################
 
 
@@ -139,7 +139,7 @@ ee_fixed_joints = [ ]
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ ]
+starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
 ######################################################################################################
 
 
@@ -269,7 +269,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = ''
+collision_file_name = 'collision.yaml'
 ###########################################################################################################
 
 
