@@ -1,0 +1,4 @@
+path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
+urdf_file_name: "ur5.urdf"
+fixed_frame: "base_link"
+joint_names: [ [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ] ]
