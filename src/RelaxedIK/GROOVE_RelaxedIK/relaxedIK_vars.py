@@ -107,15 +107,15 @@ class RelaxedIK_vars(Vars):
         else:
             self.bounds = bounds
 
-        # if not pre_config:
-        dirname = os.path.dirname(__file__)
-        if collision_file == '':
-            cf = os.path.join(dirname, '../Config/collision.yaml')
-            # cf = 'RelaxedIK/Config/collision.yaml'
-        else:
-            cf = os.path.join(dirname, '../Config/' + collision_file)
-            # cf = 'RelaxedIK/Config/' + collision_file
-        self.collision_graph = Collision_Graph(cf, self.robot, collision_link_exclusion_list)
+        if not pre_config:
+            dirname = os.path.dirname(__file__)
+            if collision_file == '':
+                cf = os.path.join(dirname, '../Config/collision.yaml')
+                # cf = 'RelaxedIK/Config/collision.yaml'
+            else:
+                cf = os.path.join(dirname, '../Config/' + collision_file)
+                # cf = 'RelaxedIK/Config/' + collision_file
+            self.collision_graph = Collision_Graph(cf, self.robot, collision_link_exclusion_list)
 
 
         if pre_config:

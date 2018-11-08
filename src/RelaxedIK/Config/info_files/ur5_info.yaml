@@ -6,3 +6,8 @@ joint_ordering: [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "w
 ee_fixed_joints: [ "ee_fixed_joint" ]
 starting_config: [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
 collision_file_name: "collision.yaml"
+axis_types: [ [ "z", "y", "y", "y", "z", "y" ] ]
+displacements: [ [ [0.0,0.13585,0.0], [0.0,-0.1197,0.425], [0.0,0.0,0.39225], [0.0,0.093,0.0], [0.0,0.0,0.09465], [0.0,0.0823,0.0] ] ]
+disp_offsets: [ [0.0,0.0,0.089159] ]
+rot_offsets: [ [ [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0] ] ]
+joint_types: [ [ "revolute", "revolute", "revolute", "revolute", "revolute", "revolute" ] ]

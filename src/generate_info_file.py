@@ -11,9 +11,13 @@ AND FOLLOW THE STEP-BY-STEP INSTRUCTIONS THERE.  Thanks!
 ######################################################################################################
 
 import os
+import rospy
 from RelaxedIK.Utils.colors import bcolors
+from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from start_here import info_file_name, urdf_file_name, fixed_frame, joint_names, joint_ordering, ee_fixed_joints, starting_config, \
     collision_file_name
+
+rospy.init_node('generate_info_file')
 
 path_to_src = os.path.dirname(__file__)
 
@@ -100,6 +104,84 @@ else:
     out_file.write('collision_file_name: \"{}\"\n'.format(collision_file_name))
 
 
+# AUTO############################################################################################################################################
+##################################################################################################################################################
+
+vars = RelaxedIK_vars('', path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name, joint_names, ee_fixed_joints, joint_ordering, pre_config=True)
+
+robot = vars.robot
+num_chains = robot.numChains
+
+
+
+out_file.write('axis_types: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].axes)
+    for j in range(chain_len):
+        out_file.write('\"{}\"'.format(robot.arms[i].axes[j]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+
+out_file.write('displacements: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].displacements)
+    for j in range(chain_len):
+        d = robot.arms[i].displacements[j]
+        out_file.write('[{},{},{}]'.format(d[0], d[1], d[2]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+
+
+out_file.write('disp_offsets: [ ')
+for i in range(num_chains):
+    d = robot.arms[i].dispOffset
+    out_file.write('[{},{},{}]'.format(d[0], d[1], d[2]))
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+
+out_file.write('rot_offsets: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].original_rotOffsets)
+    for j in range(chain_len):
+        d = robot.arms[i].original_rotOffsets[j]
+        out_file.write('[{},{},{}]'.format(d[0], d[1], d[2]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+
+out_file.write('joint_types: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].joint_types)
+    for j in range(chain_len):
+        out_file.write('\"{}\"'.format(robot.arms[i].joint_types[j]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+
 out_file.close()
 
 
@@ -109,7 +191,6 @@ in_file = open(path_to_src + '/RelaxedIK/Config/info_files/' + info_file_name, '
 import yaml
 
 y = yaml.load(in_file)
-
 
 
 

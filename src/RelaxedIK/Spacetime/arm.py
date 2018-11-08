@@ -279,6 +279,7 @@ class Arm(robot_function.RobotFunction):
         if rotOffsets == None:
             self.rotOffsets = None
         else:
+            self.original_rotOffsets = rotOffsets
             self.rotOffsets = [ eulerTupleTo3x3(t) if not(t is None) else None for t in rotOffsets]
         # now we're ready to initialize
         robot_function.RobotFunction.__init__(self, _nvars=len(self.axes) * self.varsPerJoint, _npoints=len(self.axes) + 1, _name=name)
