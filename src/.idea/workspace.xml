@@ -14,18 +14,18 @@
       <file leaf-file-name="start_here.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_here.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1084">
-              <caret line="271" column="37" lean-forward="false" selection-start-line="271" selection-start-column="37" selection-end-line="271" selection-end-column="37" />
+            <state relative-caret-position="646">
+              <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="generate_info_file.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="generate_info_file.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate_info_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+            <state relative-caret-position="214">
+              <caret line="142" column="26" lean-forward="false" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
               <folding>
                 <element signature="e#414#423#0" expanded="true" />
               </folding>
@@ -33,52 +33,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="robot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/robot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="arm.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/arm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="281" column="36" lean-forward="false" selection-start-line="281" selection-start-column="17" selection-end-line="281" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="urdf_load.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="8" />
+            <state relative-caret-position="322">
+              <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relaxedIK_vars.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
+      <file leaf-file-name="urdf_viewer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
+            <state relative-caret-position="1054">
+              <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+              <folding>
+                <element signature="e#413#479#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="collision_ur5.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3842">
+              <caret line="113" column="66" lean-forward="false" selection-start-line="113" selection-start-column="66" selection-end-line="113" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relaxedIK.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
+      <file leaf-file-name="collision_hubo.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1564">
-              <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
+            <state relative-caret-position="34">
+              <caret line="1" column="76" lean-forward="false" selection-start-line="1" selection-start-column="76" selection-end-line="1" selection-end-column="76" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="collision_viewer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/collision_viewer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#414#574#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -86,30 +90,28 @@
       <file leaf-file-name="ur5_info.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="476">
+              <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collision_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
+      <file leaf-file-name="hubo_info.yaml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo_info.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="272">
+              <caret line="8" column="51" lean-forward="true" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collision_example.yaml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_specs/collision_example.yaml">
+      <file leaf-file-name="test.jl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.jl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="4" column="105" lean-forward="false" selection-start-line="4" selection-start-column="105" selection-end-line="4" selection-end-column="105" />
+            <state relative-caret-position="68">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -126,15 +128,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>RIGHT_HAD</find>
-      <find>body_WST</find>
-      <find>Body_WST</find>
-      <find>common_world</find>
       <find>hubo_des</find>
       <find>id</find>
       <find>exclu</find>
       <find>rpy</find>
-      <find>print</find>
       <find>rot3</find>
       <find>arms</find>
       <find>__name</find>
@@ -156,14 +153,16 @@
       <find>axes</find>
       <find>self.rotOffsets</find>
       <find>original_rotOffsets</find>
+      <find>RIGHT_HAND</find>
+      <find>print</find>
+      <find>starting_config</find>
+      <find>joint_state_define</find>
+      <find>velocity</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_example.yaml" />
-        <option value="$PROJECT_DIR$/relaxedIK_processing.py" />
-        <option value="$PROJECT_DIR$/load_urdf.py" />
         <option value="$PROJECT_DIR$/configuration.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_ur5.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_mico.yaml" />
@@ -171,8 +170,6 @@
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_hubo_l.yaml" />
-        <option value="$PROJECT_DIR$/preprocessing.py" />
-        <option value="$PROJECT_DIR$/collision_viewer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/test.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/boost/test.cpp" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/boost/Makefile" />
@@ -191,30 +188,40 @@
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_hubo.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
-        <option value="$PROJECT_DIR$/urdf_viewer.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK.py" />
         <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/robot.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/ur5_collision.yaml" />
-        <option value="$PROJECT_DIR$/sample.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/movo_collision.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/load_info_file.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml" />
-        <option value="$PROJECT_DIR$/start_here.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Spacetime/arm.py" />
+        <option value="$PROJECT_DIR$/load_info_file.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py" />
+        <option value="$PROJECT_DIR$/urdf_viewer.py" />
+        <option value="$PROJECT_DIR$/sample.py" />
+        <option value="$PROJECT_DIR$/preprocessing.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/test" />
+        <option value="$PROJECT_DIR$/generate_joint_state_func.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/start_here.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/ur5_joint_state_define" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml" />
+        <option value="$PROJECT_DIR$/collision_viewer.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo.yaml" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo_info.yaml" />
+        <option value="$PROJECT_DIR$/test.jl" />
         <option value="$PROJECT_DIR$/generate_info_file.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="130" />
-    <option name="y" value="48" />
-    <option name="width" value="926" />
-    <option name="height" value="1020" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="150" />
+    <option name="y" value="-8" />
+    <option name="width" value="928" />
+    <option name="height" value="2132" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -231,6 +238,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,11 +264,16 @@
               <item name="Config" type="462c0819:PsiDirectoryNode" />
               <item name="info_files" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -269,18 +282,18 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/RelaxedIK/Config" />
-      <recent name="$PROJECT_DIR$/RelaxedIK/urdfs" />
-      <recent name="$PROJECT_DIR$/RelaxedIK/Spacetime/boost" />
-      <recent name="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost" />
-      <recent name="$PROJECT_DIR$/RelaxedIK/Spacetime" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/RelaxedIK/Config/collision_specs" />
       <recent name="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK" />
       <recent name="$PROJECT_DIR$/RelaxedIK/Spacetime" />
       <recent name="$PROJECT_DIR$/RelaxedIK" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/RelaxedIK/Config/collision_files" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/Config" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/urdfs" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/Spacetime/boost" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -295,7 +308,24 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.generate_info_file">
+  <component name="RunManager" selected="Python.collision_viewer">
+    <configuration name="collision_viewer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="src" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collision_viewer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="generate_info_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -313,7 +343,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="keras_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="generate_joint_state_func" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -325,12 +355,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/keras_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generate_joint_state_func.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="keras_test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="start_here" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -342,24 +372,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="src" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/keras_test2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="relaxed_ik_node" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="src" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/relaxed_ik_node.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/start_here.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -382,19 +395,19 @@
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.keras_test" />
-      <item index="2" class="java.lang.String" itemvalue="Python.keras_test2" />
-      <item index="3" class="java.lang.String" itemvalue="Python.relaxed_ik_node" />
-      <item index="4" class="java.lang.String" itemvalue="Python.generate_info_file" />
+      <item index="0" class="java.lang.String" itemvalue="Python.generate_info_file" />
+      <item index="1" class="java.lang.String" itemvalue="Python.collision_viewer" />
+      <item index="2" class="java.lang.String" itemvalue="Python.generate_joint_state_func" />
+      <item index="3" class="java.lang.String" itemvalue="Python.start_here" />
+      <item index="4" class="java.lang.String" itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.generate_info_file" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.relaxed_ik_node" />
-        <item index="3" class="java.lang.String" itemvalue="Python.keras_test2" />
-        <item index="4" class="java.lang.String" itemvalue="Python.keras_test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.collision_viewer" />
+        <item index="1" class="java.lang.String" itemvalue="Python.generate_info_file" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.generate_joint_state_func" />
+        <item index="4" class="java.lang.String" itemvalue="Python.start_here" />
       </list>
     </recent_temporary>
   </component>
@@ -412,18 +425,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="130" y="48" width="3712" height="2148" extended-state="6" />
+    <frame x="130" y="-8" width="3710" height="2168" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2600773" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15847598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35088634" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36131388" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2498618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39989573" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -435,6 +448,9 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.jl" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -445,67 +461,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/filter.py" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_hubo_l.yaml" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="7" column="64" lean-forward="false" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collision_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="42" column="84" lean-forward="false" selection-start-line="42" selection-start-column="84" selection-end-line="42" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/compile_commands" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/world.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/tester2.py" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/test.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/tester.py" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/boost/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/boost/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="120" lean-forward="false" selection-start-line="4" selection-start-column="120" selection-end-line="4" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/tester.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -574,24 +529,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/config_engine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1044">
           <caret line="64" column="19" lean-forward="false" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="102" />
         </state>
       </provider>
     </entry>
@@ -610,56 +551,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="31" column="55" lean-forward="false" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1768">
-          <caret line="62" column="24" lean-forward="false" selection-start-line="62" selection-start-column="24" selection-end-line="62" selection-end-column="24" />
-          <folding>
-            <element signature="e#246#424#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/relaxed_ik_node.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="102" />
-          <folding>
-            <element signature="e#413#425#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/load_info_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="43" />
-          <folding>
-            <element signature="e#413#463#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_specs/collision_example.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="4" column="105" lean-forward="false" selection-start-line="4" selection-start-column="105" selection-end-line="4" selection-end-column="105" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -667,49 +565,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1564">
-          <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="115" column="51" lean-forward="false" selection-start-line="115" selection-start-column="51" selection-end-line="115" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/start_here.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1084">
-          <caret line="271" column="37" lean-forward="false" selection-start-line="271" selection-start-column="37" selection-end-line="271" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/arm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
+        <state relative-caret-position="9282">
           <caret line="281" column="36" lean-forward="false" selection-start-line="281" selection-start-column="17" selection-end-line="281" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -717,25 +579,178 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/ur5_joint_state_define.pkl" />
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="812" column="27" lean-forward="false" selection-start-line="812" selection-start-column="17" selection-end-line="812" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/load_info_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="948">
+          <caret line="35" column="16" lean-forward="true" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="10" column="56" lean-forward="false" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/preprocessing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="4" column="105" lean-forward="false" selection-start-line="4" selection-start-column="105" selection-end-line="4" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3366">
+          <caret line="113" column="28" lean-forward="false" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/test" />
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/tmp/joint_state_tmp2" />
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/tmp/joint_state_tmp" />
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1258">
+          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/hubo_description_joint_state_define">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate_joint_state_func.py" />
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/ur5_joint_state_define">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="1" column="15" lean-forward="false" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collision_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#414#574#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+          <folding>
+            <element signature="e#413#479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3842">
+          <caret line="113" column="66" lean-forward="false" selection-start-line="113" selection-start-column="66" selection-end-line="113" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="1" column="76" lean-forward="false" selection-start-line="1" selection-start-column="76" selection-end-line="1" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.jl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="476">
+          <caret line="14" column="54" lean-forward="false" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start_here.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="19" column="3" lean-forward="true" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/urdf_load.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/generate_info_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="187" column="0" lean-forward="false" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+        <state relative-caret-position="214">
+          <caret line="142" column="26" lean-forward="false" selection-start-line="142" selection-start-column="26" selection-end-line="142" selection-end-column="26" />
           <folding>
             <element signature="e#414#423#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo_info.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="8" column="51" lean-forward="true" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

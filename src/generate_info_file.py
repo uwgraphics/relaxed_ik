@@ -15,7 +15,8 @@ import rospy
 from RelaxedIK.Utils.colors import bcolors
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from start_here import info_file_name, urdf_file_name, fixed_frame, joint_names, joint_ordering, ee_fixed_joints, starting_config, \
-    collision_file_name
+    collision_file_name, joint_state_define
+import inspect
 
 rospy.init_node('generate_info_file')
 
@@ -26,7 +27,6 @@ if info_file_name == '':
     exit(-1)
 
 out_file = open(path_to_src + '/RelaxedIK/Config/info_files/' + info_file_name, 'w')
-out_file.write('path_to_src: \"{}\"\n'.format(path_to_src))
 
 if urdf_file_name == '':
     print bcolors.FAIL + 'urdf_file_name is a required field in start_here.py.  Please fill that in and run again.' + bcolors.ENDC
@@ -79,7 +79,7 @@ else:
         ee_str += '\"{}\"'.format(ee_fixed_joints[i])
         if not i == len(ee_fixed_joints) -1:
             ee_str += ', '
-        ee_str += ' ]'
+    ee_str += ' ]'
     out_file.write('ee_fixed_joints: {}\n'.format(ee_str))
 
 
@@ -103,11 +103,19 @@ if collision_file_name == '':
 else:
     out_file.write('collision_file_name: \"{}\"\n'.format(collision_file_name))
 
+robot_name_split = urdf_file_name.split('.')
+robot_name = robot_name_split[0]
+
+out_file.write('collision_nn_file: \"{}\"\n'.format(robot_name + '_nn'))
+
+out_file.write('path_to_src: \"{}\"\n'.format(path_to_src))
+
 
 # AUTO############################################################################################################################################
 ##################################################################################################################################################
 
-vars = RelaxedIK_vars('', path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name, joint_names, ee_fixed_joints, joint_ordering, pre_config=True)
+vars = RelaxedIK_vars('', path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name, joint_names, ee_fixed_joints, joint_ordering, pre_config=True, init_state=starting_config, path_to_src=path_to_src)
+
 
 robot = vars.robot
 num_chains = robot.numChains
@@ -120,6 +128,33 @@ for i in range(num_chains):
     chain_len = len(robot.arms[i].axes)
     for j in range(chain_len):
         out_file.write('\"{}\"'.format(robot.arms[i].axes[j]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+out_file.write('velocity_limits: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].velocity_limits)
+    for j in range(chain_len):
+        out_file.write('{}'.format(robot.arms[i].velocity_limits[j]))
+        if not j == chain_len - 1:
+            out_file.write(', ')
+    out_file.write(' ]')
+    if not i == num_chains - 1:
+        out_file.write(', ')
+out_file.write(' ]\n')
+
+out_file.write('joint_limits: [ ')
+for i in range(num_chains):
+    out_file.write('[ ')
+    chain_len = len(robot.arms[i].velocity_limits)
+    for j in range(chain_len):
+        jl = robot.arms[i].joint_limits[j]
+        out_file.write('[{},{}]'.format(jl[0], jl[1]))
         if not j == chain_len - 1:
             out_file.write(', ')
     out_file.write(' ]')
@@ -182,18 +217,17 @@ for i in range(num_chains):
 out_file.write(' ]\n')
 
 
+joint_state_define_func_file_name = robot_name + '_joint_state_define'
+fp = path_to_src + '/RelaxedIK/Config/joint_state_define_functions/' + joint_state_define_func_file_name
+js_file = open(fp, 'w')
+js_file.write(inspect.getsource(joint_state_define))
+out_file.write('joint_state_define_func_file: \"{}\"\n'.format(joint_state_define_func_file_name))
+
 out_file.close()
-
-
 
 in_file = open(path_to_src + '/RelaxedIK/Config/info_files/' + info_file_name, 'r')
 
 import yaml
 
 y = yaml.load(in_file)
-
-
-
-
-
 

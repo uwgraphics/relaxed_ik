@@ -16,16 +16,34 @@ from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joi
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from sensor_msgs.msg import JointState
 from visualization_msgs.msg import Marker
+from RelaxedIK.Utils.yaml_utils import get_relaxedIK_yaml_obj
 import rospy
 import roslaunch
 import os
 import tf
+import dill
 
 
 if __name__ == '__main__':
     rospy.init_node('collision_viewer')
 
-    urdf_file = open(os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
+    path_to_src = os.path.dirname(__file__)
+
+    y = get_relaxedIK_yaml_obj(path_to_src)
+    if not y == None:
+        urdf_file_name = y['urdf_file_name']
+        joint_names = y['joint_names']
+        joint_ordering = y['joint_ordering']
+        ee_fixed_joints = y['ee_fixed_joints']
+        starting_config = y['starting_config']
+        collision_file_name = y['collision_file_name']
+        fixed_frame = y['fixed_frame']
+        joint_state_define_file_name = y['joint_state_define_func_file']
+        joint_state_define_file = open(path_to_src + '/RelaxedIK/Config/joint_state_define_functions/' + joint_state_define_file_name, 'r')
+        func = joint_state_define_file.read()
+        exec(func)
+
+    urdf_file = open(path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name, 'r')
     urdf_string = urdf_file.read()
     rospy.set_param('robot_description', urdf_string)
     js_pub = rospy.Publisher('joint_states',JointState,queue_size=5)
@@ -36,16 +54,16 @@ if __name__ == '__main__':
 
     uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
     roslaunch.configure_logging(uuid)
-    launch_path = os.path.dirname(__file__) + '/../launch/robot_state_pub.launch'
+    launch_path = path_to_src + '/../launch/robot_state_pub.launch'
     launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
     launch.start()
 
-    vars = RelaxedIK_vars('relaxedIK',os.path.dirname(__file__) + '/RelaxedIK/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
-                          joint_ordering,init_state=starting_config, collision_file=collision_file_name, pre_config=True)
+    vars = RelaxedIK_vars('relaxedIK', path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name,joint_names,ee_fixed_joints,
+                          joint_ordering,init_state=starting_config, collision_file=collision_file_name, pre_config=True, path_to_src=path_to_src)
 
     sample_states = vars.collision_graph.sample_states
     idx = 0
-    rate = rospy.Rate(0.8)
+    rate = rospy.Rate(5)
     while not rospy.is_shutdown():
         if idx >= len(sample_states): idx = 0
 
@@ -86,7 +104,6 @@ if __name__ == '__main__':
         marker.pose.position.x = -0.3
         marker.color.a = 1.0
         marker_pub.publish(marker)
-
 
         idx += 1
 

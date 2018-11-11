@@ -1,0 +1,2 @@
+def joint_state_define(x):
+    return None

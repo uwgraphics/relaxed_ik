@@ -8,7 +8,7 @@ last update: 5/10/18
 ######################################################################################################
 
 from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joints, starting_config, \
-    joint_state_define, collision_file_name, fixed_frame, config_file_name
+    joint_state_define, collision_file_name, fixed_frame
 from RelaxedIK.relaxedIK import RelaxedIK
 from relaxed_ik.msg import EEPoseGoals
 from geometry_msgs.msg import Pose

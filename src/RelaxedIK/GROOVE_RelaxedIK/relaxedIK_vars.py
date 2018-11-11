@@ -14,6 +14,8 @@ import rospy
 import os
 from sklearn.externals import joblib
 
+def get_path_to_src():
+        return os.path.dirname(__file__)
 
 
 class RelaxedIK_vars(Vars):
@@ -35,6 +37,7 @@ class RelaxedIK_vars(Vars):
                  collision_file='',
                  collision_link_exclusion_list=[],
                  config_file_name='',
+                 path_to_src='',
                  pre_config=False,
                  config_override=False,
                  c_boost=False
@@ -107,16 +110,11 @@ class RelaxedIK_vars(Vars):
         else:
             self.bounds = bounds
 
-        if not pre_config:
-            dirname = os.path.dirname(__file__)
-            if collision_file == '':
-                cf = os.path.join(dirname, '../Config/collision.yaml')
-                # cf = 'RelaxedIK/Config/collision.yaml'
-            else:
-                cf = os.path.join(dirname, '../Config/' + collision_file)
-                # cf = 'RelaxedIK/Config/' + collision_file
+        if not collision_file == '':
+            cf = path_to_src + '/RelaxedIK/Config/collision_files/' + collision_file
+            # cf = os.path.join(dirname, '../Config/' + collision_file)
+            # cf = 'RelaxedIK/Config/' + collision_file
             self.collision_graph = Collision_Graph(cf, self.robot, collision_link_exclusion_list)
-
 
         if pre_config:
             '''
@@ -141,7 +139,6 @@ class RelaxedIK_vars(Vars):
         if velocity_constraints:
             for i in xrange(self.robot.numDOF):
                 self.constraints += (Joint_Velocity_Constraint(i,velocity_scale),)
-
 
         if not self.numDOF == len(init_state):
             # self.init_state = self.numDOF * [0]

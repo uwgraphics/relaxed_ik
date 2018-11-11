@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+<!-- Must correspond to a file in the src/RelaxedIK/Config/info_files directory -->
+<!-- ex: value= "ur5_info.yaml" -->
+   <arg name="info_file_name" value="hubo_info.yaml" />
+
+<!-- ##################################################################################### -->
+
+   <param name="info_file_name" value="$(arg info_file_name)"/>
+   <node pkg="relaxed_ik" type="load_info_file.py" name="load_info_file" output="screen"/>
+</launch>

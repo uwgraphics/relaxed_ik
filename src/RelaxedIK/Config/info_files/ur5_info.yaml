@@ -1,13 +1,15 @@
-path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
 urdf_file_name: "ur5.urdf"
 fixed_frame: "base_link"
 joint_names: [ [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ] ]
 joint_ordering: [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ]
 ee_fixed_joints: [ "ee_fixed_joint" ]
 starting_config: [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-collision_file_name: "collision.yaml"
+collision_file_name: "collision_ur5.yaml"
+collision_nn_file: "ur5_nn"
+path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
 axis_types: [ [ "z", "y", "y", "y", "z", "y" ] ]
 displacements: [ [ [0.0,0.13585,0.0], [0.0,-0.1197,0.425], [0.0,0.0,0.39225], [0.0,0.093,0.0], [0.0,0.0,0.09465], [0.0,0.0823,0.0] ] ]
 disp_offsets: [ [0.0,0.0,0.089159] ]
 rot_offsets: [ [ [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0] ] ]
 joint_types: [ [ "revolute", "revolute", "revolute", "revolute", "revolute", "revolute" ] ]
+joint_state_define_func_file: "ur5_joint_state_define"
