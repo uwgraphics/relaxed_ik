@@ -136,29 +136,18 @@ for i in range(num_chains):
 out_file.write(' ]\n')
 
 out_file.write('velocity_limits: [ ')
-for i in range(num_chains):
-    out_file.write('[ ')
-    chain_len = len(robot.arms[i].velocity_limits)
-    for j in range(chain_len):
-        out_file.write('{}'.format(robot.arms[i].velocity_limits[j]))
-        if not j == chain_len - 1:
-            out_file.write(', ')
-    out_file.write(' ]')
-    if not i == num_chains - 1:
+vels = robot.velocity_limits
+for i in range(len(vels)):
+    out_file.write('{}'.format(vels[i]))
+    if not i == len(vels) - 1:
         out_file.write(', ')
 out_file.write(' ]\n')
 
 out_file.write('joint_limits: [ ')
-for i in range(num_chains):
-    out_file.write('[ ')
-    chain_len = len(robot.arms[i].velocity_limits)
-    for j in range(chain_len):
-        jl = robot.arms[i].joint_limits[j]
-        out_file.write('[{},{}]'.format(jl[0], jl[1]))
-        if not j == chain_len - 1:
-            out_file.write(', ')
-    out_file.write(' ]')
-    if not i == num_chains - 1:
+joint_limits = robot.bounds
+for i in range(len(vels)):
+    out_file.write('[{},{}]'.format(joint_limits[i][0], joint_limits[i][1]))
+    if not i == len(vels) - 1:
         out_file.write(', ')
 out_file.write(' ]\n')
 

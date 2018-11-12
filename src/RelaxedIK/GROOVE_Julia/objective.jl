@@ -3,7 +3,7 @@ using Calculus
 using ReverseDiff
 
 
-function obj_master(x, grad, objectives, gradients, weights)
+function obj_master(x, grad, vars, objectives, gradients, weights)
     if length(grad) > 0
         g = zeros(length(grad))
         for i in 1:length(gradients)
