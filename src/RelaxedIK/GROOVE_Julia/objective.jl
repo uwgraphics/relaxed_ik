@@ -3,11 +3,11 @@ using Calculus
 using ReverseDiff
 
 
-function obj_master(x, grad, vars, objectives, gradients, weights)
+function obj_master(x, grad, vars)
     if length(grad) > 0
         g = zeros(length(grad))
-        for i in 1:length(gradients)
-            g += weights[i]*gradients[i](x)
+        for i in 1:length(vars.∇s)
+            g += vars.weight_priors[i]*vars.∇s[i](x)
         end
         for i = 1:length(grad)
             grad[i] = g[i]
@@ -16,8 +16,9 @@ function obj_master(x, grad, vars, objectives, gradients, weights)
 
     sum = 0.0
     for i in 1:length(objectives)
-        sum += weights[i]*objectives[i](x)
+        sum += vars.weight_priors[i]*vars.objective_closures[i](x)
     end
+
     return sum
 end
 
