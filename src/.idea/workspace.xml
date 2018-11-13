@@ -76,7 +76,7 @@
       <file leaf-file-name="relaxedIK_objective.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1757">
+            <state relative-caret-position="11492">
               <caret line="343" column="13" lean-forward="false" selection-start-line="343" selection-start-column="13" selection-end-line="343" selection-end-column="13" />
               <folding />
             </state>
@@ -96,8 +96,8 @@
       <file leaf-file-name="groove_type.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2951">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="1701">
+              <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -218,7 +218,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="130" />
+    <option name="x" value="150" />
     <option name="y" value="48" />
     <option name="width" value="1855" />
     <option name="height" value="2112" />
@@ -267,8 +267,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -419,10 +419,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="130" y="48" width="1855" height="2112" extended-state="4" />
+    <frame x="150" y="48" width="1855" height="2112" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24448217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25014147" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -641,7 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2108">
           <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -649,9 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -724,7 +720,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1757">
+        <state relative-caret-position="11492">
           <caret line="343" column="13" lean-forward="false" selection-start-line="343" selection-start-column="13" selection-end-line="343" selection-end-column="13" />
           <folding />
         </state>
@@ -740,8 +736,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2951">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1701">
+          <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

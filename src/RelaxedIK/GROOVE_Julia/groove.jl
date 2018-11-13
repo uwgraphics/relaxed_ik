@@ -67,13 +67,13 @@ function get_groove(vars, solver_name)
         upper_bounds!(opt, upper_bounds)
     end
 
-    ftol_abs!(opt, 0.0001)
+    ftol_abs!(opt, 0.001)
 
     return Groove(vars, opt)
 
 end
 
-function solve(groove; prev_state =[], ftol_abs=0.0001, max_time=0.0)
+function solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
     if length(prev_state) == 0
         initSol = groove.vars.xopt
     else
@@ -84,7 +84,7 @@ function solve(groove; prev_state =[], ftol_abs=0.0001, max_time=0.0)
         maxtime!(groove.opt, max_time)
     end
 
-    if ftol_abs != 0.0001
+    if ftol_abs != 0.001
         ftol_abs!(groove.opt, ftol_abs)
     end
 
