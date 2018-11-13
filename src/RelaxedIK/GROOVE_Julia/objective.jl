@@ -1,6 +1,3 @@
-using ForwardDiff
-using Calculus
-using ReverseDiff
 
 
 function obj_master(x, grad, vars)
