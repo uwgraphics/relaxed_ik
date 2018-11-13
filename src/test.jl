@@ -9,7 +9,7 @@ f = open(path_to_src * "/RelaxedIK/Config/info_files/ur5_info.yaml")
 
 y = YAML.load(f)
 
-println(y)
+# println(y)
 
 # include("RelaxedIK/GROOVE_Julia/objective.jl")
 # include("RelaxedIK/Spacetime_Julia/arm.jl")

@@ -9,14 +9,14 @@ mutable struct Robot
     num_dof
     subchain_indices
     bounds
-    velocity_limitss
+    velocity_limits
     get_frame_funcs
     out_subchains
     split_state_into_subchains_c
     getFrames
 end
 
-function Robot(arms, full_joint_lists, joint_order)
+function Robot(arms, full_joint_lists, joint_order, bounds, velocity_limits)
     num_chains = length(arms)
     num_dof = length(joint_order)
 
@@ -29,7 +29,7 @@ function Robot(arms, full_joint_lists, joint_order)
         end
     end
 
-    robot = Robot(arms, full_joint_lists, joint_order, num_chains, num_dof, subchain_indices,0,0,0, out_subchains, 0,0)
+    robot = Robot(arms, full_joint_lists, joint_order, num_chains, num_dof, subchain_indices,bounds,velocity_limits,0, out_subchains, 0,0)
     initialize_subchain_indices!(robot)
 
     robot.split_state_into_subchains_c = split_state_into_subchains_closure(robot)
@@ -102,7 +102,7 @@ end
 
 function split_state_into_subchains(x, num_chains, subchain_indices, out_subchains)
     # out_subchains = Array{Array{Float64, 1},1}()
-    for i in 1:length(num_chains)
+    for i in 1:num_chains
         # subchain = Array{Float64, 1}()
         for j in 1:length(subchain_indices[i])
             # push!(subchain, x[s])
@@ -121,7 +121,7 @@ end
 function getFrames(x, robot)
     robot.split_state_into_subchains_c(x)
     out_subchains = robot.out_subchains
-    for i in 1:length(robot.num_chains)
+    for i in 1:robot.num_chains
         robot.get_frame_funcs[i](out_subchains[i])
     end
 end

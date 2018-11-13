@@ -10,15 +10,13 @@ mutable struct Arm
     static_disp_offset
     rot_offsets
     joint_types
-    joint_limits
-    velocity_limits
     do_rot_offsets
     out_pts
     out_frames
     getFrames
 end
 
-function Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,joint_limits,velocity_limits,do_rot_offsets)
+function Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,do_rot_offsets)
     rot_offset_matrices = [eulerTupleTo3x3(t) for t in rot_offsets]
     static_displacements = []
     for i in 1:length(displacements)
@@ -28,7 +26,7 @@ function Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,joi
     static_disp_offset = SVector( disp_offset[1], disp_offset[2], disp_offset[3] )
     id_mat = one(RotMatrix{3, Float64})
 
-    arm = Arm(axis_types, displacements, original_displacements, static_displacements, disp_offset, static_disp_offset, rot_offset_matrices, joint_types, joint_limits, velocity_limits, do_rot_offsets, 0, 0, 0)
+    arm = Arm(axis_types, displacements, original_displacements, static_displacements, disp_offset, static_disp_offset, rot_offset_matrices, joint_types, do_rot_offsets, 0, 0, 0)
 
     out_pts, out_frames = getEmptyFrames(arm)
     arm.out_pts = out_pts
@@ -180,7 +178,7 @@ function getFrames_closure(arm)
     return f
 end
 
-
+#=
 axis_types = ["-z","y","y","y","z","y"]
 displacements = [[0.0, 0.13585, 0.0], [0.0, -0.1197, 0.425], [0.0, 0.0, 0.39225], [0, 0.093, 0], [0, 0, 0.09465], [0.0,0.0823,0.0]]
 disp_offset = [0., 0., 0.089159]
@@ -203,3 +201,4 @@ function test_func(x)
     ee_pt = ur5.out_pts[end]
     return norm(ee_pt)
 end
+=#

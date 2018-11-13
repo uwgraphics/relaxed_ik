@@ -214,9 +214,13 @@ out_file.write('joint_state_define_func_file: \"{}\"\n'.format(joint_state_defin
 
 out_file.close()
 
+print bcolors.OKGREEN + 'info file {} successfully created!'.format(info_file_name) + bcolors.ENDC
+
+'''
 in_file = open(path_to_src + '/RelaxedIK/Config/info_files/' + info_file_name, 'r')
 
 import yaml
 
 y = yaml.load(in_file)
+'''
 
