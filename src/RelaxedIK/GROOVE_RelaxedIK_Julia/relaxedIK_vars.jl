@@ -17,12 +17,12 @@ mutable struct RelaxedIK_vars
     init_ee_quats
 end
 
-function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, equality_constraints; position_mode = "relative", rotation_mode = "relative")
+function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative")
 
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
 
     robot = yaml_block_to_robot(y)
-    vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, equality_constraints, y["joint_limits"])
+    vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
 
     robot.getFrames(y["starting_config"])
 
@@ -40,7 +40,11 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         push!(goal_quats, Quat(1.,0.,0.,0.))
     end
 
-    return RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, init_ee_positions, init_ee_quats)
+    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, init_ee_positions, init_ee_quats)
+
+    populate_vars!(vars, rv)
+
+    return rv
 end
 
 function update!(relaxedIK_vars)
@@ -91,4 +95,4 @@ using BenchmarkTools
 # @btime arms[1].getFrames([0.,0.,0.,0.,0.,0.])
 # println(arms[1].out_pts)
 
-vars = RelaxedIK_vars(path_to_src, "hubo_info.yaml", [], [], [], [], [])
+vars = RelaxedIK_vars(path_to_src, "hubo_info.yaml", [], [], [], [], [], [], [])

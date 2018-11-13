@@ -21,17 +21,6 @@ function obj_master(x, grad, vars, objectives, gradients, weights)
     return sum
 end
 
-function get_∇(func, grad_method)
-    # func needs to already be a function just with respect to x
-    if grad_method == "forward_ad"
-        return x->ForwardDiff.gradient(func, x)
-    elseif grad_method == "reverse_ad"
-        return x->ReverseDiff.gradient(func, x)
-    elseif grad_method == "finite_diff"
-        return x->Calculus.gradient(func, x)
-    end
-end
-
 
 function get_obj_closure(func, vars)
     # takes in an objective function that is dependent on x as well as a vars object, and returns a function that

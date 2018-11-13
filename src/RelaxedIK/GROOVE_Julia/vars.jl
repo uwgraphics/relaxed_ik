@@ -1,4 +1,5 @@
-include("objective.jl")
+include("gradient.jl")
+include("constraint.jl")
 
 mutable struct Vars
     init_state
@@ -8,7 +9,11 @@ mutable struct Vars
     ∇s
     weight_priors
     inequality_constraints
+    ineq_constraint_closures
+    ineq_grad_types
     equality_constraints
+    eq_constraint_closures
+    eq_grad_types
     bounds
     xopt
     prev_state
@@ -16,7 +21,7 @@ mutable struct Vars
     prev_state3
 end
 
-function Vars(init_state, objectives, grad_types, weight_priors, inequality_constraints, equality_constraints, bounds)
+function Vars(init_state, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds)
     xopt = copy(init_state)
     prev_state = copy(init_state)
     prev_state2 = copy(init_state)
@@ -27,7 +32,27 @@ function Vars(init_state, objectives, grad_types, weight_priors, inequality_cons
         throw(ArgumentError("ERROR: length of objectives, grad_types, and weight_priors must be equal in Vars"))
     end
 
-    return Vars(init_state, objectives, [], grad_types, [], weight_priors, inequality_constraints, equality_constraints, bounds, xopt, prev_state, prev_state2, prev_state3)
+    length_checek = length(inequality_constraints) == length(ineq_grad_types)
+    if length_checek == false
+        throw(ArgumentError("ERROR: length of inequality_constraints and ineq_grad_types must be equal in Vars"))
+    end
+
+    length_checek = length(equality_constraints) == length(eq_grad_types)
+    if length_checek == false
+        throw(ArgumentError("ERROR: length of equality_constraints and eq_grad_types must be equal in Vars"))
+    end
+
+    v = Vars(init_state, objectives, [], grad_types, [], weight_priors, inequality_constraints, [], ineq_grad_types, equality_constraints, [], eq_grad_types, bounds, xopt, prev_state, prev_state2, prev_state3)
+
+    populate_vars!(v, v)
+
+    return v
+end
+
+function populate_vars!(vars, target_vars)
+    populate_objective_closures!(vars, target_vars)
+    populate_∇s!(vars)
+    populate_constraint_closures!(vars, target_vars)
 end
 
 function populate_objective_closures!(vars, target_vars)
@@ -44,6 +69,20 @@ function populate_∇s!(vars)
     for i=1:length(vars.objective_closures)
         push!(vars.∇s, get_∇(vars.objective_closures[i], vars.grad_types[i]))
     end
+end
+
+function populate_constraint_closures!(vars, target_vars)
+    vars.ineq_constraint_closures = []
+    vars.eq_constraint_closures = []
+
+    for i=1:length(vars.inequality_constraints)
+        push!(vars.ineq_constraint_closures, get_constraint_closure(vars.inequality_constraints[i], vars.ineq_grad_types[i], target_vars))
+    end
+
+    for i=1:length(vars.equality_constraints)
+        push!(vars.eq_constraint_closures, get_constraint_closure(vars.equality_constraints[i], vars.eq_grad_types[i], target_vars))
+    end
+
 end
 
 function update!(xopt, vars)
