@@ -12,7 +12,7 @@ function obj_master(x, grad, vars)
     end
 
     sum = 0.0
-    for i in 1:length(objectives)
+    for i in 1:length(vars.objective_closures)
         sum += vars.weight_priors[i]*vars.objective_closures[i](x)
     end
 

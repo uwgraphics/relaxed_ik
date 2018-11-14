@@ -1,13 +1,13 @@
 #!/usr/bin/env julia
 
 using YAML
-
+using BenchmarkTools
 
 path_to_src = Base.source_dir()
 
-f = open(path_to_src * "/RelaxedIK/Config/info_files/ur5_info.yaml")
+# f = open(path_to_src * "/RelaxedIK/Config/info_files/ur5_info.yaml")
 
-y = YAML.load(f)
+# y = YAML.load(f)
 
 # println(y)
 
@@ -15,37 +15,26 @@ y = YAML.load(f)
 # include("RelaxedIK/Spacetime_Julia/arm.jl")
 # include("RelaxedIK/Spacetime_Julia/robot.jl")
 
+include("RelaxedIK/relaxedIK.jl")
+include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
 include("RelaxedIK/GROOVE_Julia/groove.jl")
-include("RelaxedIK/GROOVE_Julia/vars.jl")
-using BenchmarkTools
+include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 
-function o1(x, vars)
-    return x[1]^vars.weight_priors[1]
+relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
+# println(relaxedIK.relaxedIK_vars.vars.init_state)
+
+# @btime relaxedIK.relaxedIK_vars.vars.∇s[2](rand(6))
+# show(relaxedIK.relaxedIK_vars.vars.∇s[4](rand(15)))
+# @btime relaxedIK.relaxedIK_vars.vars.objective_closures[3](rand(6))
+# show(position_obj([3.1277, -0.0398739, -2.0773, -1.03981, -1.58653, -1.57102], relaxedIK.relaxedIK_vars))
+# @btime solve(relaxedIK.groove)
+# @btime solve(relaxedIK.groove)
+
+# show(solve(relaxedIK.groove))
+
+
+for i=1:1000
+    xopt = solve(relaxedIK.groove)
+    update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
+    println(xopt)
 end
-
-function o2(x, vars)
-    return x[1]^vars.weight_priors[2]
-end
-
-function ineq_con1(x, vars)
-    return x[1]
-end
-
-function eq_con1(x, vars)
-    return x[1] + 2
-end
-
-objectives = [o1, o2]
-grad_types = ["finite_diff", "forward_ad"]
-weight_priors = [2.0, 1.0]
-inequality_constraints = []
-ineq_grad_types = []
-equality_constraints = []
-eq_grad_types = []
-bounds = []
-vars = Vars([-1.0], objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds)
-
-g = get_groove(vars, "cobyla")
-
-@btime solve(g)
-println(solve(g))

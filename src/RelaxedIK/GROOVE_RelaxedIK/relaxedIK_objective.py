@@ -405,3 +405,5 @@ class Collision_Avoidance_nn(Objective):
             return (-math.e ** ((-(x_val - t) ** d) / (2.0 * c ** 2)) ) + f * (x_val - t) ** g
 
         # return math.exp(x_val - 0.64) - 1
+
+

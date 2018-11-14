@@ -1,3 +1,5 @@
+# note: contraints are of the form f(x) <= 0, so allowable outputs are NEGATIVE (opposite of scipy)
+
 include("gradient.jl")
 
 

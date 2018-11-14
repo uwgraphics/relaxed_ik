@@ -19,6 +19,7 @@ mutable struct Vars
     prev_state
     prev_state2
     prev_state3
+    dummy_val
 end
 
 function Vars(init_state, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds)
@@ -42,7 +43,7 @@ function Vars(init_state, objectives, grad_types, weight_priors, inequality_cons
         throw(ArgumentError("ERROR: length of equality_constraints and eq_grad_types must be equal in Vars"))
     end
 
-    v = Vars(init_state, objectives, [], grad_types, [], weight_priors, inequality_constraints, [], ineq_grad_types, equality_constraints, [], eq_grad_types, bounds, xopt, prev_state, prev_state2, prev_state3)
+    v = Vars(init_state, objectives, [], grad_types, [], weight_priors, inequality_constraints, [], ineq_grad_types, equality_constraints, [], eq_grad_types, bounds, xopt, prev_state, prev_state2, prev_state3, 0.0)
 
     populate_vars!(v, v)
 
@@ -85,7 +86,7 @@ function populate_constraint_closures!(vars, target_vars)
 
 end
 
-function update!(xopt, vars)
+function update!(vars, xopt)
     vars.prev_state3 = vars.prev_state2
     vars.prev_state2 = vars.prev_state
     vars.prev_state = vars.xopt

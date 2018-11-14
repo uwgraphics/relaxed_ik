@@ -17,9 +17,11 @@ mutable struct RelaxedIK_vars
     init_ee_quats
 end
 
+
 function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative")
 
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
+
 
     robot = yaml_block_to_robot(y)
     vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
@@ -47,12 +49,12 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
     return rv
 end
 
-function update!(relaxedIK_vars)
-
+function update_relaxedIK_vars!(relaxedIK_vars, xopt)
+    update!(relaxedIK_vars.vars, xopt)
 end
 
 function info_file_name_to_yaml_block(path_to_src, info_file_name)
-    f = open(path_to_src * "/RelaxedIK/Config/info_files/ur5_info.yaml")
+    f = open(path_to_src * "/RelaxedIK/Config/info_files/" * info_file_name)
     y = YAML.load(f)
     return y
 end
@@ -77,12 +79,12 @@ function yaml_block_to_arms(y)
     return arms
 end
 
-path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
-f = open(path_to_src * "/RelaxedIK/Config/info_files/hubo_info.yaml")
+# path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
+# f = open(path_to_src * "/RelaxedIK/Config/info_files/hubo_info.yaml")
 
-y = YAML.load(f)
+# y = YAML.load(f)
 
-using BenchmarkTools
+# using BenchmarkTools
 
 # arms = yaml_block_to_arms(y)
 # robot = yaml_block_to_robot(y)

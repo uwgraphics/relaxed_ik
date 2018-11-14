@@ -3,7 +3,7 @@ fixed_frame: "base_footprint"
 joint_names: [ [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2" ], [ "WAIST", "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ] ]
 joint_ordering: [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2", "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ]
 ee_fixed_joints: [ "RIGHT_HAND", "LEFT_HAND" ]
-starting_config: [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+starting_config: [ 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0 ]
 collision_file_name: "collision.yaml"
 collision_nn_file: "hubo_description_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"

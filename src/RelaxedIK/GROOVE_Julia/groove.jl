@@ -59,6 +59,9 @@ function get_groove(vars, solver_name)
         push!(upper_bounds, vars.bounds[i][2])
     end
 
+    lower_bounds = Array{Float64}(lower_bounds)
+    upper_bounds = Array{Float64}(upper_bounds)
+
     if length(lower_bounds) > 0
         lower_bounds!(opt, lower_bounds)
     end
@@ -68,6 +71,7 @@ function get_groove(vars, solver_name)
     end
 
     ftol_abs!(opt, 0.001)
+    maxeval!(opt, 15)
 
     return Groove(vars, opt)
 
@@ -90,5 +94,6 @@ function solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
 
     (minf, minx, ret) = optimize(groove.opt, initSol)
 
+    # return minx, minf, groove.opt.numevals
     return minx
 end
