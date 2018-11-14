@@ -12,9 +12,14 @@ end
 
 function position_obj(x, vars)
     x_val = 0.0
+    idx = relaxedIK.relaxedIK_vars.robot.subchain_indices
     # vars.robot.getFrames(x)
     # subchain = vars.robot.split_state_into_subchains_c(x)
     for i=1:vars.robot.num_chains
+        #subchain = zeros(length(relaxedIK.relaxedIK_vars.robot.subchain_indices[i]))
+        #for j=1:length(relaxedIK.relaxedIK_vars.robot.subchain_indices[i])
+        #    subchain[j] = x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i][j]]
+        #end
         #=
         if i == 1
             vars.robot.arms[i].getFrames( [x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]] )
@@ -22,7 +27,7 @@ function position_obj(x, vars)
             vars.robot.arms[i].getFrames( [x[1], x[9], x[10], x[11], x[12], x[13], x[14], x[15]] )
         end
         =#
-
+        # vars.robot.arms[i].getFrames(subchain)
         vars.robot.arms[i].getFrames( [ x[1], x[2], x[3], x[4], x[5], x[6] ] )
         x_val += norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i])
         # x_val += norm(vars.robot.arms[i].out_pts[end] - [1.,0.,0.])
@@ -33,6 +38,10 @@ end
 function rotation_obj(x, vars)
     x_val = 0.0
     for i=1:vars.robot.num_chains
+        #subchain = zeros(length(relaxedIK.relaxedIK_vars.robot.subchain_indices[i]))
+        #for j=1:length(relaxedIK.relaxedIK_vars.robot.subchain_indices[i])
+        #    subchain[j] = x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i][j]]
+        #end
         #=
         if i == 1
             vars.robot.arms[i].getFrames( [x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]] )
@@ -41,6 +50,7 @@ function rotation_obj(x, vars)
         end
         =#
         vars.robot.arms[i].getFrames([ x[1], x[2], x[3], x[4], x[5], x[6] ] )
+        # vars.robot.arms[i].getFrames(subchain)
         eeMat = vars.robot.arms[i].out_frames[end]
 
         goal_quat = Quat(1,0,0,0)

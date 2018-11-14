@@ -71,13 +71,13 @@ function get_groove(vars, solver_name)
     end
 
     ftol_abs!(opt, 0.001)
-    maxeval!(opt, 15)
+    maxeval!(opt, 25)
 
     return Groove(vars, opt)
 
 end
 
-function solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
+function groove_solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
     if length(prev_state) == 0
         initSol = groove.vars.xopt
     else
@@ -91,6 +91,7 @@ function solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
     if ftol_abs != 0.001
         ftol_abs!(groove.opt, ftol_abs)
     end
+
 
     (minf, minx, ret) = optimize(groove.opt, initSol)
 
