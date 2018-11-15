@@ -35,12 +35,14 @@ relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
 # println(relaxedIK.groove)
 # show(solve(relaxedIK, [[0.,0.,-0.2]], [Quat(1.,0.,0.,0.)]))
 
+# @btime groove_solve(relaxedIK.groove)
+
 @btime groove_solve(relaxedIK.groove)
 
 #=
 for i=1:1000
-    println(solve(relaxedIK.groove))
-    #xopt = solve(relaxedIK, [[0.,0.,0.0]], [Quat(1.,0.,0.,0.)])
+    xopt = solve(relaxedIK, [[0.,0.,0.0]], [Quat(1.,0.,0.,0.)])
     # update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
+    println(xopt)
 end
 =#

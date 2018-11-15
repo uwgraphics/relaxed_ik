@@ -71,7 +71,7 @@ function get_groove(vars, solver_name)
     end
 
     ftol_abs!(opt, 0.001)
-    maxeval!(opt, 25)
+    maxeval!(opt, 15)
 
     return Groove(vars, opt)
 
