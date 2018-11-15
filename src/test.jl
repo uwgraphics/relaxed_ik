@@ -37,7 +37,9 @@ relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
 
 # @btime groove_solve(relaxedIK.groove)
 
-@btime groove_solve(relaxedIK.groove)
+# @btime groove_solve(relaxedIK.groove)
+
+# @btime solve(relaxedIK, [SVector(0.,0.,0.0)], [Quat(1.,0.,0.,0.)])
 
 #=
 for i=1:1000

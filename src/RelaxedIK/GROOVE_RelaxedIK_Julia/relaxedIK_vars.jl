@@ -13,6 +13,8 @@ mutable struct RelaxedIK_vars
     rotation_mode
     goal_positions
     goal_quats
+    goal_positions_relative
+    goal_quats_relative
     init_ee_positions
     init_ee_quats
 end
@@ -32,6 +34,8 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
     goal_positions = []
     goal_quats = []
+    goal_positions_relative = []
+    goal_quats_relative = []
     init_ee_positions = []
     init_ee_quats = []
 
@@ -40,9 +44,12 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         push!(init_ee_quats, Quat(robot.arms[i].out_frames[end]))
         push!(goal_positions, SVector(0.,0.,0.))
         push!(goal_quats, Quat(1.,0.,0.,0.))
+        push!(goal_positions_relative, SVector(0.,0.,0.))
+        push!(goal_quats_relative, Quat(1.,0.,0.,0.))
+
     end
 
-    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, init_ee_positions, init_ee_quats)
+    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats)
 
     populate_vars!(vars, rv)
 

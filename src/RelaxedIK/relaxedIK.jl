@@ -16,7 +16,7 @@ function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_p
 end
 
 
-function get_standard(path_to_src, info_file_name; solver_name = "slsqp")
+function get_standard(path_to_src, info_file_name; solver_name = "cobyla")
     objectives = [position_obj, rotation_obj, min_jt_vel_obj, min_jt_accel_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad"]
     weight_priors = [50., 49., 1.,1.]
@@ -28,24 +28,23 @@ function get_standard(path_to_src, info_file_name; solver_name = "slsqp")
 end
 
 function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
+    vars = relaxedIK.relaxedIK_vars
     if relaxedIK.relaxedIK_vars.position_mode == "relative"
-        gp = []
-        for i = 1:length(relaxedIK.relaxedIK_vars.robot.num_chains)
-            push!(gp, SVector(relaxedIK.relaxedIK_vars.init_ee_positions[i]) + goal_positions[i])
+        for i = 1:length(vars.robot.num_chains)
+            vars.goal_positions_relative[i] = vars.init_ee_positions[i] + goal_positions[i]
         end
-        relaxedIK.relaxedIK_vars.goal_positions = gp
+        vars.goal_positions = vars.goal_positions_relative
     else
-        relaxedIK.relaxedIK_vars.goal_positions = goal_positions
+        vars.goal_positions = goal_positions
     end
 
     if relaxedIK.relaxedIK_vars.rotation_mode == "relative"
-        gq = []
-        for i = 1:length(relaxedIK.relaxedIK_vars.robot.num_chains)
-            push!(gq, goal_quats[i] * relaxedIK.relaxedIK_vars.init_ee_quats[i])
+        for i = 1:length(vars.robot.num_chains)
+            vars.goal_quats_relative[i] = goal_quats[i] * vars.init_ee_quats[i]
         end
-        relaxedIK.relaxedIK_vars.goal_quats = gq
+        vars.goal_quats = vars.goal_quats_relative
     else
-        relaxedIK.relaxedIK_vars.goal_quats = goal_quats
+        vars.goal_quats = goal_quats
     end
 
     xopt = groove_solve(relaxedIK.groove, prev_state=prev_state)

@@ -11,7 +11,7 @@ include("RelaxedIK/GROOVE_Julia/groove.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 
 
-relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
+relaxedIK = get_standard(path_to_src, "hubo_info.yaml")
 
 vars = relaxedIK.relaxedIK_vars
 
@@ -22,10 +22,16 @@ x = [1.,1.,1.,1.,0.,0.]
 c = x->rotation_obj(x, vars)
 ∇ = x->ForwardDiff.gradient(c, x)
 
-@btime ∇(x)
+# @btime ∇(x)
 # println(∇(x))
 
-# idx = [1,2,3,5]
-# subchain = vars.robot.subchain_indices
+# @btime update_relaxedIK_vars!(vars, rand(6))
 
-# println(x[subchain[2]])
+
+goal_positions = [SVector(0.3,0.4,0.1)]
+goal_quats = [Quat(1.,0.,0.,0.)]
+
+@btime solve(relaxedIK, goal_positions, goal_quats)
+# println(solve_local(relaxedIK, goal_positions, goal_quats))
+vars = relaxedIK.relaxedIK_vars
+# @btime groove_solve(relaxedIK.groove, prev_state=[])
