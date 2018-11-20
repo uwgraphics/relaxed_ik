@@ -36,14 +36,14 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
     goal_quats = []
     goal_positions_relative = []
     goal_quats_relative = []
-    init_ee_positions = []
-    init_ee_quats = []
+    init_ee_positions = Array{SArray{Tuple{3},Float64,1,3},1}()
+    init_ee_quats = Array{Quat{Float64},1}()
 
     for i in 1:num_chains
         push!(init_ee_positions, robot.arms[i].out_pts[end])
         push!(init_ee_quats, Quat(robot.arms[i].out_frames[end]))
-        push!(goal_positions, SVector(0.,0.,0.))
-        push!(goal_quats, Quat(1.,0.,0.,0.))
+        push!(goal_positions, SVector(0.0001,0.00001,0.000001))
+        push!(goal_quats, rand(Quat))
         push!(goal_positions_relative, SVector(0.,0.,0.))
         push!(goal_quats_relative, Quat(1.,0.,0.,0.))
 
@@ -104,4 +104,4 @@ end
 # @btime arms[1].getFrames([0.,0.,0.,0.,0.,0.])
 # println(arms[1].out_pts)
 
-vars = RelaxedIK_vars(path_to_src, "hubo_info.yaml", [], [], [], [], [], [], [])
+# vars = RelaxedIK_vars(path_to_src, "hubo_info.yaml", [], [], [], [], [], [], [])

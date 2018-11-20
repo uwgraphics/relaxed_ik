@@ -34,3 +34,7 @@ if not file_exists:
 print bcolors.OKGREEN + 'info file [{}] successfully loaded!'.format(info_file_name) + bcolors.ENDC
 rospy.set_param('relaxedIK/info_file_loaded', True)
 rospy.set_param('relaxedIK/loaded_info_file_name', info_file_name)
+
+loaded_robot_file = open(path_to_src + '/RelaxedIK/Config/loaded_robot', 'w')
+loaded_robot_file.write(info_file_name)
+loaded_robot_file.close()

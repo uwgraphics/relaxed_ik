@@ -15,7 +15,9 @@ function position_obj(x, vars)
     for i=1:vars.robot.num_chains
         vars.robot.arms[i].getFrames(x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i]])
         x_val += norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i])
+        # println(norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i]))
     end
+
     return x_val
 end
 

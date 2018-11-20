@@ -70,10 +70,10 @@ function get_groove(vars, solver_name)
         upper_bounds!(opt, upper_bounds)
     end
 
-    xtol_rel!(opt, 0.001)
+    xtol_abs!(opt, 1.0)
     # xtol_rel!(opt, 1.1)
-    maxeval!(opt, 15)
-    maxtime!(opt, 0.005)
+    maxeval!(opt, 100)
+    maxtime!(opt, 0.01)
 
     return Groove(vars, opt)
 
@@ -100,7 +100,7 @@ function groove_solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
     # println(xtol_rel(groove.opt))
 
     (minf, minx, ret) = optimize(groove.opt, initSol)
-    println(groove.opt.numevals)
+    # println(groove.opt.numevals)
     # println(ret)
     # return minx, minf, groove.opt.numevals
     return minx

@@ -29,7 +29,6 @@ commands to install these:
 
 '''
 
-
 def urdf_load(urdfString, startJoint, endJoint, full_joint_list, fixed_ee_joint = None, Debug=False):
     '''
     Takes in a urdf file and parses that into different object representations of the robot arm
