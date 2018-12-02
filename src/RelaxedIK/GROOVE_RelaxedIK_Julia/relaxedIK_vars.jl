@@ -24,7 +24,6 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
 
-
     robot = yaml_block_to_robot(y)
     vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
 
