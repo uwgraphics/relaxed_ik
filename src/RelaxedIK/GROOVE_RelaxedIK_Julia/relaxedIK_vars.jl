@@ -5,6 +5,8 @@ include("../Spacetime_Julia/robot.jl")
 using YAML
 using Rotations
 using StaticArrays
+using Flux
+using BSON
 
 mutable struct RelaxedIK_vars
     vars
@@ -17,6 +19,25 @@ mutable struct RelaxedIK_vars
     goal_quats_relative
     init_ee_positions
     init_ee_quats
+    collision_nn
+    state_to_joint_pts_closure
+end
+
+function state_to_joint_pts(x, vars)
+    joint_pts = []
+    for i=1:vars.robot.num_chains
+        vars.robot.arms[i].getFrames(x[vars.robot.subchain_indices[i]])
+    end
+
+    for j=1:vars.robot.num_chains
+        out_pts = vars.robot.arms[j].out_pts
+        for k = 1:length(out_pts)
+            for l=1:3
+                push!(joint_pts, out_pts[k][l])
+            end
+        end
+    end
+    return joint_pts
 end
 
 
@@ -41,14 +62,22 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
     for i in 1:num_chains
         push!(init_ee_positions, robot.arms[i].out_pts[end])
         push!(init_ee_quats, Quat(robot.arms[i].out_frames[end]))
-        push!(goal_positions, SVector(0.0001,0.00001,0.000001))
+        push!(goal_positions, SVector(0.0,0.0,0.0))
         push!(goal_quats, rand(Quat))
         push!(goal_positions_relative, SVector(0.,0.,0.))
         push!(goal_quats_relative, Quat(1.,0.,0.,0.))
 
     end
 
-    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats)
+    collision_nn_file_name = y["collision_nn_file"]
+    model = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:m]
+    function model_nn(x, model)
+        return Flux.Tracker.data(model(state_to_joint_pts_closure(x))[1])
+    end
+    collision_nn = (x)-> model_nn(x, model)
+    state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_vars)
+
+    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, collision_nn, state_to_joint_pts_closure)
 
     populate_vars!(vars, rv)
 
@@ -84,23 +113,3 @@ function yaml_block_to_arms(y)
 
     return arms
 end
-
-# path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
-# f = open(path_to_src * "/RelaxedIK/Config/info_files/hubo_info.yaml")
-
-# y = YAML.load(f)
-
-# using BenchmarkTools
-
-# arms = yaml_block_to_arms(y)
-# robot = yaml_block_to_robot(y)
-# robot.getFrames([0., 0., 0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.])
-# println(robot.subchain_indices[2][1])
-# println(robot.out_subchains)
-# println(robot.arms[1].out_pts)
-# println(robot.arms[2].out_pts)
-
-# @btime arms[1].getFrames([0.,0.,0.,0.,0.,0.])
-# println(arms[1].out_pts)
-
-# vars = RelaxedIK_vars(path_to_src, "hubo_info.yaml", [], [], [], [], [], [], [])

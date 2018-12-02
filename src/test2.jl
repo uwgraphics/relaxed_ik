@@ -11,11 +11,11 @@ include("RelaxedIK/GROOVE_Julia/groove.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 
 
-relaxedIK = get_standard(path_to_src, "hubo_info.yaml")
+relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
 
 vars = relaxedIK.relaxedIK_vars
 
-println(path_to_src)
+# println(relaxedIK.relaxedIK_vars.state_to_joint_pts_closure([0.,0.,3.,0.,0.,0.]))
 
 # x = [0.475115, 0.410492, 0.630609, 0.491862, 0.291932, 0.996426, 0.116537, 0.545429, 0.211642, 0.575973, 0.0784703, 0.468633, 0.61519, 0.0431053, 0.625812]
 # x = [0.,0.,1.,1.,0.,0.]
@@ -32,8 +32,8 @@ println(path_to_src)
 # @btime update_relaxedIK_vars!(vars, rand(6))
 
 
-goal_positions = [SVector(0.0,0.0,0.00001), SVector(0.1,0.0,0.1)]
-goal_quats = [rand(Quat), rand(Quat)]
+#goal_positions = [SVector(0.0,0.0,0.00001), SVector(0.1,0.0,0.1)]
+#goal_quats = [rand(Quat), rand(Quat)]
 
 # println(rand(Quat))
 #@btime solve(relaxedIK, goal_positions, goal_quats)
@@ -72,8 +72,5 @@ end
 
 test(relaxedIK)
 =#
-
-
-
 
 # println(groove_solve(relaxedIK.groove, prev_state=[]))
