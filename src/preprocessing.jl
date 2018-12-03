@@ -88,12 +88,11 @@ function run_preprocessing(num_samples=50000)
     data = zip(ins, outs)
 
     m = Chain(
-        Dense(length(state_to_joint_pts_closure(rand(num_dof))), 70, Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 1,Flux.relu)
+        Dense(length(state_to_joint_pts_closure(rand(num_dof))), 40, Flux.relu),
+        Dense(40, 40,Flux.relu),
+        Dense(40, 40,Flux.relu),
+        Dense(40, 40,Flux.relu),
+        Dense(40, 1,Flux.relu)
     )
 
     p = Flux.params(m)
@@ -106,7 +105,7 @@ function run_preprocessing(num_samples=50000)
 
     loss_before = total_loss(ins, outs, m)
     total_loss(ins, outs, m)
-    epochs = 3
+    epochs = 6
     for i = 1:epochs
         println("epoch $i of $epochs")
         Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb, 6.0))

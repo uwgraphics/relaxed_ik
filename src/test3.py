@@ -9,4 +9,4 @@ if __name__ == '__main__':
     rj = RelaxedIK_Julia(path_to_src)
 
     while True:
-        rj.solve([[0.,0.,0.]], [[1.,0.,0.,0.]])
+        print rj.solve([[0.,0.,0.]], [[1.,0.,0.,0.]])

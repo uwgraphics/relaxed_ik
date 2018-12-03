@@ -5,12 +5,13 @@ include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
 include("RelaxedIK/GROOVE_Julia/groove.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
+include("RelaxedIK/Utils_Julia/testbed_utils.jl")
 
 ################################################################################
 robot_name = "ur5"
 info_name = "ur5_info.yaml"
 solver_name = "relaxed_ik"
-task_name = "huboCircle"
+task_name = "circle"
 ################################################################################
 
 path_to_src = Base.source_dir()
@@ -37,10 +38,12 @@ function run_trial(relaxedIK, pos_goals, quat_goals, solver_output)
 
         add_line(solver_output, xopt, pos_goals[i], quat_goals[i])
 
-        println(xopt)
+        @show get_metrics(relaxedIK, xopt, vars.goal_positions[1], vars.goal_quats[1])
+        # println(xopt)
     end
 
 end
+
 
 run_trial(relaxedIK, pos_goals, quat_goals, solver_output)
 close_solver_output(solver_output)
