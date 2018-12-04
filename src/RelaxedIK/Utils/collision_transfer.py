@@ -4,6 +4,7 @@ from start_here import urdf_file_name, joint_names, joint_ordering, ee_fixed_joi
     joint_state_define, collision_file_name, fixed_frame
 import os
 import rospy
+import yaml
 
 def test():
     print 'what up'
@@ -15,11 +16,19 @@ def test2():
 class CollisionVars:
     def __init__(self, path_to_src):
         rospy.init_node('coll_test')
+        # print "got here!"
         # path_to_src = os.path.dirname(__file__)
-        self.vars = RelaxedIK_vars('relaxedIK', path_to_src + '/RelaxedIK/urdfs/' + 'ur5.urdf', joint_names
-                              , ee_fixed_joints,
-                              joint_ordering, init_state=starting_config, collision_file=collision_file_name,
-                              config_override=False, path_to_src=path_to_src, pre_config=True)
+        # print path_to_src
+        # print path_to_src + '/RelaxedIK/Config/loaded_robot'
+        loaded_robot_file = open(path_to_src + '/RelaxedIK/Config/loaded_robot', 'r')
+        loaded_robot = loaded_robot_file.readline()
+        y = yaml.load(open(path_to_src + '/RelaxedIK/Config/info_files/' + loaded_robot))
+        urdf = y['urdf_file_name']
+
+        self.vars = RelaxedIK_vars('relaxedIK', path_to_src + '/RelaxedIK/urdfs/' + urdf, joint_names
+                               , ee_fixed_joints,
+                               joint_ordering, init_state=starting_config, collision_file=collision_file_name,
+                               config_override=False, path_to_src=path_to_src, pre_config=True)
 
 
 def get_score(x, CollisionVars):

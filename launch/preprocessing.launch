@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <launch>
-   <node pkg="relaxed_ik" type="preprocessing.py" name="preprocessing" output="screen"/>
+   <node pkg="relaxed_ik" type="preprocessing.jl" name="preprocessing" output="screen"/>
 </launch>

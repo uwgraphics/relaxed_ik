@@ -10,33 +10,34 @@ mutable struct RelaxedIK
     groove
 end
 
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp")
-    relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false)
+    relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
+    groove = 0
     groove = get_groove(relaxedIK_vars.vars, solver_name)
     return RelaxedIK(relaxedIK_vars, groove)
 end
 
 
-function get_standard(path_to_src, info_file_name; solver_name = "slsqp")
-    objectives = [position_obj, rotation_obj, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
+function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad","forward_ad"]
     weight_priors = [50., 49.0, 1.,1., 3., 0.1]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
-function get_finite_diff_version(path_to_src, info_file_name; solver_name = "slsqp")
-    objectives = [position_obj, rotation_obj, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
-    grad_types = ["finite_diff", "finite_diff", "finite_diff", "finite_diff", "finite_diff"]
+function get_finite_diff_version(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
+    grad_types = ["finite_diff", "finite_diff", "finite_diff", "finite_diff", "finite_diff", "finite_diff"]
     weight_priors = [50., 49.0, 1.,1., 1., 0.1]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
 

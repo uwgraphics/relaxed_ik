@@ -1,0 +1,13 @@
+def joint_state_define(x):
+    js = JointState()
+    js.name = ['right_j0', 'head_pan', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']
+    js.position = 8*[0.0]
+    js.position[0] = x[0]
+    js.position[2] = x[1]
+    js.position[3] = x[2]
+    js.position[4] = x[3]
+    js.position[5] = x[4]
+    js.position[6] = x[5]
+    js.position[7] = x[6]
+    js.position = tuple(js.position)
+    return js

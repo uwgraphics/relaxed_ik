@@ -1,4 +1,8 @@
+#!/usr/bin/env julia
+
 ENV["PYTHON"] = "/usr/bin/python"
+
+println("preparing for preprocessing....")
 
 using PyCall
 using Flux
@@ -47,10 +51,14 @@ function run_preprocessing(num_samples=50000)
     loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
     loaded_robot = readline(loaded_robot_file)
 
-    relaxedIK = get_standard(path_to_src, loaded_robot)
+    println("loaded robot: $loaded_robot")
+
+    relaxedIK = get_standard(path_to_src, loaded_robot; preconfigured=true)
     cv = c.CollisionVars(path_to_src)
 
     num_dof = relaxedIK.relaxedIK_vars.robot.num_dof
+
+    # println(num_dof)
 
     state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_vars)
 
@@ -68,11 +76,12 @@ function run_preprocessing(num_samples=50000)
         in = rand(Uniform(-6,6), num_dof)
         # last_state = in
         out = [c.get_score(in, cv)]
-
+        println(in)
 
         push!(ins, state_to_joint_pts_closure(in))
         # push!(ins, in)
         push!(outs, out)
+        println(out)
 
         println("sample $i of $num_samples")
     end
@@ -88,11 +97,12 @@ function run_preprocessing(num_samples=50000)
     data = zip(ins, outs)
 
     m = Chain(
-        Dense(length(state_to_joint_pts_closure(rand(num_dof))), 40, Flux.relu),
-        Dense(40, 40,Flux.relu),
-        Dense(40, 40,Flux.relu),
-        Dense(40, 40,Flux.relu),
-        Dense(40, 1,Flux.relu)
+        Dense(length(state_to_joint_pts_closure(rand(num_dof))), 70, Flux.relu),
+        Dense(70, 70,Flux.relu),
+        Dense(70, 70,Flux.relu),
+        Dense(70, 70,Flux.relu),
+        Dense(70, 70,Flux.relu),
+        Dense(70, 1,Flux.relu)
     )
 
     p = Flux.params(m)

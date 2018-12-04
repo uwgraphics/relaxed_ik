@@ -68,10 +68,9 @@ function getFrames(arm::Arm, state)
     push!(frames, [[1. 0. 0.];[0. 1. 0.];[0. 0. 1.]])
 
     axis_idx = 1
-
     for i in 1:length(arm.displacements)
         if arm.joint_types[i]=="revolute"
-            axis = arm.axis_types[i]
+            axis = arm.axis_types[axis_idx]
             if axis[1] == "-"
                 s = sin(-state[axis_idx])
                 c = cos(-state[axis_idx])

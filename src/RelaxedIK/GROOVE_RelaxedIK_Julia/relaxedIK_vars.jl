@@ -20,7 +20,6 @@ mutable struct RelaxedIK_vars
     init_ee_positions
     init_ee_quats
     collision_nn
-    state_to_joint_pts_closure
 end
 
 function state_to_joint_pts(x, vars)
@@ -41,7 +40,7 @@ function state_to_joint_pts(x, vars)
 end
 
 
-function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative")
+function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false)
 
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
 
@@ -69,15 +68,21 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
     end
 
-    collision_nn_file_name = y["collision_nn_file"]
-    model = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:m]
-    function model_nn(x, model)
-        return Flux.Tracker.data(model(state_to_joint_pts_closure(x))[1])
-    end
-    collision_nn = (x)-> model_nn(x, model)
-    state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_vars)
+    if preconfigured == false
+        collision_nn_file_name = y["collision_nn_file"]
+        model = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:m]
+        function model_nn(x, model, state_to_joint_pts_closure)
+            return Flux.Tracker.data(model(state_to_joint_pts_closure(x))[1])
+        end
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0)
 
-    rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, collision_nn, state_to_joint_pts_closure)
+        state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, rv)
+        collision_nn = (x)-> model_nn(x, model, state_to_joint_pts_closure)
+        rv.collision_nn = collision_nn
+
+    else
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, nothing)
+    end
 
     populate_vars!(vars, rv)
 
@@ -107,7 +112,7 @@ function yaml_block_to_arms(y)
 
     for i=1:num_chains
         a = Arm(y["axis_types"][i], y["displacements"][i],  y["disp_offsets"][i],
-            y["rot_offsets"][i], y["joint_types"][i], false)
+            y["rot_offsets"][i], y["joint_types"][i], true)
         push!(arms, a)
     end
 

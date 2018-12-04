@@ -10,33 +10,33 @@ function groove_loss(x_val, t, d, c, f, g)
     return (-2.718281828459^((-(x_val - t)^d) / (2.0 * c^2.0)) ) + f * (x_val - t)^g
 end
 
-function position_obj(x, vars)
-    x_val = 0.0
-    for i=1:vars.robot.num_chains
-        vars.robot.arms[i].getFrames(x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i]])
-        x_val += norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i])
+function position_obj_1(x, vars)
+    # x_val = 0.0
+    # for i=1:vars.robot.num_chains
+    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
+    x_val = norm(vars.robot.arms[1].out_pts[end] - vars.goal_positions[1])
         # println(norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i]))
-    end
+    # end
 
     return x_val
 end
 
-function rotation_obj(x, vars)
-    x_val = 0.0
-    for i=1:vars.robot.num_chains
-        vars.robot.arms[i].getFrames(x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i]])
-        eeMat = vars.robot.arms[i].out_frames[end]
+function rotation_obj_1(x, vars)
+    # x_val = 0.0
+    # for i=1:vars.robot.num_chains
+    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
+    eeMat = vars.robot.arms[1].out_frames[end]
 
-        goal_quat = vars.goal_quats[i]
-        ee_quat = Quat(eeMat)
+    goal_quat = vars.goal_quats[1]
+    ee_quat = Quat(eeMat)
 
-        ee_quat2 = Quat(-ee_quat.w, -ee_quat.x, -ee_quat.y, -ee_quat.z)
+    ee_quat2 = Quat(-ee_quat.w, -ee_quat.x, -ee_quat.y, -ee_quat.z)
 
-        disp = norm(quaternion_disp(goal_quat, ee_quat))
-        disp2 = norm(quaternion_disp(goal_quat, ee_quat2))
+    disp = norm(quaternion_disp(goal_quat, ee_quat))
+    disp2 = norm(quaternion_disp(goal_quat, ee_quat2))
 
-        x_val += min(disp, disp2)
-    end
+    x_val = min(disp, disp2)
+    # end
 
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
 end

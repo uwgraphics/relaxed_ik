@@ -11,7 +11,6 @@ function get_groove(vars, solver_name)
     solver name options:
     "slsqp", "mma", "ccsaq", "bobyqa", "cobyla"
     =#
-
     if length(vars.equality_constraints) > 0 && (solver_name == "mma" || solver_name == "ccsaq")
         throw(ArgumentError("equality constraints not compatible with solver choice.  Consider slsqp or cobyla."))
     end
