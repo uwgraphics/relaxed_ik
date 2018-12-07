@@ -96,13 +96,14 @@ function run_preprocessing(num_samples=50000)
 
     data = zip(ins, outs)
 
+    nn_val = 70
     m = Chain(
-        Dense(length(state_to_joint_pts_closure(rand(num_dof))), 70, Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 70,Flux.relu),
-        Dense(70, 1,Flux.relu)
+        Dense(length(state_to_joint_pts_closure(rand(num_dof))), nn_val, Flux.relu),
+        Dense(nn_val, nn_val,Flux.relu),
+        Dense(nn_val, nn_val,Flux.relu),
+        Dense(nn_val, nn_val,Flux.relu),
+        Dense(nn_val, nn_val,Flux.relu),
+        Dense(nn_val, 1,Flux.relu)
     )
 
     p = Flux.params(m)

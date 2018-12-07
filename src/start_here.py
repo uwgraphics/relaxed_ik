@@ -53,21 +53,21 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = 'sawyer.urdf'
+urdf_file_name = 'mico.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = 'base'
+fixed_frame = 'root'
 ######################################################################################################
 
 ######################################################################################################
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = 'sawyer_info.yaml'
+info_file_name = 'mico.yaml'
 ######################################################################################################
 
 
@@ -94,7 +94,7 @@ info_file_name = 'sawyer_info.yaml'
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [['robot_offset', 'right_arm_mount', 'right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']]
+joint_names = [['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW', 'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2']]
 ######################################################################################################
 
 
@@ -114,7 +114,7 @@ joint_names = [['robot_offset', 'right_arm_mount', 'right_j0', 'right_j1', 'righ
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  ['right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']
+joint_ordering =  ['WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW', 'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2']
 ######################################################################################################
 
 
@@ -129,7 +129,7 @@ joint_ordering =  ['right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', '
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = ['right_hand']
+ee_fixed_joints = ['RIGHT_HAND']
 ######################################################################################################
 
 
@@ -139,7 +139,7 @@ ee_fixed_joints = ['right_hand']
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ 0.0485546875, -0.4623447265625, -2.2070107421875, 1.5392255859375, -1.1990625, -1.2571318359375, 0.975064453125]
+starting_config = [0.0, 0.78852112, -0.14649155, -0.17695991, -1.86374666, -0.09144152, -0.46006443, -0.1494651]
 ######################################################################################################
 
 
@@ -206,17 +206,32 @@ starting_config = [ 0.0485546875, -0.4623447265625, -2.2070107421875, 1.53922558
 from sensor_msgs.msg import JointState
 def joint_state_define(x):
     js = JointState()
-    js.name = ['right_j0', 'head_pan', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']
-    js.position = 8*[0.0]
-    js.position[0] = x[0]
-    js.position[2] = x[1]
-    js.position[3] = x[2]
-    js.position[4] = x[3]
-    js.position[5] = x[4]
-    js.position[6] = x[5]
-    js.position[7] = x[6]
+    js.name = ['LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW',
+                     'LEFT_WRIST_PITCH', 'LWFT', 'LEFT_WRIST_YAW_2', 'LHAND_a1', 'LHAND_a2',
+                    'LHAND_a3', 'LHAND_b1', 'LHAND_b2', 'LHAND_b3', 'LHAND_c1',
+                    'LHAND_c2', 'LHAND_c3', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW',
+                    'RIGHT_ELBOW', 'RIGHT_WRIST_YAW', 'RIGHT_WRIST_PITCH', 'RWFT', 'RIGHT_WRIST_YAW_2',
+                    'RHAND_a1', 'RHAND_a2', 'RHAND_a3', 'RHAND_b1', 'RHAND_b2',
+                    'RHAND_b3', 'RHAND_c1', 'RHAND_c2', 'RHAND_c3', 'WAIST',
+                    'LEFT_HIP_YAW', 'LEFT_HIP_ROLL', 'LEFT_HIP_PITCH', 'LEFT_KNEE', 'LEFT_ANKLE_PITCH',
+                    'LEFT_ANKLE_ROLL', 'LAFT', 'LFUNI', 'LFWH', 'LEFT_WHEEL',
+                    'RIGHT_HIP_YAW', 'RIGHT_HIP_ROLL', 'RIGHT_HIP_PITCH', 'RIGHT_KNEE', 'RIGHT_ANKLE_PITCH',
+                    'RIGHT_ANKLE_ROLL', 'RAFT', 'RFUNI','RFWH', 'RIGHT_WHEEL',
+                    'NECK_PITCH_1', 'NECK_YAW', 'NECK_PITCH_2', 'NECK_ROLL']
+
+    js.position = 59*[0]
+    js.position[34] = x[0]
+    js.position[17] = x[1]
+    js.position[18] = x[2]
+    js.position[19] = x[3]
+    js.position[20] = x[4]
+    js.position[21] = x[5]
+    js.position[22] = x[6]
+    js.position[24] = x[7]
     js.position = tuple(js.position)
     return js
+
+
 
 ######################################################################################################
 
@@ -280,7 +295,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = 'collision_sawyer.yaml'
+collision_file_name = 'collision_hubo8.yaml'
 ###########################################################################################################
 
 

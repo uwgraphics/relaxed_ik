@@ -22,7 +22,12 @@ include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 include("RelaxedIK/Utils_Julia/testbed_utils.jl")
 
 relaxedIK = get_standard(path_to_src, "sawyer_info.yaml")
-relaxedIK.relaxedIK_vars.robot.getFrames([0.,0.,0.,0.,0.,0.,0.])
+c = relaxedIK.relaxedIK_vars.vars.objective_closures[end]
+
+s = rand(7)
+
+@btime c(s)
+# relaxedIK.relaxedIK_vars.robot.getFrames([0.,0.,0.,0.,0.,0.,0.])
 # println(relaxedIK.relaxedIK_vars.robot.arms[1].out_pts)
 # @show get_metrics(relaxedIK, [0.,0.,0.,0.,0.,0.,0], [1.,0.12,1.02], Quat(1.,0.,0.,0.))
 # println(relaxedIK.relaxedIK_vars.vars.init_state)

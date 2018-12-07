@@ -3,7 +3,7 @@ fixed_frame: "base"
 joint_names: [ [ "robot_offset", "right_arm_mount", "right_j0", "right_j1", "right_j2", "right_j3", "right_j4", "right_j5", "right_j6" ] ]
 joint_ordering: [ "right_j0", "right_j1", "right_j2", "right_j3", "right_j4", "right_j5", "right_j6" ]
 ee_fixed_joints: [ "right_hand" ]
-starting_config: [ 0.0485546875, -0.462344726562, -2.20701074219, 1.53922558594, -1.1990625, -1.25713183594, 0.975064453125 ]
+starting_config: [ 0.00385192, -0.57307964,  0.3837615,   2.25103946, -2.92990265,  1.7088147, 2.84393652]
 collision_file_name: "collision_sawyer.yaml"
 collision_nn_file: "sawyer_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"

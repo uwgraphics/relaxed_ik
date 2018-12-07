@@ -18,7 +18,8 @@ function position_obj_1(x, vars)
         # println(norm(vars.robot.arms[i].out_pts[end] - vars.goal_positions[i]))
     # end
 
-    return x_val
+    return groove_loss(x_val, 0.,2.,.1,10.,2.)
+    # return x_val^2
 end
 
 function rotation_obj_1(x, vars)
@@ -39,13 +40,17 @@ function rotation_obj_1(x, vars)
     # end
 
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
+    # return x_val^2
+
 end
 
 function min_jt_vel_obj(x, vars)
+    # return norm(x - vars.vars.xopt)^2
     return groove_loss(norm(x - vars.vars.xopt), 0.0, 2.0, 0.1, 10.0, 2.0)
 end
 
 function min_jt_accel_obj(x, vars)
+    # return norm((vars.vars.xopt - vars.vars.prev_state) - (x - vars.vars.xopt))^2
     return groove_loss(norm((vars.vars.xopt - vars.vars.prev_state) - (x - vars.vars.xopt)), 0.0, 2.0, 0.1, 10.0, 2.0)
 end
 
@@ -68,11 +73,13 @@ function min_jt_jerk_obj(x, vars)
     return groove_loss( x_val,  0.0, 2.0, 0.1, 10.0, 2.0   )
     =#
 
+    # return norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) )^2
     return groove_loss( norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) ),  0.0, 2.0, 0.1, 10.0, 2.0   )
 
     # return groove_loss( norm(x - vars.vars.xopt - vars.vars.xopt - vars.vars.prev_state - vars.vars.xopt - vars.vars.prev_state - vars.vars.prev_state - vars.vars.prev_state2), 0.0, 2.0, 0.1, 10.0, 2.0)
 end
 
 function collision_nn_obj(x, vars)
+    # return vars.collision_nn(x)^2
     return groove_loss(  vars.collision_nn(x), 0.0, 2.0, 1.85, 0.004, 2.0)
 end

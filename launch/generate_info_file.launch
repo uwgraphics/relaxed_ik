@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="relaxed_ik" type="generate_info_file.py" name="generate_info_file" output="screen"/>
+</launch>

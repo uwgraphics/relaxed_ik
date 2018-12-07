@@ -17,7 +17,7 @@ class EMA_filter:
         weights = self.window_size*[0]
         filtered_state = np.zeros((len(state)))
 
-        sum = 0.0
+        # sum = 0.0
         for i in xrange(self.window_size):
             weights[i] = self.a*(1.0 - self.a)**(i)
             if i == 0:
@@ -28,7 +28,7 @@ class EMA_filter:
                 except:
                     return state
 
-            sum += weights[i]
+            # sum += weights[i]
 
         self.filtered_signal.append(filtered_state)
         return filtered_state

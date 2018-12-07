@@ -14,5 +14,5 @@ displacements: [ [ [0.0,-0.242,0.456], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.035,0.0,
 disp_offsets: [ [0.0,0.0,0.0], [0.0,0.0,0.0] ]
 rot_offsets: [ [ [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0] ], [ [0.0,0.0,0.0], [0.0,-0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0], [0.0,0.0,0.0] ] ]
 joint_types: [ [ "revolute", "revolute", "revolute", "revolute", "revolute", "revolute", "revolute", "revolute" ], [ "revolute", "revolute", "revolute", "revolute", "revolute", "revolute", "revolute", "revolute" ] ]
-joint_state_define_func_file: "hubo_description_joint_state_define"
+joint_state_define_func_file: "hubo8_joint_state_define"
 
