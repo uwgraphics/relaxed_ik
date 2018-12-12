@@ -21,7 +21,6 @@ import rospy
 import roslaunch
 import os
 import tf
-import dill
 
 
 if __name__ == '__main__':

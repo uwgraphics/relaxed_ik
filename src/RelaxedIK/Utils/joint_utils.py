@@ -1,5 +1,5 @@
 import numpy as np
-from numba import jit
+# from numba import jit
 
 def interpolate_to_joint_limits(from_q, to_q, t=0.1, numDOF=6, joint_limits=None):
     '''

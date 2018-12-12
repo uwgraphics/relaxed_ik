@@ -3,7 +3,7 @@ import math as M
 from abc import ABCMeta, abstractmethod
 import rospy
 from std_msgs.msg import Float32
-from numba import jit, jitclass
+# from numba import jit, jitclass
 
 # specific variable classes for specific solvers should inherit from Vars and initialize this super class and override update
 class Vars:

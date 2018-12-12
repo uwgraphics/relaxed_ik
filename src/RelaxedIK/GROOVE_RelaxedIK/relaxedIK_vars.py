@@ -13,9 +13,8 @@ from ..Utils.config_engine import Config_Engine
 import rospy
 import os
 from sklearn.externals import joblib
+from RelaxedIK.Utils.yaml_utils import get_relaxedIK_yaml_obj
 
-def get_path_to_src():
-        return os.path.dirname(__file__)
 
 
 class RelaxedIK_vars(Vars):
@@ -181,7 +180,9 @@ class RelaxedIK_vars(Vars):
         self.solverCounter = 0
 
         if not pre_config:
-            self.ce = Config_Engine(self.collision_graph, self, config_fn=config_file_name, override=config_override)
+            y = get_relaxedIK_yaml_obj(path_to_src)
+            collision_nn_file = y['collision_nn_file']
+            self.ce = Config_Engine(self.collision_graph, self, path_to_src,collision_nn_file,config_fn=config_file_name, override=config_override)
             self.collision_nn = self.ce.collision_nn
 
     def update(self, xopt, f_obj, publish_objectives=True,publish_constraints=True, publish_weight_funcs=True):

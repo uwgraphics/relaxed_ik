@@ -8,12 +8,15 @@ import os
 
 
 class Config_Engine:
-    def __init__(self, collision_graph, vars, config_fn='', override=False):
+    def __init__(self, collision_graph, vars, path_to_src, nn_file_name, config_fn='', override=False):
         self.collision_graph = collision_graph
         self.config_fn = config_fn
+        self.path_to_src = path_to_src
+        self.nn_file_name = nn_file_name
         self.vars = vars
-        dirname = os.path.dirname(__file__)
-        self.path = os.path.join(dirname, '../Config/')
+        # dirname = os.path.dirname(__file__)
+        # self.path = os.path.join(dirname, '../Config/')
+        self.path = path_to_src + '/RelaxedIK/Config/collision_nn_python/'
 
         if override:
             self.robot_name, self.collision_nn, self.init_state, self.full_joint_lists, self.fixed_ee_joints, \
@@ -70,10 +73,10 @@ class Config_Engine:
         # robot_name = trainer.robot.__name__
         robot_name = 'robot'
 
-        file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
-               self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]
+        # file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
+        #        self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]
 
-        joblib.dump(file_vars,self.path + 'relaxedIK.config')
+        joblib.dump(collision_nn, self.path + self.nn_file_name)
 
         return robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
                self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file
