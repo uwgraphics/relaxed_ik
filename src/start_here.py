@@ -236,6 +236,8 @@ def joint_state_define(x):
 ######################################################################################################
 
 
+# run pre-processing
+
 ######################################################################################################
 # Step 5a: We will now set up collision information.  RelaxedIK avoids self-collisions by
 #   first receiving a potential function for "how close" it is to a collision state,

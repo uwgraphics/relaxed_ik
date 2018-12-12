@@ -14,12 +14,12 @@ include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 relaxedIK = get_standard(path_to_src, "ur5_info.yaml")
 
 vars = relaxedIK.relaxedIK_vars
-∇ = relaxedIK.relaxedIK_vars.vars.∇s[5]
-f = relaxedIK.relaxedIK_vars.vars.objective_closures[5]
+∇ = relaxedIK.relaxedIK_vars.vars.∇s[6]
+f = relaxedIK.relaxedIK_vars.vars.objective_closures[6]
 
 # println(f([0.,0.,3.1,0.,0.,0.]))
 
-@btime ∇([0.,0.,1.,1.,0.,0.])
+@btime f([0.,0.,1.,1.,0.,0.])
 
 # println(relaxedIK.relaxedIK_vars.state_to_joint_pts_closure([0.,0.,3.,0.,0.,0.]))
 
