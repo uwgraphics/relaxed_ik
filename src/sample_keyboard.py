@@ -23,7 +23,7 @@ import math
 import os
 from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file
 from relaxed_ik.msg import EEPoseGoals
-from RelaxedIK.Julia_Bridge.relaxedIK_julia import RelaxedIK_Julia
+# from RelaxedIK.Julia_Bridge.relaxedIK_julia import RelaxedIK_Julia
 
 
 
@@ -40,9 +40,9 @@ if __name__ == '__main__':
 
     path_to_src = os.path.dirname(__file__)
 
-    rik = RelaxedIK_Julia(path_to_src)
-    rik_p = get_relaxedIK_from_info_file(path_to_src)
-    rik.reset(rik_p.vars.robot.numChains)
+    # rik = RelaxedIK_Julia(path_to_src)
+    rik = get_relaxedIK_from_info_file(path_to_src)
+    # rik.reset(rik_p.vars.robot.numChains)
 
     y = get_relaxedIK_yaml_obj(path_to_src)
     if not y == None:

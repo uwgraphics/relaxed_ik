@@ -11,10 +11,13 @@ AND FOLLOW THE STEP-BY-STEP INSTRUCTIONS THERE.  Thanks!
 ######################################################################################################
 
 import rospy
+import os
 from RelaxedIK.relaxedIK import RelaxedIK
 from relaxed_ik.msg import EEPoseGoals, JointAngles
 from std_msgs.msg import Float32
 from RelaxedIK.Utils.colors import bcolors
+from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file
+
 
 eepg = None
 def eePoseGoals_cb(data):
@@ -27,8 +30,11 @@ if __name__ == '__main__':
     rospy.Subscriber('/relaxed_ik/ee_pose_goals', EEPoseGoals, eePoseGoals_cb)
     rospy.sleep(0.3)
 
-    config_file_name = rospy.get_param('config_file_name', default='relaxedIK.config')
-    relaxedIK = RelaxedIK.init_from_config(config_file_name)
+    path_to_src = os.path.dirname(__file__)
+
+    # config_file_name = rospy.get_param('config_file_name', default='relaxedIK.config')
+    # relaxedIK = RelaxedIK.init_from_config(config_file_name)
+    relaxedIK = get_relaxedIK_from_info_file(path_to_src)
     num_chains = relaxedIK.vars.robot.numChains
 
     while eepg == None: continue

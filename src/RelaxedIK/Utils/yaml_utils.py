@@ -11,8 +11,9 @@ def get_relaxedIK_yaml_obj(path_to_src):
         y = yaml.load(info_file)
         return y
     else:
-        raise Exception(bcolors.WARNING + 'WARNING: info_file not loaded.  Please run [ roslaunch relaxed_ik load_info_file.launch ] with desired properties to load a robot.  If you already did this, ' \
-                                'try loading again with roscore initialized first.' + bcolors.ENDC)
+        return None
+        # raise Exception(bcolors.WARNING + 'WARNING: info_file not loaded.  Please run [ roslaunch relaxed_ik load_info_file.launch ] with desired properties to load a robot.  If you already did this, ' \
+        #                         'try loading again with roscore initialized first.' + bcolors.ENDC)
 
 
 def get_relaxedIK_yaml_obj_from_info_file_name(path_to_src, info_file_name):

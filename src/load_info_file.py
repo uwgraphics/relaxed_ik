@@ -38,3 +38,6 @@ rospy.set_param('relaxedIK/loaded_info_file_name', info_file_name)
 loaded_robot_file = open(path_to_src + '/RelaxedIK/Config/loaded_robot', 'w')
 loaded_robot_file.write(info_file_name)
 loaded_robot_file.close()
+
+
+rospy.spin()

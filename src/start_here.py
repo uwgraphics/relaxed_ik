@@ -53,7 +53,7 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = 'mico.urdf'
+urdf_file_name = 'jaco7.urdf'
 ######################################################################################################
 
 
@@ -67,7 +67,7 @@ fixed_frame = 'root'
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = 'mico_info.yaml'
+info_file_name = 'jaco7_info.yaml'
 ######################################################################################################
 
 
@@ -94,7 +94,7 @@ info_file_name = 'mico_info.yaml'
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [['m1n6s200_joint_1', 'm1n6s200_joint_2', 'm1n6s200_joint_3', 'm1n6s200_joint_4', 'm1n6s200_joint_5', 'm1n6s200_joint_6']]
+joint_names = [['j2s7s300_joint_1', 'j2s7s300_joint_2', 'j2s7s300_joint_3', 'j2s7s300_joint_4', 'j2s7s300_joint_5', 'j2s7s300_joint_6', 'j2s7s300_joint_7']]
 ######################################################################################################
 
 
@@ -114,7 +114,7 @@ joint_names = [['m1n6s200_joint_1', 'm1n6s200_joint_2', 'm1n6s200_joint_3', 'm1n
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  ['m1n6s200_joint_1', 'm1n6s200_joint_2', 'm1n6s200_joint_3', 'm1n6s200_joint_4', 'm1n6s200_joint_5', 'm1n6s200_joint_6']
+joint_ordering =  ['j2s7s300_joint_1', 'j2s7s300_joint_2', 'j2s7s300_joint_3', 'j2s7s300_joint_4', 'j2s7s300_joint_5', 'j2s7s300_joint_6', 'j2s7s300_joint_7']
 ######################################################################################################
 
 
@@ -129,7 +129,7 @@ joint_ordering =  ['m1n6s200_joint_1', 'm1n6s200_joint_2', 'm1n6s200_joint_3', '
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = ['m1n6s200_joint_end_effector']
+ee_fixed_joints = ['j2s7s300_joint_end_effector']
 ######################################################################################################
 
 
@@ -139,7 +139,7 @@ ee_fixed_joints = ['m1n6s200_joint_end_effector']
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [0,3.14,3.14,0,0,0]
+starting_config = [0.0, 3.596565082998194, 0.0, 5.1940998539339445, 0.0, 3.14159265359, 0.0]
 ######################################################################################################
 
 
@@ -206,15 +206,16 @@ starting_config = [0,3.14,3.14,0,0,0]
 from sensor_msgs.msg import JointState
 def joint_state_define(x):
     js = JointState()
-    js.name = ['m1n6s200_joint_1', 'm1n6s200_joint_2', 'm1n6s200_joint_3', 'm1n6s200_joint_4', 'm1n6s200_joint_5','m1n6s200_joint_6', 'm1n6s200_joint_finger_1', 'm1n6s200_joint_finger_2']
+    js.name = ['j2s7s300_joint_1', 'j2s7s300_joint_2', 'j2s7s300_joint_3', 'j2s7s300_joint_4', 'j2s7s300_joint_5','j2s7s300_joint_6', 'j2s7s300_joint_7', 'j2s7s300_joint_finger_1', 'j2s7s300_joint_finger_2', 'j2s7s300_joint_finger_3']
 
-    js.position = 8*[0]
+    js.position = 10*[0]
     js.position[0] = x[0]
     js.position[1] = x[1]
     js.position[2] = x[2]
     js.position[3] = x[3]
     js.position[4] = x[4]
     js.position[5] = x[5]
+    js.position[6] = x[6]
     js.position = tuple(js.position)
     return js
 
@@ -280,7 +281,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = 'collision_mico.yaml'
+collision_file_name = 'collision_jaco7.yaml'
 ###########################################################################################################
 
 
@@ -295,15 +296,28 @@ collision_file_name = 'collision_mico.yaml'
 ######################################################################################################
 
 
-# run generate info file
 
-# start roscore
-
-# load info file
+######################################################################################################
+# Step 6: Generate a robot info file using the following command:
+#
+#   roslaunch relaxed_ik generate_info_file.launch
+#
+# The info file (with name specified in Step 1d) should appear in the RelaxedIK/Config/info_files directory
+######################################################################################################
 
 
 ######################################################################################################
-# Step 5c: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
+# Step 7: load the newly created info file by changing the info_file_name argument in the load_info_file
+#   launch file, then run the following command:
+#
+#   roslaunch relaxed_ik load_info_file.launch
+#
+#######################################################################################################
+
+
+
+######################################################################################################
+# Step 8: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
 #   the solver will need to go through a one-time pre-processing step.  In this process, our method
 #   trains a neural network so that the robot can learn about its own geometry so that it avoids
 #   collisions with itself and other items defined in your collision yaml file, as well as learns
@@ -318,7 +332,7 @@ collision_file_name = 'collision_mico.yaml'
 
 
 ######################################################################################################
-# Step 6: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
+# Step 9: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
 #   roslaunch relaxed_ik sample.launch
 #
 #   You should see your robot in rviz moving its end effector back and forth
@@ -326,22 +340,21 @@ collision_file_name = 'collision_mico.yaml'
 
 
 ######################################################################################################
-# Step 7a: Now that you have a relaxedIK config file in the RelaxedIK/Config directory, you can use the relaxedIK
-#   solver as a standalone ROS node.  To start up the node, first go to the relaxed_ik.launch file (found in
-#   the launch directory) and set the 'config_file_name' argument to your desired configuration file
-#   example: <arg name="config_file_name" value="ur5.config" />
+# Step 10a: Now that the solver has gone through its preprocessing, you can now use the relaxedIK
+#   solver as a standalone ROS node.  To start the solver, first load a desired info file using the
+#   command found in Step 7.
 #
 #   Next, start the node with the following command:
 #   roslaunch relaxed_ik relaxed_ik.launch
 #
 #   Using this command, your relaxed_ik solver will initialize in its own node and will await
-#   end effector pose goal commands.  Refer to step 7b for instructions on publishing end effector
+#   end effector pose goal commands.  Refer to step 10b for instructions on publishing end effector
 #   pose goals and receiving solutions.
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 7b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
+# Step 10b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
 #   end effector pose goals for each of the end effectors in the kinematic chain.  The relaxed_ik package
 #   provides a custom message called EEPoseGoals which encapsulates all necessary pose goal information.
 #

@@ -14,8 +14,8 @@ goal_pos_pub = rospy.Publisher('vive_position', Vector3Stamped)
 goal_quat_pub = rospy.Publisher('vive_quaternion', QuaternionStamped)
 ee_pose_goals_pub = rospy.Publisher('/relaxed_ik/ee_pose_goals', EEPoseGoals, queue_size=5)
 
-pos_stride = 0.001
-rot_stride = 0.001
+pos_stride = 0.005
+rot_stride = 0.005
 
 position_r = [0,0,0]
 rotation_r = [1,0,0,0]
