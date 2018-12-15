@@ -28,38 +28,22 @@ class Config_Engine:
                 self.joint_order, self.urdf_path, self.collision_file = self.generate_config_file()
 
             else:
-                self.config_data = joblib.load(self.path + config_file)
-                self.robot_name = self.config_data[0]
-                self.collision_nn = self.config_data[1]
-                self.init_state = self.config_data[2]
-                self.full_joint_lists = self.config_data[3]
-                self.fixed_ee_joints = self.config_data[4]
-                self.joint_order = self.config_data[5]
-                self.urdf_path = self.config_data[6]
-                self.collision_file = self.config_data[7]
+                # self.collision_file = joblib.load(self.path + config_file)
+                # self.robot_name = self.config_data[0]
+                self.collision_nn = joblib.load(self.path + config_file)
+                # self.init_state = self.config_data[2]
+                # self.full_joint_lists = self.config_data[3]
+                # self.fixed_ee_joints = self.config_data[4]
+                # self.joint_order = self.config_data[5]
+                # self.urdf_path = self.config_data[6]
+                # self.collision_file = self.config_data[7]
 
     def check_for_config_file(self):
         files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
-        if self.config_fn in files:
-            return self.config_fn
-
-        elif 'relaxedIK.config' in files:
-            return 'relaxedIK.config'
 
         for f in files:
-            f_arr = f.split('.')
-            ext = f_arr[-1]
-            if ext == 'config':
-                response = raw_input(bcolors.OKGREEN + 'Found saved config file ' + f + '.  Would you like to use this config file? (y or n): ' + bcolors.ENDC)
-                if response == 'y':
-                    return f
-                else:
-                    response = raw_input(bcolors.OKGREEN + 'Would you like to generate a new config file? (y or n): ' + bcolors.ENDC)
-                    if response == 'y':
-                        return None
-                    else:
-                        print bcolors.FAIL + 'Exiting.  Please manually specify which config file you would like to use on the next run.' + bcolors.ENDC
-                        exit(1)
+            if f == self.nn_file_name:
+                return f
 
         response = raw_input(bcolors.OKBLUE + 'Config file not found, generating a new one!  This will take some time.  Continue?  (y or n): ' + bcolors.ENDC)
         if response == 'y':

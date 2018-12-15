@@ -10,10 +10,11 @@ from ..GROOVE_RelaxedIK.relaxedIK_constraint import Singularity_Avoidance_Constr
 from ..GROOVE_RelaxedIK.relaxedIK_objective import *
 from ..Utils.collision_graph import Collision_Graph
 from ..Utils.config_engine import Config_Engine
-import rospy
+# import rospy
 import os
 from sklearn.externals import joblib
 from RelaxedIK.Utils.yaml_utils import get_relaxedIK_yaml_obj
+import rospy
 
 
 
@@ -30,7 +31,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Joint_Limit_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0,40.0,0.3,0.3,0.3,1.0,2.0),
+                 weight_priors=(50.0,40.0,1.0,1.0,2.0,10.0,2.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -176,7 +177,7 @@ class RelaxedIK_vars(Vars):
         self.solveID = 1.0
         self.avg_solution_time = 0.0
         self.total_run_time = 0.0
-        self.start_time = rospy.get_time()
+        # self.start_time = rospy.get_time()
         self.solverCounter = 0
 
         if not pre_config:
@@ -201,7 +202,7 @@ class RelaxedIK_vars(Vars):
         self.prev_goal_positions2 = self.prev_goal_positions
         self.prev_goal_positions =  self.goal_positions
         self.solveID += 1.0
-        self.total_run_time = rospy.get_time() - self.start_time
+        # self.total_run_time = rospy.get_time() - self.start_time
         self.avg_solution_time = self.total_run_time / self.solveID
 
 

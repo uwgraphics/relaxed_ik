@@ -22,7 +22,15 @@ import tf
 import math
 import os
 from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file
+from relaxed_ik.msg import EEPoseGoals
 from RelaxedIK.Julia_Bridge.relaxedIK_julia import RelaxedIK_Julia
+
+
+
+eepg = None
+def eePoseGoals_cb(data):
+    global eepg
+    eepg = data
 
 
 if __name__ == '__main__':
@@ -33,8 +41,8 @@ if __name__ == '__main__':
     path_to_src = os.path.dirname(__file__)
 
     rik = RelaxedIK_Julia(path_to_src)
-    rik.reset(1)
-    # rik = get_relaxedIK_from_info_file(path_to_src)
+    rik_p = get_relaxedIK_from_info_file(path_to_src)
+    rik.reset(rik_p.vars.robot.numChains)
 
     y = get_relaxedIK_yaml_obj(path_to_src)
     if not y == None:
@@ -60,6 +68,8 @@ if __name__ == '__main__':
     ee_pose_goals_pub = rospy.Publisher('/relaxed_ik/ee_pose_goals', EEPoseGoals, queue_size=3)
     tf_pub = tf.TransformBroadcaster()
 
+    rospy.Subscriber('/relaxed_ik/ee_pose_goals', EEPoseGoals, eePoseGoals_cb)
+
     rospy.sleep(0.5)
 
     # Don't change this code ###########################################################################################
@@ -72,31 +82,42 @@ if __name__ == '__main__':
 
     rospy.sleep(1.0)
 
+    while eepg == None: continue
+
     counter = 0.0
     stride = 0.01
     idx = 0
 
-    rate = rospy.Rate(80)
+    rate = rospy.Rate(10000)
     while not rospy.is_shutdown():
-        c = math.cos(counter)
-        s = 1.1
+        pose_goals = eepg.ee_poses
+        header = eepg.header
         num_ee = num_chains
-        goal_pos = []
-        goal_quat = []
-        goal_pos.append([s*c,0,0])
-        for i in range(num_ee):
-            goal_quat.append([1,0,0,0])
-            if i == 0:
-                continue
-            else:
-                goal_pos.append([0,0,0])
+        num_poses = len(pose_goals)
+        # if not num_poses == num_chains:
+        #     print bcolors.FAIL + 'ERROR: Number of pose goals ({}) ' \
+        #                          'not equal to the number of kinematic chains ({}).  Exiting relaxed_ik_node'.format(num_poses, num_chains)
+        #     rospy.signal_shutdown()
 
-        # xopt = relaxedIK.solve(goal_pos, goal_quat)
-        # xopt = get_solution(path_to_src)
-        # print xopt
-        # xopt = 6*[0.0]
-        xopt = rik.solve(goal_pos, goal_quat)
-        print xopt
+        pos_goals = []
+        quat_goals = []
+
+        for i in xrange(num_ee):
+            p = pose_goals[i]
+            pos_x = p.position.x
+            pos_y = p.position.y
+            pos_z = p.position.z
+
+            quat_w = p.orientation.w
+            quat_x = p.orientation.x
+            quat_y = p.orientation.y
+            quat_z = p.orientation.z
+
+            pos_goals.append([pos_x, pos_y, pos_z])
+            quat_goals.append([quat_w, quat_x, quat_y, quat_z])
+
+        xopt = rik.solve(pos_goals, quat_goals)
+
 
         js = joint_state_define(xopt)
         if js == None:
@@ -113,8 +134,8 @@ if __name__ == '__main__':
         ee_pose_goals.header.seq = idx
         for i in range(num_ee):
             p = Pose()
-            curr_goal_pos = goal_pos[i]
-            curr_goal_quat = goal_quat[i]
+            curr_goal_pos = pos_goals[i]
+            curr_goal_quat = quat_goals[i]
             p.position.x = curr_goal_pos[0]
             p.position.y = curr_goal_pos[1]
             p.position.z = curr_goal_pos[2]

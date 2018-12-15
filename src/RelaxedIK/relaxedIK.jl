@@ -12,7 +12,6 @@ end
 
 function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
-    groove = 0
     groove = get_groove(relaxedIK_vars.vars, solver_name)
     return RelaxedIK(relaxedIK_vars, groove)
 end
@@ -20,8 +19,8 @@ end
 
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad","forward_ad"]
-    weight_priors = [50., 40.0, 3.0 ,1.0, 1.0, 1.0]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [1.0, 1.0, 5.0 ,0.0, 0.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -31,7 +30,7 @@ end
 
 function get_finite_diff_version(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    grad_types = ["finite_diff", "finite_diff", "finite_diff", "finite_diff", "finite_diff", "finite_diff"]
     weight_priors = [50., 40.0, 1.0 ,1.0, 1.0, 0.4]
     inequality_constraints = []
     ineq_grad_types = []
@@ -42,7 +41,6 @@ end
 
 
 function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
-    # println(typeof(goal_positions))
     vars = relaxedIK.relaxedIK_vars
 
     if vars.position_mode == "relative"
@@ -57,7 +55,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
         vars.goal_positions = goal_positions
     end
 
-    #=
+
     if vars.rotation_mode == "relative"
         for i = 1:vars.robot.num_chains
             vars.goal_quats[i] = goal_quats[i] * copy(vars.init_ee_quats[i])
@@ -65,8 +63,6 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
     else
         vars.goal_quats = goal_quats
     end
-    =#
-
 
     xopt = groove_solve(relaxedIK.groove, prev_state=prev_state)
     update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)

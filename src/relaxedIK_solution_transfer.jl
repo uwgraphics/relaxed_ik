@@ -1,6 +1,5 @@
 
 
-
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/Utils_Julia/transformations.jl")
 using BenchmarkTools
@@ -20,7 +19,7 @@ function get_goals(path_to_src)
 
         push!(goal_pos, [parse(Float64, pos_split[1]), parse(Float64, pos_split[2]), parse(Float64, pos_split[3])] )
 
-        push!(goal_quats, [parse(Float64, quat_split[1]), parse(Float64, quat_split[2]), parse(Float64, quat_split[3]), parse(Float64, quat_split[4])] )
+        push!(goal_quats, Quat(parse(Float64, quat_split[1]), parse(Float64, quat_split[2]), parse(Float64, quat_split[3]), parse(Float64, quat_split[4])) )
 
         line = readline(in_file)
     end
@@ -30,6 +29,7 @@ function get_goals(path_to_src)
         return Nothing, Nothing, Nothing
     end
 
+    # println(goal_pos)
     return goal_pos, goal_quats, goal_number
 end
 
@@ -50,7 +50,6 @@ relaxedIK = get_standard(path_to_src, loaded_robot)
 
 close(loaded_robot_file)
 
-
 function run_relaxedIK(path_to_src)
 
     prev_pos_goals, prev_quat_goals, prev_goal_number = get_goals(path_to_src)
@@ -69,12 +68,15 @@ function run_relaxedIK(path_to_src)
         end
 
         relaxedIK.relaxedIK_vars.goal_positions = pos_goals
+        relaxedIK.relaxedIK_vars.goal_quats = quat_goals
 
-        xopt = groove_solve(relaxedIK.groove)
+        # xopt = groove_solve(relaxedIK.groove)
+        xopt = solve(relaxedIK, pos_goals, quat_goals)
 
         write_solution(path_to_src, xopt, goal_number)
 
-        println(xopt)
+        println(pos_goals)
+        # println(xopt)
     end
 
 end

@@ -62,17 +62,17 @@ function get_groove(vars, solver_name)
     upper_bounds = Array{Float64}(upper_bounds)
 
     if length(lower_bounds) > 0
-        # lower_bounds!(opt, lower_bounds)
+        lower_bounds!(opt, lower_bounds)
     end
 
     if length(upper_bounds) > 0
-        # upper_bounds!(opt, upper_bounds)
+        upper_bounds!(opt, upper_bounds)
     end
 
-    # xtol_abs!(opt, 0.0001)
+    xtol_abs!(opt, 0.0001)
     # xtol_rel!(opt, 1.1)
     maxeval!(opt, 20)
-    # maxtime!(opt, 0.01)
+    maxtime!(opt, 0.01)
 
     return Groove(vars, opt)
 
