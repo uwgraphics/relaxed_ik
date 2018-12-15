@@ -7,6 +7,7 @@ starting_config: [ 0, 3.14, 3.14, 0, 0, 0 ]
 collision_file_name: "collision_mico.yaml"
 collision_nn_file: "mico_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
+thread_dofs: [ ]
 axis_types: [ [ "z", "z", "z", "z", "z", "z" ] ]
 velocity_limits: [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ]
 joint_limits: [ [-6.28318530718,6.28318530718], [0.872664625997,5.41052068118], [0.610865238198,5.67232006898], [-6.28318530718,6.28318530718], [-6.28318530718,6.28318530718], [-6.28318530718,6.28318530718] ]

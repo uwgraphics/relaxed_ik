@@ -7,6 +7,7 @@ starting_config: [ 0.00385192, -0.57307964,  0.3837615,   2.25103946, -2.9299026
 collision_file_name: "collision_sawyer.yaml"
 collision_nn_file: "sawyer_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
+thread_dofs: [ ]
 axis_types: [ [ "z", "z", "z", "z", "z", "z", "z" ] ]
 velocity_limits: [ 1.74, 1.328, 1.957, 1.957, 3.485, 3.485, 4.545 ]
 joint_limits: [ [-3.0503,3.0503], [-3.8095,2.2736], [-3.0426,3.0426], [-3.0439,3.0439], [-2.9761,2.9761], [-2.9761,2.9761], [-4.7124,4.7124] ]

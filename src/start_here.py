@@ -144,6 +144,35 @@ starting_config = [0.0, 3.596565082998194, 0.0, 5.1940998539339445, 0.0, 3.14159
 
 
 ######################################################################################################
+# Step 3e: OPTIONAL STEP
+#
+#   RelaxedIK has the option of running its optimization in parallel on multiple threads.
+#   The quality of the optimization will be affected by splitting up the optimization into multiple
+#   threads, though the efficiency gains may be worth it to some users, especially in cases with a high number of DOFs.
+#   We have seen this parallel implementation work particularly well with multi-chain robots.
+#
+#   If you would like to use the parallel implementation of relaxedIK, set the following thread_dofs list parameter
+#   to the degrees of freedom you want to include in each thread.
+#
+#   The thread_dofs list should be a list of lists, where each list contains the joint indices of the DOFs
+#   that should be considered together on a single thread.  The DOF indicies should correspond to the list indicies of
+#   the joint_ordering list from step 3b (starting at zero index).
+#
+#   As an example, using the DRC-Hubo+ robot, if the right arm, left arm, and waist should be considered on different
+#   threads, the parameter should be set as follows:
+#   thread_dofs = [[0], [1,2,3,4,5,6,7], [8,9,10,11,12,13,14]]
+#
+#   IMPORTANT: Each DOF index should be used ONCE and ONLY ONCE in the thread_dofs list
+#
+#   If you do NOT want to use multi-threading, just leave the thread_dofs list as [].  If the optimization runs fast
+#   enough on your computer without using multi-threading, it is recommended you do not use multi-threading.  (this option
+#   can be chanaged at any time in the info file)
+thread_dofs = [  ]
+######################################################################################################
+
+
+
+######################################################################################################
 # Step 4: Please provide a function that takes in a vector corresponding to a robot configuration (x) and
 #   returns a sensor_msg.JointState message in ROS.  http://docs.ros.org/api/sensor_msgs/html/msg/JointState.html
 #   You do not have to include velocity or effort information, just the joint positions.
