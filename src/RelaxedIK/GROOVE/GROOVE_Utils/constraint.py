@@ -1,7 +1,6 @@
 __author__ = 'drakita'
 
 from abc import ABCMeta, abstractmethod
-from objective import get_groove_global_vars
 import scipy.optimize as O
 
 class Constraint:
@@ -33,7 +32,7 @@ class Test_Constraint(Constraint):
     def constraintType(self): return 'ineq'
     def name(self): return 'test1'
     def func(self,x,*args):
-        vars = get_groove_global_vars()
+        # vars = get_groove_global_vars()
         return 1.0
 
 class Test_Constraint_2(Constraint):
@@ -41,7 +40,7 @@ class Test_Constraint_2(Constraint):
     def constraintType(self): return 'ineq'
     def name(self): return 'test2'
     def func(self,x,*args):
-        vars = get_groove_global_vars()
+        # vars = get_groove_global_vars()
         f = x[1] - 0.5
         return x[1] - 0.5
 

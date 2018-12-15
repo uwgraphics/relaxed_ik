@@ -18,6 +18,7 @@ import rospy
 
 
 
+
 class RelaxedIK_vars(Vars):
     def __init__(self, name,
                  urdf_path,
@@ -31,7 +32,7 @@ class RelaxedIK_vars(Vars):
                  position_mode = 'relative',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(),Min_Jt_Accel_Obj(),Min_Jt_Jerk_Obj(), Joint_Limit_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(),Identity_Weight(),Identity_Weight(), Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0,40.0,1.0,1.0,2.0,10.0,2.0),
+                 weight_priors=(50.0,49.0,3.0,1.0,2.0,10.0,2.0),
                  constraints=(),
                  bounds=(),
                  collision_file='',
@@ -147,7 +148,7 @@ class RelaxedIK_vars(Vars):
             #    str(self.init_state)) + bcolors.ENDC
             print bcolors.WARNING + 'WARNING: Length of init_state does not match number of robot DOFs.  Is this what you intended?' + bcolors.ENDC
 
-        Vars.__init__(self,name, objective_function, self.init_state,objectives,weight_funcs,weight_priors,constraints=self.constraints,bounds=self.bounds)
+        Vars.__init__(self, name, objective_function, self.init_state,objectives,weight_funcs,weight_priors,constraints=self.constraints,bounds=self.bounds)
 
         self.goal_positions = []
         for i in range(self.num_chains):

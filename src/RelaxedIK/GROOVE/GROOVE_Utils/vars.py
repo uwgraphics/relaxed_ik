@@ -46,7 +46,7 @@ class Vars:
             self.weight_func_publishers.append(rospy.Publisher('/weight_function/' + wf.name(), Float32, queue_size=5))
 
 
-    def update(self, xopt, f_obj, publish_objectives=True,publish_constraints=False, publish_weight_funcs=True):
+    def update(self, xopt, f_obj, publish_objectives=True,publish_constraints=False, publish_weight_funcs=False):
         if publish_objectives:
             for i,o in enumerate(self.objective_publishers):
                 data = self.objectives[i].__call__(xopt, self)

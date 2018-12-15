@@ -1,5 +1,4 @@
 from ..GROOVE.GROOVE_Utils.constraint import Constraint
-from ..GROOVE.GROOVE_Utils.objective import get_groove_global_vars
 
 
 class Singularity_Avoidance_Constraint(Constraint):
@@ -7,7 +6,7 @@ class Singularity_Avoidance_Constraint(Constraint):
     def constraintType(self): return 'ineq'
     def name(self): return 'singularity_avoidance'
     def func(self, x, *args):
-        vars = get_groove_global_vars()
+        # vars = get_groove_global_vars()
         mean = vars.yoshikawa_mean
         std = vars.yoshikawa_std
         min = mean - 2.6*std
@@ -23,7 +22,7 @@ class Joint_Velocity_Constraint(Constraint):
     def constraintType(self): return 'ineq'
     def name(self): return 'joint_velocity_constraint_{}'.format(self.joint_idx)
     def func(self, x, *args):
-        vars = get_groove_global_vars()
+        # vars = get_groove_global_vars()
         avg = vars.avg_solution_time
         avg = 0.02
         # print avg

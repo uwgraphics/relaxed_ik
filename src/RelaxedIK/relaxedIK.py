@@ -49,29 +49,6 @@ class RelaxedIK(object):
         self.filter = EMA_filter(self.vars.init_state,a=0.5)
 
 
-    @classmethod
-    def init_from_config(self, config_name):
-        import os
-        from sklearn.externals import joblib
-        from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
-        dirname = os.path.dirname(__file__)
-        path = os.path.join(dirname, 'Config/{}'.format(config_name))
-        file = open(path,'r')
-        self.config_data = joblib.load(file)
-
-        self.robot_name = self.config_data[0]
-        self.collision_nn = self.config_data[1]
-        self.init_state = self.config_data[2]
-        self.full_joint_lists = self.config_data[3]
-        self.fixed_ee_joints = self.config_data[4]
-        self.joint_order = self.config_data[5]
-        self.urdf_path = self.config_data[6]
-        self.collision_file = self.config_data[7]
-
-        vars = RelaxedIK_vars(self.robot_name,self.urdf_path,self.full_joint_lists,self.fixed_ee_joints,self.joint_order,
-                              config_file_name=config_name, collision_file=self.collision_file,init_state=self.init_state)
-        return RelaxedIK(vars)
-
     def solve(self, goal_positions, goal_quats, prev_state=None, vel_objectives_on=True, unconstrained=True, verbose_output=False, max_iter=11, maxtime=.05, rand_start=False):
 
         if self.vars.rotation_mode == 'relative':

@@ -4,20 +4,9 @@ __author__ = 'drakita'
 from abc import ABCMeta, abstractmethod
 import scipy.optimize as O
 
-groove_global_vars = []
-
-def set_groove_global_vars(vars):
-    global groove_global_vars
-    groove_global_vars = vars
-
-def get_groove_global_vars():
-    global groove_global_vars
-    return groove_global_vars
 
 
-def objective_master(x):
-    global groove_global_vars
-    vars = groove_global_vars
+def objective_master(x, vars):
     objectives = vars.objectives
     weight_funcs = vars.weight_funcs
     weight_priors = vars.weight_priors
@@ -34,7 +23,6 @@ def objective_master(x):
 
 
 def objective_master_nlopt(x, grad):
-    vars = get_groove_global_vars()
     numDOF = len(x)
     g = O.approx_fprime(x, vars.objective_function, numDOF * [0.001])
     if grad.size > 0:

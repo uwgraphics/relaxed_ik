@@ -5,9 +5,11 @@ from colors import bcolors
 class GrooveType:
     def __init__(self, vars):
         self.vars = vars
-        obj.set_groove_global_vars(vars)
         self.constraint_dict = self.__construct_constraint_dict(self.vars.constraints)
-        self.objective_function = self.vars.objective_function
+
+        obj_closure = lambda x : self.vars.objective_function(x, vars)
+
+        self.objective_function = obj_closure #### change this to a closure around the vars object
 
 
     def __construct_constraint_dict(self, constraints):
