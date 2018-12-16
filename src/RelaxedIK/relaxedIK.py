@@ -30,8 +30,9 @@ def get_relaxedIK_vars_from_info_file(path_to_src, info_file_name = ''):
     ee_fixed_joints = y['ee_fixed_joints']
     starting_config = y['starting_config']
     collision_file_name = y['collision_file_name']
+    collision_nn_file = y['collision_nn_file']
     urdf_path = path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name
-    vars = RelaxedIK_vars("robot", urdf_path, joint_names, ee_fixed_joints, joint_ordering,init_state=starting_config,path_to_src=path_to_src, collision_file=collision_file_name)
+    vars = RelaxedIK_vars("robot", urdf_path, joint_names, ee_fixed_joints, joint_ordering,init_state=starting_config,path_to_src=path_to_src, collision_file=collision_file_name, collision_nn_file=collision_nn_file)
     return vars
 
 

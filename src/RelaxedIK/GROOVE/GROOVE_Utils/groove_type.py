@@ -45,6 +45,7 @@ class GrooveType_scipy(GrooveType):
                                    bounds=self.vars.bounds, args=(), method=self.solver_name,
                                    options={'maxiter': max_iter, 'disp': verbose_output})
 
+
         xopt = xopt_full.x
         f_obj = xopt_full.fun
 

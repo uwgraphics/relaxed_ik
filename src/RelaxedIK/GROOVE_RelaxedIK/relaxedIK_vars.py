@@ -36,6 +36,7 @@ class RelaxedIK_vars(Vars):
                  constraints=(),
                  bounds=(),
                  collision_file='',
+                 collision_nn_file='',
                  collision_link_exclusion_list=[],
                  config_file_name='',
                  path_to_src='',
@@ -182,8 +183,8 @@ class RelaxedIK_vars(Vars):
         self.solverCounter = 0
 
         if not pre_config:
-            y = get_relaxedIK_yaml_obj(path_to_src)
-            collision_nn_file = y['collision_nn_file']
+            # y = get_relaxedIK_yaml_obj(path_to_src)
+            # collision_nn_file = y['collision_nn_file']
             self.ce = Config_Engine(self.collision_graph, self, path_to_src,collision_nn_file,config_fn=config_file_name, override=config_override)
             self.collision_nn = self.ce.collision_nn
 
