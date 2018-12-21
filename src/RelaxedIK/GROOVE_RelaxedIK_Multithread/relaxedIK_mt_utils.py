@@ -1,3 +1,5 @@
+import copy
+
 
 def get_subchains_from_indices(indices, x):
     subchains = []
@@ -20,9 +22,11 @@ def glue_subchains(indices, subchains, numDOF):
 
     return x
 
+
 def inject_subchain(x, x_subchain_idx, indices, subchains, numDOF):
-    subchains[x_subchain_idx] = x
-    return glue_subchains(indices, subchains, numDOF)
+    ret_subchains = copy.deepcopy(subchains)
+    ret_subchains[x_subchain_idx] = x
+    return glue_subchains(indices, ret_subchains, numDOF)
 
 
 if __name__ == '__main__':

@@ -5,7 +5,6 @@ from abc import ABCMeta, abstractmethod
 import scipy.optimize as O
 
 
-
 def objective_master(x, vars):
     objectives = vars.objectives
     weight_funcs = vars.weight_funcs

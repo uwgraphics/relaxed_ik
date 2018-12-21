@@ -1,2 +1,2 @@
 std_msgs/Header header
-std_msgs/Float32[] angles
+std_msgs/Float64[] angles

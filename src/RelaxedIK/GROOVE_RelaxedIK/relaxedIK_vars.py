@@ -165,6 +165,7 @@ class RelaxedIK_vars(Vars):
         self.prev_goal_quats = self.goal_quats
         self.frames = self.robot.getFrames(self.init_state)
         self.joint_limit_obj_value = 0.0
+        self.multithread = False
 
         self.init_ee_positions = self.robot.get_ee_positions(self.init_state)
         self.init_ee_quats = self.robot.get_ee_rotations(self.init_state)

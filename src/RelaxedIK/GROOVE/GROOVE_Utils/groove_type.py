@@ -30,13 +30,14 @@ class GrooveType_scipy(GrooveType):
         GrooveType.__init__(self, vars)
         self.solver_name = solver_name
 
-    def solve(self, prev_state=(), max_iter=100, verbose_output=False):
+    def solve(self, prev_state=(), max_iter=12, verbose_output=False):
         if prev_state == ():
             initSol = self.vars.xopt
         else:
             initSol = prev_state
 
         if self.vars.unconstrained:
+        # if True:
             xopt_full = obj.O.minimize(self.objective_function, initSol,
                                    bounds=self.vars.bounds, args=(), method=self.solver_name,
                                    options={'maxiter': max_iter, 'disp': verbose_output})

@@ -53,6 +53,7 @@ class Position_MultiEE_Obj(Objective):
         else:
             x_val_sum = 0.0
 
+
             for i, f in enumerate(vars.frames):
                 positions = f[0]
                 eePos = positions[-1]
@@ -74,6 +75,7 @@ class Position_MultiEE_Obj(Objective):
             return objectives_ext.nloss(x_val, t, d, c, f, g)
         else:
             return (-math.e ** ((-(x_val - t) ** d) / (2.0 * c ** 2)) ) + f * (x_val - t) ** g
+
 
 class Orientation_Obj(Objective):
     def __init__(self, *args): pass
