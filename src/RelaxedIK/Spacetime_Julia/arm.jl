@@ -1,5 +1,5 @@
 
-using LinearAlgebra, Rotations, StaticArrays, Profile
+import LinearAlgebra, Rotations, StaticArrays
 
 mutable struct Arm
     axis_types
@@ -178,6 +178,7 @@ function getFrames_closure(arm)
 end
 
 #=
+
 axis_types = ["-z","y","y","y","z","y"]
 displacements = [[0.0, 0.13585, 0.0], [0.0, -0.1197, 0.425], [0.0, 0.0, 0.39225], [0, 0.093, 0], [0, 0, 0.09465], [0.0,0.0823,0.0]]
 disp_offset = [0., 0., 0.089159]
@@ -185,7 +186,13 @@ rot_offsets = [[0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 
 # rot_offsets = [eulerTupleTo3x3(t) for t in rot_offsets]
 joint_types = ["revolute","revolute","revolute","revolute","revolute","revolute"]
 # ur5 = Arm(axis_types,displacements,displacements,disp_offset,rot_offsets, joint_types,0,0,false)
-ur5 = Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,0,0,false)
+ur5 = Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types, false)
+println(eulerTupleTo3x3([0.,0.,0.]))
+return 0
+
+
+
+
 
 func = getFrames_closure(ur5)
 

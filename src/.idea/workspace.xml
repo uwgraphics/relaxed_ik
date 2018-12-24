@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../msg/JointAngles.msg" beforeDir="false" afterPath="$PROJECT_DIR$/../msg/JointAngles.msg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/objective.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/objective.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/vars.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py" afterDir="false" />
@@ -16,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mt_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/mt_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/multithreading.py" beforeDir="false" afterPath="$PROJECT_DIR$/multithreading.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="522">
+              <caret line="18" column="66" lean-forward="true" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
               <folding>
                 <element signature="e#0#71#0" expanded="true" />
               </folding>
@@ -41,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="696">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="788">
+              <caret line="38" column="41" lean-forward="true" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -50,7 +43,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/objective.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
+            <state relative-caret-position="493">
               <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
@@ -60,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2731">
-              <caret line="142" column="28" lean-forward="true" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
+              <caret line="142" column="28" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -71,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="33" column="61" lean-forward="true" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
+            <state relative-caret-position="464">
+              <caret line="16" column="27" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="27" />
               <folding>
                 <element signature="e#1#74#0" expanded="true" />
               </folding>
@@ -83,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+            <state relative-caret-position="464">
+              <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -95,8 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="899">
+              <caret line="109" selection-start-line="109" selection-end-line="109" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -107,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            <state relative-caret-position="638">
+              <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -119,8 +112,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mt_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
+            <state relative-caret-position="464">
+              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -218,13 +211,13 @@
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/vars.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py" />
         <option value="$PROJECT_DIR$/scipy_mt_test.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py" />
         <option value="$PROJECT_DIR$/scipy_mt_test2.py" />
         <option value="$PROJECT_DIR$/ros_test.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py" />
         <option value="$PROJECT_DIR$/mt_test.py" />
@@ -243,6 +236,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,7 +259,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,6 +315,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="relaxedIK_mt_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="relaxedIK_subchain" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -364,27 +378,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scipy_mt_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="src" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scipy_mt_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="scipy_mt_test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -408,18 +401,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.mt_test" />
-      <item itemvalue="Python.scipy_mt_test" />
       <item itemvalue="Python.relaxedIK_subchain" />
       <item itemvalue="Python.scipy_mt_test2" />
       <item itemvalue="Python.ros_test" />
+      <item itemvalue="Python.relaxedIK_mt_utils" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.mt_test" />
+        <item itemvalue="Python.relaxedIK_mt_utils" />
         <item itemvalue="Python.ros_test" />
         <item itemvalue="Python.scipy_mt_test2" />
         <item itemvalue="Python.relaxedIK_subchain" />
-        <item itemvalue="Python.scipy_mt_test" />
       </list>
     </recent_temporary>
   </component>
@@ -447,14 +440,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="129" y="13" width="3712" height="2148" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16175668" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.162575" />
       <window_info id="Structure" order="1" weight="0.24958587" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3257024" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.45935625" side_tool="true" visible="true" weight="0.39958376" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.45935625" side_tool="true" weight="0.39958376" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.54064375" weight="0.39958376" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -767,40 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="33" column="61" lean-forward="true" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
-          <folding>
-            <element signature="e#1#74#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/objective.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python2.7/threading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="365">
@@ -808,50 +766,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py">
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/objective.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="493">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="788">
+          <caret line="38" column="41" lean-forward="true" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2731">
-          <caret line="142" column="28" lean-forward="true" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
+          <caret line="142" column="28" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py">
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        <state relative-caret-position="464">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="27" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#1#74#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="522">
+          <caret line="18" column="66" lean-forward="true" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
           <folding>
             <element signature="e#0#71#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mt_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="15" column="58" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
+        <state relative-caret-position="464">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding>
             <element signature="e#0#65#0" expanded="true" />
           </folding>

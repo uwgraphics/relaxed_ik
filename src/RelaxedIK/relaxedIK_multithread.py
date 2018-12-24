@@ -32,12 +32,12 @@ class RelaxedIK_multithread(object):
             self.relaxedIK_subchains.append(relaxedIK_subchain)
 
 
-        # self.threads = []
-        # for r in self.relaxedIK_subchains:
-        #     self.threads.append(threading.Thread(target=r.run))
+        self.threads = []
+        for r in self.relaxedIK_subchains:
+            self.threads.append(threading.Thread(target=r.run))
 
-        # for t in self.threads:
-        #     t.start()
+        for t in self.threads:
+            t.start()
 
         # r= self.relaxedIK_subchains[1]
         # threading.Thread(target=r.run).start()
@@ -88,21 +88,32 @@ class RelaxedIK_multithread(object):
         # for t in self.threads:
         #    t.join()
 
-        threads = []
-        for r in self.relaxedIK_subchains:
-           t = threading.Thread(target=r.run)
-           threads.append(t)
-           t.start()
+        # threads = []
+        #for r in self.relaxedIK_subchains:
+        #   t = threading.Thread(target=r.run)
+        #   threads.append(t)
+        #   t.start()
 
-        for t in threads:
-           t.join()
+        #for t in threads:
+        #   t.join()
 
 
-        self.mt_manager.solution_count += 1
+        curr_target_idx = self.mt_manager.solution_count + 1
+        move_on = False
+        while not move_on:
+            local_move_on = True
+            for s in self.relaxedIK_subchains:
+                if not curr_target_idx == s.solution_count:
+                    local_move_on = False
+            move_on = local_move_on
+
 
         self.mt_manager.subchains = self.mt_manager.subchains_write
         xopt = glue_subchains(self.mt_manager.subchain_indices, self.mt_manager.subchains, self.relaxedIK_full.vars.robot.numDOF)
-        xopt = self.filter.filter(xopt)
+        # xopt = self.filter.filter(xopt)
+        self.mt_manager.locked_x = xopt
+
+        self.mt_manager.solution_count += 1
 
         for r in self.relaxedIK_subchains:
             r.vars.prev_goal_quats = quat_goals

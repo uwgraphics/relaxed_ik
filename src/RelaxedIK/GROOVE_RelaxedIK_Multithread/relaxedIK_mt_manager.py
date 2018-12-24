@@ -12,6 +12,7 @@ class Multithread_Manager:
 
         self.subchains = get_subchains_from_indices(subchain_indices, relaxedIK_full.vars.init_state)
         self.subchains_write = get_subchains_from_indices(subchain_indices, relaxedIK_full.vars.init_state)
+        self.locked_x = relaxedIK_full.vars.init_state
 
         self.solution_count = 0
 

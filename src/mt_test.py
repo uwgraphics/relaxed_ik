@@ -13,14 +13,17 @@ if __name__ == '__main__':
     relaxedIK = get_relaxedIK_from_info_file(path_to_src, 'ur5_info.yaml')
     relaxedIK.vars.unconstrained = True
 
-    rik_mt = RelaxedIK_multithread(  [ [0,1], [2,3], [4, 5] ], relaxedIK, solver_name='slsqp')
+
+    rik_mt = RelaxedIK_multithread(  [ [0,1,2], [3,4,5] ], relaxedIK, solver_name='slsqp')
+
 
     # print rik_mt.relaxedIK_subchains[1].groove.solve()
     # print rik_mt.relaxedIK_subchains[1].vars.objectives
+
 
     idx = 0.0
     rate = rospy.Rate(100)
     for i in xrange(1000):
         print rik_mt.solve([[idx,0,0.0]], [[1.,0,0,0]])
-        idx += 0.0001
+        idx += 0.001
         rate.sleep()

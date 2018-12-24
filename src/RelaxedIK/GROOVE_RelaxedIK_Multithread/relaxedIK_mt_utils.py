@@ -28,15 +28,16 @@ def inject_subchain(x, x_subchain_idx, indices, subchains, numDOF):
     ret_subchains[x_subchain_idx] = x
     return glue_subchains(indices, ret_subchains, numDOF)
 
+def inject_state(x, subchain, subchain_indices):
+    x_ret = copy.deepcopy(x)
+    for i, s in enumerate(subchain_indices):
+        x_ret[s] = subchain[i]
+    return x_ret
 
 if __name__ == '__main__':
     x = [0.0, 2.0, 1.0, 3.0, 4.0, 5., 6., 7., 8.]
     indices = [[0,2], [1,3,4], [8,6,7,5]]
     subchains = [[0.0, 1.0], [2.0, 3.0, 4.0], [5., 6., 7., 8.]]
 
-    print glue_subchains(indices, subchains, 9)
-    print get_subchains_from_indices(indices, x)
-
-    x_new = [9., 9., 9., 9.]
-
-    print inject_subchain(x_new, 2, indices, subchains, 9)
+    print inject_state(x, [100.,100., 100., 100.], [0,1,4,5])
+    print x

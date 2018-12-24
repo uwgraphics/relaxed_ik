@@ -1,5 +1,6 @@
-include("arm.jl")
 using BenchmarkTools
+include("arm.jl")
+
 
 mutable struct Robot
     arms
@@ -131,25 +132,33 @@ function getFrames_c(robot)
     return f
 end
 
+Base.@ccallable function julia_main(ARGS::Vector{String})::Cint
+    axis_types = ["-z","y","y","y","z","y"]
+    displacements = [[0.0, 0.13585, 0.0], [0.0, -0.1197, 0.425], [0.0, 0.0, 0.39225], [0, 0.093, 0], [0, 0, 0.09465], [0.0,0.0823,0.0]]
+    disp_offset = [0., 0., 0.089159]
+    rot_offsets = [[0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0]]
+    bounds = [[0.,0.],[0.,0.],[0.,0.],[0.,0.],[0.,0.],[0.,0.]]
+    velocity_limits = [0.,0.,0.,0.,0.,0.]
+
+    # rot_offsets = [eulerTupleTo3x3(t) for t in rot_offsets]
+    joint_types = ["revolute","revolute","revolute","revolute","revolute","revolute"]
+    # ur5 = Arm(axis_types,displacements,displacements,disp_offset,rot_offsets, joint_types,0,0,false)
+    ur5 = Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,false)
+    arms = [ur5]
+    joint_names = [ ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"] ]
+    joint_ordering = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+
+    robot = Robot(arms, joint_names, joint_ordering,bounds,velocity_limits)
+    robot.getFrames( [1.,1.,1.,1.,1.,1.1]  )
+    println(robot.arms[1].out_pts)
+    return 0
+end
+
+
+
+
+
 #=
-axis_types = ["-z","y","y","y","z","y"]
-displacements = [[0.0, 0.13585, 0.0], [0.0, -0.1197, 0.425], [0.0, 0.0, 0.39225], [0, 0.093, 0], [0, 0, 0.09465], [0.0,0.0823,0.0]]
-disp_offset = [0., 0., 0.089159]
-rot_offsets = [[0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0] , [0.0, 0.0, 0.0]]
-# rot_offsets = [eulerTupleTo3x3(t) for t in rot_offsets]
-joint_types = ["revolute","revolute","revolute","revolute","revolute","revolute"]
-# ur5 = Arm(axis_types,displacements,displacements,disp_offset,rot_offsets, joint_types,0,0,false)
-ur5 = Arm(axis_types, displacements, disp_offset, rot_offsets,joint_types,0,0,false)
-arms = [ur5]
-joint_names = [ ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"] ]
-joint_ordering = ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
-
-using BenchmarkTools
-
-robot = Robot(arms, joint_names, joint_ordering)
-robot.getFrames( [1.,1.,1.,1.,1.,1.1]  )
-println(robot.arms[1].out_pts)
-
 function test_func(x)
     robot.getFrames(x)
     ee_pt = robot.arms[1].out_pts[end]

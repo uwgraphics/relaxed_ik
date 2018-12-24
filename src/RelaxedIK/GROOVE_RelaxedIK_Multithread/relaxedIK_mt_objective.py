@@ -1,5 +1,5 @@
 from ..GROOVE.GROOVE_Utils.objective import Objective, objective_master
-from relaxedIK_mt_utils import glue_subchains, get_subchains_from_indices, inject_subchain
+from relaxedIK_mt_utils import glue_subchains, get_subchains_from_indices, inject_subchain, inject_state
 import math
 import numpy as np
 
@@ -13,8 +13,9 @@ def objective_master_relaxedIK_mt(x, vars):
             break
 
     subchain_idx = vars.subchain_idx
-    count = vars.mt_manager.solution_count
-    full_x = inject_subchain(x, subchain_idx, vars.mt_manager.subchain_indices, vars.mt_manager.subchains, vars.relaxedIK_full.vars.robot.numDOF)
+    # count = vars.mt_manager.solution_count
+    # full_x = inject_subchain(x, subchain_idx, vars.mt_manager.subchain_indices, vars.mt_manager.subchains, vars.relaxedIK_full.vars.robot.numDOF)
+    full_x = inject_state(vars.mt_manager.locked_x, x, vars.mt_manager.subchain_indices[subchain_idx])
     vars.frames = vars.relaxedIK_full.vars.robot.getFrames(full_x)
 
     vars.full_x = full_x

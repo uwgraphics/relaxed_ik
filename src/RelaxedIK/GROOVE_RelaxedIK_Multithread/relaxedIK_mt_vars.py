@@ -14,7 +14,7 @@ class RelaxedIK_mt_vars(Vars):
                  init_state = '',
                  objectives=(Position_MultiEE_Obj(), Orientation_MultiEE_Obj(), Min_Jt_Vel_Obj(), Min_Jt_Accel_Obj(), Min_Jt_Jerk_Obj(), Collision_Avoidance_nn()),
                  weight_funcs=(Identity_Weight(), Identity_Weight(), Identity_Weight(), Identity_Weight(), Identity_Weight(), Identity_Weight()),
-                 weight_priors=(50.0, 40.0, 2., 1., 1., 2.),
+                 weight_priors=(50.0, 40.0, 10., 1., 1., 2.),
                  constraints=(),
                  bounds=(),
                  position_mode='relative',

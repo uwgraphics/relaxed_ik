@@ -74,8 +74,3 @@ if __name__ == '__main__':
         angles_pub.publish(ja)
 
         rate.sleep()
-
-
-
-
-
