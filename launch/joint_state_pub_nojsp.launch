@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+   
+   <!-- startup rviz -->
+   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find relaxed_ik)/rviz/joint_viewer.rviz" />
+
+   <!-- Robot state publisher    -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="/" >
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+    </node>
+
+
+</launch>

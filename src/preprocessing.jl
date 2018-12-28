@@ -13,7 +13,6 @@ using BSON
 using Calculus
 using ForwardDiff
 using ReverseDiff
-using CuArrays
 import Distributions: Uniform
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/Utils_Julia/transformations.jl")
@@ -21,6 +20,7 @@ include("RelaxedIK/Utils_Julia/transformations.jl")
 @pyimport RelaxedIK.Utils.collision_transfer as c
 
 function state_to_joint_pts(x, vars)
+    # return x
     joint_pts = []
     for i=1:vars.robot.num_chains
         vars.robot.arms[i].getFrames(x[vars.robot.subchain_indices[i]])
@@ -41,11 +41,12 @@ function total_loss(ins, outs, m)
     total_error = 0.0
     for i=1:length(ins)
         total_error += Flux.mse(m(ins[i]), outs[i])
+        # total_error += abs(Flux.Tracker.data(m(ins[i])) - outs[i])
     end
     return total_error
 end
 
-function run_preprocessing(num_samples=50000)
+function run_preprocessing(num_samples=100)
 
     path_to_src = Base.source_dir()
     loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
@@ -67,6 +68,8 @@ function run_preprocessing(num_samples=50000)
 
     test_ins = []
     test_outs = []
+    data = []
+    test_data = []
 
     # make samples
     # last_state = relaxedIK.relaxedIK_vars.vars.init_state
@@ -76,53 +79,77 @@ function run_preprocessing(num_samples=50000)
         in = rand(Uniform(-6,6), num_dof)
         # last_state = in
         out = [c.get_score(in, cv)]
+        println(typeof(out))
         println(in)
 
         push!(ins, state_to_joint_pts_closure(in))
         # push!(ins, in)
         push!(outs, out)
+        push!(data, (state_to_joint_pts_closure(in), out) )
         println(out)
 
         println("sample $i of $num_samples")
     end
 
-    for i=1:100
+
+    for i=1:50
         in = rand(Uniform(-6,6), num_dof)
-        out = [c.get_score(in, cv)]
+        out = c.get_score(in, cv)
 
         push!(test_ins, state_to_joint_pts_closure(in))
         push!(test_outs, out)
+        push!(test_data, (state_to_joint_pts_closure(in), out) )
     end
 
-    data = zip(ins, outs)
+    data = Flux.zip(ins, outs)
 
-    nn_val = 70
-    m = Chain(
-        Dense(length(state_to_joint_pts_closure(rand(num_dof))), nn_val, Flux.relu),
-        Dense(nn_val, nn_val,Flux.relu),
-        Dense(nn_val, nn_val,Flux.relu),
-        Dense(nn_val, nn_val,Flux.relu),
-        Dense(nn_val, nn_val,Flux.relu),
-        Dense(nn_val, 1,Flux.relu)
+    nn_val = 200
+    m = Chain( Dense(length( state_to_joint_pts_closure( rand(num_dof) ) ), nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, nn_val, Flux.relu),
+        Dense(nn_val, 1)
     )
 
     p = Flux.params(m)
-    opt = Flux.Optimise.ADAM(p, 0.001)
+    opt = Flux.Optimise.ADAM(p)
 
     loss(x, y) = Flux.mse(m(x), y)
+    # loss(x,y) = m(x) - y
 
     # evalcb = () -> @show(loss(ins[1], outs[1]))
-    evalcb = () -> @show(total_loss(test_ins, test_outs, m))
+    # evalcb = () -> @show(total_loss(test_ins, test_outs, m))
+
+    function evalcb(ins, outs, test_ins, test_outs, m)
+        train_loss = total_loss(ins, outs, m)
+        test_loss = total_loss(test_ins, test_outs, m)
+        println("train set loss: $train_loss, test set loss: $test_loss")
+    end
+
+    evalcb_closure = () -> evalcb(ins[1:50], outs[1:50], test_ins, test_outs, m)
 
     loss_before = total_loss(ins, outs, m)
-    total_loss(ins, outs, m)
-    epochs = 6
-    for i = 1:epochs
-        println("epoch $i of $epochs")
-        Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb, 6.0))
-    end
+    # epochs = 11
+    # for i = 1:epochs
+    # println("epoch $i of $epochs")
+    @epochs 1 Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb_closure, 1.0))
+    # end
     loss_after = total_loss(ins, outs, m)
     println("total loss before: $loss_before, total loss after: $loss_after")
+
+    for i=1:length(test_ins)
+        input = test_ins[i]
+        println(input)
+        modeled_out =   m( input )
+        # modeled_out = Flux.Tracker.data( m(state_to_joint_pts_closure(test_ins[i])) )[1]
+        y_out = test_outs[i]
+
+        random_output = m(  rand( length(  state_to_joint_pts_closure(test_ins[i]) ) ) )
+        println("modeled_out: $modeled_out, y_out: $y_out, random: $random_output \n")
+    end
 
     # save it
     f = open(path_to_src * "/RelaxedIK/Config/info_files/" * loaded_robot)
@@ -132,5 +159,6 @@ function run_preprocessing(num_samples=50000)
 
     @save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name m
 end
+
 
 run_preprocessing()

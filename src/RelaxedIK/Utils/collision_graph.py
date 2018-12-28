@@ -13,7 +13,7 @@ class Collision_Graph:
         self.num_objects = len(self.c.collision_objects)
         self.original_distances = 10000*np.ones((self.num_objects, self.num_objects))
         self.combinations = list(itertools.combinations(range(self.num_objects),r=2))
-        self.b_value = 50
+        self.b_value = 1.0
         self.collision_color_array = self.num_objects*[0]
 
         self.initialize_table()
@@ -86,8 +86,3 @@ class Collision_Graph:
 
     def get_c_value_from_dis(self, dis, b, v=1.0e-15):
         return math.sqrt(-(dis) ** 4 / (2.0 * math.log(v / b)))
-
-
-
-
-

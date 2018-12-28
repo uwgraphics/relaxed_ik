@@ -39,6 +39,13 @@ function state_to_joint_pts(x, vars)
     return joint_pts
 end
 
+function predict(w,x)
+    # x = Knet.mat(x)
+    for i=1:2:length(w)-2
+        x = Knet.relu.(w[i]*x .+ w[i+1])
+    end
+    return w[end-1]*x .+ w[end]
+end
 
 function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false)
 
@@ -70,16 +77,16 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
     if preconfigured == false
         collision_nn_file_name = y["collision_nn_file"]
-        model = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:m]
+        w = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:w]
+        model = (x) -> predict(w, x)[1]
         function model_nn(x, model, state_to_joint_pts_closure)
-            return Flux.Tracker.data(model(state_to_joint_pts_closure(x))[1])
+            return model(state_to_joint_pts_closure(x))
         end
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0)
 
         state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, rv)
         collision_nn = (x)-> model_nn(x, model, state_to_joint_pts_closure)
         rv.collision_nn = collision_nn
-
     else
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, nothing)
     end
