@@ -4,7 +4,6 @@ using Calculus
 
 ENV["PYTHON"] = "/usr/bin/python"
 
-
 using PyCall
 using Flux
 using Flux: @epochs
@@ -15,7 +14,6 @@ using Calculus
 using ForwardDiff
 using ReverseDiff
 import Distributions: Uniform
-using BenchmarkTools
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/Utils_Julia/transformations.jl")
 @pyimport RelaxedIK.Utils.collision_transfer as c
@@ -76,5 +74,6 @@ g = (x) -> ForwardDiff.gradient(nn_func, x)
 relaxedIK = get_standard(path_to_src, loaded_robot)
 # println(relaxedIK.relaxedIK_vars.vars.∇s[end]([0.,0.,0.,0.,0.,0.]))
 
-
-@btime solve(relaxedIK, [[0.,0.,0.]], [Quat(1.,0.,0.,0.)])
+for i = 1:100
+    println(solve(relaxedIK, [[1.,0.,0.]], [Quat(1.,0.,0.,0.)]))
+end

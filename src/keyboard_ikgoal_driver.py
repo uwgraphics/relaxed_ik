@@ -185,10 +185,3 @@ while not rospy.is_shutdown():
     ee_pose_goals.ee_poses.append(pose_l)
 
     ee_pose_goals_pub.publish(ee_pose_goals)
-
-
-
-
-
-
-

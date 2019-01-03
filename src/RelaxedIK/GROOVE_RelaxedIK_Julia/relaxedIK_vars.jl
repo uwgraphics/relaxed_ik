@@ -72,7 +72,6 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         push!(goal_quats, rand(Quat))
         push!(goal_positions_relative, SVector(0.,0.,0.))
         push!(goal_quats_relative, Quat(1.,0.,0.,0.))
-
     end
 
     if preconfigured == false
