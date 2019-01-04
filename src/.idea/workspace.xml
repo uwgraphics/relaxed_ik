@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/sawyer_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/sawyer_nn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_nn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Julia/groove.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Julia/groove.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relaxed_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knet_test.jl" beforeDir="false" afterPath="$PROJECT_DIR$/knet_test.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relaxed_ik_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test3.jl" beforeDir="false" afterPath="$PROJECT_DIR$/test3.jl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1073">
+            <state relative-caret-position="928">
               <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -54,8 +57,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/multithreading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+            <state relative-caret-position="551">
+              <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -75,7 +78,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mt_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
+            <state relative-caret-position="725">
               <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
@@ -84,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rviz_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+            <state relative-caret-position="1239">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
               <folding>
                 <element signature="e#310#413#0" expanded="true" />
               </folding>
@@ -99,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1165">
-              <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+            <state relative-caret-position="1682">
+              <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
               <folding>
                 <element signature="e#413#479#0" expanded="true" />
               </folding>
@@ -113,11 +116,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/relaxed_ik_node.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="28" selection-start-line="28" selection-end-line="29" />
+            <state relative-caret-position="425">
+              <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
               <folding>
                 <element signature="e#413#425#0" expanded="true" />
               </folding>
@@ -185,7 +188,6 @@
         <option value="$PROJECT_DIR$/RelaxedIK/Julia_Bridge/relaxedIK_julia.py" />
         <option value="$PROJECT_DIR$/sample.py" />
         <option value="$PROJECT_DIR$/sample_keyboard.py" />
-        <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
         <option value="$PROJECT_DIR$/load_info_file.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml" />
@@ -225,6 +227,7 @@
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py" />
         <option value="$PROJECT_DIR$/mt_test.py" />
         <option value="$PROJECT_DIR$/rviz_viewer.py" />
+        <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
       </list>
     </option>
   </component>
@@ -433,8 +436,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="129" y="13" width="3712" height="2148" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.162575" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.162575" />
       <window_info id="Structure" order="1" weight="0.24958587" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -746,6 +750,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///opt/ros/kinetic/lib/joint_state_publisher/joint_state_publisher">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#23#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
@@ -766,42 +780,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mt_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///opt/ros/kinetic/lib/joint_state_publisher/joint_state_publisher">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#23#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1165">
-          <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-          <folding>
-            <element signature="e#413#479#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/relaxedIK_solution_transfer.jl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1073">
+        <state relative-caret-position="928">
           <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -811,8 +792,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/multithreading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        <state relative-caret-position="551">
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
@@ -826,22 +807,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/relaxed_ik_node.py">
+    <entry file="file://$PROJECT_DIR$/mt_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="28" selection-start-line="28" selection-end-line="29" />
+        <state relative-caret-position="725">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
           <folding>
-            <element signature="e#413#425#0" expanded="true" />
+            <element signature="e#0#65#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1682">
+          <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+          <folding>
+            <element signature="e#413#479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/relaxedIK_solution_transfer.jl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/rviz_viewer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="77" lean-forward="true" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="1239">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
           <folding>
             <element signature="e#310#413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/relaxed_ik_node.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+          <folding>
+            <element signature="e#413#425#0" expanded="true" />
           </folding>
         </state>
       </provider>

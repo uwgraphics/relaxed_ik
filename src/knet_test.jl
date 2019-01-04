@@ -161,18 +161,8 @@ end
 
 
 # Make neural net ##############################################################
-net_width = 70
+net_width = length(ins[1]) + 3
 rand_val = 1.0
-
-#=
-w = Any[ rand_val*randn(Float64,net_width,length(ins[1])), zeros(Float64,net_width,1),
-         rand_val*randn(Float64,net_width,net_width), c
-         rand_val*randn(Float64,net_width,net_width), zeros(Float64,net_width,1),
-         rand_val*randn(Float64,net_width,net_width), zeros(Float64,net_width,1),
-         rand_val*randn(Float64,net_width,net_width), zeros(Float64,net_width,1),
-         rand_val*randn(Float64,net_width,net_width), zeros(Float64,net_width,1),
-         rand_val*randn(Float64,1,net_width),  zeros(Float64,1,1) ]
-=#
 
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
@@ -188,7 +178,7 @@ o = optimizers(w, Knet.Adam)
 tl = total_loss2(w, test_ins, test_outs)
 tl_train = total_loss( w, ins, outs )
 println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
-num_epochs = 15
+num_epochs = 50
 for epoch=1:num_epochs
     for b = 1:length(batched_data)
         num_batches = length(batched_data)

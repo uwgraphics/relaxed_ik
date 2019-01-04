@@ -27,7 +27,6 @@ end
 
 
 function state_to_joint_pts(x, vars)
-    # return x
     joint_pts = []
     for i=1:vars.robot.num_chains
         vars.robot.arms[i].getFrames(x[vars.robot.subchain_indices[i]])
@@ -38,6 +37,26 @@ function state_to_joint_pts(x, vars)
         for k = 1:length(out_pts)
             for l=1:3
                 push!(joint_pts, out_pts[k][l])
+            end
+        end
+    end
+    return joint_pts
+end
+
+function state_to_joint_pts2(x, vars, joint_pts)
+    # joint_pts = []
+    for i=1:vars.robot.num_chains
+        vars.robot.arms[i].getFrames(x[vars.robot.subchain_indices[i]])
+    end
+
+    count = 1
+    for j=1:vars.robot.num_chains
+        out_pts = vars.robot.arms[j].out_pts
+        for k = 1:length(out_pts)
+            for l=1:3
+                # push!(joint_pts, out_pts[k][l])
+                joint_pts[count] = out_pts[k][l]
+                count += 1
             end
         end
     end
@@ -64,16 +83,24 @@ model = (x) -> predict(w, x)[1]
 
 # println( model(state_to_joint_pts_closure([0.,0.,0.,0.,0.,0.])  ) )
 
-nn_func = (x) -> model(state_to_joint_pts_closure(x))
+# nn_func = (x) -> model(state_to_joint_pts_closure(x))
 
 # println(nn_func([0.,0.,0.,0.,0.,0.]))
 
-g = (x) -> ForwardDiff.gradient(nn_func, x)
+# g = (x) -> ForwardDiff.gradient(nn_func, x)
 
 
 relaxedIK = get_standard(path_to_src, loaded_robot)
 # println(relaxedIK.relaxedIK_vars.vars.∇s[end]([0.,0.,0.,0.,0.,0.]))
 
+#=
 for i = 1:100
     println(solve(relaxedIK, [[1.,0.,0.]], [Quat(1.,0.,0.,0.)]))
 end
+=#
+
+@btime relaxedIK.relaxedIK_vars.vars.∇s[end]([0.,0.,0.,0.,0.,0.])
+# @btime relaxedIK.relaxedIK_vars.vars.objective_closures[end]([0.,0.,0.,0.,0.,0.])
+# jt_pts = state_to_joint_pts([0.,0.,0.,0.,0.,0.], relaxedIK.relaxedIK_vars)
+# @btime state_to_joint_pts([0.,0.,0.,0.,0.,0.], relaxedIK.relaxedIK_vars)
+# @btime state_to_joint_pts2([0.,0.,0.,0.,0.,0.], relaxedIK.relaxedIK_vars, jt_pts)
