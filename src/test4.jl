@@ -27,5 +27,15 @@ m = Chain( Dense(24, nn_val, Flux.relu),
 
 x = rand(24)
 
-@btime m(x)
-@btime predict(w, x)
+# @btime m(x)
+# @btime predict(w, x)
+
+for i = 1:10000
+try
+    println(i)
+    sleep(0.1)
+catch ex
+    println(ex)
+    return 0
+end
+end

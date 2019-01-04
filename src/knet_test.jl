@@ -47,7 +47,7 @@ function predict(w,x)
 end
 
 loss(w,x,y) = Knet.mean(abs2, y - predict(w,x))
-loss2(w,x,y) = Knet.mean(abs2, y - predict(w,x)[1])
+loss2(w,x,y) = Knet.mean(abs2, y - predict(w,x))[1]
 lossgradient = grad(loss)
 
 function total_loss(w, all_x, all_y)
@@ -73,6 +73,14 @@ function train(model, data, optim)
     end
 end
 
+function get_rand_state_with_bounds(bounds)
+    sample = []
+    for b in bounds
+        push!(sample, rand(Uniform(b[1], b[2])))
+    end
+    return sample
+end
+
 path_to_src = Base.source_dir()
 loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
 loaded_robot = readline(loaded_robot_file)
@@ -81,6 +89,7 @@ println("loaded robot: $loaded_robot")
 
 relaxedIK = get_standard(path_to_src, loaded_robot; preconfigured=true)
 cv = c.CollisionVars(path_to_src)
+
 
 num_dof = relaxedIK.relaxedIK_vars.robot.num_dof
 
@@ -103,8 +112,11 @@ test_ins = []
 test_outs = []
 
 for i=1:num_samples
-    in = rand(Uniform(-6,6), num_dof)
+    # in = rand(Uniform(-6,6), num_dof)
+    in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
+    # out = [min(c.get_score(in, cv), 1.3)]
     out = [c.get_score(in, cv)]
+
 
     push!(ins, state_to_joint_pts_closure(in))
     push!(outs, out)
@@ -114,8 +126,10 @@ end
 
 
 for i=1:100
-    in = rand(Uniform(-6,6), num_dof)
-    out = c.get_score(in, cv)
+    # in = rand(Uniform(-6,6), num_dof)
+    in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
+    # out = [min(c.get_score(in, cv), 1.3)]
+    out = [c.get_score(in, cv)]
 
     push!(test_ins, state_to_joint_pts_closure(in))
     push!(test_outs, out)
@@ -178,7 +192,7 @@ o = optimizers(w, Knet.Adam)
 tl = total_loss2(w, test_ins, test_outs)
 tl_train = total_loss( w, ins, outs )
 println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
-num_epochs = 50
+num_epochs = 20
 for epoch=1:num_epochs
     for b = 1:length(batched_data)
         num_batches = length(batched_data)

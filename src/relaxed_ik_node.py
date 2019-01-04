@@ -75,8 +75,9 @@ if __name__ == '__main__':
         xopt = relaxedIK.solve(pos_goals, quat_goals)
         ja = JointAngles()
         ja.header = header
+        # ja.header.stamp = rospy.rostime.get_rostime()
         for x in xopt:
-            ja.angles.data.append(Float64(x))
+            ja.angles.data.append(x)
 
         angles_pub.publish(ja)
         print xopt

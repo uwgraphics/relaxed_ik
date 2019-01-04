@@ -15,7 +15,7 @@ import rospy
 from RelaxedIK.Utils.colors import bcolors
 from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 from start_here import info_file_name, urdf_file_name, fixed_frame, joint_names, joint_ordering, ee_fixed_joints, starting_config, \
-    collision_file_name, joint_state_define, thread_dofs
+    collision_file_name, joint_state_define
 import inspect
 
 rospy.init_node('generate_info_file')
@@ -111,7 +111,7 @@ out_file.write('collision_nn_file: \"{}\"\n'.format(robot_name + '_nn'))
 out_file.write('path_to_src: \"{}\"\n'.format(path_to_src))
 
 
-
+'''
 thread_dofs_str = '[ '
 for i in xrange(len(thread_dofs)):
     thread_dofs_str += ' [ '
@@ -125,6 +125,7 @@ for i in xrange(len(thread_dofs)):
 thread_dofs_str += ' ] '
 
 out_file.write('thread_dofs: {}\n'.format(thread_dofs_str))
+'''
 
 
 # AUTO############################################################################################################################################

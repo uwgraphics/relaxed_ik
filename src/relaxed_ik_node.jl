@@ -21,13 +21,15 @@ function eePoseGoals_cb(data::EEPoseGoals)
     eepg = data
 end
 
+# function loop()
 path_to_src = Base.source_dir()
 println(path_to_src)
 loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
 loaded_robot = readline(loaded_robot_file)
 close(loaded_robot_file)
 
-relaxedIK = get_standard(path_to_src, loaded_robot)
+relaxedIK = get_bimanual(path_to_src, loaded_robot)
+
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
 println("loaded robot: $loaded_robot")
@@ -48,12 +50,13 @@ pose.orientation.w = 1.0
 pose.orientation.x = 0.0
 pose.orientation.y = 0.0
 pose.orientation.z = 0.0
-for i = 1:length(num_chains)
+for i = 1:num_chains
     push!(eepg.ee_poses, pose)
 end
 
 loop_rate = Rate(1000)
 while ! is_shutdown()
+    # while true
     # if length(eepg.ee_poses) == 0
     #    println("waiting for pose goals.......")
     # else
@@ -89,3 +92,7 @@ while ! is_shutdown()
     # end
     rossleep(loop_rate)
 end
+# end
+
+
+# loop()

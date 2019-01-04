@@ -69,7 +69,7 @@ function getFrames(arm::Arm, state)
 
     axis_idx = 1
     for i in 1:length(arm.displacements)
-        if arm.joint_types[i]=="revolute"
+        if arm.joint_types[i]=="revolute" || arm.joint_types[i]=="continuous"
             axis = arm.axis_types[axis_idx]
             if axis[1] == "-"
                 s = sin(-state[axis_idx])
@@ -97,7 +97,7 @@ function getFrames(arm::Arm, state)
             rot = rot * arm.rot_offsets[i]
         end
 
-        if arm.joint_types[i] == "revolute"
+        if arm.joint_types[i] == "revolute" || arm.joint_types[i]=="continuous"
             rmat = rot3(axis,s,c)
             rot = rot * rmat
         end
@@ -121,7 +121,7 @@ function getFrames!(state, static_disp_offset, joint_types, axis_types, displace
     axis_idx = 1
 
     for i in 1:length(displacements)
-        if joint_types[i]=="revolute"
+        if joint_types[i]=="revolute" || joint_types[i]=="continuous"
             axis = axis_types[axis_idx]
             if axis[1] == "-"
                 if axis == "Z" || axis == "z" || axis == "-z"
@@ -159,7 +159,7 @@ function getFrames!(state, static_disp_offset, joint_types, axis_types, displace
             rot = rot * rot_offsets[i]
         end
 
-        if joint_types[i] == "revolute"
+        if joint_types[i] == "revolute" || joint_types[i]=="continuous"
             rot = rot * r
         end
 
