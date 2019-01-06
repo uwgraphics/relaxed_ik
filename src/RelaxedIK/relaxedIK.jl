@@ -20,7 +20,7 @@ end
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [50.0, 40.0, 5.0 ,1.0, 1.0, 7.0]
+    weight_priors = [50.0, 40.0, 5.0 ,1.0, 1.0, 3.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -29,9 +29,31 @@ function get_standard(path_to_src, info_file_name; solver_name = "slsqp", precon
 end
 
 function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
-    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [50.0, 40.0, 50.0, 40.0, 5.0 ,1.0, 1.0]
+    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, bimanual_line_seg_collision_avoid_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 50.0, 49.0, 10.0 ,9.0, 8.0, 2.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
+function get_autocam1(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, bimanual_line_seg_collision_avoid_obj, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_dis_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [20.0, 19.0, 1.0, 12.0 ,1.0, 1.0, 2.0, 2.0, 3.0, 2.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
+function get_autocam2(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_2, rotation_obj_2, bimanual_line_seg_collision_avoid_obj, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_2, camera_dis_obj_2, camera_upright_obj_2, camera_occlusion_avoid_obj_2]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [20.0, 19.0, 1.0, 10.0 ,1.0, 1.0, 2.0, 2.0, 3.0, 2.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []

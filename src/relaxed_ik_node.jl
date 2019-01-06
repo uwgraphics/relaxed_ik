@@ -28,7 +28,7 @@ loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
 loaded_robot = readline(loaded_robot_file)
 close(loaded_robot_file)
 
-relaxedIK = get_bimanual(path_to_src, loaded_robot)
+relaxedIK = get_autocam1(path_to_src, loaded_robot)
 
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
@@ -89,6 +89,7 @@ while ! is_shutdown()
     publish(angles_pub, ja)
 
     println(xopt)
+    # println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
     # end
     rossleep(loop_rate)
 end

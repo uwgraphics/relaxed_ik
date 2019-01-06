@@ -46,7 +46,15 @@ function total_loss(ins, outs, m)
     return total_error
 end
 
-function run_preprocessing(num_samples=100)
+function get_rand_state_with_bounds(bounds)
+    sample = []
+    for b in bounds
+        push!(sample, rand(Uniform(b[1], b[2])))
+    end
+    return sample
+end
+
+function run_preprocessing(num_samples=10000)
 
     path_to_src = Base.source_dir()
     loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
@@ -76,24 +84,24 @@ function run_preprocessing(num_samples=100)
     for i=1:num_samples
         # vel = 0.02 * rand(num_dof)
         #in = last_state + vel
-        in = rand(Uniform(-6,6), num_dof)
+        # in = rand(Uniform(-6,6), num_dof)
+        in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
         # last_state = in
         out = [c.get_score(in, cv)]
-        println(typeof(out))
-        println(in)
 
         push!(ins, state_to_joint_pts_closure(in))
         # push!(ins, in)
         push!(outs, out)
         push!(data, (state_to_joint_pts_closure(in), out) )
-        println(out)
+        # println(out)
 
         println("sample $i of $num_samples")
     end
 
 
-    for i=1:50
-        in = rand(Uniform(-6,6), num_dof)
+    for i=1:100
+        # in = rand(Uniform(-6,6), num_dof)
+        in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
         out = c.get_score(in, cv)
 
         push!(test_ins, state_to_joint_pts_closure(in))
@@ -103,14 +111,18 @@ function run_preprocessing(num_samples=100)
 
     data = Flux.zip(ins, outs)
 
-    nn_val = 200
-    m = Chain( Dense(length( state_to_joint_pts_closure( rand(num_dof) ) ), nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
-        Dense(nn_val, nn_val, Flux.relu),
+    nn_val = 40
+    m = Chain( Dense(length( state_to_joint_pts_closure( rand(num_dof) ) ), nn_val, Flux.leakyrelu),
+        Dropout(0.6),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
+        Dropout(0.6),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
+        Dropout(0.6),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
+        Dropout(0.6),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
+        Dense(nn_val, nn_val, Flux.leakyrelu),
         Dense(nn_val, 1)
     )
 
@@ -129,26 +141,26 @@ function run_preprocessing(num_samples=100)
         println("train set loss: $train_loss, test set loss: $test_loss")
     end
 
-    evalcb_closure = () -> evalcb(ins[1:50], outs[1:50], test_ins, test_outs, m)
+    evalcb_closure = () -> evalcb(ins[1:100], outs[1:100], test_ins, test_outs, m)
 
     loss_before = total_loss(ins, outs, m)
     # epochs = 11
     # for i = 1:epochs
     # println("epoch $i of $epochs")
-    @epochs 1 Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb_closure, 1.0))
+    @epochs 30 Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb_closure, 2.0))
     # end
     loss_after = total_loss(ins, outs, m)
     println("total loss before: $loss_before, total loss after: $loss_after")
 
     for i=1:length(test_ins)
         input = test_ins[i]
-        println(input)
+        # println(input)
         modeled_out =   m( input )
         # modeled_out = Flux.Tracker.data( m(state_to_joint_pts_closure(test_ins[i])) )[1]
         y_out = test_outs[i]
 
         random_output = m(  rand( length(  state_to_joint_pts_closure(test_ins[i]) ) ) )
-        println("modeled_out: $modeled_out, y_out: $y_out, random: $random_output \n")
+        println("modeled_out: $modeled_out, y_out: $y_out")
     end
 
     # save it
@@ -157,8 +169,7 @@ function run_preprocessing(num_samples=100)
 
     collision_nn_file_name = y["collision_nn_file"]
 
-    @save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name m
+    # @save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name m
 end
-
 
 run_preprocessing()

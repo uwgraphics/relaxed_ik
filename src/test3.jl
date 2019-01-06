@@ -89,8 +89,7 @@ model = (x) -> predict(w, x)[1]
 
 # g = (x) -> ForwardDiff.gradient(nn_func, x)
 
-
-relaxedIK = get_standard(path_to_src, loaded_robot)
+relaxedIK = get_bimanual(path_to_src, loaded_robot)
 # println(relaxedIK.relaxedIK_vars.vars.∇s[end]([0.,0.,0.,0.,0.,0.]))
 
 #=
@@ -99,7 +98,10 @@ for i = 1:100
 end
 =#
 
-@btime relaxedIK.relaxedIK_vars.vars.∇s[end]([0.,0.,0.,0.,0.,0.])
+# println(relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14)))
+# @btime relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14))
+
+
 # @btime relaxedIK.relaxedIK_vars.vars.objective_closures[end]([0.,0.,0.,0.,0.,0.])
 # jt_pts = state_to_joint_pts([0.,0.,0.,0.,0.,0.], relaxedIK.relaxedIK_vars)
 # @btime state_to_joint_pts([0.,0.,0.,0.,0.,0.], relaxedIK.relaxedIK_vars)

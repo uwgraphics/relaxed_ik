@@ -15,6 +15,7 @@ class Collision_Graph:
         self.combinations = list(itertools.combinations(range(self.num_objects),r=2))
         self.b_value = 1.0
         self.collision_color_array = self.num_objects*[0]
+        self.danger_dis = 0.3
 
         self.initialize_table()
         self.c_values = self.get_c_values(self.original_distances)
@@ -73,6 +74,15 @@ class Collision_Graph:
                     self.original_distances[a, b] = dis
                     self.original_distances[b, a] = dis
 
+            for pair in self.combinations:
+                a = pair[0]
+                b = pair[1]
+                if not self.original_distances[a,b] == 0.0:
+                    self.original_distances[a,b] = min( self.danger_dis, self.original_distances[a,b] )
+                if not self.original_distances[b,a] == 0.0:
+                    self.original_distances[b,a] = min( self.danger_dis, self.original_distances[b,a] )
+
+
     def get_c_values(self, original_distances):
         shape = self.original_distances.shape
         c_values = np.zeros(shape)
@@ -81,7 +91,7 @@ class Collision_Graph:
                 if original_distances[i,j] <= .001:
                     c_values[i,j] = 0.0
                 else:
-                    c_values[i,j] = self.get_c_value_from_dis(original_distances[i,j],self.b_value)
+                    c_values[i,j] = self.get_c_value_from_dis(original_distances[i,j], self.b_value)
         return c_values
 
     def get_c_value_from_dis(self, dis, b, v=1.0e-15):

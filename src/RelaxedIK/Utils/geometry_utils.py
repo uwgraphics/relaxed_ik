@@ -40,3 +40,9 @@ def pt_dis_to_line_seg(pt,a,b):
     p = a + u*(b - a)
     dis = np.linalg.norm(p - pt)
     return p, u, dis
+
+
+if __name__ == '__main__':
+    # print pt_dis_to_line_seg(np.array([0.,0.,0.]),np.array([0.1,0.1,0.1]),np.array([1.,1.,1.]))
+    # print closest_point_on_2_lines([1.,1.,1.], [0.,0.,1.], [0.,0.,0.], [0.,1.,0.])
+    print dis_between_line_segments([1.,1.,1.], [1.,0.,1.], [0.,0.,0.], [0.,1.,0.])

@@ -5,10 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
       Splitter Ratio: 0.592391312
-    Tree Height: 749
+    Tree Height: 588
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -59,35 +60,162 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
+        j2s7s300_end_effector_a:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ee_link:
+        j2s7s300_end_effector_b:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        forearm_link:
+        j2s7s300_link_1_a:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        shoulder_link:
+        j2s7s300_link_1_b:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
+        j2s7s300_link_2_a:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        upper_arm_link:
+          Value: true
+        j2s7s300_link_2_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_3_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_3_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_4_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_4_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_5_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_5_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_6_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_6_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_7_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_7_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_base_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_base_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_1_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_1_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_2_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_2_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_3_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_3_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_1_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_1_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_2_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_2_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_3_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        j2s7s300_link_finger_tip_3_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        root_a:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        root_b:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -96,21 +224,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        wrist_1_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_2_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wrist_3_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -121,51 +234,124 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
-        base:
-          Value: true
-        base_link:
-          Value: true
+        All Enabled: false
         common_world:
+          Value: false
+        j2s7s300_end_effector_a:
+          Value: false
+        j2s7s300_end_effector_b:
           Value: true
-        ee_link:
-          Value: true
-        forearm_link:
-          Value: true
-        shoulder_link:
-          Value: true
-        tool0:
-          Value: true
-        upper_arm_link:
-          Value: true
+        j2s7s300_link_1_a:
+          Value: false
+        j2s7s300_link_1_b:
+          Value: false
+        j2s7s300_link_2_a:
+          Value: false
+        j2s7s300_link_2_b:
+          Value: false
+        j2s7s300_link_3_a:
+          Value: false
+        j2s7s300_link_3_b:
+          Value: false
+        j2s7s300_link_4_a:
+          Value: false
+        j2s7s300_link_4_b:
+          Value: false
+        j2s7s300_link_5_a:
+          Value: false
+        j2s7s300_link_5_b:
+          Value: false
+        j2s7s300_link_6_a:
+          Value: false
+        j2s7s300_link_6_b:
+          Value: false
+        j2s7s300_link_7_a:
+          Value: false
+        j2s7s300_link_7_b:
+          Value: false
+        j2s7s300_link_base_a:
+          Value: false
+        j2s7s300_link_base_b:
+          Value: false
+        j2s7s300_link_finger_1_a:
+          Value: false
+        j2s7s300_link_finger_1_b:
+          Value: false
+        j2s7s300_link_finger_2_a:
+          Value: false
+        j2s7s300_link_finger_2_b:
+          Value: false
+        j2s7s300_link_finger_3_a:
+          Value: false
+        j2s7s300_link_finger_3_b:
+          Value: false
+        j2s7s300_link_finger_tip_1_a:
+          Value: false
+        j2s7s300_link_finger_tip_1_b:
+          Value: false
+        j2s7s300_link_finger_tip_2_a:
+          Value: false
+        j2s7s300_link_finger_tip_2_b:
+          Value: false
+        j2s7s300_link_finger_tip_3_a:
+          Value: false
+        j2s7s300_link_finger_tip_3_b:
+          Value: false
+        root_a:
+          Value: false
+        root_b:
+          Value: false
         world:
-          Value: true
-        wrist_1_link:
-          Value: true
-        wrist_2_link:
-          Value: true
-        wrist_3_link:
-          Value: true
+          Value: false
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        common_world:
-          base_link:
-            base:
-              {}
-            shoulder_link:
-              upper_arm_link:
-                forearm_link:
-                  wrist_1_link:
-                    wrist_2_link:
-                      wrist_3_link:
-                        ee_link:
-                          {}
-                        tool0:
-                          {}
+        world:
+          common_world:
+            {}
+          root_a:
+            j2s7s300_link_base_a:
+              j2s7s300_link_1_a:
+                j2s7s300_link_2_a:
+                  j2s7s300_link_3_a:
+                    j2s7s300_link_4_a:
+                      j2s7s300_link_5_a:
+                        j2s7s300_link_6_a:
+                          j2s7s300_link_7_a:
+                            j2s7s300_end_effector_a:
+                              {}
+                            j2s7s300_link_finger_1_a:
+                              j2s7s300_link_finger_tip_1_a:
+                                {}
+                            j2s7s300_link_finger_2_a:
+                              j2s7s300_link_finger_tip_2_a:
+                                {}
+                            j2s7s300_link_finger_3_a:
+                              j2s7s300_link_finger_tip_3_a:
+                                {}
+          root_b:
+            j2s7s300_link_base_b:
+              j2s7s300_link_1_b:
+                j2s7s300_link_2_b:
+                  j2s7s300_link_3_b:
+                    j2s7s300_link_4_b:
+                      j2s7s300_link_5_b:
+                        j2s7s300_link_6_b:
+                          j2s7s300_link_7_b:
+                            j2s7s300_end_effector_b:
+                              {}
+                            j2s7s300_link_finger_1_b:
+                              j2s7s300_link_finger_tip_1_b:
+                                {}
+                            j2s7s300_link_finger_2_b:
+                              j2s7s300_link_finger_tip_2_b:
+                                {}
+                            j2s7s300_link_finger_3_b:
+                              j2s7s300_link_finger_tip_3_b:
+                                {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -193,33 +379,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.00203943
+      Distance: 1.75548637
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.267948747
+        Y: 0.554430366
+        Z: 0.468074977
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.520399034
+      Pitch: 0.350399256
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.82990456
+      Yaw: 3.6944313
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1056
+  Height: 975
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a0000037cfc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006100fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000037c000000d700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016c0000037cfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037c000000ad00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000073f00000058fc0100000002fb0000000800540069006d006501000000000000073f0000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000005cf0000037c00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000208000002fefc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007200fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000040000002fe0000010000fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016c0000037cfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037c000000e800fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000065200000058fc0100000002fb0000000800540069006d00650100000000000006520000057800fffffffb0000000800540069006d006501000000000000045000000000000000000000043e000002fe00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -228,6 +414,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1855
-  X: 65
-  Y: 24
+  Width: 1618
+  X: 173
+  Y: 111
