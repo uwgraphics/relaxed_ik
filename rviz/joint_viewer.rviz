@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
       Splitter Ratio: 0.592391312
@@ -231,129 +230,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        common_world:
-          Value: false
-        j2s7s300_end_effector_a:
-          Value: false
-        j2s7s300_end_effector_b:
-          Value: true
-        j2s7s300_link_1_a:
-          Value: false
-        j2s7s300_link_1_b:
-          Value: false
-        j2s7s300_link_2_a:
-          Value: false
-        j2s7s300_link_2_b:
-          Value: false
-        j2s7s300_link_3_a:
-          Value: false
-        j2s7s300_link_3_b:
-          Value: false
-        j2s7s300_link_4_a:
-          Value: false
-        j2s7s300_link_4_b:
-          Value: false
-        j2s7s300_link_5_a:
-          Value: false
-        j2s7s300_link_5_b:
-          Value: false
-        j2s7s300_link_6_a:
-          Value: false
-        j2s7s300_link_6_b:
-          Value: false
-        j2s7s300_link_7_a:
-          Value: false
-        j2s7s300_link_7_b:
-          Value: false
-        j2s7s300_link_base_a:
-          Value: false
-        j2s7s300_link_base_b:
-          Value: false
-        j2s7s300_link_finger_1_a:
-          Value: false
-        j2s7s300_link_finger_1_b:
-          Value: false
-        j2s7s300_link_finger_2_a:
-          Value: false
-        j2s7s300_link_finger_2_b:
-          Value: false
-        j2s7s300_link_finger_3_a:
-          Value: false
-        j2s7s300_link_finger_3_b:
-          Value: false
-        j2s7s300_link_finger_tip_1_a:
-          Value: false
-        j2s7s300_link_finger_tip_1_b:
-          Value: false
-        j2s7s300_link_finger_tip_2_a:
-          Value: false
-        j2s7s300_link_finger_tip_2_b:
-          Value: false
-        j2s7s300_link_finger_tip_3_a:
-          Value: false
-        j2s7s300_link_finger_tip_3_b:
-          Value: false
-        root_a:
-          Value: false
-        root_b:
-          Value: false
-        world:
-          Value: false
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        world:
-          common_world:
-            {}
-          root_a:
-            j2s7s300_link_base_a:
-              j2s7s300_link_1_a:
-                j2s7s300_link_2_a:
-                  j2s7s300_link_3_a:
-                    j2s7s300_link_4_a:
-                      j2s7s300_link_5_a:
-                        j2s7s300_link_6_a:
-                          j2s7s300_link_7_a:
-                            j2s7s300_end_effector_a:
-                              {}
-                            j2s7s300_link_finger_1_a:
-                              j2s7s300_link_finger_tip_1_a:
-                                {}
-                            j2s7s300_link_finger_2_a:
-                              j2s7s300_link_finger_tip_2_a:
-                                {}
-                            j2s7s300_link_finger_3_a:
-                              j2s7s300_link_finger_tip_3_a:
-                                {}
-          root_b:
-            j2s7s300_link_base_b:
-              j2s7s300_link_1_b:
-                j2s7s300_link_2_b:
-                  j2s7s300_link_3_b:
-                    j2s7s300_link_4_b:
-                      j2s7s300_link_5_b:
-                        j2s7s300_link_6_b:
-                          j2s7s300_link_7_b:
-                            j2s7s300_end_effector_b:
-                              {}
-                            j2s7s300_link_finger_1_b:
-                              j2s7s300_link_finger_tip_1_b:
-                                {}
-                            j2s7s300_link_finger_2_b:
-                              j2s7s300_link_finger_tip_2_b:
-                                {}
-                            j2s7s300_link_finger_3_b:
-                              j2s7s300_link_finger_tip_3_b:
-                                {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -379,25 +268,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.75548637
+      Distance: 1.83532405
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.267948747
-        Y: 0.554430366
-        Z: 0.468074977
+        X: 0.246718213
+        Y: 0.530422807
+        Z: 0.708473384
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.350399256
+      Pitch: 0.435399562
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.6944313
+      Yaw: 0.328947604
     Saved: ~
 Window Geometry:
   Displays:

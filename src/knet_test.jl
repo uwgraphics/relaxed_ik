@@ -1,6 +1,7 @@
 using Knet
 using ForwardDiff
 using Calculus
+using Random
 
 ENV["PYTHON"] = "/usr/bin/python"
 
@@ -47,10 +48,10 @@ function predict(w,x)
     return w[end-1]*x .+ w[end]
 end
 
-# loss(w,x,y) = Knet.mean(abs2, y - predict(w,x) )
-# loss2(w,x,y) = Knet.mean(abs2, y - predict(w,x))[1]
-loss(w,x,y) = (y[1] - predict(w,x)[1])^2
-loss2(w,x,y) = ((y[1] - predict(w,x)[1])^2)[1]
+loss(w,x,y) = Knet.mean(abs, y - predict(w,x) )
+loss2(w,x,y) = Knet.mean(abs, y - predict(w,x))[1]
+# loss(w,x,y) = (y[1] - predict(w,x)[1])^2
+# loss2(w,x,y) = ((y[1] - predict(w,x)[1])^2)[1]
 lossgradient = grad(loss)
 
 function total_loss(w, all_x, all_y)
@@ -84,6 +85,42 @@ function get_rand_state_with_bounds(bounds)
     return sample
 end
 
+function shuffle_ins_and_outs(ins, outs)
+    new_ins = []
+    new_outs = []
+
+    idxs = 1:length(ins)
+    shuffled_idxs = shuffle(idxs)
+
+    for i=1:length(shuffled_idxs)
+        push!(new_ins, ins[shuffled_idxs[i]])
+        push!(new_outs, outs[shuffled_idxs[i]])
+    end
+
+    return new_ins, new_outs
+end
+
+function get_batched_data(ins, outs, batch_size)
+    batch = Knet.minibatch(ins, outs, batch_size)
+    batches = []
+
+    for (index, value) in enumerate(batch)
+        push!(batches, value)
+    end
+
+    batched_data = []
+    for batch_idx = 1:length(batches)
+        push!(batched_data, [])
+        for i = 1:length(batches[batch_idx][1])
+            in = batches[batch_idx][1][i]
+            out = batches[batch_idx][2][i]
+            push!( batched_data[batch_idx], (in, out) )
+        end
+    end
+
+    return batched_data
+end
+
 path_to_src = Base.source_dir()
 loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
 loaded_robot = readline(loaded_robot_file)
@@ -108,7 +145,7 @@ state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_va
 
 
 # Create data ##################################################################
-num_samples = 1000
+num_samples = 10000
 ins = []
 outs = []
 test_ins = []
@@ -125,6 +162,7 @@ for i=1:num_samples
 
     println("sample $i of $num_samples ::: state: $in, y: $out")
 end
+
 
 # add manually specified training examples
 fp = open(path_to_src * "/RelaxedIK/Config/info_files/" * loaded_robot)
@@ -155,7 +193,7 @@ if ! (training_states == nothing)
 end
 
 
-for i=1:500
+for i=1:50
     # in = rand(Uniform(-6,6), num_dof)
     in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
     # out = [min(c.get_score(in, cv), 2.0)]
@@ -169,7 +207,7 @@ end
 
 
 # Make batches #################################################################
-batch = Knet.minibatch(ins, outs, 200)
+batch = Knet.minibatch(ins, outs, 100)
 batches = []
 
 for (index, value) in enumerate(batch)
@@ -205,8 +243,8 @@ end
 
 
 # Make neural net ##############################################################
-net_width = length(ins[1]) + 8
-# net_width = 200
+# net_width = length(ins[1]) + 8
+net_width = length(ins[1])
 rand_val = 1.0
 
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
@@ -224,33 +262,30 @@ o = optimizers(w, Knet.Adam)
 tl = total_loss2(w, test_ins, test_outs)
 tl_train = total_loss( w, ins, outs )
 println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
-num_epochs = 1
+num_epochs = 5
+batch_size = 100
 best_w = []
 best_score = 10000000000000000.0
 for epoch=1:num_epochs
+    # shuffle data here...get new batched data
+    new_ins, new_outs = shuffle_ins_and_outs(ins, outs)
+    batched_data = get_batched_data(new_ins, new_outs, batch_size)
+
     for b = 1:length(batched_data)
         num_batches = length(batched_data)
         train(w, batched_data[b], o)
         tl = total_loss2(w, test_ins, test_outs)
-        tl_train = total_loss( w, ins, outs )
-        # print("*")
+        tl_train = total_loss( w, new_ins[1:50], new_outs[1:50] )
+        global best_w
+        global best_score
+        if tl + tl_train < best_score
+            println("improved best score")
+            best_w = copy(w)
+            best_score = tl + tl_train
+        end
         num_batches = length(batched_data)
         println("epoch $epoch of $num_epochs, $b of $num_batches ::: train loss: $tl_train, test loss: $tl")
     end
-    # train(w, data, o)
-    tl = total_loss2(w, test_ins, test_outs)
-    tl_train = total_loss( w, ins, outs )
-    global best_w
-    global best_score
-    if tl + tl_train < best_score
-        println("improved best score")
-        best_w = copy(w)
-        best_score = tl + tl_train
-    end
-    println("epoch $epoch of $num_epochs ::: train loss: $tl_train, test loss: $tl")
-    # tl = total_loss2(w, test_ins, test_outs)
-    # tl_train = total_loss( w, ins[1:50], outs[1:50] )
-    # println("epoch $epoch of $num_epochs ::: train loss: $tl_train, test loss: $tl")
 end
 w = copy(best_w)
 ################################################################################

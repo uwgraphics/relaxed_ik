@@ -6,6 +6,8 @@ using StaticArrays
 using Rotations
 include("../Utils_Julia/transformations.jl")
 include("../Utils_Julia/geometry_utils.jl")
+include("../Utils_Julia/nn_utils.jl")
+
 
 function groove_loss(x_val, t, d, c, f, g)
     return (-2.718281828459^((-(x_val - t)^d) / (2.0 * c^2.0)) ) + f * (x_val - t)^g
@@ -74,122 +76,11 @@ end
 
 
 function collision_nn_obj(x, vars)
-    return groove_loss(  vars.collision_nn(x), 0.0, 2.0, 0.2, 0.3, 2.0 )
+    state_to_joint_pts_inplace(x, vars)
+    # state = state_to_joint_pts_withreturn(x, vars)
+    return groove_loss(  vars.nn_model( vars.joint_pts ) , 0.0, 2.0, 0.5, 0.3, 2.0 )
 end
 
-function lookat_obj_1(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[2].out_frames[end]
-    camera_pt = vars.robot.arms[2].out_pts[end]
-    manipulation_pt = vars.robot.arms[1].out_pts[end]
-    forward = eeMat[:,3]
-
-    x_val = pt_dis_to_line_seg(manipulation_pt, camera_pt, camera_pt - 100.0*forward)
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-function lookat_obj_2(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[1].out_frames[end]
-    camera_pt = vars.robot.arms[1].out_pts[end]
-    manipulation_pt = vars.robot.arms[2].out_pts[end]
-    forward = eeMat[:,3]
-
-    x_val = pt_dis_to_line_seg(manipulation_pt, camera_pt, camera_pt - 100.0*forward)
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-function camera_dis_obj_1(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    camera_pt = vars.robot.arms[2].out_pts[end]
-    manipulation_pt = vars.robot.arms[1].out_pts[end]
-
-    goal_dis = 0.6
-    x_val = (LinearAlgebra.norm(camera_pt - manipulation_pt) - goal_dis)^2
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-
-function camera_dis_obj_2(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    camera_pt = vars.robot.arms[1].out_pts[end]
-    manipulation_pt = vars.robot.arms[2].out_pts[end]
-
-    goal_dis = 0.6
-    x_val = (LinearAlgebra.norm(camera_pt - manipulation_pt) - goal_dis)^2
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-function camera_upright_obj_1(x, vars)
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[2].out_frames[end]
-    side = eeMat[:,2]
-
-    x_val = LinearAlgebra.dot(side, [0.,0.,1.])^2
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-function camera_upright_obj_2(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[1].out_frames[end]
-    side = eeMat[:,2]
-
-    x_val = LinearAlgebra.dot(side, [0.,0.,1.])^2
-    return groove_loss(x_val, 0.,2.,.1,10.,2.)
-end
-
-
-function camera_occlusion_avoid_obj_1(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[2].out_frames[end]
-    camera_pt = vars.robot.arms[2].out_pts[end]
-    forward = eeMat[:,3]
-
-    x_val = 0.0
-    out_pts = vars.robot.arms[1].out_pts
-    num_pts = length(out_pts)
-    for i = 1:num_pts-1
-        dis = dis_between_line_segments(camera_pt, camera_pt - 100.0*forward, out_pts[i], out_pts[i+1])
-        c = 0.07
-        x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
-    end
-
-    # x_val = 0.0
-    return groove_loss(x_val, 0.,2.,.35, .4,2.)
-end
-
-function camera_occlusion_avoid_obj_2(x, vars)
-    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
-    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
-
-    eeMat = vars.robot.arms[1].out_frames[end]
-    camera_pt = vars.robot.arms[1].out_pts[end]
-    forward = eeMat[:,3]
-
-    x_val = 0.0
-    out_pts = vars.robot.arms[2].out_pts
-    num_pts = length(out_pts)
-    for i = 1:num_pts-1
-        dis = dis_between_line_segments(camera_pt, camera_pt - 100.0*forward, out_pts[i], out_pts[i+1])
-        c = 0.06
-        x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
-    end
-
-    # x_val = 0.0
-    return groove_loss(x_val, 0.,2.,.35, .4,2.)
-end
 
 
 function bimanual_line_seg_collision_avoid_obj(x, vars)
@@ -201,12 +92,29 @@ function bimanual_line_seg_collision_avoid_obj(x, vars)
 
     x_val = 0.0
     for i = 1:length(out_pts1)-1
-        for j = 1:length(out_pts2)-1
-            dis = dis_between_line_segments(out_pts1[i], out_pts1[i+1], out_pts2[i], out_pts2[i+1])
-            c = 0.1
-            x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
-        end
+        # x_val += (-2.718281828459^((-(out_pts1[i][3])^2) / (2.0 * c^2.0)) )
+        # x_val += (-2.718281828459^((-(out_pts1[i+1][3])^2) / (2.0 * c^2.0)) )
+        # for j = 1:length(out_pts2)-1
+        c = 0.12
+        dis1 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[1], out_pts2[2] )
+        dis2 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[2], out_pts2[3] )
+        dis3 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[3], out_pts2[4] )
+        dis4 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[4], out_pts2[5] )
+        dis5 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[5], out_pts2[6] )
+        dis6 = dis_between_line_segments( out_pts1[i], out_pts1[i+1], out_pts2[6], out_pts2[7] )
+
+        x_val += (2.718281828459^((-(dis1)^2) / (2.0 * c^2.0)) )
+        x_val += (2.718281828459^((-(dis2)^2) / (2.0 * c^2.0)) )
+        x_val += (2.718281828459^((-(dis3)^2) / (2.0 * c^2.0)) )
+        x_val += (2.718281828459^((-(dis4)^2) / (2.0 * c^2.0)) )
+        x_val += (2.718281828459^((-(dis5)^2) / (2.0 * c^2.0)) )
+        x_val += (2.718281828459^((-(dis6)^2) / (2.0 * c^2.0)) )
+
+            # the next two are just to avoid the plane on the ground
+            # x_val += (-2.718281828459^((-(out_pts2[j][3])^2) / (2.0 * c^2.0)) )
+            # x_val += (-2.718281828459^((-(out_pts2[j+1][3])^2) / (2.0 * c^2.0)) )
+        # end
     end
 
-    return groove_loss(x_val, 0.,2.,.35, .4,2.)
+    return groove_loss(x_val, 0.,2.,.2, .4, 2.)
 end

@@ -1,6 +1,7 @@
 include("../GROOVE_Julia/vars.jl")
 include("../Spacetime_Julia/arm.jl")
 include("../Spacetime_Julia/robot.jl")
+include("../Utils_Julia/nn_utils.jl")
 
 using YAML
 using Rotations
@@ -19,33 +20,12 @@ mutable struct RelaxedIK_vars
     goal_quats_relative
     init_ee_positions
     init_ee_quats
-    collision_nn
+    joint_pts
+    nn_model
+    w
+    additional_vars
 end
 
-function state_to_joint_pts(x, vars)
-    joint_pts = []
-    for i=1:vars.robot.num_chains
-        vars.robot.arms[i].getFrames(x[vars.robot.subchain_indices[i]])
-    end
-
-    for j=1:vars.robot.num_chains
-        out_pts = vars.robot.arms[j].out_pts
-        for k = 1:length(out_pts)
-            for l=1:3
-                push!(joint_pts, out_pts[k][l])
-            end
-        end
-    end
-    return joint_pts
-end
-
-function predict(w,x)
-    # x = Knet.mat(x)
-    for i=1:2:length(w)-2
-        x = Knet.relu.(w[i]*x .+ w[i+1])
-    end
-    return w[end-1]*x .+ w[end]
-end
 
 function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false)
 
@@ -78,16 +58,18 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         collision_nn_file_name = y["collision_nn_file"]
         w = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:w]
         model = (x) -> predict(w, x)[1]
-        function model_nn(x, model, state_to_joint_pts_closure)
-            return model(state_to_joint_pts_closure(x))
-        end
-        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0)
+        #function model_nn(x, model, state_to_joint_pts_closure)
+        #    return model(state_to_joint_pts_closure(x))
+        #end
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, model, w, 0)
+        initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
+        rv.joint_pts = initial_joint_points
 
-        state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, rv)
-        collision_nn = (x)-> model_nn(x, model, state_to_joint_pts_closure)
-        rv.collision_nn = collision_nn
+        # state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, rv)
+        # collision_nn = (x)-> model_nn(x, model, state_to_joint_pts_closure)
+        # rv.collision_nn = collision_nn
     else
-        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, nothing)
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0)
     end
 
     populate_vars!(vars, rv)
