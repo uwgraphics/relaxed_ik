@@ -8,7 +8,6 @@ include("../Utils_Julia/transformations.jl")
 include("../Utils_Julia/geometry_utils.jl")
 include("../Utils_Julia/nn_utils.jl")
 
-
 function groove_loss(x_val, t, d, c, f, g)
     return (-2.718281828459^((-(x_val - t)^d) / (2.0 * c^2.0)) ) + f * (x_val - t)^g
 end

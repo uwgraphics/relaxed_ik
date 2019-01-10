@@ -121,9 +121,9 @@ end
 
 println( Array{Number, 1}() )
 
-println(relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14)))
-@btime relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14))
-@btime relaxedIK.relaxedIK_vars.vars.objective_closures[end](rand(14))
+println(relaxedIK.relaxedIK_vars.vars.objective_closures[end-1](rand(14)))
+# @btime relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14))
+# @btime relaxedIK.relaxedIK_vars.vars.objective_closures[end](rand(14))
 
 # @btime relaxedIK.relaxedIK_vars.vars.objective_closures[end](rand(14))
 # @btime g( rand(14) )
@@ -135,7 +135,7 @@ println(relaxedIK.relaxedIK_vars.vars.∇s[end](rand(14)))
 # @btime state_to_joint_pts( rand(14) , relaxedIK.relaxedIK_vars)
 # jp = relaxedIK.relaxedIK_vars.joint_pts
 # @btime relaxedIK.relaxedIK_vars.nn_model( jp )
-@btime relaxedIK.relaxedIK_vars.nn_model( relaxedIK.relaxedIK_vars.joint_pts )
+# @btime relaxedIK.relaxedIK_vars.nn_model( relaxedIK.relaxedIK_vars.joint_pts )
 # @btime relaxedIK.relaxedIK_vars.vars.objective_closures[end](rand(14))
 
 # println( state_to_joint_pts_g(rand(14) , relaxedIK.relaxedIK_vars) )

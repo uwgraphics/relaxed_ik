@@ -1,4 +1,4 @@
-urdf_file_name: "jaco7_and_ur5.urdf"
+urdf_file_name: "jaco7.urdf"
 fixed_frame: "root"
 joint_names: [ [ "j2s7s300_joint_1", "j2s7s300_joint_2", "j2s7s300_joint_3", "j2s7s300_joint_4", "j2s7s300_joint_5", "j2s7s300_joint_6", "j2s7s300_joint_7" ] ]
 joint_ordering: [ "j2s7s300_joint_1", "j2s7s300_joint_2", "j2s7s300_joint_3", "j2s7s300_joint_4", "j2s7s300_joint_5", "j2s7s300_joint_6", "j2s7s300_joint_7" ]

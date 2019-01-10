@@ -243,6 +243,14 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /visualization_marker
+      Name: Marker
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -304,5 +312,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1618
-  X: 173
-  Y: 111
+  X: 190
+  Y: 106

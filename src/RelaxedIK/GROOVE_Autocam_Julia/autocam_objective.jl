@@ -134,14 +134,13 @@ function avoid_environment_occlusions_obj_1(x, vars)
     back = eeMat[:,3]
 
     search_direction = vars.additional_vars.search_direction
-    println(search_direction)
     search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right
 
-    Δ = 0.1
-    goal_position = camera_pt + Δ*search_direction_in_ee_frame
+    Δ = 2.
+    goal_position = vars.additional_vars.previous_camera_location + Δ*search_direction_in_ee_frame
 
-    x_val = LinearAlgebra.norm(goal_position - vars.additional_vars.previous_camera_location)
-    return groove_loss(x_val, 0.,2.,.22, .4,2.)
+    x_val = LinearAlgebra.norm(goal_position - camera_pt)
+    return groove_loss(x_val, 0.,2.,.1, 3.0,2.)
 end
 
 function avoid_environment_occlusions_obj_2(x, vars)
@@ -157,9 +156,19 @@ function avoid_environment_occlusions_obj_2(x, vars)
     search_direction = vars.additional_vars.search_direction
     search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right
 
-    Δ = 0.01
+    Δ = 1.0
     goal_position = camera_pt + Δ*search_direction_in_ee_frame
 
     x_val = LinearAlgebra.norm(goal_position - camera_pt)
     return groove_loss(x_val, 0.,2.,.22, .4,2.)
+end
+
+
+function gravitate_to_natural_position_obj1(x, vars)
+    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
+
+    camera_pt = vars.robot.arms[2].out_pts[end]
+    natural_point = [0.0, 0.1, 0.9]
+    x_val = LinearAlgebra.norm(natural_point - camera_pt)
+    return groove_loss(x_val, 0.,2.,.5, .1,2.)
 end
