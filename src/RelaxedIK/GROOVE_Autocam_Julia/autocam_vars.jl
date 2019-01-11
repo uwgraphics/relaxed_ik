@@ -10,5 +10,5 @@ mutable struct Autocam_vars
 end
 
 function Autocam_vars()
-    return Autocam_vars([1.,0.], 0., [0.,.1,.5], [0.,0.,0.], 0., 0.6, false)
+    return Autocam_vars([1.,0.,0.], 0., [0.,.1,.5], [0.,0.,0.], 0., 0.6, false)
 end

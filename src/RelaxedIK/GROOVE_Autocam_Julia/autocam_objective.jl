@@ -128,18 +128,6 @@ function avoid_environment_occlusions_obj_1(x, vars)
 
     # eeMat = vars.robot.arms[2].out_frames[end]
     camera_pt = vars.robot.arms[2].out_pts[end]
-    # for jaco7...
-    #=
-    up = eeMat[:,1]
-    right = -eeMat[:,2]
-    back = eeMat[:,3]
-
-    search_direction = vars.additional_vars.search_direction
-    search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right
-
-    Δ = 0.5
-    goal_position = vars.additional_vars.previous_camera_location + Δ*search_direction_in_ee_frame
-    =#
     goal_position = vars.additional_vars.visual_target_position
 
     x_val = LinearAlgebra.norm(goal_position - camera_pt)

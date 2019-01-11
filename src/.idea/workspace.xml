@@ -3,29 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autocam_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/autocam_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flux_test.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/knet_test.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mt_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/multithreading.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing.jl" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relaxedIK_solution_transfer.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/relaxedIK_wrapper.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/robot_os.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/robot_os2.jl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scipy_mt_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scipy_mt_test2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/snoop.jl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboard_camera_buttons.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_camera_buttons.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+            <state relative-caret-position="1334">
+              <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
               <folding>
                 <element signature="e#19#34#0" expanded="true" />
               </folding>
@@ -793,8 +774,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        <state relative-caret-position="1334">
+          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
           <folding>
             <element signature="e#19#34#0" expanded="true" />
           </folding>

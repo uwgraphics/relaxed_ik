@@ -12,7 +12,7 @@ function get_camera_goal_location(x, vars, camera_arm_idx; Δ=0.5)
     back = eeMat[:,3]
 
     search_direction = vars.additional_vars.search_direction
-    search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right
+    search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right - search_direction[3]*back
 
     goal_position = vars.additional_vars.previous_camera_location + Δ*search_direction_in_ee_frame
     return goal_position

@@ -48,6 +48,12 @@ function camera_motion_magnitude_cb(data::Float32Msg)
     camera_motion_magnitude = data.data
 end
 
+goal_dis = 0.6
+function goal_dis_cb(data::Float32Msg)
+    global goal_dis
+    goal_dis = data.data
+end
+
 # function loop()
 path_to_src = Base.source_dir()
 loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
@@ -74,6 +80,7 @@ Subscriber{Float64MultiArray}("/autocam/search_direction", search_direction_cb, 
 Subscriber{BoolMsg}("/autocam/too_close", too_close_cb, queue_size=3)
 Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=3)
 Subscriber{Float32Msg}("/autocam/motion_magnitude", camera_motion_magnitude_cb, queue_size=3)
+Subscriber{Float32Msg}("/autocam/goal_dis", goal_dis_cb, queue_size=3)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 marker_pub = Publisher("/visualization_marker", Marker, queue_size = 3)
 
@@ -93,7 +100,8 @@ for i = 1:num_chains
 end
 
 too_close = false
-search_direction = [1.,0.]
+search_direction = [1.,0.,0.]
+goal_dis = 0.6
 relaxedIK.relaxedIK_vars.robot.getFrames(relaxedIK.relaxedIK_vars.vars.init_state)
 relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
 
@@ -106,8 +114,10 @@ while true
         quit = false
         return
     end
+
     relaxedIK.relaxedIK_vars.additional_vars.search_direction = search_direction
     relaxedIK.relaxedIK_vars.additional_vars.too_close = too_close
+    relaxedIK.relaxedIK_vars.additional_vars.distance_to_target = goal_dis
 
     pose_goals = eepg.ee_poses
 
