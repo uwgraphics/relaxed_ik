@@ -1,4 +1,8 @@
-#!/usr/bin/env julia
+using Knet
+using ForwardDiff
+using Calculus
+using Random
+using RobotOS
 
 ENV["PYTHON"] = "/usr/bin/python"
 
@@ -16,8 +20,14 @@ using ReverseDiff
 import Distributions: Uniform
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/Utils_Julia/transformations.jl")
-
 @pyimport RelaxedIK.Utils.collision_transfer as c
+
+@rosimport std_msgs.msg: Bool
+
+rostypegen()
+using .std_msgs.msg
+
+
 
 function state_to_joint_pts(x, vars)
     # return x
@@ -34,16 +44,45 @@ function state_to_joint_pts(x, vars)
             end
         end
     end
+
     return joint_pts
 end
 
-function total_loss(ins, outs, m)
-    total_error = 0.0
-    for i=1:length(ins)
-        total_error += Flux.mse(m(ins[i]), outs[i])
-        # total_error += abs(Flux.Tracker.data(m(ins[i])) - outs[i])
+function predict(w,x)
+    # x = Knet.mat(x)
+    for i=1:2:length(w)-2
+        x = Knet.relu.(w[i]*x .+ w[i+1])
     end
-    return total_error
+    return w[end-1]*x .+ w[end]
+end
+
+loss(w,x,y) = Knet.mean(abs, y - predict(w,x) )
+loss2(w,x,y) = Knet.mean(abs, y - predict(w,x))[1]
+# loss(w,x,y) = (y[1] - predict(w,x)[1])^2
+# loss2(w,x,y) = ((y[1] - predict(w,x)[1])^2)[1]
+lossgradient = grad(loss)
+
+function total_loss(w, all_x, all_y)
+    sum = 0.0
+    for i = 1:length(all_x)
+        sum += loss(w, all_x[i], all_y[i])
+    end
+    return sum
+end
+
+function total_loss2(w, all_x, all_y)
+    sum = 0.0
+    for i = 1:length(all_x)
+        sum += loss2(w, all_x[i], all_y[i])
+    end
+    return sum
+end
+
+function train(model, data, optim)
+    for (x,y) in data
+        grads = lossgradient(model,x,y)
+        Knet.update!(model, grads, optim)
+    end
 end
 
 function get_rand_state_with_bounds(bounds)
@@ -54,122 +93,282 @@ function get_rand_state_with_bounds(bounds)
     return sample
 end
 
-function run_preprocessing(num_samples=10000)
+function shuffle_ins_and_outs(ins, outs)
+    new_ins = []
+    new_outs = []
 
-    path_to_src = Base.source_dir()
-    loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
-    loaded_robot = readline(loaded_robot_file)
+    idxs = 1:length(ins)
+    shuffled_idxs = shuffle(idxs)
 
-    println("loaded robot: $loaded_robot")
+    for i=1:length(shuffled_idxs)
+        push!(new_ins, ins[shuffled_idxs[i]])
+        push!(new_outs, outs[shuffled_idxs[i]])
+    end
 
-    relaxedIK = get_standard(path_to_src, loaded_robot; preconfigured=true)
-    cv = c.CollisionVars(path_to_src)
+    return new_ins, new_outs
+end
 
-    num_dof = relaxedIK.relaxedIK_vars.robot.num_dof
+function get_batched_data(ins, outs, batch_size)
+    batch = Knet.minibatch(ins, outs, batch_size)
+    batches = []
 
-    # println(num_dof)
+    for (index, value) in enumerate(batch)
+        push!(batches, value)
+    end
 
-    state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_vars)
+    batched_data = []
+    for batch_idx = 1:length(batches)
+        push!(batched_data, [])
+        for i = 1:length(batches[batch_idx][1])
+            in = batches[batch_idx][1][i]
+            out = batches[batch_idx][2][i]
+            push!( batched_data[batch_idx], (in, out) )
+        end
+    end
 
-    ins = []
-    outs = []
+    return batched_data
+end
 
-    test_ins = []
-    test_outs = []
-    data = []
-    test_data = []
+quit = false
+function quit_cb(data::BoolMsg)
+    global quit
+    quit = data.data
+end
 
-    # make samples
-    # last_state = relaxedIK.relaxedIK_vars.vars.init_state
+path_to_src = Base.source_dir()
+loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
+loaded_robot = readline(loaded_robot_file)
+
+println("loaded robot: $loaded_robot")
+
+relaxedIK = get_standard(path_to_src, loaded_robot; preconfigured=true)
+cv = c.CollisionVars(path_to_src)
+
+# init_node("preprocessing")
+
+Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=3)
+
+sleep(0.3)
+
+num_dof = relaxedIK.relaxedIK_vars.robot.num_dof
+
+state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_vars)
+
+##############################################################################################################################################################
+##############################################################################################################################################################
+##############################################################################################################################################################
+##############################################################################################################################################################
+##############################################################################################################################################################
+##############################################################################################################################################################
+##############################################################################################################################################################
+
+
+# Create data ##################################################################
+num_samples = 30000
+ins = []
+outs = []
+test_ins = []
+test_outs = []
+
+for i=1:num_samples
+    # in = rand(Uniform(-6,6), num_dof)
+    in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
+    # out = [min(c.get_score(in, cv), 2.0)]
+    out = [c.get_score(in, cv)]
+
+    push!(ins, state_to_joint_pts_closure(in))
+    push!(outs, out)
+
+    global quit
+    if quit == true
+        quit = false
+        break
+    end
+
+    println("sample $i of $num_samples ::: state: $in, y: $out")
+end
+
+
+# add manually specified training examples
+fp = open(path_to_src * "/RelaxedIK/Config/info_files/" * loaded_robot)
+y = YAML.load(fp)
+close(fp)
+
+collision_file_name = y["collision_file_name"]
+
+fp = open(path_to_src * "/RelaxedIK/Config/collision_files/" * collision_file_name)
+y = YAML.load(fp)
+close(fp)
+
+training_states = y["training_states"]
+if ! (training_states == nothing)
+    num_samples = length(training_states)
     for i=1:num_samples
-        # vel = 0.02 * rand(num_dof)
-        #in = last_state + vel
         # in = rand(Uniform(-6,6), num_dof)
-        in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
-        # last_state = in
+        # in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
+        in = training_states[i]
+        # out = [min(c.get_score(in, cv), 2.0)]
         out = [c.get_score(in, cv)]
 
         push!(ins, state_to_joint_pts_closure(in))
-        # push!(ins, in)
         push!(outs, out)
-        push!(data, (state_to_joint_pts_closure(in), out) )
-        # println(out)
 
-        println("sample $i of $num_samples")
+        println("manual sample $i of $num_samples ::: state: $in, y: $out")
     end
-
-
-    for i=1:100
-        # in = rand(Uniform(-6,6), num_dof)
-        in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
-        out = c.get_score(in, cv)
-
-        push!(test_ins, state_to_joint_pts_closure(in))
-        push!(test_outs, out)
-        push!(test_data, (state_to_joint_pts_closure(in), out) )
-    end
-
-    data = Flux.zip(ins, outs)
-
-    nn_val = 40
-    m = Chain( Dense(length( state_to_joint_pts_closure( rand(num_dof) ) ), nn_val, Flux.leakyrelu),
-        Dropout(0.6),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dropout(0.6),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dropout(0.6),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dropout(0.6),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dense(nn_val, nn_val, Flux.leakyrelu),
-        Dense(nn_val, 1)
-    )
-
-    p = Flux.params(m)
-    opt = Flux.Optimise.ADAM(p)
-
-    loss(x, y) = Flux.mse(m(x), y)
-    # loss(x,y) = m(x) - y
-
-    # evalcb = () -> @show(loss(ins[1], outs[1]))
-    # evalcb = () -> @show(total_loss(test_ins, test_outs, m))
-
-    function evalcb(ins, outs, test_ins, test_outs, m)
-        train_loss = total_loss(ins, outs, m)
-        test_loss = total_loss(test_ins, test_outs, m)
-        println("train set loss: $train_loss, test set loss: $test_loss")
-    end
-
-    evalcb_closure = () -> evalcb(ins[1:100], outs[1:100], test_ins, test_outs, m)
-
-    loss_before = total_loss(ins, outs, m)
-    # epochs = 11
-    # for i = 1:epochs
-    # println("epoch $i of $epochs")
-    @epochs 30 Flux.train!( loss, data, opt, cb = Flux.throttle(evalcb_closure, 2.0))
-    # end
-    loss_after = total_loss(ins, outs, m)
-    println("total loss before: $loss_before, total loss after: $loss_after")
-
-    for i=1:length(test_ins)
-        input = test_ins[i]
-        # println(input)
-        modeled_out =   m( input )
-        # modeled_out = Flux.Tracker.data( m(state_to_joint_pts_closure(test_ins[i])) )[1]
-        y_out = test_outs[i]
-
-        random_output = m(  rand( length(  state_to_joint_pts_closure(test_ins[i]) ) ) )
-        println("modeled_out: $modeled_out, y_out: $y_out")
-    end
-
-    # save it
-    f = open(path_to_src * "/RelaxedIK/Config/info_files/" * loaded_robot)
-    y = YAML.load(f)
-
-    collision_nn_file_name = y["collision_nn_file"]
-
-    # @save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name m
 end
 
-run_preprocessing()
+
+for i=1:50
+    # in = rand(Uniform(-6,6), num_dof)
+    in = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
+    # out = [min(c.get_score(in, cv), 2.0)]
+    out = [c.get_score(in, cv)]
+
+    push!(test_ins, state_to_joint_pts_closure(in))
+    push!(test_outs, out)
+end
+
+################################################################################
+
+
+# Make batches #################################################################
+batch = Knet.minibatch(ins, outs, 100)
+batches = []
+
+for (index, value) in enumerate(batch)
+    push!(batches, value)
+end
+
+################################################################################
+
+
+# Finalize data ################################################################
+batched_data = []
+data = []
+test_data = []
+
+for batch_idx = 1:length(batches)
+    push!(batched_data, [])
+    for i = 1:length(batches[batch_idx][1])
+        in = batches[batch_idx][1][i]
+        out = batches[batch_idx][2][i]
+        push!( batched_data[batch_idx], (in, out) )
+    end
+end
+
+for i = 1:length(ins)
+    push!( data, (ins[i], outs[i]) )
+end
+
+for i = 1:length(test_ins)
+    push!( test_data, (test_ins[i], test_outs[i]) )
+end
+
+################################################################################
+
+
+# Make neural net ##############################################################
+# net_width = length(ins[1]) + 8
+# net_width = length(ins[1])
+net_width = 10
+rand_val = 1.0
+
+w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
+      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+      rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
+
+################################################################################
+
+
+# Optimize #####################################################################
+o = optimizers(w, Knet.Adam)
+tl = total_loss2(w, test_ins, test_outs)
+tl_train = total_loss( w, ins, outs )
+println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
+num_epochs = 5
+batch_size = 100
+best_w = []
+best_score = 10000000000000000.0
+improve_idx = 1
+
+for epoch=1:num_epochs
+    # shuffle data here...get new batched data
+    new_ins, new_outs = shuffle_ins_and_outs(ins, outs)
+    batched_data = get_batched_data(new_ins, new_outs, batch_size)
+
+    global quit
+    if quit == true
+        global w
+        w = copy(best_w)
+        println("quitting training.")
+        break
+    end
+
+    for b = 1:length(batched_data)
+        num_batches = length(batched_data)
+        global w
+        train(w, batched_data[b], o)
+        tl = total_loss2(w, test_ins, test_outs)
+        tl_train = total_loss( w, new_ins[1:50], new_outs[1:50] )
+        global best_w
+        global best_score
+        if tl + tl_train < best_score
+            println("improved best score")
+            best_w = copy(w)
+            best_score = tl + tl_train
+            global improve_idx
+            improve_idx = 1
+        else
+            global improve_idx
+            improve_idx += 1
+            max_iters = 1000
+            if improve_idx > max_iters
+                println("have not improved in $max_iters iterations.  quitting.")
+                global quit
+                quit = true
+                break
+            end
+        end
+        num_batches = length(batched_data)
+        println("epoch $epoch of $num_epochs, $b of $num_batches ::: train loss: $tl_train, test loss: $tl")
+
+        global quit
+        if quit == true
+            global w
+            w = copy(best_w)
+            break
+        end
+    end
+end
+w = copy(best_w)
+
+################################################################################
+
+
+################################################################################
+
+function f(w, x)
+    p = predict(w, x)
+    return p[1]
+end
+
+m = x -> f(w, x)
+
+for i=1:length(test_ins)
+    input = test_ins[i]
+    modeled_out =   m( input )
+    y_out = test_outs[i]
+
+    println("modeled_out: $modeled_out, y_out: $y_out \n")
+end
+
+# save it ######################################################################
+
+fp = open(path_to_src * "/RelaxedIK/Config/info_files/" * loaded_robot)
+y = YAML.load(fp)
+
+collision_nn_file_name = y["collision_nn_file"]
+
+@save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name w
+################################################################################

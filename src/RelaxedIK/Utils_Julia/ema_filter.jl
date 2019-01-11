@@ -19,7 +19,6 @@ function EMA_filter(init_state; a = 0.6, window_size = 25)
 end
 
 function filter_signal(EMA_filter, state)
-
     weights = zeros(EMA_filter.window_size)
     filtered_state = zeros(length(state))
 

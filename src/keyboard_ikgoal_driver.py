@@ -3,6 +3,7 @@
 import readchar
 import rospy
 from geometry_msgs.msg import PoseStamped, Vector3Stamped, QuaternionStamped, Pose
+from std_msgs.msg import Bool
 from relaxed_ik.msg import EEPoseGoals
 import RelaxedIK.Utils.transformations as T
 
@@ -13,6 +14,8 @@ ik_goal_l_pub = rospy.Publisher('/ik_goal_l',PoseStamped,queue_size=5)
 goal_pos_pub = rospy.Publisher('vive_position', Vector3Stamped)
 goal_quat_pub = rospy.Publisher('vive_quaternion', QuaternionStamped)
 ee_pose_goals_pub = rospy.Publisher('/relaxed_ik/ee_pose_goals', EEPoseGoals, queue_size=5)
+quit_pub = rospy.Publisher('/relaxed_ik/quit',Bool,queue_size=5)
+
 
 pos_stride = 0.005
 rot_stride = 0.005
@@ -121,6 +124,10 @@ while not rospy.is_shutdown():
         euler = list(T.euler_from_quaternion(rotation_l))
         euler[2] -= rot_stride
         rotation_l = T.quaternion_from_euler(euler[0],euler[1],euler[2])
+    elif key == 'q':
+        q = Bool()
+        q.data = True
+        quit_pub.publish(q)
     elif key == 'c':
         rospy.signal_shutdown()
 
@@ -185,3 +192,7 @@ while not rospy.is_shutdown():
     ee_pose_goals.ee_poses.append(pose_l)
 
     ee_pose_goals_pub.publish(ee_pose_goals)
+
+    q = Bool()
+    q.data = False
+    quit_pub.publish(q)

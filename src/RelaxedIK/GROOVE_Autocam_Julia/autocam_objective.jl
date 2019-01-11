@@ -126,9 +126,10 @@ end
 function avoid_environment_occlusions_obj_1(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
 
-    eeMat = vars.robot.arms[2].out_frames[end]
+    # eeMat = vars.robot.arms[2].out_frames[end]
     camera_pt = vars.robot.arms[2].out_pts[end]
     # for jaco7...
+    #=
     up = eeMat[:,1]
     right = -eeMat[:,2]
     back = eeMat[:,3]
@@ -136,8 +137,10 @@ function avoid_environment_occlusions_obj_1(x, vars)
     search_direction = vars.additional_vars.search_direction
     search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right
 
-    Δ = 2.
+    Δ = 0.5
     goal_position = vars.additional_vars.previous_camera_location + Δ*search_direction_in_ee_frame
+    =#
+    goal_position = vars.additional_vars.visual_target_position
 
     x_val = LinearAlgebra.norm(goal_position - camera_pt)
     return groove_loss(x_val, 0.,2.,.1, 3.0,2.)
