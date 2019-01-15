@@ -7,7 +7,7 @@ from std_msgs.msg import Float64MultiArray, Float32, Bool
 
 rospy.init_node('keyboard_camera_buttons')
 
-viewpoint_dir_pub = rospy.Publisher('/autocam/search_direction',Float64MultiArray,queue_size=5)
+viewpoint_dir_pub = rospy.Publisher('/autocam/search_direction/manual',Float64MultiArray,queue_size=5)
 camera_motion_magnitude_pub = rospy.Publisher('/autocam/motion_magnitude',Float32,queue_size=5)
 goal_dis_pub = rospy.Publisher('/autocam/goal_dis',Float32,queue_size=5)
 quit_pub = rospy.Publisher('/relaxed_ik/quit',Bool,queue_size=5)

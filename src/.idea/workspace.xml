@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autocam_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/autocam_node.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keyboard_camera_buttons.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_camera_buttons.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing.jl" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quit.py" beforeDir="false" afterPath="$PROJECT_DIR$/quit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+            <state relative-caret-position="240">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding>
                 <element signature="e#413#479#0" expanded="true" />
               </folding>
@@ -29,13 +40,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quit.py">
+        <entry file="file://$PROJECT_DIR$/quaternion_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="225">
+              <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
               <folding>
-                <element signature="e#1#13#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22395">
+              <caret line="1497" selection-start-line="1497" selection-end-line="1497" />
             </state>
           </provider>
         </entry>
@@ -43,8 +87,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1334">
-              <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
+            <state relative-caret-position="165">
+              <caret line="11" column="72" lean-forward="true" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
               <folding>
                 <element signature="e#19#34#0" expanded="true" />
               </folding>
@@ -63,8 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>RIGHT_HAND</find>
-      <find>print</find>
       <find>starting_config</find>
       <find>joint_state_define</find>
       <find>velocity</find>
@@ -93,6 +135,8 @@
       <find>&lt;!--</find>
       <find>link</find>
       <find>joint name</find>
+      <find>DR</find>
+      <find>added by</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,8 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/mico_info.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/iiwa_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo8_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/constraint.py" />
@@ -137,8 +179,6 @@
         <option value="$PROJECT_DIR$/generate_info_file.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/geometry_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_and_ur5.urdf" />
@@ -151,15 +191,19 @@
         <option value="$PROJECT_DIR$/keyboard_ikgoal_driver.py" />
         <option value="$PROJECT_DIR$/stop.py" />
         <option value="$PROJECT_DIR$/quit.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" />
+        <option value="$PROJECT_DIR$/quaternion_test.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
         <option value="$PROJECT_DIR$/keyboard_camera_buttons.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="130" />
-    <option name="y" value="-8" />
-    <option name="width" value="3710" />
-    <option name="height" value="2168" />
+    <option name="x" value="992" />
+    <option name="y" value="24" />
+    <option name="width" value="928" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -175,6 +219,17 @@
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="src" type="b2602c69:ProjectViewProjectNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -182,7 +237,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../autocam/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../teleop/bin" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -213,7 +268,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.move_jaco_sample">
+  <component name="RunManager" selected="Python.quaternion_test">
     <configuration name="geometry_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -277,7 +332,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="relaxed_ik_node" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="quaternion_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -289,7 +344,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/relaxed_ik_node.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/quaternion_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -320,19 +375,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.relaxed_ik_node" />
       <item itemvalue="Python.preprocessing" />
       <item itemvalue="Python.geometry_utils" />
       <item itemvalue="Python.urdf_viewer" />
       <item itemvalue="Python.move_jaco_sample" />
+      <item itemvalue="Python.quaternion_test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.quaternion_test" />
         <item itemvalue="Python.move_jaco_sample" />
         <item itemvalue="Python.urdf_viewer" />
         <item itemvalue="Python.geometry_utils" />
         <item itemvalue="Python.preprocessing" />
-        <item itemvalue="Python.relaxed_ik_node" />
       </list>
     </recent_temporary>
   </component>
@@ -359,15 +414,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="129" y="13" width="3712" height="2148" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19394435" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1937773" />
       <window_info id="Structure" order="1" weight="0.24958587" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3257024" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.45935625" side_tool="true" visible="true" weight="0.41155046" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.45935625" side_tool="true" weight="0.42303553" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.54064375" weight="0.39958376" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,23 +441,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jl" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scipy_mt_test2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/groove_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -511,16 +549,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mt_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/mt_test.py" />
     <entry file="file://$PROJECT_DIR$/rviz_viewer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="725">
@@ -607,16 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1218">
-          <caret line="81" column="59" selection-start-line="81" selection-start-column="59" selection-end-line="81" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
@@ -633,16 +652,6 @@
           <caret line="25" column="36" lean-forward="true" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="18" column="92" selection-start-line="18" selection-start-column="92" selection-end-line="18" selection-end-column="92" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -708,40 +717,12 @@
     <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/jaco7.urdf">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/move_jaco_sample.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/robot_os2.jl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/relaxedIK_wrapper.jl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/relaxedIK_solution_transfer.jl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-775" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/multithreading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flux_test.jl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/move_jaco_sample.py" />
+    <entry file="file://$PROJECT_DIR$/robot_os2.jl" />
+    <entry file="file://$PROJECT_DIR$/relaxedIK_wrapper.jl" />
+    <entry file="file://$PROJECT_DIR$/relaxedIK_solution_transfer.jl" />
+    <entry file="file://$PROJECT_DIR$/multithreading.py" />
+    <entry file="file://$PROJECT_DIR$/flux_test.jl" />
     <entry file="file://$PROJECT_DIR$/keyboard_ikgoal_driver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="599">
@@ -752,30 +733,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/quit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        <state relative-caret-position="240">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding>
             <element signature="e#413#479#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quit.py">
+    <entry file="file://$PROJECT_DIR$/quaternion_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="225">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
           <folding>
-            <element signature="e#1#13#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22395">
+          <caret line="1497" selection-start-line="1497" selection-end-line="1497" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1334">
-          <caret line="49" column="49" selection-start-line="49" selection-start-column="49" selection-end-line="49" selection-end-column="49" />
+        <state relative-caret-position="165">
+          <caret line="11" column="72" lean-forward="true" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
           <folding>
             <element signature="e#19#34#0" expanded="true" />
           </folding>

@@ -16,7 +16,7 @@ class Collision_Object_Container:
         keys = y.keys()
         for k in keys:
             if not y[k] == None:
-                if k == 'robot_link_radius' or k == 'sample_states' or k == 'training_states': continue
+                if k == 'robot_link_radius' or k == 'sample_states' or k == 'training_states' or k == 'problem_states': continue
                 for i in range(len(y[k])):
                     if k == 'boxes':
                         self.collision_objects.append(Collision_Box(y[k][i]))

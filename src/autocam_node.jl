@@ -1,6 +1,7 @@
 #!/usr/bin/env julia
 using YAML
 using RobotOS
+using Rotations
 
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
@@ -8,8 +9,8 @@ include("RelaxedIK/Utils_Julia/ros_utils.jl")
 include("RelaxedIK/Utils_Julia/autocam_utils.jl")
 include("RelaxedIK/Utils_Julia/ema_filter.jl")
 @rosimport relaxed_ik.msg : EEPoseGoals, JointAngles
-@rosimport geometry_msgs.msg: Point, Quaternion, Pose
-@rosimport std_msgs.msg: Float64MultiArray, Bool, Float32
+@rosimport geometry_msgs.msg: Point, Quaternion, Pose, Vector3
+@rosimport std_msgs.msg: Float64MultiArray, Bool, Float32, Int8
 @rosimport visualization_msgs.msg: Marker
 
 rostypegen()
@@ -24,16 +25,28 @@ function eePoseGoals_cb(data::EEPoseGoals)
     eepg = data
 end
 
-search_direction = Nothing
-function search_direction_cb(data::Float64MultiArray)
-    global search_direction
-    search_direction = data.data
+search_direction_manual = Nothing
+function search_direction_manual_cb(data::Float64MultiArray)
+    global search_direction_manual
+    search_direction_manual = data.data
 end
 
-too_close = false
-function too_close_cb(data::BoolMsg)
-    global too_close
-    too_close = data.data
+search_direction_automatic = Nothing
+function search_direction_automatic_cb(data::Float64MultiArray)
+    global search_direction_automatic
+    search_direction_automatic = data.data
+end
+
+visual_target_position = Nothing
+function visual_target_position_cb(data::Float64MultiArray)
+    global visual_target_position
+    visual_target_position = data.data
+end
+
+camera_mode = 0
+function camera_mode_cb(data::Int8Msg)
+    global camera_mode
+    camera_mode = data.data
 end
 
 quit = false
@@ -66,23 +79,30 @@ close(fp)
 
 fixed_frame = y["fixed_frame"]
 
-relaxedIK = get_autocam1(path_to_src, loaded_robot)
+relaxedIK_mode0 = get_autocam1(path_to_src, loaded_robot)
+relaxedIK_mode1 = get_autocam_visual_exploration_mode1(path_to_src, loaded_robot)
+relaxedIK = relaxedIK_mode0
 # ema_filter = EMA_filter(relaxedIK.relaxedIK_vars.vars.init_state)
 
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
+# num_chains = 1
 
 println("loaded robot: $loaded_robot")
 
 init_node("autocam_node")
 
 Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb, queue_size=3)
-Subscriber{Float64MultiArray}("/autocam/search_direction", search_direction_cb, queue_size=3)
-Subscriber{BoolMsg}("/autocam/too_close", too_close_cb, queue_size=3)
-Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=3)
+Subscriber{Float64MultiArray}("/autocam/search_direction/manual", search_direction_manual_cb, queue_size=3)
+Subscriber{Float64MultiArray}("/autocam/search_direction/automatic", search_direction_automatic_cb, queue_size=3)
+Subscriber{Float64MultiArray}("/autocam/visual_target_position", visual_target_position_cb, queue_size=3)
+Subscriber{BoolMsg}("/autocam/camera_mode", camera_mode_cb, queue_size=3)
+Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=1)
 Subscriber{Float32Msg}("/autocam/motion_magnitude", camera_motion_magnitude_cb, queue_size=3)
 Subscriber{Float32Msg}("/autocam/goal_dis", goal_dis_cb, queue_size=3)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 marker_pub = Publisher("/visualization_marker", Marker, queue_size = 3)
+cam_pose_pub = Publisher("/autocam/ee_pose/camera_arm", Pose, queue_size = 3 )
+man_pose_pub = Publisher("/autocam/ee_pose/manipulation_arm", Pose, queue_size = 3 )
 
 sleep(0.3)
 
@@ -99,11 +119,14 @@ for i = 1:num_chains
     push!(eepg.ee_poses, pose)
 end
 
-too_close = false
-search_direction = [1.,0.,0.]
+camera_mode = 0
+search_direction_manual = [1.,0.,0.]
+search_direction_automatic = [0.000000001,0.,0.]
+visual_target_position = [0.,0.,0.]
 goal_dis = 0.6
 relaxedIK.relaxedIK_vars.robot.getFrames(relaxedIK.relaxedIK_vars.vars.init_state)
 relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
+relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end]
 
 println("ready to get first solution...")
 loop_rate = Rate(1000)
@@ -115,8 +138,16 @@ while true
         return
     end
 
-    relaxedIK.relaxedIK_vars.additional_vars.search_direction = search_direction
-    relaxedIK.relaxedIK_vars.additional_vars.too_close = too_close
+    if camera_mode == 0
+        relaxedIK = relaxedIK_mode0
+    elseif camera_mode == 1
+        global visual_target_position
+        relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = visual_target_position
+        relaxedIK = relaxedIK_mode1
+    end
+
+    # have way to combine manual and automatic search direction
+    relaxedIK.relaxedIK_vars.additional_vars.search_direction = search_direction_manual
     relaxedIK.relaxedIK_vars.additional_vars.distance_to_target = goal_dis
 
     pose_goals = eepg.ee_poses
@@ -153,11 +184,37 @@ while true
     relaxedIK.relaxedIK_vars.robot.getFrames(xopt)
     relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
 
-    # println(relaxedIK.relaxedIK_vars.vars.objective_closures[end-1](xopt))
+    println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
     camera_goal_pt = get_camera_goal_location(xopt, relaxedIK.relaxedIK_vars, 2; Δ=camera_motion_magnitude)
-    relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = camera_goal_pt
+    relaxedIK.relaxedIK_vars.additional_vars.camera_goal_position = camera_goal_pt
     draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, camera_goal_pt, 0.03, 0.03, [0.,1.,0.,1.]; id=1)
     # draw_sphere_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, [0.1,0.1,0.1], [1.,0.,0.,1.])
+
+    cam_pose = Pose()
+    man_pose = Pose()
+    cam_ee_pos = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
+    man_ee_pos = relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end]
+    cam_ee_quat = Quat(relaxedIK.relaxedIK_vars.robot.arms[2].out_frames[end])
+    man_ee_quat = Quat(relaxedIK.relaxedIK_vars.robot.arms[1].out_frames[end])
+
+    cam_pose.position.x = cam_ee_pos[1]
+    cam_pose.position.y = cam_ee_pos[2]
+    cam_pose.position.z = cam_ee_pos[3]
+    cam_pose.orientation.w =  cam_ee_quat.w
+    cam_pose.orientation.x = cam_ee_quat.x
+    cam_pose.orientation.y = cam_ee_quat.y
+    cam_pose.orientation.z = cam_ee_quat.z
+
+    man_pose.position.x = man_ee_pos[1]
+    man_pose.position.y = man_ee_pos[2]
+    man_pose.position.z = man_ee_pos[3]
+    man_pose.orientation.w = man_ee_quat.w
+    man_pose.orientation.x = man_ee_quat.x
+    man_pose.orientation.y = man_ee_quat.y
+    man_pose.orientation.z = man_ee_quat.z
+
+    publish(cam_pose_pub, cam_pose)
+    publish(man_pose_pub, man_pose)
 
     rossleep(loop_rate)
 end

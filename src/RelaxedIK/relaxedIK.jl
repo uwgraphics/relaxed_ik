@@ -6,16 +6,19 @@ include("GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 include("GROOVE_Autocam_Julia/autocam_objective.jl")
 include("GROOVE_Autocam_Julia/autocam_vars.jl")
 include("Utils_Julia/transformations.jl")
+include("Utils_Julia/ema_filter.jl")
 
 mutable struct RelaxedIK
     relaxedIK_vars
     groove
+    ema_filter
 end
 
 function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
     groove = get_groove(relaxedIK_vars.vars, solver_name)
-    return RelaxedIK(relaxedIK_vars, groove)
+    ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
+    return RelaxedIK(relaxedIK_vars, groove, ema_filter)
 end
 
 
@@ -42,9 +45,9 @@ function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", precon
 end
 
 function get_autocam1(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
-    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_dis_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1, avoid_environment_occlusions_obj_1, collision_nn_obj]
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1, avoid_environment_occlusions_obj_1, camera_dis_obj_1, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [20.0, 19.0, 1.0 ,0.5, 0.5, 20.0, 3.0, 15.0, 2.0, 3.0, 2.0]
+    weight_priors = [15.0, 14.5, 2.0, 4.0, 0.01, 15.0, 10.0, 2.0, 8.0, 1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -54,10 +57,11 @@ function get_autocam1(path_to_src, info_file_name; solver_name = "slsqp", precon
     return rik
 end
 
-function get_autocam2(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
-    objectives = [position_obj_2, rotation_obj_2, bimanual_line_seg_collision_avoid_obj, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_2, camera_dis_obj_2, camera_upright_obj_2, camera_occlusion_avoid_obj_2]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [20.0, 19.0, 1.0, 10.0 ,1.0, 1.0, 2.0, 2.0, 3.0, 2.0]
+
+function get_autocam_visual_exploration_mode1(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, look_at_visual_target_obj1, camera_upright_obj_1, collision_nn_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [15.0, 14.5, 2.0, 4.0, 0.01, 15.0, 10.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -104,6 +108,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
     end
 
     xopt = groove_solve(relaxedIK.groove, prev_state=prev_state)
+    xopt = filter_signal(relaxedIK.ema_filter, xopt)
     update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
 
     return xopt

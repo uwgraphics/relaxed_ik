@@ -164,7 +164,7 @@ state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_va
 
 
 # Create data ##################################################################
-num_samples = 30000
+num_samples = 10000
 ins = []
 outs = []
 test_ins = []
@@ -198,7 +198,7 @@ collision_file_name = y["collision_file_name"]
 
 fp = open(path_to_src * "/RelaxedIK/Config/collision_files/" * collision_file_name)
 y = YAML.load(fp)
-close(fp)
+
 
 training_states = y["training_states"]
 if ! (training_states == nothing)
@@ -216,6 +216,27 @@ if ! (training_states == nothing)
         println("manual sample $i of $num_samples ::: state: $in, y: $out")
     end
 end
+
+problem_states = y["problem_states"]
+if ! (problem_states == nothing)
+    num_samples = length(problem_states)
+    length_of_sample = length(problem_states[1])
+    num_rands_per = 10
+    for i = 1:num_samples
+        for j = 1:num_rands_per
+            r = rand(Uniform(-.1,.1), length_of_sample)
+            in = problem_states[i] + r
+            out = [c.get_score(in ,cv)]
+
+            push!(ins, state_to_joint_pts_closure(in))
+            push!(outs, out)
+
+            println("problem state sample $i ($j / $num_rands_per) of $num_samples ::: state: $in, y: $out")
+        end
+    end
+end
+
+close(fp)
 
 
 for i=1:50
@@ -270,7 +291,7 @@ end
 # Make neural net ##############################################################
 # net_width = length(ins[1]) + 8
 # net_width = length(ins[1])
-net_width = 10
+net_width = 14
 rand_val = 1.0
 
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
@@ -286,7 +307,7 @@ o = optimizers(w, Knet.Adam)
 tl = total_loss2(w, test_ins, test_outs)
 tl_train = total_loss( w, ins, outs )
 println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
-num_epochs = 5
+num_epochs = 100
 batch_size = 100
 best_w = []
 best_score = 10000000000000000.0

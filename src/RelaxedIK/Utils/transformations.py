@@ -1462,9 +1462,42 @@ def quaternion_disp(q, qPrime):
     m = quaternion_multiply(inv, qPrime)
     return quaternion_log(m)
 
+# added by Danny Rakita
 def quaternion_dispQ(q,qPrime):
     inv = quaternion_inverse(q)
     return quaternion_multiply(inv, qPrime)
+
+# added by Danny Rakita
+def quaternion_to_axisAngle(q):
+    axis = [0.0,0.0,0.0]
+    angle = 0.0
+    if q[0] == 1 and q[1] == 0 and q[2] == 0 and q[3] == 0:
+        return axis, angle
+
+    try:
+        angle = 2.0* math.acos(q[0])
+    except:
+        return axis, angle
+    t = q[0]*q[0]
+    axis[0] = q[1] / max(math.sqrt(1 - t), 0.000000001)
+    axis[1] = q[2] / max(math.sqrt(1 - t), 0.000000001)
+    axis[2] = q[3] / max(math.sqrt(1 - t), 0.000000001)
+
+    return axis, angle
+
+# added by Danny Rakita
+def rotate_quaternion_representation(q, rot_mat):
+    axis, angle = quaternion_to_axisAngle(q)
+    # axis_q = [0.0, axis[0], axis[1], axis[2]]
+    rotatedAxis = numpy.dot(rot_mat, numpy.array(axis))
+
+    # print(numpy.linalg.norm(numpy.array(rotatedAxis)))
+    new_axis = [rotatedAxis[0], rotatedAxis[1], rotatedAxis[2]]
+    new_angle = math.cos(angle/2.0)
+    new_axis = math.sin(angle/2.0)*numpy.array(new_axis)
+
+    return [new_angle, new_axis[0], new_axis[1], new_axis[2]]
+
 
 
 def quaternion_real(quaternion):
