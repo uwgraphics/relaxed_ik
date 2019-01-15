@@ -102,7 +102,7 @@ For full setup and usage details, please refer to start_here.py in the src direc
 
 <b> Coming Soon </b>
 
-Performance critical code will be moved to C++ using Boost Python to speed up the solver.  We are currently testing these features and will push it to the central branch when it is stable.
+RelaxedIK has been rewritten in Julia to substantially boost performance.  These changes will be made public and pushed to the main branch in February 2019.
 
 <b> Change Log </b>
 
