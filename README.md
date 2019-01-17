@@ -4,6 +4,8 @@
 
 DEVELOPMENT BRANCH
 
+<b> NOTE: The dev branch is not quite ready for public use. I'm still testing out many of the new features, and the documentation has not been updated to reflect the changes. I would recommend sticking with the master branch for now - I'll be merging the dev branch to master when it's all ready to go in a few weeks </b>
+
 Welcome to RelaxedIK! This solver implements the methods discussed in our paper <i> RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion </i> (http://www.roboticsproceedings.org/rss14/p43.html)
 
 Video of presentation at RSS 2018 (RelaxedIK part starts around 12:00) :
@@ -100,7 +102,7 @@ For full setup and usage details, please refer to start_here.py in the src direc
 
 <b> Coming Soon </b>
 
-Performance critical code will be moved to C++ using Boost Python to speed up the solver.  We are currently testing these features and will push it to the central branch when it is stable.
+RelaxedIK has been rewritten in Julia to substantially boost performance.  These changes will be made public and pushed to the main branch in February 2019.
 
 <b> Change Log </b>
 
