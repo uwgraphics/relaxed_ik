@@ -224,6 +224,7 @@ def joint_state_define(x):
     js.position[12] = x[9]
     js.position[13] = x[10]
     js.position[14] = x[11]
+    js.position[15] = x[12]
 
     return js
 

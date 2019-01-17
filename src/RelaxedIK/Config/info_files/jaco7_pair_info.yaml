@@ -3,7 +3,8 @@ fixed_frame: "world"
 joint_names: [ [ "connect_root_and_world_a", "j2s7s300_joint_1_a", "j2s7s300_joint_2_a", "j2s7s300_joint_3_a", "j2s7s300_joint_4_a", "j2s7s300_joint_5_a", "j2s7s300_joint_6_a", "j2s7s300_joint_7_a" ], [ "connect_root_and_world_b", "j2s7s300_joint_1_b", "j2s7s300_joint_2_b", "j2s7s300_joint_3_b", "j2s7s300_joint_4_b", "j2s7s300_joint_5_b", "j2s7s300_joint_6_b", "j2s7s300_joint_7_b" ] ]
 joint_ordering: [ "j2s7s300_joint_1_a", "j2s7s300_joint_2_a", "j2s7s300_joint_3_a", "j2s7s300_joint_4_a", "j2s7s300_joint_5_a", "j2s7s300_joint_6_a", "j2s7s300_joint_7_a", "j2s7s300_joint_1_b", "j2s7s300_joint_2_b", "j2s7s300_joint_3_b", "j2s7s300_joint_4_b", "j2s7s300_joint_5_b", "j2s7s300_joint_6_b", "j2s7s300_joint_7_b" ]
 ee_fixed_joints: [ "j2s7s300_joint_end_effector_a", "j2s7s300_joint_end_effector_b" ]
-starting_config: [ 0.0, 3.596565083, 0.0, 5.19409985393, 0.0, 3.14159265359, 0.0, 0.0, 3.596565083, 0.0, 5.19409985393, 0.0, 3.14159265359, 0.0 ]
+# starting_config: [ 0.0, 3.596565083, 0.0, 5.19409985393, 0.0, 3.14159265359, 0.0, 0.0, 3.596565083, 0.0, 5.19409985393, 0.0, 3.14159265359, 0.0 ]
+starting_config: [-0.747941, 2.67209, 0.541998, 5.48362, -0.468416, 4.12141, -0.0106119, 0.750218, 4.27891, -0.129464, 5.26234, -0.112621, 2.20092, 0.0215114]
 collision_file_name: "collision_jaco7_pair.yaml"
 collision_nn_file: "jaco7_pair_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"

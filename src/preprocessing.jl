@@ -297,6 +297,7 @@ rand_val = 1.0
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
 
 ################################################################################
@@ -343,7 +344,7 @@ for epoch=1:num_epochs
         else
             global improve_idx
             improve_idx += 1
-            max_iters = 1000
+            max_iters = 500
             if improve_idx > max_iters
                 println("have not improved in $max_iters iterations.  quitting.")
                 global quit

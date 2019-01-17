@@ -95,7 +95,7 @@ Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb, queue_size=
 Subscriber{Float64MultiArray}("/autocam/search_direction/manual", search_direction_manual_cb, queue_size=3)
 Subscriber{Float64MultiArray}("/autocam/search_direction/automatic", search_direction_automatic_cb, queue_size=3)
 Subscriber{Float64MultiArray}("/autocam/visual_target_position", visual_target_position_cb, queue_size=3)
-Subscriber{BoolMsg}("/autocam/camera_mode", camera_mode_cb, queue_size=3)
+Subscriber{Int8Msg}("/autocam/camera_mode", camera_mode_cb, queue_size=3)
 Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=1)
 Subscriber{Float32Msg}("/autocam/motion_magnitude", camera_motion_magnitude_cb, queue_size=3)
 Subscriber{Float32Msg}("/autocam/goal_dis", goal_dis_cb, queue_size=3)
@@ -139,11 +139,14 @@ while true
     end
 
     if camera_mode == 0
+        # global relaxedIK
         relaxedIK = relaxedIK_mode0
+        update_relaxedIK_vars!(relaxedIK_mode1.relaxedIK_vars, relaxedIK.relaxedIK_vars.vars.xopt)
     elseif camera_mode == 1
-        global visual_target_position
-        relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = visual_target_position
+        # global visual_target_position, relaxedIK
         relaxedIK = relaxedIK_mode1
+        relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = visual_target_position
+        update_relaxedIK_vars!(relaxedIK_mode0.relaxedIK_vars, relaxedIK.relaxedIK_vars.vars.xopt)
     end
 
     # have way to combine manual and automatic search direction
@@ -183,11 +186,27 @@ while true
 
     relaxedIK.relaxedIK_vars.robot.getFrames(xopt)
     relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
+    # global relaxedIK_mode0, relaxedIK_mode1
+    # relaxedIK_mode0.relaxedIK_vars.robot.getFrames(xopt)
+    # relaxedIK_mode1.relaxedIK_vars.robot.getFrames(xopt)
+    # relaxedIK_mode0.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode0.relaxedIK_vars.robot.arms[2].out_pts[end]
+    # relaxedIK_mode1.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode1.relaxedIK_vars.robot.arms[2].out_pts[end]
 
     println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
     camera_goal_pt = get_camera_goal_location(xopt, relaxedIK.relaxedIK_vars, 2; Δ=camera_motion_magnitude)
     relaxedIK.relaxedIK_vars.additional_vars.camera_goal_position = camera_goal_pt
     draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, camera_goal_pt, 0.03, 0.03, [0.,1.,0.,1.]; id=1)
+    if camera_mode == 0
+        # global relaxedIK_mode1
+        relaxedIK_mode1.relaxedIK_vars.robot.getFrames(xopt)
+        relaxedIK_mode1.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode1.relaxedIK_vars.robot.arms[2].out_pts[end]
+        draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end], 0.03, 0.03, [0.,0.,1.,1.]; id=2)
+    elseif camera_mode == 1
+        # global relaxedIK_mode0
+        relaxedIK_mode0.relaxedIK_vars.robot.getFrames(xopt)
+        relaxedIK_mode0.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode0.relaxedIK_vars.robot.arms[2].out_pts[end]
+        draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, visual_target_position, 0.03, 0.03, [0.,0.,1.,1.]; id=2)
+    end
     # draw_sphere_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, [0.1,0.1,0.1], [1.,0.,0.,1.])
 
     cam_pose = Pose()

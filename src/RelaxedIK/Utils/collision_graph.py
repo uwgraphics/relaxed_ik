@@ -15,7 +15,7 @@ class Collision_Graph:
         self.combinations = list(itertools.combinations(range(self.num_objects),r=2))
         self.b_value = 1.0
         self.collision_color_array = self.num_objects*[0]
-        self.danger_dis = 0.35
+        self.danger_dis = 0.25
 
         self.initialize_table()
         self.c_values = self.get_c_values(self.original_distances)

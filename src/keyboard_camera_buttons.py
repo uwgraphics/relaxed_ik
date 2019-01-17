@@ -3,7 +3,7 @@
 import readchar
 import rospy
 from geometry_msgs.msg import PoseStamped, Vector3Stamped, QuaternionStamped, Pose
-from std_msgs.msg import Float64MultiArray, Float32, Bool
+from std_msgs.msg import Float64MultiArray, Float32, Bool, Int8
 
 rospy.init_node('keyboard_camera_buttons')
 
@@ -11,6 +11,7 @@ viewpoint_dir_pub = rospy.Publisher('/autocam/search_direction/manual',Float64Mu
 camera_motion_magnitude_pub = rospy.Publisher('/autocam/motion_magnitude',Float32,queue_size=5)
 goal_dis_pub = rospy.Publisher('/autocam/goal_dis',Float32,queue_size=5)
 quit_pub = rospy.Publisher('/relaxed_ik/quit',Bool,queue_size=5)
+camera_mode_pub = rospy.Publisher('/autocam/camera_mode', Int8, queue_size=3)
 
 
 mag_stride = 0.005
@@ -21,6 +22,7 @@ goal_dis = 0.6
 goal_dis_stride = 0.005
 min_dis = 0.3
 max_dis = 1.7
+camera_mode = 0
 
 rate = rospy.Rate(1000)
 while not rospy.is_shutdown():
@@ -52,7 +54,7 @@ while not rospy.is_shutdown():
         viewpoint_dir_pub.publish(dir)
     elif key == ',':
         curr_magnitude -= mag_stride
-        curr_magnitude = max(curr_magnitude, 0.0000000001)
+        curr_magnitude = max(curr_magnitude, 0.0000001)
     elif key == '.':
         curr_magnitude += mag_stride
         curr_magnitude = min(curr_magnitude, 3.0)
@@ -60,6 +62,8 @@ while not rospy.is_shutdown():
         q = Bool()
         q.data = True
         quit_pub.publish(q)
+    elif key == '/':
+        camera_mode = 1 - camera_mode
     elif key == 'c':
         rospy.signal_shutdown()
 
@@ -75,5 +79,6 @@ while not rospy.is_shutdown():
     d.data = goal_dis
     goal_dis_pub.publish(d)
 
-
-
+    cm = Int8()
+    cm.data = camera_mode
+    camera_mode_pub.publish(cm)
