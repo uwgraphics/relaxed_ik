@@ -101,7 +101,7 @@ function camera_occlusion_avoid_obj_1(x, vars)
 
     # x_val = 0.0
     # return groove_loss(x_val, 0.,2.,.35, .4,2.)
-    return groove_loss(x_val, 0.,2.,.4, .4,2.)
+    return groove_loss(x_val, 0.,2.,.8, .4,2.)
 end
 
 function camera_occlusion_avoid_obj_2(x, vars)
@@ -123,7 +123,7 @@ function camera_occlusion_avoid_obj_2(x, vars)
     end
 
     # x_val = 0.0
-    return groove_loss(x_val, 0.,2.,.4, .4,2.)
+    return groove_loss(x_val, 0.,2.,.8, .4,2.)
 end
 
 function avoid_environment_occlusions_obj_1(x, vars)
@@ -143,9 +143,9 @@ function gravitate_to_natural_position_obj1(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
 
     camera_pt = vars.robot.arms[2].out_pts[end]
-    natural_point = [0.0, 0.1, 0.9]
+    natural_point = [0.0, 0.1, 1.0]
     x_val = LinearAlgebra.norm(natural_point - camera_pt)
-    return groove_loss(x_val, 0.,2.,.5, .1,2.)
+    return groove_loss(x_val, 0.,2.,.9, .1,2.)
 end
 
 function look_at_visual_target_obj1(x, vars)
