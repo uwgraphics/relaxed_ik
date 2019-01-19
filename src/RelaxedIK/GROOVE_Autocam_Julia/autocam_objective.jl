@@ -95,13 +95,13 @@ function camera_occlusion_avoid_obj_1(x, vars)
     num_pts = length(out_pts)
     for i = 1:num_pts-1
         dis = dis_between_line_segments(camera_pt, camera_pt + 100.0*forward, out_pts[i], out_pts[i+1])
-        c = 0.07
+        c = 0.12
         x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
     end
 
     # x_val = 0.0
     # return groove_loss(x_val, 0.,2.,.35, .4,2.)
-    return groove_loss(x_val, 0.,2.,.8, .4,2.)
+    return groove_loss(x_val, 0.,2.,1.1, .4,2.)
 end
 
 function camera_occlusion_avoid_obj_2(x, vars)
@@ -118,12 +118,12 @@ function camera_occlusion_avoid_obj_2(x, vars)
     num_pts = length(out_pts)
     for i = 1:num_pts-1
         dis = dis_between_line_segments(camera_pt, camera_pt + 100.0*forward, out_pts[i], out_pts[i+1])
-        c = 0.06
+        c = 0.12
         x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
     end
 
     # x_val = 0.0
-    return groove_loss(x_val, 0.,2.,.8, .4,2.)
+    return groove_loss(x_val, 0.,2.,1.1, .4,2.)
 end
 
 function avoid_environment_occlusions_obj_1(x, vars)
@@ -179,4 +179,19 @@ function look_at_visual_target_obj2(x, vars)
 
     x_val = pt_dis_to_line_seg(visual_target, camera_pt, camera_pt + 100.0*forward)
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
+end
+
+function keep_ee_apart_obj(x, vars)
+    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
+    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
+
+    man_ee = vars.robot.arms[1].out_pts[end]
+    camera_ee = vars.robot.arms[2].out_pts[end]
+
+    dis = LinearAlgebra.norm(man_ee - camera_ee)
+
+    c = 0.05
+    x_val = 100.0*(2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
+
+    return groove_loss(x_val, 0.,2.,0.4, .4,2.)
 end

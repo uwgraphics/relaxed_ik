@@ -8,6 +8,8 @@ include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
 include("RelaxedIK/Utils_Julia/ros_utils.jl")
 include("RelaxedIK/Utils_Julia/autocam_utils.jl")
 include("RelaxedIK/Utils_Julia/ema_filter.jl")
+include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
+include("RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl")
 @rosimport relaxed_ik.msg : EEPoseGoals, JointAngles
 @rosimport geometry_msgs.msg: Point, Quaternion, Pose, Vector3
 @rosimport std_msgs.msg: Float64MultiArray, Bool, Float32, Int8
@@ -81,7 +83,8 @@ fixed_frame = y["fixed_frame"]
 
 relaxedIK_mode0 = get_autocam1(path_to_src, loaded_robot)
 relaxedIK_mode1 = get_autocam_visual_exploration_mode1(path_to_src, loaded_robot)
-relaxedIK = relaxedIK_mode0
+relaxedIK = get_autocam1(path_to_src, loaded_robot)
+
 # ema_filter = EMA_filter(relaxedIK.relaxedIK_vars.vars.init_state)
 
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
@@ -120,6 +123,8 @@ for i = 1:num_chains
 end
 
 camera_mode = 0
+prev_camera_mode = 0
+switch_camera_mode_count = 96.0
 search_direction_manual = [1.,0.,0.]
 search_direction_automatic = [0.000000001,0.,0.]
 visual_target_position = [0.,0.,0.]
@@ -127,6 +132,7 @@ goal_dis = 0.6
 relaxedIK.relaxedIK_vars.robot.getFrames(relaxedIK.relaxedIK_vars.vars.init_state)
 relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
 relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end]
+solve_count = 0
 
 println("ready to get first solution...")
 loop_rate = Rate(1000)
@@ -138,16 +144,28 @@ while true
         return
     end
 
+    global switch_camera_mode, switch_camera_mode_count, prev_camera_mode
+    if ! (prev_camera_mode == camera_mode)
+        switch_camera_mode_count = 1.0
+        rossleep(0.1)
+    end
+
+    if switch_camera_mode_count < 96.0
+        switch_camera_mode_count = switch_camera_mode_count + 1.0
+    end
+
     if camera_mode == 0
         # global relaxedIK
         relaxedIK = relaxedIK_mode0
-        update_relaxedIK_vars!(relaxedIK_mode1.relaxedIK_vars, relaxedIK.relaxedIK_vars.vars.xopt)
     elseif camera_mode == 1
         # global visual_target_position, relaxedIK
         relaxedIK = relaxedIK_mode1
         relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = visual_target_position
-        update_relaxedIK_vars!(relaxedIK_mode0.relaxedIK_vars, relaxedIK.relaxedIK_vars.vars.xopt)
     end
+    relaxedIK.relaxedIK_vars.vars.weight_priors[3] = 100.0 - switch_camera_mode_count
+    prev_camera_mode = camera_mode
+
+    println(relaxedIK.relaxedIK_vars.vars.weight_priors)
 
     # have way to combine manual and automatic search direction
     relaxedIK.relaxedIK_vars.additional_vars.search_direction = search_direction_manual
@@ -175,6 +193,10 @@ while true
     end
 
     xopt = solve(relaxedIK, pos_goals, quat_goals)
+    global solve_count
+    if solve_count < 10
+        solve(relaxedIK_mode1, pos_goals, quat_goals)
+    end
     ja = JointAngles()
     for i = 1:length(xopt)
         push!(ja.angles.data, xopt[i])
@@ -198,12 +220,16 @@ while true
     draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, camera_goal_pt, 0.03, 0.03, [0.,1.,0.,1.]; id=1)
     if camera_mode == 0
         # global relaxedIK_mode1
-        relaxedIK_mode1.relaxedIK_vars.robot.getFrames(xopt)
+        xopt_f = filter_signal(relaxedIK_mode1.ema_filter, xopt)
+        update_relaxedIK_vars!(relaxedIK_mode1.relaxedIK_vars, xopt_f)
+        relaxedIK_mode1.relaxedIK_vars.robot.getFrames(xopt_f)
         relaxedIK_mode1.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode1.relaxedIK_vars.robot.arms[2].out_pts[end]
         draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end], 0.03, 0.03, [0.,0.,1.,1.]; id=2)
     elseif camera_mode == 1
         # global relaxedIK_mode0
-        relaxedIK_mode0.relaxedIK_vars.robot.getFrames(xopt)
+        xopt_f = filter_signal(relaxedIK_mode0.ema_filter, xopt)
+        update_relaxedIK_vars!(relaxedIK_mode0.relaxedIK_vars, xopt_f)
+        relaxedIK_mode0.relaxedIK_vars.robot.getFrames(xopt_f)
         relaxedIK_mode0.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode0.relaxedIK_vars.robot.arms[2].out_pts[end]
         draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, visual_target_position, 0.03, 0.03, [0.,0.,1.,1.]; id=2)
     end
@@ -235,6 +261,7 @@ while true
     publish(cam_pose_pub, cam_pose)
     publish(man_pose_pub, man_pose)
 
+    solve_count += 1
     rossleep(loop_rate)
 end
 

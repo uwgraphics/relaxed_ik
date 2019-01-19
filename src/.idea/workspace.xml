@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/preprocessing.jl" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,28 +18,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/transformations.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22395">
-              <caret line="1497" selection-start-line="1497" selection-end-line="1497" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_here.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3405">
-              <caret line="227" selection-start-line="227" selection-end-line="227" />
+            <state relative-caret-position="407">
+              <caret line="205" column="1" lean-forward="true" selection-start-line="205" selection-start-column="1" selection-end-line="205" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="609" column="34" selection-start-line="609" selection-start-column="34" selection-end-line="609" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -44,62 +47,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17970">
-              <caret line="1198" selection-start-line="1198" selection-end-line="1207" selection-end-column="26" />
+            <state relative-caret-position="182">
+              <caret line="1152" column="108" selection-start-line="1152" selection-start-column="108" selection-end-line="1152" selection-end-column="108" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_and_ur5.yaml">
+        <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="643" column="11" selection-start-line="643" selection-start-column="11" selection-end-line="643" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sample_keyboard.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-523">
-              <caret line="16" column="61" lean-forward="true" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="158" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/jaco7_and_ur5_joint_state_define">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_and_ur5.urdf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13125">
-              <caret line="875" column="43" selection-start-line="875" selection-start-column="43" selection-end-line="875" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_and_ur5_info.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="450">
+              <caret line="31" column="43" lean-forward="true" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
+              <folding>
+                <element signature="e#413#479#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,16 +96,16 @@
       <find>x</find>
       <find>unconstrai</find>
       <find>id</find>
-      <find>link name</find>
       <find>child</find>
       <find>parent</find>
       <find>_a</find>
       <find>&lt;!--</find>
       <find>link</find>
-      <find>joint name</find>
       <find>DR</find>
       <find>added by</find>
       <find>disp</find>
+      <find>link name</find>
+      <find>joint name</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,7 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo8_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE/GROOVE_Utils/constraint.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_constraint.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_multithread_central_vars.py" />
@@ -184,8 +144,6 @@
         <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pairb.urdf" />
         <option value="$PROJECT_DIR$/generate_info_file.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/geometry_utils.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" />
@@ -199,11 +157,14 @@
         <option value="$PROJECT_DIR$/quaternion_test.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
         <option value="$PROJECT_DIR$/keyboard_camera_buttons.py" />
-        <option value="$PROJECT_DIR$/start_here.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_and_ur5.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_and_ur5_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_and_ur5.yaml" />
+        <option value="$PROJECT_DIR$/start_here.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" />
+        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" />
       </list>
     </option>
   </component>
@@ -219,6 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -235,32 +197,12 @@
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
-              <item name="info_files" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
               <item name="urdfs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -468,13 +410,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jl" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/lib/python2.7/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="800" selection-start-line="800" selection-end-line="800" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -622,13 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="89" column="13" selection-start-line="89" selection-start-column="3" selection-end-line="89" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="991">
@@ -716,16 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
-          <folding>
-            <element signature="e#413#479#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quaternion_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -770,20 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start_here.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3405">
-          <caret line="227" selection-start-line="227" selection-end-line="227" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17970">
-          <caret line="1198" selection-start-line="1198" selection-end-line="1207" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/jaco7_and_ur5_joint_state_define">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -805,24 +709,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sample_keyboard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="61" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_and_ur5.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
+        <state relative-caret-position="872">
           <caret line="643" column="11" selection-start-line="643" selection-start-column="11" selection-end-line="643" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sample_keyboard.py">
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/mico_info.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start_here.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-523">
-          <caret line="16" column="61" lean-forward="true" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
+        <state relative-caret-position="407">
+          <caret line="205" column="1" lean-forward="true" selection-start-line="205" selection-start-column="1" selection-end-line="205" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="158" />
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="1152" column="108" selection-start-line="1152" selection-start-column="108" selection-end-line="1152" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="31" column="43" lean-forward="true" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
+          <folding>
+            <element signature="e#413#479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="609" column="34" selection-start-line="609" selection-start-column="34" selection-end-line="609" selection-end-column="34" />
         </state>
       </provider>
     </entry>

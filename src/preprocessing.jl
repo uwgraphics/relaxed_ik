@@ -1,3 +1,5 @@
+#!/usr/bin/env julia
+
 using Knet
 using ForwardDiff
 using Calculus
@@ -164,7 +166,7 @@ state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_va
 
 
 # Create data ##################################################################
-num_samples = 10000
+num_samples = 30000
 ins = []
 outs = []
 test_ins = []
@@ -291,7 +293,7 @@ end
 # Make neural net ##############################################################
 # net_width = length(ins[1]) + 8
 # net_width = length(ins[1])
-net_width = 14
+net_width = 18
 rand_val = 1.0
 
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
