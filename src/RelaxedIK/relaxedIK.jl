@@ -25,7 +25,7 @@ end
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [50.0, 40.0, 5.0 ,1.0, 1.0, 3.0]
+    weight_priors = [20.0, 19.5, 4.0 ,4.0, 2.0, 2.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -45,9 +45,22 @@ function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", precon
 end
 
 function get_autocam1(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
-    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1, avoid_environment_occlusions_obj_1, keep_ee_apart_obj, collision_nn_obj]
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1, avoid_environment_occlusions_obj_1, keep_ee_apart_obj, gravitate_to_natural_position_obj1, collision_nn_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [15.0, 14.5, 4.0, 4.0, 0.01, 10.0, 10.0, 1.0, 10.0, 2.0, 6.0, 5.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    rik = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    rik.relaxedIK_vars.additional_vars = Autocam_vars()
+    return rik
+end
+
+function get_2018_autocam(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_upright_obj_1, camera_occlusion_avoid_obj_1, keep_ee_apart_obj, camera_dis_obj_1, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [15.0, 14.5, 4.0, 4.0, 0.01, 10.0, 10.0, 1.0, 8.0, 2.0, 1.0]
+    weight_priors = [15.0, 14.5, 4.0, 4.0, 0.01, 10.0, 10.0, 0.5, 2.0, 3.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []

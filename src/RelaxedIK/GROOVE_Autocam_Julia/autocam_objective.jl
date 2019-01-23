@@ -10,11 +10,13 @@ function lookat_obj_1(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
 
     eeMat = vars.robot.arms[2].out_frames[end]
+    eeMat2 = vars.robot.arms[1].out_frames[end]
     camera_pt = vars.robot.arms[2].out_pts[end]
-    manipulation_pt = vars.robot.arms[1].out_pts[end]
+    manipulation_pt = vars.robot.arms[1].out_pts[end] + 0.11*eeMat2[:,2]
 
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
 
     x_val = pt_dis_to_line_seg(manipulation_pt, camera_pt, camera_pt + 100.0*forward)
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -28,8 +30,9 @@ function lookat_obj_2(x, vars)
     camera_pt = vars.robot.arms[1].out_pts[end]
     manipulation_pt = vars.robot.arms[2].out_pts[end]
 
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
 
     x_val = pt_dis_to_line_seg(manipulation_pt, camera_pt, camera_pt + 100.0*forward)
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -87,15 +90,16 @@ function camera_occlusion_avoid_obj_1(x, vars)
 
     eeMat = vars.robot.arms[2].out_frames[end]
     camera_pt = vars.robot.arms[2].out_pts[end]
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
 
     x_val = 0.0
     out_pts = vars.robot.arms[1].out_pts
     num_pts = length(out_pts)
     for i = 1:num_pts-1
         dis = dis_between_line_segments(camera_pt, camera_pt + 100.0*forward, out_pts[i], out_pts[i+1])
-        c = 0.12
+        c = 0.2
         x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
     end
 
@@ -110,8 +114,10 @@ function camera_occlusion_avoid_obj_2(x, vars)
 
     eeMat = vars.robot.arms[1].out_frames[end]
     camera_pt = vars.robot.arms[1].out_pts[end]
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
+
 
     x_val = 0.0
     out_pts = vars.robot.arms[2].out_pts
@@ -143,9 +149,9 @@ function gravitate_to_natural_position_obj1(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
 
     camera_pt = vars.robot.arms[2].out_pts[end]
-    natural_point = [0.0, 0.1, 1.0]
+    natural_point = [-.2, -0.35, .9]
     x_val = LinearAlgebra.norm(natural_point - camera_pt)
-    return groove_loss(x_val, 0.,2.,.9, .1,2.)
+    return groove_loss(x_val, 0.,2.,.4, .8,2.)
 end
 
 function look_at_visual_target_obj1(x, vars)
@@ -157,8 +163,10 @@ function look_at_visual_target_obj1(x, vars)
     # manipulation_pt = vars.robot.arms[1].out_pts[end]
     visual_target = vars.additional_vars.visual_target_position
 
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
+
 
     x_val = pt_dis_to_line_seg(visual_target, camera_pt, camera_pt + 100.0*forward)
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -174,8 +182,10 @@ function look_at_visual_target_obj2(x, vars)
     # manipulation_pt = vars.robot.arms[1].out_pts[end]
     visual_target = vars.additional_vars.visual_target_position
 
-    forward = -eeMat[:,3]
+    # forward = -eeMat[:,3]
     # forward = eeMat[:,2]
+    forward = eeMat[:,3]
+
 
     x_val = pt_dis_to_line_seg(visual_target, camera_pt, camera_pt + 100.0*forward)
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -190,7 +200,7 @@ function keep_ee_apart_obj(x, vars)
 
     dis = LinearAlgebra.norm(man_ee - camera_ee)
 
-    c = 0.05
+    c = 0.08
     x_val = 100.0*(2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
 
     return groove_loss(x_val, 0.,2.,0.4, .4,2.)

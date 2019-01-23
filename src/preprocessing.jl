@@ -58,8 +58,8 @@ function predict(w,x)
     return w[end-1]*x .+ w[end]
 end
 
-loss(w,x,y) = Knet.mean(abs, y - predict(w,x) )
-loss2(w,x,y) = Knet.mean(abs, y - predict(w,x))[1]
+loss(w,x,y) = Knet.mean(abs2, y - predict(w,x) )
+loss2(w,x,y) = Knet.mean(abs2, y - predict(w,x))[1]
 # loss(w,x,y) = (y[1] - predict(w,x)[1])^2
 # loss2(w,x,y) = ((y[1] - predict(w,x)[1])^2)[1]
 lossgradient = grad(loss)
@@ -166,7 +166,7 @@ state_to_joint_pts_closure = (x) -> state_to_joint_pts(x, relaxedIK.relaxedIK_va
 
 
 # Create data ##################################################################
-num_samples = 30000
+num_samples = 20000
 ins = []
 outs = []
 test_ins = []
@@ -223,10 +223,10 @@ problem_states = y["problem_states"]
 if ! (problem_states == nothing)
     num_samples = length(problem_states)
     length_of_sample = length(problem_states[1])
-    num_rands_per = 10
+    num_rands_per = 30
     for i = 1:num_samples
         for j = 1:num_rands_per
-            r = rand(Uniform(-.1,.1), length_of_sample)
+            r = rand(Uniform(-.01,.01), length_of_sample)
             in = problem_states[i] + r
             out = [c.get_score(in ,cv)]
 
@@ -255,7 +255,7 @@ end
 
 
 # Make batches #################################################################
-batch = Knet.minibatch(ins, outs, 100)
+batch = Knet.minibatch(ins, outs, 200)
 batches = []
 
 for (index, value) in enumerate(batch)
@@ -293,10 +293,11 @@ end
 # Make neural net ##############################################################
 # net_width = length(ins[1]) + 8
 # net_width = length(ins[1])
-net_width = 18
+net_width = 14
 rand_val = 1.0
 
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
+      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
       rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),

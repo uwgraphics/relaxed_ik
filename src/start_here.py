@@ -53,21 +53,21 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = 'jaco7_pair.urdf'
+urdf_file_name = 'ur5_and_sawyer.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = 'world'
+fixed_frame = 'base_link'
 ######################################################################################################
 
 ######################################################################################################
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = 'jaco7_pair_info.yaml'
+info_file_name = 'ur5_and_sawyer_info.yaml'
 ######################################################################################################
 
 
@@ -94,8 +94,8 @@ info_file_name = 'jaco7_pair_info.yaml'
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [['connect_root_and_world_a', 'j2s7s300_joint_1_a', 'j2s7s300_joint_2_a', 'j2s7s300_joint_3_a', 'j2s7s300_joint_4_a', 'j2s7s300_joint_5_a', 'j2s7s300_joint_6_a', 'j2s7s300_joint_7_a'],
-               ['connect_root_and_world_b', 'j2s7s300_joint_1_b', 'j2s7s300_joint_2_b', 'j2s7s300_joint_3_b', 'j2s7s300_joint_4_b', 'j2s7s300_joint_5_b', 'j2s7s300_joint_6_b', 'j2s7s300_joint_7_b'] ]
+joint_names = [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'],
+                ['disp', 'right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6' ] ]
 ######################################################################################################
 
 
@@ -115,7 +115,7 @@ joint_names = [['connect_root_and_world_a', 'j2s7s300_joint_1_a', 'j2s7s300_join
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  ['j2s7s300_joint_1_a', 'j2s7s300_joint_2_a', 'j2s7s300_joint_3_a', 'j2s7s300_joint_4_a', 'j2s7s300_joint_5_a', 'j2s7s300_joint_6_a', 'j2s7s300_joint_7_a', 'j2s7s300_joint_1_b', 'j2s7s300_joint_2_b', 'j2s7s300_joint_3_b', 'j2s7s300_joint_4_b', 'j2s7s300_joint_5_b', 'j2s7s300_joint_6_b', 'j2s7s300_joint_7_b']
+joint_ordering =  [ 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint', 'right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6'   ]
 ######################################################################################################
 
 
@@ -130,7 +130,7 @@ joint_ordering =  ['j2s7s300_joint_1_a', 'j2s7s300_joint_2_a', 'j2s7s300_joint_3
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = ['j2s7s300_joint_end_effector_a', 'j2s7s300_joint_end_effector_b']
+ee_fixed_joints = [ 'ee_fixed_joint', 'right_hand' ]
 ######################################################################################################
 
 
@@ -140,7 +140,7 @@ ee_fixed_joints = ['j2s7s300_joint_end_effector_a', 'j2s7s300_joint_end_effector
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [0.0, 3.596565082998194, 0.0, 5.1940998539339445, 0.0, 3.14159265359, 0.0, 0.0, 3.596565082998194, 0.0, 5.1940998539339445, 0.0, 3.14159265359, 0.0]
+starting_config = [ 3.14, -0.38, -1.2, -1.57, -1.57, -1.57, 0.0, -0.57307964,  0.3837615,   2.25103946, -2.92990265,  1.7088147, 2.84393652]
 ######################################################################################################
 
 
@@ -204,30 +204,27 @@ starting_config = [0.0, 3.596565082998194, 0.0, 5.1940998539339445, 0.0, 3.14159
 #          return js
 #
 #
-
 # TODO: fill out this function, or leave it how it is for the default option
 from sensor_msgs.msg import JointState
 def joint_state_define(x):
     js = JointState()
-    js.name = ['j2s7s300_joint_1_a', 'j2s7s300_joint_2_a', 'j2s7s300_joint_3_a', 'j2s7s300_joint_4_a', 'j2s7s300_joint_5_a','j2s7s300_joint_6_a', 'j2s7s300_joint_7_a', 'j2s7s300_joint_finger_1_a', 'j2s7s300_joint_finger_2_a', 'j2s7s300_joint_finger_3_a',
-               'j2s7s300_joint_1_b', 'j2s7s300_joint_2_b', 'j2s7s300_joint_3_b', 'j2s7s300_joint_4_b', 'j2s7s300_joint_5_b', 'j2s7s300_joint_6_b', 'j2s7s300_joint_7_b', 'j2s7s300_joint_finger_1_b','j2s7s300_joint_finger_2_b', 'j2s7s300_joint_finger_3_b']
-
-    js.position = 20*[0]
+    js.name = [ 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint',  'right_j0', 'head_pan', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']
+    js.position = 14*[0.0]
     js.position[0] = x[0]
     js.position[1] = x[1]
     js.position[2] = x[2]
     js.position[3] = x[3]
     js.position[4] = x[4]
     js.position[5] = x[5]
-    js.position[6] = x[6]
 
-    js.position[10] = x[7]
-    js.position[11] = x[8]
-    js.position[12] = x[9]
-    js.position[13] = x[10]
-    js.position[14] = x[11]
-    js.position[15] = x[12]
-    js.position[16] = x[13]
+
+    js.position[6] = x[6]
+    js.position[8] = x[7]
+    js.position[9] = x[8]
+    js.position[10] = x[9]
+    js.position[11] = x[10]
+    js.position[12] = x[11]
+    js.position[13] = x[12]
     js.position = tuple(js.position)
     return js
 
@@ -293,7 +290,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = 'collision_jaco7_pair.yaml'
+collision_file_name = 'collision_ur5_and_sawyer.yaml'
 ###########################################################################################################
 
 

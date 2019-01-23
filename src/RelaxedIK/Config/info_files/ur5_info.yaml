@@ -3,11 +3,10 @@ fixed_frame: "base_link"
 joint_names: [ [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ] ]
 joint_ordering: [ "shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint" ]
 ee_fixed_joints: [ "ee_fixed_joint" ]
-starting_config: [ 3.14159, -0.38, -1.2, -1.570796, -1.570796, -1.570796 ]
+starting_config: [ 3.14, -0.38, -1.2, -1.57, -1.57, -1.57 ]
 collision_file_name: "collision_ur5.yaml"
 collision_nn_file: "ur5_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
-thread_dofs: [ ]
 axis_types: [ [ "z", "y", "y", "y", "z", "y" ] ]
 velocity_limits: [ 3.15, 3.15, 3.15, 3.2, 3.2, 3.2 ]
 joint_limits: [ [-6.2831853,6.2831853], [-6.2831853,6.2831853], [-6.2831853,6.2831853], [-6.2831853,6.2831853], [-6.2831853,6.2831853], [-6.2831853,6.2831853] ]

@@ -2,19 +2,34 @@
 
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
+include("RelaxedIK/Utils_Julia/solver_output.jl")
 using YAML
 using RobotOS
 using Rotations
 using BenchmarkTools
 using ForwardDiff
 using Knet
+using Dates
 @rosimport relaxed_ik.msg : EEPoseGoals, JointAngles
+@rosimport std_msgs.msg: Float64MultiArray, Bool, Float32, Int8
 @rosimport geometry_msgs.msg: Point, Quaternion, Pose
 
 rostypegen()
 using .relaxed_ik.msg
+using .std_msgs.msg
 using .geometry_msgs.msg
 
+quit = false
+function quit_cb(data::BoolMsg)
+    global quit
+    quit = data.data
+end
+
+reset_solver = false
+function reset_cb(data::BoolMsg)
+    global reset_solver
+    reset_solver = data.data
+end
 
 eepg = Nothing
 function eePoseGoals_cb(data::EEPoseGoals)
@@ -22,14 +37,13 @@ function eePoseGoals_cb(data::EEPoseGoals)
     eepg = data
 end
 
-# function loop()
 path_to_src = Base.source_dir()
 println(path_to_src)
 loaded_robot_file = open(path_to_src * "/RelaxedIK/Config/loaded_robot")
 loaded_robot = readline(loaded_robot_file)
 close(loaded_robot_file)
 
-relaxedIK = get_autocam1(path_to_src, loaded_robot)
+relaxedIK = get_standard(path_to_src, loaded_robot)
 
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
@@ -37,10 +51,15 @@ println("loaded robot: $loaded_robot")
 
 init_node("relaxed_ik_node_jl")
 
-Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb, queue_size=3)
+Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb)
+Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb)
+Subscriber{BoolMsg}("relaxed_ik/reset", reset_cb)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 
 sleep(0.4)
+
+# d = Dates.format(now(), "yyyy-mm-dd HH:MM:SS")
+# so = Solver_Output(path_to_src, "relaxed_ik", "ur5", d)
 
 eepg = EEPoseGoals()
 pose = Pose()
@@ -54,13 +73,29 @@ pose.orientation.z = 0.0
 for i = 1:num_chains
     push!(eepg.ee_poses, pose)
 end
+empty_eepg = eepg
 
-loop_rate = Rate(1000)
+loop_rate = Rate(2000)
 while ! is_shutdown()
-    # while true
-    # if length(eepg.ee_poses) == 0
-    #    println("waiting for pose goals.......")
-    # else
+    global quit
+    if quit == true
+        println("quitting")
+        quit = false
+        return
+    end
+
+    global reset_solver
+    global eepg
+    if reset_solver == true
+        println("resetting")
+        reset_solver = false
+        relaxedIK.relaxedIK_vars.vars.xopt = relaxedIK.relaxedIK_vars.vars.init_state
+        relaxedIK.relaxedIK_vars.vars.prev_state = relaxedIK.relaxedIK_vars.vars.init_state
+        relaxedIK.relaxedIK_vars.vars.prev_state2 = relaxedIK.relaxedIK_vars.vars.init_state
+        relaxedIK.relaxedIK_vars.vars.prev_state3 = relaxedIK.relaxedIK_vars.vars.init_state
+        eepg = empty_eepg
+    end
+
     pose_goals = eepg.ee_poses
 
     pos_goals = []
@@ -83,6 +118,7 @@ while ! is_shutdown()
     end
 
     xopt = solve(relaxedIK, pos_goals, quat_goals)
+    # add_line(so, xopt, pos_goals[1], quat_goals[1])
     ja = JointAngles()
     for i = 1:length(xopt)
         push!(ja.angles.data, xopt[i])
@@ -90,12 +126,5 @@ while ! is_shutdown()
     publish(angles_pub, ja)
 
     println(xopt)
-    # println( relaxedIK.relaxedIK_vars.additional_vars.search_direction )
-    # println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
-    # end
     rossleep(loop_rate)
 end
-# end
-
-
-# loop()

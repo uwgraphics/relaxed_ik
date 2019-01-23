@@ -607,7 +607,7 @@
   <joint name="connect_root_and_world_b" type="fixed">
     <child link="root_b"/>
     <parent link="world"/>
-    <origin rpy="0 0 0" xyz="0 0.4 0.0"/>
+    <origin rpy="0 0 0" xyz="-0.1905 0.4 0.0"/>
   </joint>
   <!-- ros_control plugin -->
   <gazebo>
