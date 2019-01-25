@@ -60,7 +60,7 @@ end
 function get_autocam_new(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, lookat_obj_1, camera_upright_obj_1, inner_visibility_cone_obj1, outer_visibility_cone_obj1, keep_ee_apart_obj, camera_occlusion_avoid_obj_1, avoid_environment_occlusions_obj_1, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [15.0, 14.5, 4.0, 4.0, 0.01, 10.0, 10.0, 2.0, 2.0, 3.0, 1.0, 4.0, 3.0]
+    weight_priors = [15.0, 14.5, 4.0, 4.0, 0.01, 10.0, 10.0, 3.0, 2.0, 3.0, 1.0, 4.0, 5.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
