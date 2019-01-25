@@ -1,7 +1,9 @@
 
 
-d = Dates.format(now(), "yyyy-mm-dd HH:MM:SS")
+println(acos(-1.0))
 
-println(d)
+a = [1.,0.,0.]
+b = [1.,0.,0.]
 
-file = open(d, "w")
+
+println(  acos(dot(a,b)) )

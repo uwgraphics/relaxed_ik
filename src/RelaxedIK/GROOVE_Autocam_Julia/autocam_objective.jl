@@ -46,7 +46,7 @@ function camera_dis_obj_1(x, vars)
     manipulation_pt = vars.robot.arms[1].out_pts[end]
 
     x_val = (LinearAlgebra.norm(camera_pt - manipulation_pt) - vars.additional_vars.goal_distance_to_target)^2
-    return groove_loss(x_val, 0.,2.,.5,10.,2.)
+    return groove_loss(x_val, 0.,2.,.5,35.,2.)
 end
 
 
@@ -65,8 +65,8 @@ function camera_upright_obj_1(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
 
     eeMat = vars.robot.arms[2].out_frames[end]
-    side = eeMat[:,2]
-    # side = eeMat[:,1]
+    # side = eeMat[:,2]
+    side = eeMat[:,1]
 
     x_val = LinearAlgebra.dot(side, [0.,0.,1.])^2
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -76,8 +76,8 @@ function camera_upright_obj_2(x, vars)
     vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
 
     eeMat = vars.robot.arms[1].out_frames[end]
-    side = eeMat[:,2]
-    # side = eeMat[:,1]
+    # side = eeMat[:,2]
+    side = eeMat[:,1]
 
     x_val = LinearAlgebra.dot(side, [0.,0.,1.])^2
     return groove_loss(x_val, 0.,2.,.1,10.,2.)
@@ -102,6 +102,16 @@ function camera_occlusion_avoid_obj_1(x, vars)
         c = 0.2
         x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
     end
+
+    '''
+    out_pts = vars.robot.arms[2].out_pts
+    num_pts = length(out_pts)
+    for i = 1:3
+        dis = dis_between_line_segments(camera_pt, camera_pt + 100.0*forward, out_pts[i], out_pts[i+1])
+        c = 0.2
+        x_val += (2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
+    end
+    '''
 
     # x_val = 0.0
     # return groove_loss(x_val, 0.,2.,.35, .4,2.)
@@ -204,4 +214,44 @@ function keep_ee_apart_obj(x, vars)
     x_val = 100.0*(2.718281828459^((-(dis)^2) / (2.0 * c^2.0)) )
 
     return groove_loss(x_val, 0.,2.,0.4, .4,2.)
+end
+
+function outer_visibility_cone_obj1(x, vars)
+    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
+    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
+
+    man_eeMat = vars.robot.arms[1].out_frames[end]
+    cam_eeMat = vars.robot.arms[2].out_frames[end]
+
+    man_forward = man_eeMat[:,2]
+    cam_forward = cam_eeMat[:,3]
+
+    # max of 1.0, for example
+    max = vars.additional_vars.outer_cone_max
+    x_val = acos(dot(man_forward,cam_forward)) - max # when this is greater than 0.0, it's really really bad
+
+    return groove_loss(x_val, -3., 60., 100000000000000.0, 0.00001,10.)
+    # return groove_loss(x_val, -1.0,100,1.0, 1.0,50.)
+    # return exp(100*x_val)
+
+end
+
+
+function inner_visibility_cone_obj1(x, vars)
+    vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
+    vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
+
+    man_eeMat = vars.robot.arms[1].out_frames[end]
+    cam_eeMat = vars.robot.arms[2].out_frames[end]
+
+    man_forward = man_eeMat[:,2]
+    cam_forward = cam_eeMat[:,3]
+
+    # max of 1.0, for example
+    min = 0.2
+    x_val = min - acos(dot(man_forward,cam_forward)) # when this is greater than 0.0, it's really really bad
+
+    # return groove_loss(x_val, -1.0,100,1.0, 1.0,50.)
+    return groove_loss(x_val, -3., 60., 100000000000000.0, 0.00001,10.)
+
 end

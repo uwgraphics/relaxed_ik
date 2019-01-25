@@ -2,27 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_sawyer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_sawyer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_nn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/jaco7_pair_nn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/sawyer_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/sawyer_nn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_nn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_info.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_and_sawyer_nn" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/ur5_and_sawyer_nn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_objective.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_Autocam_Julia/autocam_vars.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/autocam_utils.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autocam_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/autocam_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing.jl" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relaxed_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboard_camera_buttons.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_camera_buttons.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test10.jl" beforeDir="false" afterPath="$PROJECT_DIR$/test10.jl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,26 +24,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start_here.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-30">
+            <state relative-caret-position="4380">
               <caret line="292" column="47" selection-start-line="292" selection-start-column="47" selection-end-line="292" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5_and_sawyer.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="700" column="128" selection-start-line="700" selection-start-column="128" selection-end-line="700" selection-end-column="128" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="210">
+              <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -74,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/ur5_and_sawyer.urdf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
+            <state relative-caret-position="12555">
               <caret line="837" column="32" selection-start-line="837" selection-start-column="32" selection-end-line="837" selection-end-column="32" />
             </state>
           </provider>
@@ -84,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_and_sawyer_info.yaml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="145" />
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="145" />
             </state>
           </provider>
         </entry>
@@ -92,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
+            <state relative-caret-position="315">
               <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
               <folding>
                 <element signature="e#19#34#0" expanded="true" />
@@ -104,8 +84,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="66" selection-start-line="66" selection-end-line="67" selection-end-column="31" />
+            <state relative-caret-position="165">
+              <caret line="14" selection-start-line="14" selection-end-line="15" />
               <folding>
                 <element signature="e#19#34#0" expanded="true" />
               </folding>
@@ -116,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
+            <state relative-caret-position="7230">
               <caret line="482" column="10" selection-start-line="6" selection-start-column="2" selection-end-line="482" selection-end-column="10" />
             </state>
           </provider>
@@ -145,7 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>right_hand</find>
       <find>lin</find>
       <find>bounds</find>
       <find>objective_function</find>
@@ -175,6 +154,7 @@
       <find>offset</find>
       <find>joint</find>
       <find>right_j6</find>
+      <find>goal_dis</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -219,7 +199,6 @@
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" />
         <option value="$PROJECT_DIR$/quaternion_test.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
-        <option value="$PROJECT_DIR$/keyboard_camera_buttons.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_and_ur5.urdf" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_and_ur5_info.yaml" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_and_ur5.yaml" />
@@ -232,13 +211,14 @@
         <option value="$PROJECT_DIR$/reset_and_quit.py" />
         <option value="$PROJECT_DIR$/start_here.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/urdfs/ur5_and_sawyer.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5_and_sawyer.yaml" />
+        <option value="$PROJECT_DIR$/keyboard_camera_buttons.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
+    <option name="x" value="75" />
     <option name="y" value="24" />
     <option name="width" value="928" />
     <option name="height" value="1056" />
@@ -255,23 +235,6 @@
             <path>
               <item name="src" type="b2602c69:ProjectViewProjectNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -458,8 +421,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20196506" />
       <window_info id="Structure" order="1" weight="0.24958587" />
@@ -745,40 +707,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5_and_sawyer.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
-          <folding>
-            <element signature="e#413#479#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="874">
+          <caret line="700" column="128" selection-start-line="700" selection-start-column="128" selection-end-line="700" selection-end-column="128" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
+    <entry file="file://$PROJECT_DIR$/start_here.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="66" selection-start-line="66" selection-end-line="67" selection-end-column="31" />
-          <folding>
-            <element signature="e#19#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
-          <folding>
-            <element signature="e#19#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="482" column="10" selection-start-line="6" selection-start-column="2" selection-end-line="482" selection-end-column="10" />
+        <state relative-caret-position="4380">
+          <caret line="292" column="47" selection-start-line="292" selection-start-column="47" selection-end-line="292" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -789,16 +728,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start_here.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="292" column="47" selection-start-line="292" selection-start-column="47" selection-end-line="292" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/ur5_and_sawyer.urdf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
+        <state relative-caret-position="12555">
           <caret line="837" column="32" selection-start-line="837" selection-start-column="32" selection-end-line="837" selection-end-column="32" />
         </state>
       </provider>
@@ -806,24 +738,54 @@
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_and_sawyer_info.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="145" />
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+          <folding>
+            <element signature="e#19#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" selection-start-line="14" selection-end-line="15" />
+          <folding>
+            <element signature="e#19#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7230">
+          <caret line="482" column="10" selection-start-line="6" selection-start-column="2" selection-end-line="482" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
+          <folding>
+            <element signature="e#413#479#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        <state relative-caret-position="210">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5_and_sawyer.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="700" column="128" selection-start-line="700" selection-start-column="128" selection-end-line="700" selection-end-column="128" />
         </state>
       </provider>
     </entry>

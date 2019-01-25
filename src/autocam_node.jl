@@ -72,6 +72,12 @@ function camera_motion_magnitude_cb(data::Float32Msg)
     camera_motion_magnitude = data.data
 end
 
+outer_cone_max = 0.7
+function outer_cone_max_cb(data::Float32Msg)
+    global outer_cone_max
+    outer_cone_max = data.data
+end
+
 occlusion_score = 0.0
 function occlusion_score_cb(data::Float32Msg)
     global occlusion_score
@@ -96,7 +102,7 @@ close(fp)
 
 fixed_frame = y["fixed_frame"]
 
-relaxedIK_mode0 = get_autocam1(path_to_src, loaded_robot)
+relaxedIK_mode0 = get_autocam_new(path_to_src, loaded_robot)
 # relaxedIK_mode0 = get_2018_autocam(path_to_src, loaded_robot)
 relaxedIK_mode1 = get_autocam_visual_exploration_mode1(path_to_src, loaded_robot)
 relaxedIK = relaxedIK_mode0
@@ -118,6 +124,7 @@ Subscriber{BoolMsg}("relaxed_ik/reset", reset_cb)
 Subscriber{Float32Msg}("/autocam/motion_magnitude", camera_motion_magnitude_cb)
 Subscriber{Float32Msg}("/autocam/occlusion_score", occlusion_score_cb)
 Subscriber{Float32Msg}("/autocam/goal_dis", goal_dis_cb)
+Subscriber{Float32Msg}("/autocam/outer_cone_max", outer_cone_max_cb)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 marker_pub = Publisher("/visualization_marker", Marker, queue_size = 3)
 cam_pose_pub = Publisher("/autocam/ee_pose/camera_arm", Pose, queue_size = 3 )
@@ -149,6 +156,7 @@ search_direction_manual = [0.000000001,0.,0.]
 search_direction_automatic = [0.000000001,0.,0.]
 visual_target_position = [0.,0.,0.]
 goal_dis = 0.6
+outer_cone_max = 0.6
 relaxedIK.relaxedIK_vars.robot.getFrames(relaxedIK.relaxedIK_vars.vars.init_state)
 relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK.relaxedIK_vars.robot.arms[2].out_pts[end]
 relaxedIK.relaxedIK_vars.additional_vars.visual_target_position = relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end]
@@ -199,7 +207,7 @@ while true
     relaxedIK.relaxedIK_vars.vars.weight_priors[3] = 100.0 - switch_camera_mode_count
     prev_camera_mode = camera_mode
 
-    println(relaxedIK.relaxedIK_vars.vars.weight_priors)
+    # println(relaxedIK.relaxedIK_vars.vars.weight_priors)
 
     # have way to combine manual and automatic search direction, add that in here...
     n = LinearAlgebra.norm(search_direction_manual)
@@ -210,6 +218,7 @@ while true
     Δt = time() - last_time_manual_used
     relaxedIK.relaxedIK_vars.additional_vars.search_direction = 2.0*search_direction_manual + (1.0/(1.0 + 2.718281828459^-(0.3*Δt - 3.0)))*occlusion_score*search_direction_automatic
     relaxedIK.relaxedIK_vars.additional_vars.distance_to_target = goal_dis
+    relaxedIK.relaxedIK_vars.additional_vars.outer_cone_max = outer_cone_max
 
     pose_goals = eepg.ee_poses
 
@@ -255,7 +264,7 @@ while true
     # relaxedIK_mode0.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode0.relaxedIK_vars.robot.arms[2].out_pts[end]
     # relaxedIK_mode1.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode1.relaxedIK_vars.robot.arms[2].out_pts[end]
 
-    println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
+    println(relaxedIK.relaxedIK_vars.vars.objective_closures[7](xopt))
     camera_goal_pt = get_camera_goal_location(xopt, relaxedIK.relaxedIK_vars, 2; Δ=camera_motion_magnitude)
     relaxedIK.relaxedIK_vars.additional_vars.camera_goal_position = camera_goal_pt
     draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, camera_goal_pt, 0.03, 0.03, [0.,1.,0.,1.]; id=1)
@@ -267,7 +276,9 @@ while true
         relaxedIK_mode1.relaxedIK_vars.robot.getFrames(xopt_f)
         relaxedIK_mode1.relaxedIK_vars.additional_vars.previous_camera_location = relaxedIK_mode1.relaxedIK_vars.robot.arms[2].out_pts[end]
         eeMat2 = relaxedIK.relaxedIK_vars.robot.arms[1].out_frames[end]
+        eeMat = relaxedIK.relaxedIK_vars.robot.arms[2].out_frames[end]
         draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, relaxedIK.relaxedIK_vars.robot.arms[1].out_pts[end] + 0.11*eeMat2[:,2], 0.03, 0.03, [0.,0.,1.,1.]; id=2)
+        draw_arrow_in_rviz(marker_pub, fixed_frame, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location, relaxedIK.relaxedIK_vars.additional_vars.previous_camera_location + 10.0*eeMat[:,3], 0.03, 0.03, [0.,1.,1.,1.]; id=10)
     elseif camera_mode == 1
         # global relaxedIK_mode0
         xopt_f = filter_signal(relaxedIK_mode0.ema_filter, xopt)

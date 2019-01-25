@@ -16,7 +16,7 @@ function get_camera_goal_location(x, vars, camera_arm_idx; Δ=1.0)
     # forward = eeMat[:,2]
     # for ur5 and sawyer...
     forward = eeMat[:,3]
-    right = eeMat[:,2]
+    right = -eeMat[:,1]
 
     search_direction = vars.additional_vars.search_direction
     search_direction_in_ee_frame = search_direction[1]*up + search_direction[2]*right + search_direction[3]*forward

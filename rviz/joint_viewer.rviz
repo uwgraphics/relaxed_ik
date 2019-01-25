@@ -60,162 +60,35 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        j2s7s300_end_effector_a:
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        j2s7s300_end_effector_b:
+        ee_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        j2s7s300_link_1_a:
+        forearm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        j2s7s300_link_1_b:
+        shoulder_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        j2s7s300_link_2_a:
+        tool0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        j2s7s300_link_2_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_3_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_3_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_4_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_4_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_5_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_5_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_6_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_6_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_7_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_7_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_base_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_base_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_1_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_1_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_2_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_2_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_3_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_3_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_1_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_1_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_2_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_2_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_3_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        j2s7s300_link_finger_tip_3_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        root_a:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        root_b:
+        upper_arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -224,6 +97,21 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -249,7 +137,7 @@ Visualization Manager:
       Marker Topic: /visualization_marker
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -277,33 +165,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.78512883
+      Distance: 2.0936029
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.127894208
-        Y: 0.175583437
-        Z: -0.233470738
+        X: 0.181304336
+        Y: 0.104175493
+        Z: 0.0717098266
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.470399976
+      Pitch: 0.495399952
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.788986981
+      Yaw: 3.93898726
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: true
-  Height: 622
+  Height: 414
   Hide Left Dock: true
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000020800000228fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000002800000228000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016c0000037cfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037c000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000032900000058fc0100000002fb0000000800540069006d00650000000000000003290000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000002d60000022800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000020800000228fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000002800000228000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016c0000037cfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000037c000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000032900000058fc0100000002fb0000000800540069006d00650000000000000003290000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000002d60000015800000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -313,5 +201,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 726
-  X: 146
-  Y: 81
+  X: 66
+  Y: 631
