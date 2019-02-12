@@ -11,15 +11,15 @@ class Collision_Graph:
         self.robot = robot
         self.sample_states = self.c.sample_states
         self.num_objects = len(self.c.collision_objects)
+        # self.b_value = 1.0/self.num_objects
+        self.b_value = 0.1
         self.original_distances = 10000*np.ones((self.num_objects, self.num_objects))
         self.combinations = list(itertools.combinations(range(self.num_objects),r=2))
-        self.b_value = 0.05
         self.collision_color_array = self.num_objects*[0]
-        self.danger_dis = 0.35
+        self.danger_dis = 0.2
 
         self.initialize_table()
         self.c_values = self.get_c_values(self.original_distances)
-
 
     def get_collision_score(self, frames):
         sum = 0.0

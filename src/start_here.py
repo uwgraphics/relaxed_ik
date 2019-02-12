@@ -53,21 +53,21 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = 'ur5_and_sawyer.urdf'
+urdf_file_name = 'hubo_description.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = 'base_link'
+fixed_frame = 'base_footprint'
 ######################################################################################################
 
 ######################################################################################################
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = 'ur5_and_sawyer_info.yaml'
+info_file_name = 'hubo_info.yaml'
 ######################################################################################################
 
 
@@ -94,8 +94,8 @@ info_file_name = 'ur5_and_sawyer_info.yaml'
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'],
-                ['disp', 'right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6' ] ]
+joint_names = [ [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2" ],
+                [ "WAIST", "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ] ]
 ######################################################################################################
 
 
@@ -115,7 +115,7 @@ joint_names = [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wr
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  [ 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint', 'right_j0', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6'   ]
+joint_ordering =  [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2" , "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ]
 ######################################################################################################
 
 
@@ -130,7 +130,7 @@ joint_ordering =  [ 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [ 'ee_fixed_joint', 'right_hand' ]
+ee_fixed_joints = [ "RIGHT_HAND", "LEFT_HAND" ]
 ######################################################################################################
 
 
@@ -140,7 +140,7 @@ ee_fixed_joints = [ 'ee_fixed_joint', 'right_hand' ]
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ 3.14, -0.38, -1.2, -1.57, -1.57, -1.57, 0.0, -0.57307964,  0.3837615,   2.25103946, -2.92990265,  1.7088147, 2.84393652]
+starting_config = [0.0, -3.490658503935151e-05, -0.00021929464807923793, 0.0, -1.5225962574178042, 0.0, 0.0, 0.0, -3.490658503935151e-05, -0.0004188790204785464, 0.0, -1.5225962574178042, 0.0, 0.0, 0.0]
 ######################################################################################################
 
 
@@ -208,23 +208,37 @@ starting_config = [ 3.14, -0.38, -1.2, -1.57, -1.57, -1.57, 0.0, -0.57307964,  0
 from sensor_msgs.msg import JointState
 def joint_state_define(x):
     js = JointState()
-    js.name = [ 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint',  'right_j0', 'head_pan', 'right_j1', 'right_j2', 'right_j3', 'right_j4', 'right_j5', 'right_j6']
-    js.position = 14*[0.0]
-    js.position[0] = x[0]
-    js.position[1] = x[1]
-    js.position[2] = x[2]
-    js.position[3] = x[3]
-    js.position[4] = x[4]
-    js.position[5] = x[5]
+    js.name = ['LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW',
+                     'LEFT_WRIST_PITCH', 'LWFT', 'LEFT_WRIST_YAW_2', 'LHAND_a1', 'LHAND_a2',
+                    'LHAND_a3', 'LHAND_b1', 'LHAND_b2', 'LHAND_b3', 'LHAND_c1',
+                    'LHAND_c2', 'LHAND_c3', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW',
+                    'RIGHT_ELBOW', 'RIGHT_WRIST_YAW', 'RIGHT_WRIST_PITCH', 'RWFT', 'RIGHT_WRIST_YAW_2',
+                    'RHAND_a1', 'RHAND_a2', 'RHAND_a3', 'RHAND_b1', 'RHAND_b2',
+                    'RHAND_b3', 'RHAND_c1', 'RHAND_c2', 'RHAND_c3', 'WAIST',
+                    'LEFT_HIP_YAW', 'LEFT_HIP_ROLL', 'LEFT_HIP_PITCH', 'LEFT_KNEE', 'LEFT_ANKLE_PITCH',
+                    'LEFT_ANKLE_ROLL', 'LAFT', 'LFUNI', 'LFWH', 'LEFT_WHEEL',
+                    'RIGHT_HIP_YAW', 'RIGHT_HIP_ROLL', 'RIGHT_HIP_PITCH', 'RIGHT_KNEE', 'RIGHT_ANKLE_PITCH',
+                    'RIGHT_ANKLE_ROLL', 'RAFT', 'RFUNI','RFWH', 'RIGHT_WHEEL',
+                    'NECK_PITCH_1', 'NECK_YAW', 'NECK_PITCH_2', 'NECK_ROLL']
 
+    js.position = 59*[0]
+    js.position[34] = x[0]
+    js.position[17] = x[1]
+    js.position[18] = x[2]
+    js.position[19] = x[3]
+    js.position[20] = x[4]
+    js.position[21] = x[5]
+    js.position[22] = x[6]
+    js.position[24] = x[7]
 
-    js.position[6] = x[6]
-    js.position[8] = x[7]
-    js.position[9] = x[8]
-    js.position[10] = x[9]
-    js.position[11] = x[10]
-    js.position[12] = x[11]
-    js.position[13] = x[12]
+    js.position[0] = x[8]
+    js.position[1] = x[9]
+    js.position[2] = x[10]
+    js.position[3] = x[11]
+    js.position[4] = x[12]
+    js.position[5] = x[13]
+    js.position[7] = x[14]
+
     js.position = tuple(js.position)
     return js
 
@@ -290,7 +304,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = 'collision_ur5_and_sawyer.yaml'
+collision_file_name = 'collision_hubo.yaml'
 ###########################################################################################################
 
 
@@ -307,11 +321,18 @@ collision_file_name = 'collision_ur5_and_sawyer.yaml'
 
 
 ######################################################################################################
-# Step 6: Generate a robot info file using the following command:
+# Step 6a: Generate a robot info file using the following command:
 #
 #   roslaunch relaxed_ik generate_info_file.launch
 #
 # The info file (with name specified in Step 1d) should appear in the RelaxedIK/Config/info_files directory
+######################################################################################################
+
+
+######################################################################################################
+# Step 6b: There should now be a robot info file corresponding to the robot you are currently setting up
+#   in the RelaxedIK/Config/info_files directory.  From now on, the solver will get all information directly
+#   from this file upon initialization
 ######################################################################################################
 
 
@@ -326,13 +347,29 @@ collision_file_name = 'collision_ur5_and_sawyer.yaml'
 
 
 ######################################################################################################
-# Step 8: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
+# Step 8a: If this is your first time setting up the RelaxedIK solver for a particular robot platform,
 #   the solver will need to go through a one-time pre-processing step.  In this process, our method
 #   trains a neural network so that the robot can learn about its own geometry so that it avoids
 #   collisions with itself and other items defined in your collision yaml file, as well as learns
 #   to avoid kinematic singularities.
 #   To start this process, run the following command:
-#   roslaunch relaxed_ik preprocessing.launch
+#
+#   roslaunch relaxed_ik preprocessing_julia.launch
+#
+#   The system will immediately start producing input-output pairs for the neural network
+#   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
+######################################################################################################
+
+
+
+######################################################################################################
+# Step 8b (optional): If you would also like the option of running the python variant of RelaxedIK,
+#   you will have to run a separate preprocessing step to learn a neural network in the python environment.
+#   The python version of the solver runs considerably slower than the default, Julia version; however,
+#   we still want to support the Python version going forward in case people would still like to use it.
+#   To start this process, run the following command:
+#
+#   roslaunch relaxed_ik preprocessing_python.launch
 #
 #   The system will immediately start producing input-output pairs for the neural network
 #   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
@@ -346,6 +383,7 @@ collision_file_name = 'collision_ur5_and_sawyer.yaml'
 #
 #   You should see your robot in rviz moving its end effector back and forth
 ######################################################################################################
+
 
 
 ######################################################################################################

@@ -60,6 +60,7 @@ class Config_Engine:
         # file_vars = [robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \
         #        self.vars.joint_order, self.vars.urdf_path, self.vars.collision_file]
 
+        print self.nn_file_name
         joblib.dump(collision_nn, self.path + self.nn_file_name)
 
         return robot_name, collision_nn, self.vars.init_state, self.vars.full_joint_lists, self.vars.fixed_ee_joints, \

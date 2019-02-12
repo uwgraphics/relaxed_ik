@@ -20,7 +20,6 @@ from std_msgs.msg import Float64
 from RelaxedIK.Utils.colors import bcolors
 from RelaxedIK.relaxedIK import get_relaxedIK_from_info_file
 
-
 eepg = None
 def eePoseGoals_cb(data):
     global eepg
@@ -34,8 +33,6 @@ if __name__ == '__main__':
 
     path_to_src = os.path.dirname(__file__)
 
-    # config_file_name = rospy.get_param('config_file_name', default='relaxedIK.config')
-    # relaxedIK = RelaxedIK.init_from_config(config_file_name)
     relaxedIK = get_relaxedIK_from_info_file(path_to_src)
     num_chains = relaxedIK.vars.robot.numChains
 
@@ -43,24 +40,12 @@ if __name__ == '__main__':
 
     rate = rospy.Rate(150)
     while not rospy.is_shutdown():
-        '''
-        pose_goals = eepg.ee_poses
-        header = eepg.header
-        num_poses = len(pose_goals)
-        if not num_poses == num_chains:
-            print bcolors.FAIL + 'ERROR: Number of pose goals ({}) ' \
-                                 'not equal to the number of kinematic chains ({}).  Exiting relaxed_ik_node'.format(num_poses, num_chains)
-            rospy.signal_shutdown()
-        '''
-
         pos_goals = []
         quat_goals = []
         pose_goals = eepg.ee_poses
         header = eepg.header
 
-
         for i in xrange(num_chains):
-        # for p in pose_goals:
             p = pose_goals[i]
             pos_x = p.position.x
             pos_y = p.position.y
@@ -77,7 +62,6 @@ if __name__ == '__main__':
         xopt = relaxedIK.solve(pos_goals, quat_goals)
         ja = JointAngles()
         ja.header = header
-        # ja.header.stamp = rospy.rostime.get_rostime()
         for x in xopt:
             ja.angles.data.append(x)
 

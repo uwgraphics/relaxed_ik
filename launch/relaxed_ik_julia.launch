@@ -3,6 +3,6 @@
 
    <!-- ##################################################################################### -->
 
-   <node pkg="relaxed_ik" type="relaxed_ik_node.py" name="relaxed_ik_node" />
+   <node pkg="relaxed_ik" type="relaxed_ik_node.jl" name="relaxed_ik_node" output="screen"/>
 
 </launch>
