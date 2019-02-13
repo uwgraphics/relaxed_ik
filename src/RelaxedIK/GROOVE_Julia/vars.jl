@@ -23,10 +23,10 @@ mutable struct Vars
 end
 
 function Vars(init_state, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds)
-    xopt = copy(init_state)
-    prev_state = copy(init_state)
-    prev_state2 = copy(init_state)
-    prev_state3 = copy(init_state)
+    xopt = copy(init_state) + 0.0000000001*ones(length(init_state))
+    prev_state = copy(init_state) + 0.0000000001*ones(length(init_state))
+    prev_state2 = copy(init_state) + 0.0000000001*ones(length(init_state))
+    prev_state3 = copy(init_state) + 0.0000000001*ones(length(init_state))
 
     length_checek = length(objectives) == length(grad_types) == length(weight_priors)
     if length_checek == false

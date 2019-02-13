@@ -234,8 +234,8 @@ def joint_state_define(x):
 #   will automatically envelope the robot's links based on its geometry defined in the urdf, but you
 #   must supply a few other pieces of information for collision avoidance to work well.
 #
-#   To start, duplicate the collision_example.yaml file found in the RelaxedIK/Config directory, and rename the duplicate.
-#   The renamed file should retain its yaml file extension and should also be in the RelaxedIK/Config
+#   To start, duplicate the collision_example.yaml file found in the RelaxedIK/Config/collision_files directory, and rename the duplicate.
+#   The renamed file should retain its yaml file extension and should also be in the RelaxedIK/Config/collision_files
 #   directory.
 #
 #   Now, we'll work in this new file and make some adjustments to tailor the collision information to your robot platform.
@@ -245,8 +245,7 @@ def joint_state_define(x):
 #   Next, the robot needs a set of collision-free "sample states" so that it can learn what is close to a collision state and what is not.
 #   These sample states help the robot decide the difference between a configuration that is close to collision state and
 #   a configuration where two links are natively and safely close together.  THIS STEP IS VERY IMPORTANT FOR THE NEURAL
-#   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
-#   seen to work well, but more will always be better.  Good candidates for "sample states" are robot configurations that are
+#   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  Good candidates for "sample states" are robot configurations that are
 #   somewhat close to collisions states, but do not exhibit a collision.  If it seems like the robot is being too cautious after
 #   training the neural network (i.e., it is staying too far away from collision states), include more sample states that are closer to
 #   collision states without colliding.
@@ -258,6 +257,25 @@ def joint_state_define(x):
 #
 #   To start this tool, use the command:
 #       roslaunch relaxed_ik urdf_viewer.launch
+#
+#   The next (optional) fields in the collision file are the following:
+#      training_states: [ ]
+#      problem_states: [ ]
+#
+#   The training_states list should be filled with any states that you think will be useful in the neural network training process
+#   NOTE: in constrast to the sample_states list filled above, the training_states states do NOT have to be in a collision free state!
+#   Good states to include in the training_states list are those that are near the interface between collision regions, such that the robot
+#   can learn through example the difference between near-collision and collision states
+#
+#   The problem_states list is similar to the training_states list (i.e., can feature either collision or non-collision states), but the
+#   system will try to give these states extra attention in the learning process.  Good states to include in the problem_states list are those
+#   that appear to have been learned incorrectly on previous runs of the neural network learning, and you want to try to fix it on another run
+#   of the learning process.
+#
+#   Both the training_states and problem_states lists are optional parameters.  If you do not want to include states in these lists, leave them as
+#   empty lists (i.e., do NOT delete the [ ] characters in the yaml file).
+#
+#   Again, feel free to use the urdf_viewer tool provided in the relaxed_ik package to select training_states and problem_states
 #
 #   The next fields in the yaml file (boxes, spheres, ellipsoids, capsules, cylinders) are used to specify additional
 #   objects around the environment that the robot should avoid.
@@ -296,6 +314,11 @@ collision_file_name = 'collision_panda.yaml'
 #   You will see an rviz scene with collision objects in their specified locations, including the
 #   collision capsules on the robot's links.
 #   The robot in this scene will be cycling through the sample states you provided in the yaml file
+#
+#   TIP: if any geometry that has been specified in the collision yaml file filled out in Step 5a is not being
+#     displayed, just copy and paste that geometry again in the collision yaml file.
+#     This appears to be a mysterious rviz bug, but listing it twice in the yaml file appears to fix
+#     the problem in all cases.  Listing the geometry twice will not affect the learning process.
 ######################################################################################################
 
 
@@ -304,8 +327,6 @@ collision_file_name = 'collision_panda.yaml'
 # Step 6a: Generate a robot info file using the following command:
 #
 #   roslaunch relaxed_ik generate_info_file.launch
-#
-# The info file (with name specified in Step 1d) should appear in the RelaxedIK/Config/info_files directory
 ######################################################################################################
 
 
@@ -318,10 +339,9 @@ collision_file_name = 'collision_panda.yaml'
 
 ######################################################################################################
 # Step 7: load the newly created info file by changing the info_file_name argument in the load_info_file
-#   launch file, then run the following command:
+#   launch file and running the following command:
 #
 #   roslaunch relaxed_ik load_info_file.launch
-#
 #######################################################################################################
 
 
@@ -337,7 +357,7 @@ collision_file_name = 'collision_panda.yaml'
 #   roslaunch relaxed_ik preprocessing_julia.launch
 #
 #   The system will immediately start producing input-output pairs for the neural network
-#   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
+#   This process will take about 5 - 15 minutes, depending on the robot and number of degrees of freedom
 ######################################################################################################
 
 
@@ -345,43 +365,41 @@ collision_file_name = 'collision_panda.yaml'
 ######################################################################################################
 # Step 8b (optional): If you would also like the option of running the python variant of RelaxedIK,
 #   you will have to run a separate preprocessing step to learn a neural network in the python environment.
-#   The python version of the solver runs considerably slower than the default, Julia version; however,
+#   The python version of the solver runs considerably slower than the default Julia version; however,
 #   we still want to support the Python version going forward in case people would still like to use it.
 #   To start this process, run the following command:
 #
 #   roslaunch relaxed_ik preprocessing_python.launch
 #
 #   The system will immediately start producing input-output pairs for the neural network
-#   This process will take about 10 - 25 minutes, depending on the robot and number of degrees of freedom
+#   This process will take about 5 - 15 minutes, depending on the robot and number of degrees of freedom
 ######################################################################################################
 
 
 
 ######################################################################################################
-# Step 9: Your RelaxedIK solver is ready to go!  To see sample output, run the following command:
-#   roslaunch relaxed_ik sample.launch
-#
-#   You should see your robot in rviz moving its end effector back and forth
-######################################################################################################
-
-
-
-######################################################################################################
-# Step 10a: Now that the solver has gone through its preprocessing, you can now use the relaxedIK
+# Step 9a: Now that the solver has gone through its preprocessing, you can now use the relaxedIK
 #   solver as a standalone ROS node.  To start the solver, first load a desired info file using the
 #   command found in Step 7.
 #
-#   Next, start the node with the following command:
-#   roslaunch relaxed_ik relaxed_ik.launch
+#   Next, start the node with one of the following commands:
 #
-#   Using this command, your relaxed_ik solver will initialize in its own node and will await
-#   end effector pose goal commands.  Refer to step 10b for instructions on publishing end effector
+#   For the Julia version of the solver, run:
+#       roslaunch relaxed_ik relaxed_ik_julia.launch
+#   (NOTE: The julia version takes a little while to do its JIT compilation, ~20-40 seconds in testing)
+#
+#
+#   For the Python version of the solver, run:
+#       roslaunch relaxed_ik relaxed_ik_python.launch
+#
+#   Using one of these commands, your relaxed_ik solver will initialize in its own node and will await
+#   end-effector pose goal commands.  Refer to step 9b for instructions on publishing end-effector
 #   pose goals and receiving solutions.
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 10b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
+# Step 9b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
 #   end effector pose goals for each of the end effectors in the kinematic chain.  The relaxed_ik package
 #   provides a custom message called EEPoseGoals which encapsulates all necessary pose goal information.
 #
@@ -415,6 +433,57 @@ collision_file_name = 'collision_panda.yaml'
 #   The angles field contains the joint angle solutions as Float32 values, adhering to the naming order
 #   provided in step 3b when the configuration file was created.
 #######################################################################################################
+
+
+######################################################################################################
+# Step 10: To verify that your solver has been set up properly, we provide a control simulation environment
+#   using keyboard inputs.  To start, ensure that a version of relaxedIK has been initialized, following
+#   Steps 7 and 9a.  Next, start up the rviz viewer by running the following command:
+#
+#   roslaunch relaxed_ik rviz_viewer.launch
+#
+#   Once this command is run, you should see an rviz window come up, and your robot platform should be
+#   stationary in the initial configuation you specified for the info file in step 3d.
+#   NOTE: if you ever want to CHANGE this initial configuration, change it in the robot's info file, NOT in this
+#   start_here.py file!!
+#
+#   Next, we provide a simple keyboard interface in order to pass end-effector pose goals to the solver.
+#   This keyboard interface has been designed just for testing.  To start up the keyboard controller, use
+#   the following command:
+#
+#   rosrun relaxed_ik keyboard_ikgoal_driver.py
+#
+#   The keyboard controller handles up to two chains in the robot platform (if you only have a single chain in your
+#   system, the solver will know not to listen to the single end-effector goal).  To use the keyboard controller,
+#   first ensure that the termainal window where the keyboard_ikgoal_driver script was run from has focus (i.e.,
+#   make sure it's clicked), then use the following keystrokes:
+#
+#   w - move chain 1 along +X
+#   x - move chain 1 along -X
+#   a - move chain 1 along +Y
+#   d - move chain 1 along -Y
+#   q - move chain 1 along +Z
+#   z - move chain 1 along -Z
+#   1 - rotate chain 1 around +X
+#   2 - rotate chain 1 around -X
+#   3 - rotate chain 1 around +Y
+#   4 - rotate chain 1 around -Y
+#   5 - rotate chain 1 around +Z
+#   6 rotate chain 1 around -Z
+#
+#   i - move chain 2 along +X
+#   m - move chain 2 along -X
+#   j - move chain 2 along +Y
+#   l - move chain 2 along -Y
+#   u - move chain 1 along +Z
+#   n - move chain 1 along -Z
+#   = - rotate chain 1 around +X
+#   - - rotate chain 1 around -X
+#   0 - rotate chain 1 around +Y
+#   9 - rotate chain 1 around -Y
+#   8 - rotate chain 1 around +Z
+#   7 - rotate chain 1 around -Z
+######################################################################################################
 
 
 # Step-by-step guide ends here!

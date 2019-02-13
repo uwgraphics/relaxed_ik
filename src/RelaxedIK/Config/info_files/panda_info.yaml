@@ -3,7 +3,7 @@ fixed_frame: "panda_link0"
 joint_names: [ [ "panda_joint1", "panda_joint2", "panda_joint3", "panda_joint4", "panda_joint5", "panda_joint6", "panda_joint7", "panda_joint8"  ] ]
 joint_ordering: [ "panda_joint1", "panda_joint2", "panda_joint3", "panda_joint4", "panda_joint5", "panda_joint6", "panda_joint7" ]
 ee_fixed_joints: [ "panda_hand_joint" ]
-starting_config: [ 0.000001, 0.000001, 0.00001, -1.57, 0.000001, 3.14, 0.000001 ]
+starting_config: [ 0.0, 0.0, 0.0, -1.57, 0.0, 3.14, 0.0 ]
 collision_file_name: "collision_panda.yaml"
 collision_nn_file: "panda_arm_hand_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"
