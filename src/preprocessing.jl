@@ -335,19 +335,20 @@ for epoch=1:num_epochs
         global w
         train(w, batched_data[b], o)
         tl = total_loss2(w, test_ins, test_outs)
-        tl_train = total_loss( w, new_ins[1:50], new_outs[1:50] )
+        tl_train = total_loss( w, new_ins[1:200], new_outs[1:200] )
         global best_w
         global best_score
-        if tl + tl_train < best_score
+        if tl_train < best_score
             println("improved best score")
             best_w = copy(w)
-            best_score = tl + tl_train
+            best_score = tl_train
             global improve_idx
             improve_idx = 1
         else
             global improve_idx
             improve_idx += 1
             max_iters = 500
+            w = best_w
             if improve_idx > max_iters
                 println("have not improved in $max_iters iterations.  quitting.")
                 global quit

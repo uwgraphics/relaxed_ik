@@ -166,7 +166,7 @@ end
 function collision_nn_obj(x, vars)
     state_to_joint_pts_inplace(x, vars)
     # state = state_to_joint_pts_withreturn(x, vars)
-    return groove_loss(  vars.nn_model( vars.joint_pts ) , 0.0, 2.0, 0.1, 2.1, 2.0 )
+    return groove_loss(  vars.nn_model( vars.joint_pts ) , 0.0, 2.0, 0.07, 100.0, 2.0 )
 end
 
 

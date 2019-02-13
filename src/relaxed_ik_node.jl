@@ -139,6 +139,7 @@ while ! is_shutdown()
     end
 
     xopt = solve(relaxedIK, pos_goals, quat_goals)
+    # println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
     ja = JointAngles()
     for i = 1:length(xopt)
         push!(ja.angles.data, xopt[i])
