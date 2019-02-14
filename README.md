@@ -83,22 +83,34 @@ kdl urdf parser:
 
 <br>
 
+readchar:
+<div> >> pip install readchar </div>
+
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
-
-<!--
-boost: https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html
-The boost c++ libraries are used to interface between c++ and python code in the solver.  The solver will look for boost library files in the directory /usr/local/lib/ (the default install directory); if the library files are not found, the solver will try to move on anyway using the default python implementation, though performance will be slower. (UPDATE: Boost implementations are not turned on in the current version, but these will be included in the next RelaxedIK update after some testing).
--->
-
 
 scikit learn:
 http://scikit-learn.org/stable/index.html
 
+To use the Julia version of the solver (which is the recommended option), you will first need to install Julia.
+https://julialang.org/
+
+The solver was written in Julia 1.0.2, though any more recent 1.X.X version should suffice.
+
+If you plan to extend any of the Julia code, we recommend using the Juno IDE (not required)
+
+Once Julia is installed, initialize a Julia environment using the following command:
+<div> >> julia </div>
+
+then run the following commands to install Julia dependencies for RelaxedIK:
+<div> >> using Pkg </div>
+<div> >> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra"])
+
+
 
 <b> Tutorial </b>
 
-For full setup and usage details, please refer to start_here.py in the src directory.
+For full setup and usage details, please refer to start_here.py in the src directory.  Prior to starting the setup process, please ensure that you have installed all dependencies listed above.
 
 <b> Coming Soon </b>
 
