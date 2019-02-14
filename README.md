@@ -77,14 +77,14 @@ https://dl.acm.org/citation.cfm?id=3171221.3171279
 <b> Dependencies </b>
 
 kdl urdf parser:
-<pre> >> sudo apt-get install ros-[your ros distro]-urdfdom-py </pre>
-<pre> >> sudo apt-get install ros-[your ros distro]-kdl-parser-py </pre>
-<pre> >> sudo apt-get install ros-[your ros distro]-kdl-conversions </pre> 
+<pre> sudo apt-get install ros-[your ros distro]-urdfdom-py </pre>
+<pre> sudo apt-get install ros-[your ros distro]-kdl-parser-py </pre>
+<pre> sudo apt-get install ros-[your ros distro]-kdl-conversions </pre> 
 
 <br>
 
 readchar:
-<pre> >> pip install readchar </pre>
+<pre> pip install readchar </pre>
 
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
@@ -100,11 +100,11 @@ The solver was written in Julia 1.0.2, though any more recent 1.X.X version shou
 If you plan to extend any of the Julia code, we recommend using the Juno IDE (not required)
 
 Once Julia is installed, initialize a Julia environment using the following command:
-<pre> >> julia </pre>
+<pre> julia </pre>
 
 then run the following commands to install Julia dependencies for RelaxedIK:
-<pre> >> using Pkg </pre>
-<pre> >> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra"]) </pre>
+<pre> using Pkg </pre>
+<pre> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra"]) </pre>
 
 
 
