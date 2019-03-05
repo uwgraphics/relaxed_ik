@@ -95,6 +95,9 @@ http://scikit-learn.org/stable/index.html
 scipy:
 <pre> sudo pip install scipy </pre>
 
+Pyyaml:
+<pre> sudo pip install PyYaml </pre>
+
 <br>
 
 To use the Julia version of the solver (which is the recommended option), you will first need to install Julia.
