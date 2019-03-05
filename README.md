@@ -82,18 +82,18 @@ kdl urdf parser:
 <pre> sudo apt-get install ros-[your ros distro]-kdl-conversions </pre> 
 
 readchar:
-<pre> pip install readchar </pre>
+<pre> sudo pip install readchar </pre>
 
 fcl collision library:
 https://github.com/BerkeleyAutomation/python-fcl
-<pre> pip install python-fcl </pre>
+<pre> sudo pip install python-fcl </pre>
 
 scikit learn:
 http://scikit-learn.org/stable/index.html
-<pre> pip install scikit-learn </pre>
+<pre> sudo pip install scikit-learn </pre>
 
 scipy:
-<pre> pip install scipy </pre>
+<pre> sudo pip install scipy </pre>
 
 <br>
 
