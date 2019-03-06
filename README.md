@@ -98,7 +98,13 @@ For full setup and usage details, please refer to start_here.py in the src direc
 
 <b> Coming Soon </b>
 
-RelaxedIK has been rewritten in Julia to substantially boost performance. These changes will be made public and pushed to the main branch in February 2019.
+RelaxedIK has been rewritten in Julia to substantially boost performance. If you would like to try out this version of RelaxedIK before it is pushed to the main branch, feel free to try it out as part of a beta testing phase.  To use it, please clone the "dev" branch using the following command: 
+
+<pre> git clone -b dev https://github.com/uwgraphics/relaxed_ik.git </pre>
+
+install the proper dependenices, and follow the new set of instructions in the start_here.py file.  
+
+If you have feedback on your experience using the new version of the solver (positive or negative), please email me at rakita@cs.wisc.edu .  The code will be moved to the main branch after this testing phase.  Thanks!
 
 <b> Change Log </b>
 
