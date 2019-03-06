@@ -135,7 +135,7 @@ Then, make sure that the terminal that that command was entered into has focus (
 
 <b> Coming Soon </b>
 
-RelaxedIK has been rewritten in Julia to substantially boost performance.  These changes will be made public and pushed to the main branch in February 2019.
+RelaxedIK has been rewritten in Julia to substantially boost performance.  This version of the solver is currently in a beta test on this branch.  If you have feedback based on your experience using this version of the solver (positive or negative), please email me at rakita@cs.wisc.edu.  Thanks!
 
 <b> Change Log </b>
 
