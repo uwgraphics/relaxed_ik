@@ -122,6 +122,17 @@ in the same Julia session, configure PyCall within Julia by running the followin
 
 For full setup and usage details, please refer to start_here.py in the src directory.  Prior to starting the setup process, please ensure that you have installed all dependencies listed above.
 
+<b> Usage Notes </b>
+
+If you are using the Julia version of the RelaxedIK solver, note that it currently takes a little while (~30 seconds) for the solver to start.  Julia code is VERY fast once it starts up, but it takes a bit of overhead time to do its JIT compilation.
+
+Unfortunately, there's little we can do at this point to eliminate this JIT compilation time the first time RelaxedIK starts up (though, we are hoping compilation times get better in general in future versions of the Julia programming language!).  However, to alleviate this issue in the short term, we have provided a way to "reset" the solver on subsequent runs, such that you will not have to kill the program, restart it, and wait another 30 seconds for it to compile every time.
+
+To perform this reset, first start the following ROS node using this command:
+<pre> rosrun relaxed_ik reset_and_quit.py </pre>
+
+Then, make sure that the terminal that that command was entered into has focus (i.e., it has been clicked), and type the character 'r'.  This will reset the robot to its initial configuration.  If you would like to quit instead of resetting, type the character 'q'.
+
 <b> Coming Soon </b>
 
 RelaxedIK has been rewritten in Julia to substantially boost performance.  These changes will be made public and pushed to the main branch in February 2019.
