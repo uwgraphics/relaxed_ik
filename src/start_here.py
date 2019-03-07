@@ -124,7 +124,7 @@ joint_ordering =  [  ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [ 'panda_hand_joint']
+ee_fixed_joints = [ ]
 ######################################################################################################
 
 
