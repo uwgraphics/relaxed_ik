@@ -1,5 +1,6 @@
 include("gradient.jl")
 include("constraint.jl")
+include("objective.jl")
 
 mutable struct Vars
     init_state

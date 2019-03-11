@@ -16,7 +16,6 @@ goal_quat_pub = rospy.Publisher('vive_quaternion', QuaternionStamped)
 ee_pose_goals_pub = rospy.Publisher('/relaxed_ik/ee_pose_goals', EEPoseGoals, queue_size=5)
 quit_pub = rospy.Publisher('/relaxed_ik/quit',Bool,queue_size=5)
 
-
 pos_stride = 0.005
 rot_stride = 0.005
 
