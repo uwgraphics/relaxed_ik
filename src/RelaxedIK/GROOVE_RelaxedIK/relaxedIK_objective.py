@@ -42,6 +42,7 @@ class Position_Obj(Objective):
         g = 2
         return (-math.e ** ((-(x_val - t) ** d) / (2.0 * c ** 2)) ) + f * (x_val - t) ** g
 
+
 class Position_MultiEE_Obj(Objective):
     def __init__(self, *args): pass
     def isVelObj(self): return False
@@ -408,5 +409,3 @@ class Collision_Avoidance_nn(Objective):
             return (-math.e ** ((-(x_val - t) ** d) / (2.0 * c ** 2)) ) + f * (x_val - t) ** g
 
         # return math.exp(x_val - 0.64) - 1
-
-

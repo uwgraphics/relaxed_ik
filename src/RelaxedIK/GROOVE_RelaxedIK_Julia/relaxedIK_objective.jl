@@ -160,7 +160,7 @@ end
 
 function joint_limit_obj(x, vars)
     sum = 0.0
-    penalty = 1.0
+    penalty = 50.0
     d = 8
     joint_limits = vars.vars.bounds
     for i = 1:vars.robot.num_dof
@@ -173,7 +173,7 @@ function joint_limit_obj(x, vars)
 
     x_val = sum
     # return groove_loss(  x_val, 0.0, 2.0, 2.3, 0.003, 2.0 )
-    return groove_loss(  x_val, 0.0, 2.0, 0.3295051144911304, 0.1, 2.0 )
+    return groove_loss(  x_val, 0.0, 2.0, 2.3, 0.003, 2.0 )
 end
 
 function collision_nn_obj(x, vars)
