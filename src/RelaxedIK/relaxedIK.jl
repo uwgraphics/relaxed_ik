@@ -88,6 +88,30 @@ function get_finite_diff_version(path_to_src, info_file_name; solver_name = "sls
     return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
+function get_joint_positions(relaxedIK, x)
+    positions = []
+    for i = 1:length(relaxedIK.relaxedIK_vars.robot.subchain_indices)
+        push!(positions, [])
+        relaxedIK.relaxedIK_vars.robot.arms[i].getFrames(x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i]])
+        for j = 1:length(relaxedIK.relaxedIK_vars.robot.arms[i].out_pts)
+            push!(positions[i], relaxedIK.relaxedIK_vars.robot.arms[i].out_pts[j])
+        end
+    end
+    return positions
+end
+
+function get_rot_mats(relaxedIK, x)
+    rot_mats = []
+    for i = 1:length(relaxedIK.relaxedIK_vars.robot.subchain_indices)
+        push!(rot_mats, [])
+        relaxedIK.relaxedIK_vars.robot.arms[i].getFrames(x[relaxedIK.relaxedIK_vars.robot.subchain_indices[i]])
+        for j = 1:length(relaxedIK.relaxedIK_vars.robot.arms[i].out_frames)
+            push!(rot_mats[i], relaxedIK.relaxedIK_vars.robot.arms[i].out_frames[j])
+        end
+    end
+    return rot_mats
+end
+
 
 function solve(relaxedIK, goal_positions, goal_quats; prev_state = [])
     vars = relaxedIK.relaxedIK_vars
