@@ -21,7 +21,6 @@ function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_p
     return RelaxedIK(relaxedIK_vars, groove, ema_filter)
 end
 
-
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad",  "forward_ad"]
