@@ -391,7 +391,8 @@ class Arm(robot_function.RobotFunction):
         do_ad = False
         pt = N.array(self.dispOffset)
         pts = [ self.dispOffset ]
-        rot = N.eye(3)
+        # rot = N.eye(3)
+        rot = self.rotOffsets[0]
         frames = [ rot ]
         axis_idx = 0
 
@@ -434,15 +435,17 @@ class Arm(robot_function.RobotFunction):
                     # since we know that the rot matrix doesn't change, and that
                 # this is an affine thing, we can do this a bit more quickly
                 #lmat = N.dot(rotMatrix(axis,s,c) , transMatrix(self.displacements[i]))
-            if self.rotOffsets:
-                if not (self.rotOffsets[i] is None):
-                    rot = rot.dot(self.rotOffsets[i])
 
             if self.joint_types[i] == 'revolute' or self.joint_types[i] == 'continuous':
                 rmat = rot3(axis,s,c)
                 rot = rot.dot(rmat)
 
             pt = rot.dot(self.displacements[i]) + pt
+
+            if self.rotOffsets:
+                if not (self.rotOffsets[i] is None):
+                    rot = rot.dot(self.rotOffsets[i+1])
+
             # print end - start
             pts.append( pt )
             frames.append(rot)
