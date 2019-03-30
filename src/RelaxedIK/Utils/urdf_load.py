@@ -107,6 +107,8 @@ def convertToArmJointList(urdf_robot, full_joint_list, fixedJoint, Debug=False):
             if j.name == fixedJoint:
                 currJoint = j
                 displacements.append(tuple(currJoint.origin.xyz))
+                rotOffsets.append(tuple(currJoint.origin.rpy))
+
         if currJoint == []:
             print bcolors.FAIL + 'fixed_ee_joint: {} not found!'.format(fixedJoint) + bcolors.ENDC
             raise Exception('Invalid fixed_ee_joint.  Exiting.')

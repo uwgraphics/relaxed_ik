@@ -112,7 +112,8 @@ end
 
 function getFrames!(state, static_disp_offset, joint_types, axis_types, displacements, original_displacements, static_displacements, do_rot_offsets, rot_offsets, pts, frames)
     pt = static_disp_offset
-    rot = one(RotMatrix{3, Float64})
+    # rot = one(RotMatrix{3, Float64})
+    rot = rot_offsets[1]
     #push!(pts, pt)
     pts[1] = pt
     # push!(frames, rot)
@@ -155,15 +156,15 @@ function getFrames!(state, static_disp_offset, joint_types, axis_types, displace
             axis_idx += 1
         end
 
-        if do_rot_offsets
-            rot = rot * rot_offsets[i]
-        end
-
         if joint_types[i] == "revolute" || joint_types[i]=="continuous"
             rot = rot * r
         end
 
         pt = rot * static_displacements[i] + pt
+
+        if do_rot_offsets
+            rot = rot * rot_offsets[i+1]
+        end
         #push!(pts, pt)
         pts[i+1] = pt
         # push!(frames, rot)
