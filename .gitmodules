@@ -1,3 +1,5 @@
 [submodule "src/RelaxedIK"]
 	path = src/RelaxedIK
 	url = https://github.com/uwgraphics/RelaxedIK.git
+[submodule "src/RelaxedIK/"]
+	branch = master
