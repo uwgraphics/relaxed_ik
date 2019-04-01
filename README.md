@@ -98,9 +98,9 @@ For full setup and usage details, please refer to start_here.py in the src direc
 
 <b> Coming Soon </b>
 
-RelaxedIK has been rewritten in Julia to substantially boost performance. If you would like to try out this version of RelaxedIK before it is pushed to the main branch, feel free to try it out as part of a beta testing phase.  To use it, please clone the "dev" branch using the following command: 
+RelaxedIK has been rewritten in Julia to substantially boost performance. If you would like to try out this version of RelaxedIK before it is pushed to the main branch, feel free to try it out as part of a beta testing phase.  To use it, please clone the "dev" branch using the following commands: 
 
-<pre> git clone -b dev https://github.com/uwgraphics/relaxed_ik.git </pre>
+<pre> git clone --recurse-submodules -b dev https://github.com/uwgraphics/relaxed_ik.git </pre>
 
 install the proper dependenices, and follow the new set of instructions in the start_here.py file.  
 
