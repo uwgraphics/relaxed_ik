@@ -1,0 +1,1785 @@
+<?xml version="1.0" ?>
+<robot name="DRC_HUBO" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<link name="base_footprint">
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<box size="0.001 0.001 0.001"/>
+			</geometry>
+		</visual>
+	</link>
+	<joint name="base_footprint_joint" type="fixed">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="base_footprint"/>
+		<child link="Body_TORSO"/>
+	</joint>
+	<link name="Body_TORSO">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.000373 0.000832 0.360257"/>
+			<mass value="18.236"/>
+			<inertia ixx="0.19794" ixy="6.4e-05" ixz="-0.001125" iyy="0.155811" iyz="0.000284" izz="0.117584"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_TORSO.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_TORSO_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<!-- LEFT ARM -->
+	<!-- LEFT ARM -->
+	<!-- LEFT ARM -->
+	<joint name="LEFT_SHOULDER_PITCH" type="revolute">
+		<origin rpy="0 -0 0" xyz="0 0.242 0.456"/>
+		<parent link="Body_TORSO"/>
+		<child link="Body_LSP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-4.537856055185257" upper="1.3962634015954636" velocity="4.254240051736178"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LSP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.015596 -0.052409 0"/>
+			<mass value="1.6"/>
+			<inertia ixx="0.005195" ixy="0.001333" ixz="1e-08" iyy="0.004409" iyz="0" izz="0.007234"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_SHOULDER_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_LSP"/>
+		<child link="Body_LSR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-0.5235987755982988" upper="3.6651914291880923" velocity="4.254240051736178"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LSR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.003104 0.000106 -0.013013"/>
+			<mass value="1.427"/>
+			<inertia ixx="0.003163" ixy="6e-06" ixz="-0.000211" iyy="0.003689" iyz="0" izz="0.001909"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSR.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSR_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_SHOULDER_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_LSR"/>
+		<child link="Body_LSY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.2" upper="2.2" velocity="7.644542123735163"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LSY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.035284 -0.242 -0.87969"/>
+			<mass value="0.95687"/>
+			<inertia ixx="0.06681" ixy="-3.173E-08" ixz="-0.0029038" iyy="0.034452" iyz="1.0171E-05" izz="0.03448"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LSY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_ELBOW" type="revolute">
+		<origin rpy="0 0 0" xyz="0.035 0 -0.350"/>
+		<parent link="Body_LSY"/>
+		<child link="Body_LEB"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="-0.5" velocity="7.644542123735163"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LEB">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.019775 0.004924 -0.041836"/>
+			<mass value="0.409464"/>
+			<inertia ixx="0.001031" ixy="4e-05" ixz="0.000277" iyy="0.001163" iyz="8.5e-05" izz="0.00056"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LEB.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LEB_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_WRIST_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="-0.035 0 -0.34"/>
+		<parent link="Body_LEB"/>
+		<child link="Body_LWY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="8.901179185171081"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LWY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="5.4e-05 0.001779 0.134651"/>
+			<mass value="1.47"/>
+			<inertia ixx="0.01302" ixy="-1e-05" ixz="4e-5" iyy="0.012803" iyz="-0.000388" izz="0.000862"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_WRIST_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_LWY"/>
+		<child link="Body_LWP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="14.66076571675237"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LWP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="1.7e-05 0.011876 -0.003359"/>
+			<mass value="0.158865"/>
+			<inertia ixx="7.2e-04" ixy="1e-06" ixz="1e-06" iyy="6.5e-04" iyz="6e-05" izz="6.5e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LWFT" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.0326"/>
+		<parent link="Body_LWP"/>
+		<child link="Body_LWFT"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="1.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LWFT">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-1.2e-05 -3e-06 -0.017752"/>
+			<mass value="0.016659"/>
+			<inertia ixx="2e-05" ixy="1e-06" ixz="1e-06" iyy="1.85e-05" iyz="1e-06" izz="3.33e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWFT.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWFT_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_WRIST_YAW_2" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0.0326"/>
+		<parent link="Body_LWFT"/>
+		<child link="Body_LF1"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="14.66076571675237"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LF1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00350179 0.00500094 -0.108683"/>
+			<mass value="0.894667"/>
+			<inertia ixx="0.00087045" ixy="-1.448e-05" ixz="-1.064e-05" iyy="0.00103972" iyz="-7.89e-06"
+					 izz="0.00095329"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_HAND" type="fixed">
+		<origin rpy="0 0 0" xyz="0 0 -0.2"/>
+		<parent link="Body_LF1"/>
+		<child link="Body_LHAND"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+	<link name="Body_LHAND">
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<box size="0.0001 0.0001 0.0001"/>
+			</geometry>
+		</visual>
+	</link>
+	<!-- LEFT HAND -->
+	<!-- LEFT HAND -->
+	<!-- LEFT HAND -->
+	<joint name="LHAND_a1" type="revolute">
+		<origin rpy="0 0 0" xyz="0.02498 -0.023 -0.1471"/>
+		<parent link="Body_LF1"/>
+		<child link="Body_LF2_a1"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_a1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 -0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_a1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_a1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_a2" type="revolute">
+		<origin rpy="0 0.7854 0" xyz="0.03889 0 -0.0388"/>
+		<parent link="Body_LF2_a1"/>
+		<child link="Body_LF2_a2"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_a2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183473 -5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_a2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_a3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_a3" type="revolute">
+		<origin rpy="0 0 0" xyz="0.04 0 0"/>
+		<parent link="Body_LF2_a2"/>
+		<child link="Body_LF2_a3"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_a3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00112468 -3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_a3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_b1" type="revolute">
+		<origin rpy="0 0 0" xyz="0.02498 0.0232 -0.1471"/>
+		<parent link="Body_LF1"/>
+		<child link="Body_LF2_b1"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_b1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 -0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_b2" type="revolute">
+		<origin rpy="0 0.7854 0" xyz="0.03889 0 -0.0388"/>
+		<parent link="Body_LF2_b1"/>
+		<child link="Body_LF2_b2"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_b2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183473 -5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b2_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_b3" type="revolute">
+		<origin rpy="0 0 0" xyz="0.04 0 0"/>
+		<parent link="Body_LF2_b2"/>
+		<child link="Body_LF2_b3"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_b3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00112468 -3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_b3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_c1" type="revolute">
+		<origin rpy="0 0 0" xyz="-0.02502 0 -0.1471"/>
+		<parent link="Body_LF1"/>
+		<child link="Body_LF2_c1"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_c1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_c2" type="revolute">
+		<origin rpy="0 -0.7854 0" xyz="-0.03889 0 -0.0388"/>
+		<parent link="Body_LF2_c1"/>
+		<child link="Body_LF2_c2"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_c2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0183473 5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c2_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LHAND_c3" type="revolute">
+		<origin rpy="0 0 0" xyz="-0.04 0 0"/>
+		<parent link="Body_LF2_c2"/>
+		<child link="Body_LF2_c3"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_LF2_c3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00112468 3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LF2_c3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<!-- RIGHT ARM -->
+	<!-- RIGHT ARM -->
+	<!-- RIGHT ARM -->
+	<joint name="RIGHT_SHOULDER_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 -0.242 0.456"/>
+		<parent link="Body_TORSO"/>
+		<child link="Body_RSP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-4.537856055185257" upper="1.3962634015954636" velocity="4.254240051736178"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RSP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.015596 0.052409 0"/>
+			<mass value="1.6"/>
+			<inertia ixx="0.005195" ixy="-0.001333" ixz="1e-08" iyy="0.004409" iyz="-1e-08" izz="0.007234"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_SHOULDER_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_RSP"/>
+		<child link="Body_RSR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-3.6651914291880923" upper="0.52" velocity="4.254240051736178"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RSR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.003104 -0.000106 -0.013013"/>
+			<mass value="1.427"/>
+			<inertia ixx="0.003163" ixy="-6e-06" ixz="-0.000211" iyy="0.003689" iyz="-1e-08" izz="0.001909"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSR.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSR_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_SHOULDER_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_RSR"/>
+		<child link="Body_RSY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.2" upper="2.2" velocity="7.644542123735163"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RSY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.035284 0.242 -0.87969"/>
+			<mass value="0.95687"/>
+			<inertia ixx="0.06681" ixy="-3.173E-08" ixz="-0.0029038" iyy="0.034452" iyz="1.0171E-05" izz="0.03448"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RSY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_ELBOW" type="revolute">
+		<origin rpy="0 0 0" xyz="0.035 0 -0.35"/>
+		<parent link="Body_RSY"/>
+		<child link="Body_REB"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="-0.5" velocity="7.644542123735163"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_REB">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.019775 -0.004924 -0.041836"/>
+			<mass value="0.409464"/>
+			<inertia ixx="0.001031" ixy="-4e-05" ixz="0.000277" iyy="0.001163" iyz="-8.5e-05" izz="0.00056"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_REB.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_REB_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_WRIST_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="-0.035 0 -0.34"/>
+		<parent link="Body_REB"/>
+		<child link="Body_RWY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="8.901179185171081"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RWY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="5.4e-05 -0.001779 0.134651"/>
+			<mass value="1.47"/>
+			<inertia ixx="0.01302" ixy="1e-05" ixz="4e-05" iyy="0.012803" iyz="0.000388" izz="0.000862"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_WRIST_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_RWY"/>
+		<child link="Body_RWP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="14.66076571675237"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RWP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="1.7e-05 -0.011876 -0.003359"/>
+			<mass value="0.158865"/>
+			<inertia ixx="7.2e-04" ixy="-1e-06" ixz="1e-06" iyy="6.5e-04" iyz="-6e-05" izz="6.5e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RWFT" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.0326"/>
+		<parent link="Body_RWP"/>
+		<child link="Body_RWFT"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="1.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RWFT">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-1.2e-05 3e-06 -0.017752"/>
+			<mass value="0.016659"/>
+			<inertia ixx="2e-05" ixy="-1e-06" ixz="1e-06" iyy="1.85e-05" iyz="-1e-06" izz="3.33e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWFT.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWFT_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_WRIST_YAW_2" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0.0326"/>
+		<parent link="Body_RWFT"/>
+		<child link="Body_RF1"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="14.66076571675237"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RF1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00350179 -0.00500094 -0.108683"/>
+			<mass value="0.894667"/>
+			<inertia ixx="0.00087045" ixy="1.448e-05" ixz="-1.064e-05" iyy="0.00103972" iyz="7.89e-06"
+					 izz="0.00095329"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_HAND" type="fixed">
+		<origin rpy="0 0 0" xyz="0 0 -0.2"/>
+		<parent link="Body_RF1"/>
+		<child link="Body_RHAND"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+	<link name="Body_RHAND">
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<box size="0.0001 0.0001 0.0001"/>
+			</geometry>
+		</visual>
+	</link>
+	<!-- RIGHT HAND -->
+	<!-- RIGHT HAND -->
+	<!-- RIGHT HAND -->
+	<joint name="RHAND_a1" type="revolute">
+		<origin rpy="0 0 0" xyz="0.02498 -0.0232 -0.1471"/>
+		<parent link="Body_RF1"/>
+		<child link="Body_RF2_a1"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_a1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 -0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_a2" type="revolute">
+		<origin rpy="0 0.7854 0" xyz="0.03889 0 -0.0388"/>
+		<parent link="Body_RF2_a1"/>
+		<child link="Body_RF2_a2"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_a2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183473 -5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a2_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_a3" type="revolute">
+		<origin rpy="0 0 0" xyz="0.04 0 0"/>
+		<parent link="Body_RF2_a2"/>
+		<child link="Body_RF2_a3"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_a3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00112468 -3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_a3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_b1" type="revolute">
+		<origin rpy="0 0 0" xyz="0.02498 0.023 -0.1471"/>
+		<parent link="Body_RF1"/>
+		<child link="Body_RF2_b1"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_b1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 -0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_b2" type="revolute">
+		<origin rpy="0 0.7854 0" xyz="0.03889 0 -0.0388"/>
+		<parent link="Body_RF2_b1"/>
+		<child link="Body_RF2_b2"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_b2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183473 -5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b2_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_b3" type="revolute">
+		<origin rpy="0 0 0" xyz="0.04 0 0"/>
+		<parent link="Body_RF2_b2"/>
+		<child link="Body_RF2_b3"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_b3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00112468 -3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_b3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_c1" type="revolute">
+		<origin rpy="0 0 0 " xyz="-0.02502 0 -0.1471"/>
+		<parent link="Body_RF1"/>
+		<child link="Body_RF2_c1"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_c1">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0228526 0.00016373 -0.0095261"/>
+			<mass value="0.038683"/>
+			<inertia ixx="1.143e-04" ixy="7e-06" ixz="-6.53e-05" iyy="2.17e-04" iyz="-1e-05" izz="1.314e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c1.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c1_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_c2" type="revolute">
+		<origin rpy="0 -0.7854 0" xyz="-0.03889 0 -0.0388"/>
+		<parent link="Body_RF2_c1"/>
+		<child link="Body_RF2_c2"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_c2">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0183473 5.73e-06 0.00742064"/>
+			<mass value="0.021949"/>
+			<inertia ixx="2.31e-05" ixy="9e-06" ixz="-4.6e-06" iyy="7.09e-05" iyz="-5e-06" izz="6.69e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c2.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c2_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RHAND_c3" type="revolute">
+		<origin rpy="0 0 0" xyz="-0.04 0 0"/>
+		<parent link="Body_RF2_c2"/>
+		<child link="Body_RF2_c3"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="0" upper="1.4708" velocity="1.0"/>
+		<dynamics damping="0.0003" friction="0.1"/>
+	</joint>
+	<link name="Body_RF2_c3">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00112468 3.724e-05 0.00681838"/>
+			<mass value="0.0115"/>
+			<inertia ixx="7.2e-05" ixy="1e-06" ixz="2.9e-05" iyy="1.67e-05" iyz="1e-06" izz="1.84e-05"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c3.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RF2_c3_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<!-- WST -->
+	<!-- WST -->
+	<!-- WST -->
+	<joint name="WAIST" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_TORSO"/>
+		<child link="Body_WST"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-1.0" upper="1.0" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_WST">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.0142849 3.677e-05 0.167934"/>
+			<mass value="5.84383"/>
+			<inertia ixx="0.0381955" ixy="-8.92e-06" ixz="9.3e-06" iyy="0.0129335" iyz="1.362e-05" izz="0.0406631"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_WST.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_WST_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<!-- LEFT LEG -->
+	<!-- LEFT LEG -->
+	<!-- LEFT LEG -->
+	<joint name="LEFT_HIP_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0.1 0"/>
+		<parent link="Body_WST"/>
+		<child link="Body_LHY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LHY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00935101 3.16e-05 0.0624095"/>
+			<mass value="0.928024"/>
+			<inertia ixx="0.00295486" ixy="6.98e-06" ixz="0.00078049" iyy="0.00518702" iyz="1.094e-05"
+					 izz="0.00293613"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_HIP_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_LHY"/>
+		<child link="Body_LHR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LHR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.021225 0.00221228 0.00754947"/>
+			<mass value="1.59023"/>
+			<inertia ixx="0.00211844" ixy="-7.043e-05" ixz="-0.00032158" iyy="0.00328567" iyz="-2.583e-05"
+					 izz="0.00327796"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHR.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHR_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_HIP_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_LHR"/>
+		<child link="Body_LHP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="2.0943951023931953" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LHP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00118459 0.0191546 -0.203184"/>
+			<mass value="6.71948"/>
+			<inertia ixx="0.141229" ixy="-0.00025382" ixz="-0.00860244" iyy="0.137189" iyz="0.00467915"
+					 izz="0.0215948"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LHP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_KNEE" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.38"/>
+		<parent link="Body_LHP"/>
+		<child link="Body_LKN"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.2217304763960306" upper="2.6179938779914944" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LKN">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183276 0.0136168 -0.202909"/>
+			<mass value="3.31308"/>
+			<inertia ixx="0.0505482" ixy="1.49e-06" ixz="0.00341835" iyy="0.0477577" iyz="-0.00179054"
+					 izz="0.00783449"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LKN_col.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LKN_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_ANKLE_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.36"/>
+		<parent link="Body_LKN"/>
+		<child link="Body_LAP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.8325957145940461" upper="2.0943951023931953" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LAP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0172034 0.00229412 -0.00449716"/>
+			<mass value="1.46603"/>
+			<inertia ixx="0.00224197" ixy="-6.068e-05" ixz="-0.00068955" iyy="0.00324527" iyz="1.223e-05"
+					 izz="0.0025331"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_ANKLE_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.025"/>
+		<parent link="Body_LAP"/>
+		<child link="Body_LAR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-0.7853981633974483" upper="0.7853981633974483" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LAR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00933053 0.00014696 -0.0217225"/>
+			<mass value="0.375042"/>
+			<inertia ixx="0.00040047" ixy="-1.77e-06" ixz="-0.00017001" iyy="0.00119482" iyz="8e-07" izz="0.00101396"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAR_NEW.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAR_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LAFT" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.055"/>
+		<parent link="Body_LAR"/>
+		<child link="Body_LAFT"/>
+		<axis xyz="0 0 -1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LAFT">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.035284 -0.099999 0.39601"/>
+			<mass value="0.95687"/>
+			<inertia ixx="0.06681" ixy="-3.1786E-08" ixz="-0.0029038" iyy="0.034452" iyz="1.0171E-05" izz="0.03448"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAFT.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LAFT_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LFUNI" type="revolute">
+		<origin rpy="0 0 0" xyz="0.09 0.079799 0.009"/>
+		<parent link="Body_LAFT"/>
+		<child link="Body_LFUNI"/>
+		<axis xyz="-1 0 0"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LFUNI">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.015121 0 -0.0067726"/>
+			<mass value="0.0070917"/>
+			<inertia ixx="8.5087e-05" ixy="7.9111e-07" ixz="-1.7854e-05" iyy="6.9478e-05" iyz="-1.1234e-07"
+					 izz="1.2766e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LFUNI.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LFUNI.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LFWH" type="revolute">
+		<origin rpy="0 1.4603 -3.1416" xyz="0.03 0 -0.012893"/>
+		<parent link="Body_LFUNI"/>
+		<child link="Body_LFWH"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LFWH">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<mass value="0.03657"/>
+			<inertia ixx="5.4197E-06" ixy="1.2882E-22" ixz="3.1764E-22" iyy="9.0245E-06" iyz="-8.9198E-23"
+					 izz="5.4197E-06"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LFWHEEL.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LFWHEEL.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="LEFT_WHEEL" type="continuous">
+		<origin rpy="0 0 0" xyz="0.04575 0 -0.13"/>
+		<parent link="Body_LKN"/>
+		<child link="Body_LWH"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1e+16" upper="1e+16" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_LWH">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0 0.0800951 0"/>
+			<mass value="0.411522"/>
+			<inertia ixx="0.00038014" ixy="1e-09" ixz="1e-09" iyy="0.0006581" iyz="1e-09" izz="0.00038014"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWH.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_LWH_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<!-- RIGHT LEG -->
+	<!-- RIGHT LEG -->
+	<!-- RIGHT LEG -->
+	<joint name="RIGHT_HIP_YAW" type="revolute">
+		<origin rpy="0 0 0" xyz="0 -0.1 0"/>
+		<parent link="Body_WST"/>
+		<child link="Body_RHY"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-2.96705972839036" upper="2.96705972839036" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RHY">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00935101 -3.16e-05 0.0624095"/>
+			<mass value="0.928024"/>
+			<inertia ixx="0.00295486" ixy="-6.98e-06" ixz="0.00078049" iyy="0.00518702" iyz="-1.094e-05"
+					 izz="0.00293613"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHY.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHY_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_HIP_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_RHY"/>
+		<child link="Body_RHR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="1.5707963267948966" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RHR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.021225 -0.00221228 0.00754947"/>
+			<mass value="1.59023"/>
+			<inertia ixx="0.00211844" ixy="7.043e-05" ixz="-0.00032158" iyy="0.00328567" iyz="2.583e-05"
+					 izz="0.00327796"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHR.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHR_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_HIP_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<parent link="Body_RHR"/>
+		<child link="Body_RHP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.5707963267948966" upper="2.0943951023931953" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RHP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.00118459 -0.0191546 -0.203184"/>
+			<mass value="6.71948"/>
+			<inertia ixx="0.141229" ixy="0.00025382" ixz="-0.00860244" iyy="0.137189" iyz="-0.00467915"
+					 izz="0.0215948"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RHP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_KNEE" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.38"/>
+		<parent link="Body_RHP"/>
+		<child link="Body_RKN"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.2217304763960306" upper="2.6179938779914944" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RKN">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0183276 -0.0136168 -0.202909"/>
+			<mass value="3.31308"/>
+			<inertia ixx="0.0505482" ixy="-1.49e-06" ixz="0.00341835" iyy="0.0477577" iyz="0.00179054"
+					 izz="0.00783449"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RKN.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RKN_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_ANKLE_PITCH" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.36"/>
+		<parent link="Body_RKN"/>
+		<child link="Body_RAP"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1.8325957145940461" upper="2.0943951023931953" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RAP">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.0172034 -0.00229412 -0.00449716"/>
+			<mass value="1.46603"/>
+			<inertia ixx="0.00224197" ixy="6.068e-05" ixz="-0.00068955" iyy="0.00324527" iyz="-1.223e-05"
+					 izz="0.0025331"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAP.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAP_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_ANKLE_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.025"/>
+		<parent link="Body_RAP"/>
+		<child link="Body_RAR"/>
+		<axis xyz="1 0 0"/>
+		<limit effort="100000" lower="-0.7853981633974483" upper="0.7853981633974483" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RAR">
+		<inertial>
+			<origin rpy="0 0 0" xyz="-0.00933053 -0.00014696 -0.0217225"/>
+			<mass value="0.375042"/>
+			<inertia ixx="0.00040047" ixy="1.77e-06" ixz="-0.00017001" iyy="0.00119482" iyz="-8e-07" izz="0.00101396"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAR_NEW.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAR.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RAFT" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 -0.055"/>
+		<parent link="Body_RAR"/>
+		<child link="Body_RAFT"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RAFT">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.035284 0.1 0.39601"/>
+			<mass value="0.95687"/>
+			<inertia ixx="0.06681" ixy="-3.1786E-08" ixz="-0.0029038" iyy="0.034452" iyz="1.0171E-05" izz="0.03448"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAFT.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RAFT_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RFUNI" type="revolute">
+		<origin rpy="0 0 0" xyz="0.09 -0.079799 0.009"/>
+		<parent link="Body_RAFT"/>
+		<child link="Body_RFUNI"/>
+		<axis xyz="-1 0 0"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RFUNI">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0.015121 0 -0.0067726"/>
+			<mass value="0.0070917"/>
+			<inertia ixx="8.5087e-05" ixy="7.9111e-07" ixz="-1.7854e-05" iyy="6.9478e-05" iyz="-1.1234e-07"
+					 izz="1.2766e-04"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RFUNI.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RFUNI.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RFWH" type="revolute">
+		<origin rpy="0 1.4603 -3.1416" xyz="0.03 0 -0.012893"/>
+		<parent link="Body_RFUNI"/>
+		<child link="Body_RFWH"/>
+		<axis xyz="0 -1 0"/>
+		<limit effort="100000" lower="-5" upper="5" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RFWH">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<mass value="0.03657"/>
+			<inertia ixx="5.4197E-06" ixy="1.2882E-22" ixz="3.1764E-22" iyy="9.0245E-06" iyz="-8.9198E-23"
+					 izz="5.4197E-06"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RFWHEEL.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RFWHEEL.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="RIGHT_WHEEL" type="continuous">
+		<origin rpy="0 0 0" xyz="0.04575 0 -0.13"/>
+		<parent link="Body_RKN"/>
+		<child link="Body_RWH"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="100000" lower="-1e+16" upper="1e+16" velocity="2.0"/>
+		<dynamics damping="200" friction="200"/>
+	</joint>
+	<link name="Body_RWH">
+		<inertial>
+			<origin rpy="0 0 0" xyz="0 -0.0800951 0"/>
+			<mass value="0.411522"/>
+			<inertia ixx="0.00038014" ixy="-1e-09" ixz="1e-09" iyy="0.0006581" iyz="-1e-09" izz="0.00038014"/>
+		</inertial>
+		<visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWH.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1"/>
+			</material>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://hubo_description/meshes/Body_RWH_col.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="NECK_PITCH_1" type="revolute">
+		<parent link="Body_TORSO"/>
+		<child link="Body_NKP1"/>
+		<origin rpy="0 0 0" xyz="0.055 0 0.521"/>
+		<limit lower="-0.174532925" upper="0.523598776" effort="100000" velocity="1.0"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+	<link name="Body_NKP1"/>
+	<joint name="NECK_YAW" type="revolute">
+		<parent link="Body_NKP1"/>
+		<child link="Body_NKY"/>
+		<limit lower="-0.785398163" upper="0.785398163" effort="100000" velocity="1.0"/>
+		<origin rpy="0 0 0" xyz="-0.0535 0 0.11475"/>
+		<axis xyz="0 0 1"/>
+	</joint>
+	<link name="Body_NKY"/>
+	<joint name="NECK_PITCH_2" type="revolute">
+		<parent link="Body_NKY"/>
+		<child link="Body_NKP2"/>
+		<limit lower="-0.174532925" upper="0.785398163" effort="100000" velocity="1.0"/>
+		<axis xyz="0 1 0"/>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+	</joint>
+	<link name="Body_NKP2"/>
+	<joint name="NECK_ROLL" type="revolute">
+		<origin rpy="0 0 0" xyz="0 0 0.067"/>
+		<parent link="Body_NKP2"/>
+		<child link="Body_Face"/>
+		<axis xyz="1 0 0"/>
+		<limit lower="-0.523598776" upper="0.523598776" effort="100000" velocity="1.0"/>
+	</joint>
+	<link name="Body_Face"/>
+</robot>
