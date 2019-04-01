@@ -102,6 +102,10 @@ RelaxedIK has been rewritten in Julia to substantially boost performance. If you
 
 <pre> git clone --recurse-submodules -b dev https://github.com/uwgraphics/relaxed_ik.git </pre>
 
+Then navigate to the RelaxedIK directory (src/RelaxedIK) and run the following command:
+
+<pre> git checkout master </pre>
+
 install the proper dependenices, and follow the new set of instructions in the start_here.py file.  
 
 If you have feedback on your experience using the new version of the solver (positive or negative), please email me at rakita@cs.wisc.edu .  The code will be moved to the main branch after this testing phase.  Thanks!
