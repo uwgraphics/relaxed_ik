@@ -3,8 +3,6 @@ include("GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 include("GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
 include("GROOVE_Julia/groove.jl")
 include("GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
-include("GROOVE_Autocam_Julia/autocam_objective.jl")
-include("GROOVE_Autocam_Julia/autocam_vars.jl")
 include("Utils_Julia/transformations.jl")
 include("Utils_Julia/ema_filter.jl")
 
