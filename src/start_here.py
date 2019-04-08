@@ -380,7 +380,7 @@ collision_file_name = ''
 
 
 ######################################################################################################
-# Step 9b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
+# Step 9b: To receive solutions from the relaxed_ik node launched in Step 9a, you first have to publish
 #   end effector pose goals for each of the end effectors in the kinematic chain.  The relaxed_ik package
 #   provides a custom message called EEPoseGoals which encapsulates all necessary pose goal information.
 #
