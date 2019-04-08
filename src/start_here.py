@@ -456,14 +456,14 @@ collision_file_name = ''
 #   m - move chain 2 along -X
 #   j - move chain 2 along +Y
 #   l - move chain 2 along -Y
-#   u - move chain 1 along +Z
-#   n - move chain 1 along -Z
-#   = - rotate chain 1 around +X
-#   - - rotate chain 1 around -X
-#   0 - rotate chain 1 around +Y
-#   9 - rotate chain 1 around -Y
-#   8 - rotate chain 1 around +Z
-#   7 - rotate chain 1 around -Z
+#   u - move chain 2 along +Z
+#   n - move chain 2 along -Z
+#   = - rotate chain 2 around +X
+#   - - rotate chain 2 around -X
+#   0 - rotate chain 2 around +Y
+#   9 - rotate chain 2 around -Y
+#   8 - rotate chain 2 around +Z
+#   7 - rotate chain 2 around -Z
 ######################################################################################################
 
 
