@@ -439,6 +439,7 @@ collision_file_name = ''
 #   first ensure that the termainal window where the keyboard_ikgoal_driver script was run from has focus (i.e.,
 #   make sure it's clicked), then use the following keystrokes:
 #
+#   c - kill the controller controller script
 #   w - move chain 1 along +X
 #   x - move chain 1 along -X
 #   a - move chain 1 along +Y
