@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="relaxed_ik" type="urdf_viewer_with_collision_info.py" name="urdf_viewer" output="screen"/>
+</launch>

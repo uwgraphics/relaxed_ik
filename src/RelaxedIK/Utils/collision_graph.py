@@ -12,14 +12,18 @@ class Collision_Graph:
         self.sample_states = self.c.sample_states
         self.num_objects = len(self.c.collision_objects)
         # self.b_value = 1.0/self.num_objects
-        self.b_value = 0.1
+        self.b_value = 5.0
         self.original_distances = 10000*np.ones((self.num_objects, self.num_objects))
         self.combinations = list(itertools.combinations(range(self.num_objects),r=2))
         self.collision_color_array = self.num_objects*[0]
-        self.danger_dis = 0.2
+        self.danger_dis = 0.1
 
         self.initialize_table()
         self.c_values = self.get_c_values(self.original_distances)
+
+    def get_collision_score_of_state(self, state):
+        frames = self.robot.getFrames(state)
+        return self.get_collision_score(frames)
 
     def get_collision_score(self, frames):
         sum = 0.0
@@ -38,12 +42,12 @@ class Collision_Graph:
             c = c_values[l1,l2]
             if not c == 0.0:
                 val = self.b_value * (math.e ** ((-(dis) ** 4.0) / (2.0 * c ** 2)))
-                if val > 5.0:
+                if val > self.b_value / 2.0:
                     self.c.collision_objects[l1].update_rviz_color(1.0,0,0,0.4)
                     self.c.collision_objects[l2].update_rviz_color(1.0,0,0,0.4)
                     self.collision_color_array[l1] = 2
                     self.collision_color_array[l2] = 2
-                elif val > 0.5 and val < 5.0:
+                elif val > self.b_value / 2.0 and val < self.b_value:
                     if not self.collision_color_array[l1] > 1:
                         self.c.collision_objects[l1].update_rviz_color(1.0,1.0,0.0,0.4)
                         self.collision_color_array[l1] = 1

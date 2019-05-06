@@ -23,6 +23,9 @@ mutable struct RelaxedIK_vars
     joint_pts
     nn_model
     w
+    nn_t
+    nn_c
+    nn_f
     additional_vars
 end
 
@@ -61,7 +64,14 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         #function model_nn(x, model, state_to_joint_pts_closure)
         #    return model(state_to_joint_pts_closure(x))
         #end
-        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, model, w, 0)
+        fp = open(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_params", "r")
+        nn_params_line = readline(fp)
+        split_arr = split(nn_params_line, ",")
+        t_val = parse(Float64, split_arr[1])
+        c_val = parse(Float64, split_arr[2])
+        f_val = parse(Float64, split_arr[3])
+
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, model, w, t_val, c_val, f_val, 0)
         initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
         rv.joint_pts = initial_joint_points
 
@@ -69,7 +79,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         # collision_nn = (x)-> model_nn(x, model, state_to_joint_pts_closure)
         # rv.collision_nn = collision_nn
     else
-        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0)
+        rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions, goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0)
     end
 
     populate_vars!(vars, rv)

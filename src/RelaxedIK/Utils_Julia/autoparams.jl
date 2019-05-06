@@ -44,20 +44,24 @@ function horrible_vals_obj(x, vars)
     return (val-10.0)^2.0
 end
 
-function get_c_value(val)
-    return sqrt( -val^2.0 / (2.0*log(0.01)) )
+# breaking_point is the split point where the gaussian stops and the quadratic takes over
+function get_c_value(breaking_point, t)
+    return sqrt( -(breaking_point-t)^2 / (2.0*log(0.01)) )
 end
 
-function get_f_value(val)
-    return 10.0 / (val*10.0)^2.0
+function get_f_value(breaking_point, t)
+    return 1.0 / ( (breaking_point-t))^2
 end
 
+# println(get_c_value(5.0, 0.0))
+# println(get_f_value(5.0, 0.0))
 # init_state, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds
 # vars = Vars([0.0,0.0], [], [], [], [], [], [], [], [])
 
-val = 1.0
-println(get_c_value(val))
-println(get_f_value(val))
+#val = 1.1
+#t = 0.0
+#println(get_c_value(val, t))
+#println(get_f_value(val, t))
 # optimize_params(0.0, [val], [20*val])
 
 # (-2.718281828459^((-(x_val - t)^2.0) / (2.0 * c^2.0)) )

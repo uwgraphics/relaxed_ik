@@ -1,7 +1,7 @@
 
 function draw_sphere_in_rviz(publisher, frame_id, position, scale, color; id=0)
     # marker_pub = Publisher("/visualization_marker", Marker, queue_size = 3)
-    # using RobotOs
+    # using RobotOS
     # @rosimport visualization_msgs.msg: Marker
     # rostypegen()
     # using .visualization_msgs.msg

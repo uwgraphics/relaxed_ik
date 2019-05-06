@@ -48,21 +48,21 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = ''
+urdf_file_name = 'hubo_description.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = ''
+fixed_frame = 'base_footprint'
 ######################################################################################################
 
 ######################################################################################################
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = ''
+info_file_name = 'hubo_info.yaml'
 ######################################################################################################
 
 
@@ -89,7 +89,8 @@ info_file_name = ''
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [ ]
+joint_names = [ [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2" ],
+                [ "WAIST", "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ] ]
 ######################################################################################################
 
 
@@ -109,7 +110,7 @@ joint_names = [ ]
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  [  ]
+joint_ordering =  [ "WAIST", "RIGHT_SHOULDER_PITCH", "RIGHT_SHOULDER_ROLL", "RIGHT_SHOULDER_YAW", "RIGHT_ELBOW", "RIGHT_WRIST_YAW", "RIGHT_WRIST_PITCH", "RIGHT_WRIST_YAW_2" , "LEFT_SHOULDER_PITCH", "LEFT_SHOULDER_ROLL", "LEFT_SHOULDER_YAW", "LEFT_ELBOW", "LEFT_WRIST_YAW", "LEFT_WRIST_PITCH", "LEFT_WRIST_YAW_2" ]
 ######################################################################################################
 
 
@@ -124,7 +125,7 @@ joint_ordering =  [  ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [ ]
+ee_fixed_joints = [ "RIGHT_HAND", "LEFT_HAND" ]
 ######################################################################################################
 
 
@@ -134,7 +135,7 @@ ee_fixed_joints = [ ]
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ ]
+starting_config = [0.0, -3.490658503935151e-05, -0.00021929464807923793, 0.0, -1.5225962574178042, 0.0, 0.0, 0.0, -3.490658503935151e-05, -0.0004188790204785464, 0.0, -1.5225962574178042, 0.0, 0.0, 0.0]
 ######################################################################################################
 
 
@@ -201,7 +202,40 @@ starting_config = [ ]
 # TODO: fill out this function, or leave it how it is for the default option
 from sensor_msgs.msg import JointState
 def joint_state_define(x):
-    return None
+    js = JointState()
+    js.name = ['LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW', 'LEFT_ELBOW', 'LEFT_WRIST_YAW',
+                     'LEFT_WRIST_PITCH', 'LWFT', 'LEFT_WRIST_YAW_2', 'LHAND_a1', 'LHAND_a2',
+                    'LHAND_a3', 'LHAND_b1', 'LHAND_b2', 'LHAND_b3', 'LHAND_c1',
+                    'LHAND_c2', 'LHAND_c3', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW',
+                    'RIGHT_ELBOW', 'RIGHT_WRIST_YAW', 'RIGHT_WRIST_PITCH', 'RWFT', 'RIGHT_WRIST_YAW_2',
+                    'RHAND_a1', 'RHAND_a2', 'RHAND_a3', 'RHAND_b1', 'RHAND_b2',
+                    'RHAND_b3', 'RHAND_c1', 'RHAND_c2', 'RHAND_c3', 'WAIST',
+                    'LEFT_HIP_YAW', 'LEFT_HIP_ROLL', 'LEFT_HIP_PITCH', 'LEFT_KNEE', 'LEFT_ANKLE_PITCH',
+                    'LEFT_ANKLE_ROLL', 'LAFT', 'LFUNI', 'LFWH', 'LEFT_WHEEL',
+                    'RIGHT_HIP_YAW', 'RIGHT_HIP_ROLL', 'RIGHT_HIP_PITCH', 'RIGHT_KNEE', 'RIGHT_ANKLE_PITCH',
+                    'RIGHT_ANKLE_ROLL', 'RAFT', 'RFUNI','RFWH', 'RIGHT_WHEEL',
+                    'NECK_PITCH_1', 'NECK_YAW', 'NECK_PITCH_2', 'NECK_ROLL']
+
+    js.position = 59*[0]
+    js.position[34] = -x[0]
+    js.position[17] = x[1]
+    js.position[18] = x[2]
+    js.position[19] = x[3]
+    js.position[20] = x[4]
+    js.position[21] = x[5]
+    js.position[22] = x[6]
+    js.position[24] = x[7]
+
+    js.position[0] = x[8]
+    js.position[1] = x[9]
+    js.position[2] = x[10]
+    js.position[3] = x[11]
+    js.position[4] = x[12]
+    js.position[5] = x[13]
+    js.position[7] = x[14]
+
+    js.position = tuple(js.position)
+    return js
 
 ######################################################################################################
 
@@ -283,23 +317,23 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = ''
+collision_file_name = 'collision_hubo.yaml'
 ###########################################################################################################
 
 
 
 ######################################################################################################
 # Step 5b: To see that your collision file was put together accurately, use the following command:
-#   roslaunch relaxed_ik collision_viewer.launch
+#   rosrun relaxed_ik urdf_viewer_with_collision_info.py
 #
 #   You will see an rviz scene with collision objects in their specified locations, including the
 #   collision capsules on the robot's links.
-#   The robot in this scene will be cycling through the sample states you provided in the yaml file
-#
-#   TIP: if any geometry that has been specified in the collision yaml file filled out in Step 5a is not being
-#     displayed, just copy and paste that geometry again in the collision yaml file.
-#     This appears to be a mysterious rviz bug, but listing it twice in the yaml file appears to fix
-#     the problem in all cases.  Listing the geometry twice will not affect the learning process.
+#   Text will appear above the robot that will either say "No Collision" (in green) or "Collision" (in red)
+#   Using the provided GUI pop-up, use the sliders to change the robot's configuration.  Verfiy that
+#   the "No Collision" and "Collision" match up with your interpretation of what a collision
+#   and non-collision state means for your robot platform.  If it does NOT align with what you have
+#   in mind for collision and non-collision states, go back to step 5a and adjust your collision file.
+#   This will usually consist of changing the states in the sample_states list.
 ######################################################################################################
 
 
@@ -333,6 +367,9 @@ collision_file_name = ''
 #   trains a neural network so that the robot can learn about its own geometry so that it avoids
 #   collisions with itself and other items defined in your collision yaml file, as well as learns
 #   to avoid kinematic singularities.
+#
+#   IMPORTANT: Make sure you are happy with the results in Step 5b before training the neural network!
+#
 #   To start this process, run the following command:
 #
 #   roslaunch relaxed_ik preprocessing_julia.launch

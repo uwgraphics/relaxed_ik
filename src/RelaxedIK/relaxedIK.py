@@ -19,7 +19,8 @@ def rand_vec(bounds):
     return vec
 
 
-def get_relaxedIK_vars_from_info_file(path_to_src, info_file_name = ''):
+# path_to_src = os.path.dirname(os.path.abspath(__file__))
+def get_relaxedIK_vars_from_info_file(path_to_src, info_file_name = '', preconfig=False):
     if info_file_name == '':
         y = get_relaxedIK_yaml_obj(path_to_src)
     else:
@@ -32,12 +33,15 @@ def get_relaxedIK_vars_from_info_file(path_to_src, info_file_name = ''):
     collision_file_name = y['collision_file_name']
     collision_nn_file = y['collision_nn_file']
     urdf_path = path_to_src + '/RelaxedIK/urdfs/' + urdf_file_name
-    vars = RelaxedIK_vars("robot", urdf_path, joint_names, ee_fixed_joints, joint_ordering,init_state=starting_config,path_to_src=path_to_src, collision_file=collision_file_name, collision_nn_file=collision_nn_file)
+    if not preconfig:
+        vars = RelaxedIK_vars("robot", urdf_path, joint_names, ee_fixed_joints, joint_ordering,init_state=starting_config,path_to_src=path_to_src, collision_file=collision_file_name, collision_nn_file=collision_nn_file)
+    else:
+        vars = RelaxedIK_vars("robot", urdf_path, joint_names, ee_fixed_joints, joint_ordering,init_state=starting_config,path_to_src=path_to_src, collision_file=collision_file_name, pre_config=True)
     return vars
 
 
-def get_relaxedIK_from_info_file(path_to_src, info_file_name = '', optimization_package='scipy', solver_name='slsqp'):
-    vars = get_relaxedIK_vars_from_info_file(path_to_src, info_file_name)
+def get_relaxedIK_from_info_file(path_to_src, info_file_name = '', optimization_package='scipy', solver_name='slsqp', preconfig=False):
+    vars = get_relaxedIK_vars_from_info_file(path_to_src, info_file_name, preconfig=preconfig)
     return RelaxedIK(vars, optimization_package, solver_name)
 
 

@@ -145,7 +145,6 @@ class Collision_Object_Container:
                 local_rotation = c.quaternion
                 final_quat = T.quaternion_multiply(local_rotation, final_quat)
 
-
             c.update_transform(final_pos, final_quat)
 
     def draw_all(self):
