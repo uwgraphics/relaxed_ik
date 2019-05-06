@@ -417,7 +417,7 @@ collision_file_name = 'collision_hubo.yaml'
 
 
 ######################################################################################################
-# Step 9b: To receive solutions from the relaxed_ik node launched in Step 7a, you first have to publish
+# Step 9b: To receive solutions from the relaxed_ik node launched in Step 9a, you first have to publish
 #   end effector pose goals for each of the end effectors in the kinematic chain.  The relaxed_ik package
 #   provides a custom message called EEPoseGoals which encapsulates all necessary pose goal information.
 #
@@ -476,6 +476,7 @@ collision_file_name = 'collision_hubo.yaml'
 #   first ensure that the termainal window where the keyboard_ikgoal_driver script was run from has focus (i.e.,
 #   make sure it's clicked), then use the following keystrokes:
 #
+#   c - kill the controller controller script
 #   w - move chain 1 along +X
 #   x - move chain 1 along -X
 #   a - move chain 1 along +Y
@@ -493,14 +494,14 @@ collision_file_name = 'collision_hubo.yaml'
 #   m - move chain 2 along -X
 #   j - move chain 2 along +Y
 #   l - move chain 2 along -Y
-#   u - move chain 1 along +Z
-#   n - move chain 1 along -Z
-#   = - rotate chain 1 around +X
-#   - - rotate chain 1 around -X
-#   0 - rotate chain 1 around +Y
-#   9 - rotate chain 1 around -Y
-#   8 - rotate chain 1 around +Z
-#   7 - rotate chain 1 around -Z
+#   u - move chain 2 along +Z
+#   n - move chain 2 along -Z
+#   = - rotate chain 2 around +X
+#   - - rotate chain 2 around -X
+#   0 - rotate chain 2 around +Y
+#   9 - rotate chain 2 around -Y
+#   8 - rotate chain 2 around +Z
+#   7 - rotate chain 2 around -Z
 ######################################################################################################
 
 
