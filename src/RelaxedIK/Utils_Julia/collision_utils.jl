@@ -55,16 +55,16 @@ function get_t_c_and_f_values(w, collision_check_py_object, relaxedIK)
 end
 
 
-path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
-relaxedIK = get_standard(path_to_src, "sawyer_info.yaml")
-println(relaxedIK.relaxedIK_vars.nn_f)
+#path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
+#relaxedIK = get_standard(path_to_src, "sawyer_info.yaml")
+#println(relaxedIK.relaxedIK_vars.nn_f)
 
-collision_nn_file_name = "sawyer_nn"
-w = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:w]
-model = (x) -> predict(w, x)[1]
-cv = c.CollisionVars(path_to_src)
+#collision_nn_file_name = "sawyer_nn"
+#w = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:w]
+#model = (x) -> predict(w, x)[1]
+#cv = c.CollisionVars(path_to_src)
 
-println(get_t_c_and_f_values(w, cv, relaxedIK))
+# println(get_t_c_and_f_values(w, cv, relaxedIK))
 
 #=
 r = rand(6)
