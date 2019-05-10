@@ -115,3 +115,6 @@ venv.bak/
 *.pyc
 
 test*.*
+*.xml
+*.iml
+*.rviz
