@@ -41,6 +41,6 @@ function quaternion_dispQ(q, qPrime)
     return inv(q)*qPrime
 end
 
-using BenchmarkTools
+# using BenchmarkTools
 
 # @btime quaternion_dispQ(q, q2)

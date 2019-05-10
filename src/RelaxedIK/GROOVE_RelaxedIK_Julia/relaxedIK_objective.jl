@@ -22,6 +22,7 @@ function position_obj_1(x, vars)
     return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
 end
 
+
 function position_obj_2(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
     x_val = norm(vars.robot.arms[2].out_pts[end] - vars.goal_positions[2])
@@ -71,6 +72,7 @@ function rotation_obj_1(x, vars)
     # return groove_loss(x_val, 0.,2.,.1,10.,2.)
     return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
 end
+
 
 function rotation_obj_2(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])

@@ -32,6 +32,18 @@ function get_standard(path_to_src, info_file_name; solver_name = "slsqp", precon
     return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
+function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 4.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
+
 # path_to_src = Base.source_dir()
 function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
