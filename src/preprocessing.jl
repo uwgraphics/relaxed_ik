@@ -23,6 +23,7 @@ import Distributions: Uniform
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/Utils_Julia/transformations.jl")
 include("RelaxedIK/Utils_Julia/collision_utils.jl")
+include("calibrate_nns.jl")
 @pyimport RelaxedIK.Utils.collision_transfer as c
 
 @rosimport std_msgs.msg: Bool
@@ -322,30 +323,45 @@ end
 
 ################################################################################
 
-
 #println(new_outs[1])
 #println(c.get_score(new_states[1], cv))
-
-
 
 # Make neural net ##############################################################
 # net_width = length(ins[1]) + 8
 # net_width = length(ins[1])
 net_width = 14
 rand_val = 1.0
-
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
-      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
-      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
-      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
-      rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
-      rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
 
+
+net_width = 30
+rand_val = 1.0
+w2 = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
+
+
+net_width = 50
+rand_val = 1.0
+w3 = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
+    rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
 ################################################################################
 
 
 # Optimize #####################################################################
 o = optimizers(w, Knet.Adam)
+o2 = optimizers(w2, Knet.Adam)
+o3 = optimizers(w3, Knet.Adam)
+
 tl = total_loss2(w, test_ins, test_outs)
 tl_train = total_loss( w, ins, outs )
 println("epoch 0 ::: train loss: $tl_train, test loss: $tl")
@@ -360,19 +376,22 @@ for epoch=1:num_epochs
     new_ins, new_outs, new_states = shuffle_ins_and_outs(ins, outs, states)
     batched_data = get_batched_data(new_ins, new_outs, batch_size)
 
-    global quit
-    if quit == true
-        global w
-        w = copy(best_w)
-        println("quitting training.")
-        break
-    end
+    # global quit
+    #if quit == true
+    #    global w
+    #    w = copy(best_w)
+    #    println("quitting training.")
+    #    break
+    # end
 
     for b = 1:length(batched_data)
         num_batches = length(batched_data)
-        global w
+        global w, w2, w3
         train(w, batched_data[b], o)
+        train(w2, batched_data[b], o2)
+        train(w3, batched_data[b], o3)
         print("*")
+
         #=
         tl = total_loss2(w, test_ins, test_outs)
         tl_train = total_loss( w, new_ins[1:200], new_outs[1:200] )
@@ -441,13 +460,32 @@ y = YAML.load(fp)
 collision_nn_file_name = y["collision_nn_file"]
 
 @save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name w
+@save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_2" w2
+@save path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_3" w3
+
 ################################################################################
 
+
 println("Preprocessing almost complete.  Calculating calibration parameters...")
+calibrate_nns(path_to_src)
+#=
 # get t, c, and f values #######################################################
 t_val, c_val, f_val = get_t_c_and_f_values(w, cv, relaxedIK)
+t_val2, c_val2, f_val2 = get_t_c_and_f_values(w2, cv, relaxedIK)
+t_val3, c_val3, f_val3 = get_t_c_and_f_values(w3, cv, relaxedIK)
+
 
 fp = open(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_params", "w")
 write(fp, "$t_val, $c_val, $f_val")
 close(fp)
+
+fp = open(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_params_2", "w")
+write(fp, "$t_val2, $c_val2, $f_val2")
+close(fp)
+
+fp = open(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_params_3", "w")
+write(fp, "$t_val3, $c_val3, $f_val3")
+close(fp)
+=#
+
 ################################################################################

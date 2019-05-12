@@ -1,0 +1,6 @@
+relaxed_ik/EEPoseGoals ee_pose_goals
+relaxed_ik/JointAngles init
+float64 ee_pos_precision
+float64 ee_rot_precision
+---
+relaxed_ik/JointAngles joint_angles

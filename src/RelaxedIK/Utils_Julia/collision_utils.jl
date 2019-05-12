@@ -23,7 +23,7 @@ function get_t_c_and_f_values(w, collision_check_py_object, relaxedIK)
 
     nn_model = (x) -> predict(w, x)[1]
 
-    for i = 1:30000
+    for i = 1:7000
         r = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.vars.bounds)
         state = state_to_joint_pts_withreturn(r, relaxedIK.relaxedIK_vars)
         push!(model_scores, nn_model(state))
@@ -37,7 +37,7 @@ function get_t_c_and_f_values(w, collision_check_py_object, relaxedIK)
             push!(collision_vals, model_scores[i])
         end
 
-        if ground_truth_scores[i] < 0.00000001
+        if ground_truth_scores[i] < 0.00000000001
             push!(min_vals, model_scores[i])
         end
     end
@@ -53,7 +53,6 @@ function get_t_c_and_f_values(w, collision_check_py_object, relaxedIK)
 
     return t_val, c_val, f_val
 end
-
 
 #path_to_src = "/home/rakita/catkin_ws/src/relaxed_ik/src/"
 #relaxedIK = get_standard(path_to_src, "sawyer_info.yaml")

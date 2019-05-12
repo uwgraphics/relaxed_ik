@@ -55,10 +55,32 @@ function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", precon
     return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
+function get_bimanual_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 50.0, 49.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
 function get_3chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 5.0 ,4.0, 0.1, 1.0, 2.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
+function get_3chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -77,10 +99,32 @@ function get_4chain(path_to_src, info_file_name; solver_name = "slsqp", preconfi
     return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
 end
 
+function get_4chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3,  position_obj_4, rotation_obj_4]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
 function get_5chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3, position_obj_4, rotation_obj_4, position_obj_5, rotation_obj_5, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 5.0 ,4.0, 0.1, 1.0, 2.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+end
+
+function get_5chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3,  position_obj_4, rotation_obj_4, position_obj_5, rotation_obj_5]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0,  50.0, 49.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -123,7 +167,7 @@ function get_rot_mats(relaxedIK, x)
     return rot_mats
 end
 
-function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter_signal=true)
+function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=true)
     vars = relaxedIK.relaxedIK_vars
 
     if vars.position_mode == "relative"
@@ -145,7 +189,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter_si
     end
 
     xopt = groove_solve(relaxedIK.groove, prev_state=prev_state)
-    if filter_signal
+    if filter
         xopt = filter_signal(relaxedIK.ema_filter, xopt)
     end
     update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
