@@ -36,6 +36,7 @@ mutable struct RelaxedIK_vars
     nn_t3
     nn_c3
     nn_f3
+    in_collision
     additional_vars
 end
 
@@ -100,10 +101,9 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         f_val3 = parse(Float64, split_arr[3])
         close(fp)
 
-
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
             goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions,
-            init_ee_quats, 0, model, model2, model3, w, t_val, c_val, f_val, w2, t_val2, c_val2, f_val2, w3, t_val3, c_val3, f_val3, 0)
+            init_ee_quats, 0, model, model2, model3, w, t_val, c_val, f_val, w2, t_val2, c_val2, f_val2, w3, t_val3, c_val3, f_val3, 0, 0)
         initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
         rv.joint_pts = initial_joint_points
 
@@ -112,8 +112,21 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         # rv.collision_nn = collision_nn
     else
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
-        goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     end
+
+    function in_collision(rv, x)
+        state_to_joint_pts_inplace(x, rv)
+        val = model3(rv.joint_pts)
+        if val >= 1.0
+            return true
+        else
+            return false
+        end
+    end
+
+    in_collision_c = x->in_collision(rv, x)
+    rv.in_collision = in_collision_c
 
     populate_vars!(vars, rv)
 
