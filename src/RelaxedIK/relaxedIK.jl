@@ -29,7 +29,19 @@ function get_standard(path_to_src, info_file_name; solver_name = "slsqp", precon
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
+
+    if num_chains == 2
+        relaxedIK = get_bimanual(path_to_src, loaded_robot)
+    elseif num_chains == 3
+        relaxedIK = get_3chain(path_to_src, loaded_robot)
+    elseif num_chains == 4
+        relaxedIK = get_4chain(path_to_src, loaded_robot)
+    elseif num_chains == 5
+        relaxedIK = get_5chain(path_to_src, loaded_robot)
+    end
+    return relaxedIK
 end
 
 function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
@@ -40,7 +52,18 @@ function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconf
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=30)
+    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=30)
+    num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
+    if num_chains == 2
+        relaxedIK = get_bimanual_base_ik(path_to_src, loaded_robot)
+    elseif num_chains == 3
+        relaxedIK = get_3chain_base_ik(path_to_src, loaded_robot)
+    elseif num_chains == 4
+        relaxedIK = get_4chain_base_ik(path_to_src, loaded_robot)
+    elseif num_chains == 5
+        relaxedIK = get_5chain_base_ik(path_to_src, loaded_robot)
+    end
+    return relaxedIK
 end
 
 # path_to_src = Base.source_dir()
@@ -198,7 +221,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
 end
 
 function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 30)
-    xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter_signal = false)
+    xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false)
     valid_sol = true
     pos_error = 0.0
     rot_error = 0.0
@@ -213,7 +236,7 @@ function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], p
 
     try_idx = 1
     while (! valid_sol) && (try_idx < max_tries)
-        xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = xopt, filter_signal = false)
+        xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = xopt, filter = false)
         valid_sol = true
         for i = 1:length(goal_positions)
             pos_error, rot_error = get_ee_error(relaxedIK, xopt, goal_positions[1], goal_quats[1], i)
