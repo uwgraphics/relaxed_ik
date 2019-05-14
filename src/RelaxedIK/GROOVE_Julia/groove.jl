@@ -70,7 +70,7 @@ function get_groove(vars, solver_name; max_iter=12, max_time = 0.0)
     end
 
     # xtol_abs!(opt, 0.0001)
-    xtol_rel!(opt, 0.0001)
+    # xtol_rel!(opt, 0.0001)
     maxeval!(opt, max_iter)
     if max_time > 0.0
         maxtime!(opt, max_time)
