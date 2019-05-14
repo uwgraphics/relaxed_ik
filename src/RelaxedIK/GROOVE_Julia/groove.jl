@@ -6,7 +6,7 @@ mutable struct Groove
     opt
 end
 
-function get_groove(vars, solver_name; max_iter=12)
+function get_groove(vars, solver_name; max_iter=12, max_time = 0.0)
     #=
     solver name options:
     "slsqp", "mma", "ccsaq", "bobyqa", "cobyla"
@@ -69,10 +69,12 @@ function get_groove(vars, solver_name; max_iter=12)
         upper_bounds!(opt, upper_bounds)
     end
 
-    xtol_abs!(opt, 0.00001)
-    # xtol_rel!(opt, 1.1)
+    # xtol_abs!(opt, 0.0001)
+    xtol_rel!(opt, 0.0001)
     maxeval!(opt, max_iter)
-    # maxtime!(opt, 0.005)
+    if max_time > 0.0
+        maxtime!(opt, max_time)
+    end
 
     return Groove(vars, opt)
 

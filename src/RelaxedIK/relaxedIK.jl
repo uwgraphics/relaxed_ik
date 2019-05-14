@@ -13,9 +13,9 @@ mutable struct RelaxedIK
 end
 
 
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 12)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 12, max_time=0.0)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
-    groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter)
+    groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter, max_time=max_time)
     ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
     return RelaxedIK(relaxedIK_vars, groove, ema_filter)
 end
@@ -47,12 +47,12 @@ end
 function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1]
     grad_types = ["forward_ad", "forward_ad"]
-    weight_priors = [1000.0, 1000.0]
+    weight_priors = [1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=30)
+    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=60, max_time = 0.0018)
     num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
     if num_chains == 2
         relaxedIK = get_bimanual_base_ik(path_to_src, loaded_robot)
@@ -86,7 +86,7 @@ function get_bimanual_base_ik(path_to_src, info_file_name; solver_name = "slsqp"
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=100)
 end
 
 function get_3chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
@@ -108,7 +108,7 @@ function get_3chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", 
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=100)
 end
 
 function get_4chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
@@ -130,7 +130,7 @@ function get_4chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", 
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=100)
 end
 
 function get_5chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
@@ -152,7 +152,7 @@ function get_5chain_base_ik(path_to_src, info_file_name; solver_name = "slsqp", 
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured)
+    return RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=100)
 end
 
 function get_finite_diff_version(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
@@ -220,7 +220,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     return xopt
 end
 
-function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 30)
+function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 2)
     xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false)
     valid_sol = true
     pos_error = 0.0
@@ -230,7 +230,6 @@ function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], p
         pos_error, rot_error = get_ee_error(relaxedIK, xopt, goal_positions[1], goal_quats[1], i)
         if (pos_error > pos_tol || rot_error > rot_tol)
             valid_sol = false
-            break
         end
     end
 
@@ -242,7 +241,6 @@ function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], p
             pos_error, rot_error = get_ee_error(relaxedIK, xopt, goal_positions[1], goal_quats[1], i)
             if (pos_error > pos_tol || rot_error > rot_tol)
                 valid_sol = false
-                break
             end
         end
         try_idx += 1
@@ -265,9 +263,9 @@ function get_ee_error(relaxedIK, xopt, goal_pos, goal_quat, armidx)
     end
 
     arm = relaxedIK.relaxedIK_vars.robot.arms[armidx]
-    arm.getFramesf(xopt)
-    ee_pos = arm.static_out_pts[end]
-    ee_quat = Quat(arm.static_out_frames[end])
+    arm.getFrames(xopt)
+    ee_pos = arm.out_pts[end]
+    ee_quat = Quat(arm.out_frames[end])
 
     pos_error = norm(ee_pos - goal_pos)
     rot_error = norm( quaternion_disp(ee_quat, goal_quat) )

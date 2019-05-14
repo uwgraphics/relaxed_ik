@@ -43,3 +43,22 @@ function predict(w,x)
     end
     return w[end-1]*x .+ w[end]
 end
+
+
+function get_rand_state_with_bounds(bounds)
+    sample = []
+    for b in bounds
+        push!(sample, rand(Uniform(b[1], b[2])))
+    end
+    return sample
+end
+
+
+function get_rand_state_with_bounds(relaxedIK_vars)
+    sample = []
+    bounds = relaxedIK_vars.vars.bounds
+    for b in bounds
+        push!(sample, rand(Uniform(b[1], b[2])))
+    end
+    return sample
+end

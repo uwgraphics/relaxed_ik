@@ -1,5 +1,4 @@
 #!/usr/bin/env julia
-
 include("RelaxedIK/relaxedIK.jl")
 include("RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl")
 include("RelaxedIK/Utils_Julia/solver_output.jl")
