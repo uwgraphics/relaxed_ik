@@ -80,22 +80,25 @@ function get_groove(vars, solver_name; max_iter=12, max_time = 0.0)
 
 end
 
-function groove_solve(groove; prev_state =[], ftol_abs=0.001, max_time=0.0)
+function groove_solve(groove; prev_state =[], ftol_abs=0.0, max_time=0.0, max_iter = 0)
     if length(prev_state) == 0
         initSol = groove.vars.xopt
     else
         initSol = prev_state
     end
 
-    #=
+
     if max_time > 0.0
         maxtime!(groove.opt, max_time)
     end
 
-    if ftol_abs != 0.001
+    if ftol_abs > 0.0
         ftol_abs!(groove.opt, ftol_abs)
     end
-    =#
+
+    if max_iter > 0
+        maxeval!(groove.opt, max_iter)
+    end
 
     #xtol_rel!(groove.opt, 0.0001)
     # println(xtol_rel(groove.opt))

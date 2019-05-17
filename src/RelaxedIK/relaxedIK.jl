@@ -190,7 +190,7 @@ function get_rot_mats(relaxedIK, x)
     return rot_mats
 end
 
-function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=true)
+function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=true, max_iter = 0, max_time = 0.0)
     vars = relaxedIK.relaxedIK_vars
 
     if vars.position_mode == "relative"
@@ -211,7 +211,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
         vars.goal_quats = goal_quats
     end
 
-    xopt = groove_solve(relaxedIK.groove, prev_state=prev_state)
+    xopt = groove_solve(relaxedIK.groove, prev_state=prev_state, max_iter=max_iter, max_time = max_time)
     if filter
         xopt = filter_signal(relaxedIK.ema_filter, xopt)
     end
@@ -220,8 +220,8 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     return xopt
 end
 
-function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 2)
-    xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false)
+function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 2, max_iter = 0, max_time = 0.0)
+    xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false, max_iter = max_iter, max_time = 0.0)
     valid_sol = true
     pos_error = 0.0
     rot_error = 0.0
