@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="relaxed_ik" type="rviz_viewer_no_pub.py" name="rviz_viewer" output="screen"/>
+</launch>

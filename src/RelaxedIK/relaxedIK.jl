@@ -52,7 +52,7 @@ function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconf
     ineq_grad_types = []
     equality_constraints = []
     eq_grad_types = []
-    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=60, max_time = 0.0018)
+    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=60, max_time = 0.0023)
     num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
     if num_chains == 2
         relaxedIK = get_bimanual_base_ik(path_to_src, loaded_robot)
@@ -220,7 +220,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     return xopt
 end
 
-function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.00001, rot_tol = 0.00001, max_tries = 2, max_iter = 0, max_time = 0.0)
+function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.000001, rot_tol = 0.000001, max_tries = 2, max_iter = 0, max_time = 0.0)
     xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false, max_iter = max_iter, max_time = 0.0)
     valid_sol = true
     pos_error = 0.0

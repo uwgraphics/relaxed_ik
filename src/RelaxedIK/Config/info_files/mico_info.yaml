@@ -3,7 +3,7 @@ fixed_frame: "root"
 joint_names: [ [ "m1n6s200_joint_1", "m1n6s200_joint_2", "m1n6s200_joint_3", "m1n6s200_joint_4", "m1n6s200_joint_5", "m1n6s200_joint_6" ] ]
 joint_ordering: [ "m1n6s200_joint_1", "m1n6s200_joint_2", "m1n6s200_joint_3", "m1n6s200_joint_4", "m1n6s200_joint_5", "m1n6s200_joint_6" ]
 ee_fixed_joints: [ "m1n6s200_joint_end_effector" ]
-starting_config: [ 0, 3.14, 3.14, 0, 0, 0 ]
+starting_config: [ 0, 3.41, 5.0, 0, 0, 1.57 ]
 collision_file_name: "collision_mico.yaml"
 collision_nn_file: "mico_nn"
 path_to_src: "/home/rakita/catkin_ws/src/relaxed_ik/src"

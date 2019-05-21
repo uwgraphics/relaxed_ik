@@ -57,35 +57,4 @@ if __name__ == '__main__':
     launch = roslaunch.parent.ROSLaunchParent(uuid, [launch_path])
     launch.start()
 
-    prev_state = []
-
-    rate = rospy.Rate(200.0)
-    prev_sol = starting_config
-    while not rospy.is_shutdown():
-        tf_pub.sendTransform((0, 0, 0),
-                             tf.transformations.quaternion_from_euler(0, 0, 0),
-                             rospy.Time.now(),
-                             'common_world',
-                             fixed_frame)
-        if len(ja_solution) == 0:
-            xopt = starting_config
-        else:
-            xopt = ja_solution
-            if not len(xopt) == len(starting_config):
-                xopt = prev_sol
-            else:
-                prev_sol = xopt
-
-        js = joint_state_define(xopt)
-        if js == None:
-            js = JointState()
-            js.name = joint_ordering
-            for x in xopt:
-                js.position.append(x)
-        now = rospy.Time.now()
-        js.header.stamp.secs = now.secs
-        js.header.stamp.nsecs = now.nsecs
-        js_pub.publish(js)
-
-
-    rate.sleep()
+    rospy.spin()
