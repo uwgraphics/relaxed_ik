@@ -1,0 +1,15 @@
+language: generic
+services:
+  - docker
+cache:
+  directories:
+    - $HOME/.ccache
+env:
+  global:
+    - CCACHE_DIR=$HOME/.ccache
+  matrix:
+    - ROS_DISTRO="kinetic"
+install:
+  - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci.git .industrial_ci
+script:
+  - ".industrial_ci/travis.sh"
