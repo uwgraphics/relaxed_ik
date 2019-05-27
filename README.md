@@ -105,6 +105,14 @@ https://julialang.org/
 
 The solver was written in Julia 1.0.2, though any more recent 1.X.X version should suffice.
 
+To install Julia, follow these simple, yet intentionally verbose, steps:
+1. Go to the downloads page here: https://julialang.org/downloads/
+2. Scroll down to the "Current Stable Release" section, find the "Generic Linux Binaries for [x86/ARM]" row that is correct for you (if you're unsure, it's most likely x86), then click either 32-bit or 64-bit depending on your OS configuration.  A prompt will come up asking where you want to save the download.  Anywhere convenient (like the desktop) is fine.
+3. Right click the downloaded folder, and click "extract here"
+4. Move the extracted folder to a permanent location of your choice.  I usually just keep it in my "home" folder.
+5. Update your Path variable such that your system can find and start up Julia.  There are a couple of ways to do this; my preferred way is to update the /etc/environment file.  To do this, open the /etc/environment file in your favorite text editor (vim, emacs, etc) with sudo privilege.  I use vim, so for me the command would read "sudo vim /etc/environment".  You'll probably get a prompt to enter your password.  Next, use the text editor to append ":/[your path to your julia bin folder]" to the path.  For example, at the time of writing this, my system path line ends with ":/home/rakita/julia-1.1.0/bin".  Save the file and exit.
+6. Restart your computer.  And you're done!  To make sure this worked, open up a terminal and type the command "julia".  A Julia environment should initialize.
+
 If you plan to extend any of the Julia code, we recommend using the Juno IDE (not required)
 
 Once Julia is installed, initialize a Julia environment using the following command:
