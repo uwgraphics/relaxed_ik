@@ -13,7 +13,7 @@ mutable struct RelaxedIK
 end
 
 
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 11, max_time=0.0)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 15, max_time=0.0)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
     groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter, max_time=max_time)
     ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
@@ -22,9 +22,9 @@ end
 
 # path_to_src = Base.source_dir()
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
-    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad",  "forward_ad", "forward_ad"]
-    weight_priors = [15.0, 14.0, 2.0 ,0.5, 0.5, 1.0, 1.0]
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, collision_nn_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    weight_priors = [50.0, 49.0, 3.0 ,2.0, 2.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -190,7 +190,7 @@ function get_rot_mats(relaxedIK, x)
     return rot_mats
 end
 
-function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=true, max_iter = 0, max_time = 0.0)
+function solve(relaxedIK, goal_positions, goal_quats; prev_state = nothing, filter=true, max_iter = 0, max_time = 0.0)
     vars = relaxedIK.relaxedIK_vars
 
     if vars.position_mode == "relative"
@@ -201,7 +201,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     else
         vars.goal_positions = goal_positions
     end
-    
+
 
     if vars.rotation_mode == "relative"
         for i = 1:vars.robot.num_chains
@@ -220,7 +220,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     return xopt
 end
 
-function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = [], pos_tol = 0.000001, rot_tol = 0.000001, max_tries = 2, max_iter = 0, max_time = 0.0)
+function solve_precise(relaxedIK, goal_positions, goal_quats; prev_state = nothing, pos_tol = 0.000001, rot_tol = 0.000001, max_tries = 2, max_iter = 0, max_time = 0.0)
     xopt = solve(relaxedIK, goal_positions, goal_quats, prev_state = prev_state, filter = false, max_iter = max_iter, max_time = 0.0)
     valid_sol = true
     pos_error = 0.0

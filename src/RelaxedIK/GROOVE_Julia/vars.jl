@@ -84,7 +84,6 @@ function populate_constraint_closures!(vars, target_vars)
     for i=1:length(vars.equality_constraints)
         push!(vars.eq_constraint_closures, get_constraint_closure(vars.equality_constraints[i], vars.eq_grad_types[i], target_vars))
     end
-
 end
 
 function update!(vars, xopt)

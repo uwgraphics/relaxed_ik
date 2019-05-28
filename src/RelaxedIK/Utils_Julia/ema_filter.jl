@@ -5,7 +5,7 @@ mutable struct EMA_filter
     filtered_signal
 end
 
-function EMA_filter(init_state; a = 0.7, window_size = 20)
+function EMA_filter(init_state; a = 0.8, window_size = 20)
     if a > 1.0 || a < 0.0
         throw(ArgumentError("a must be between 0 and 1 in EMA filter"))
     end

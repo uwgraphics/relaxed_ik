@@ -19,7 +19,8 @@ function position_obj_1(x, vars)
     # return groove_loss(x_val, 0.,2.,.1,10.,2.)
     # 0.23065358014379128
     # 0.10204081632653063
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    # return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
 end
 
 
@@ -70,7 +71,8 @@ function rotation_obj_1(x, vars)
     x_val = min(disp, disp2)
 
     # return groove_loss(x_val, 0.,2.,.1,10.,2.)
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    # return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
 end
 
 
@@ -153,12 +155,12 @@ end
 
 function min_jt_accel_obj(x, vars)
     # return groove_loss(norm((vars.vars.xopt - vars.vars.prev_state) - (x - vars.vars.xopt)), 0.0, 2.0, 0.1, 10.0, 2.0)
-    return groove_loss(norm((vars.vars.xopt - vars.vars.prev_state) - (x - vars.vars.xopt)),  0.0, 2, .39, 10.0, 2)
+    return groove_loss(norm((vars.vars.xopt - vars.vars.prev_state) - (x - vars.vars.xopt)),  0.0, 2, .1, 10.0, 2)
 end
 
 function min_jt_jerk_obj(x, vars)
     # return groove_loss( norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) ),  0.0, 2.0, 0.1, 10.0, 2.0   )
-    return groove_loss( norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) ),  0.0, 2, .39, 10.0, 2  )
+    return groove_loss( norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) ),  0.0, 2, .1, 10.0, 2  )
 end
 
 
