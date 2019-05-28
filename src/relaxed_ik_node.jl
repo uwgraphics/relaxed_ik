@@ -83,7 +83,7 @@ for i = 1:num_chains
 end
 empty_eepg = eepg
 
-loop_rate = Rate(2000)
+loop_rate = Rate(1000)
 while ! is_shutdown()
     global quit
     if quit == true

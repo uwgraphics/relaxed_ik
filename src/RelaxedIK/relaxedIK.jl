@@ -13,7 +13,7 @@ mutable struct RelaxedIK
 end
 
 
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 12, max_time=0.0)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 11, max_time=0.0)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
     groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter, max_time=max_time)
     ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
@@ -24,7 +24,7 @@ end
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad",  "forward_ad", "forward_ad"]
-    weight_priors = [50.0, 49.0, 4.0 ,0.5, 0.2, 1.0, 1.0]
+    weight_priors = [15.0, 14.0, 2.0 ,0.5, 0.5, 1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -201,7 +201,7 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = [], filter=tr
     else
         vars.goal_positions = goal_positions
     end
-
+    
 
     if vars.rotation_mode == "relative"
         for i = 1:vars.robot.num_chains
