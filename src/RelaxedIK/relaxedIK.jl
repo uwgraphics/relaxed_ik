@@ -212,10 +212,10 @@ function solve(relaxedIK, goal_positions, goal_quats; prev_state = nothing, filt
     end
 
     xopt = groove_solve(relaxedIK.groove, prev_state=prev_state, max_iter=max_iter, max_time = max_time)
+    update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
     if filter
         xopt = filter_signal(relaxedIK.ema_filter, xopt)
     end
-    update_relaxedIK_vars!(relaxedIK.relaxedIK_vars, xopt)
 
     return xopt
 end

@@ -118,3 +118,15 @@ test*.*
 *.xml
 *.iml
 *.rviz
+
+src/RelaxedIK/Config/collision_files/*
+!src/RelaxedIK/Config/collision_files/collision_example.yaml
+!src/RelaxedIK/Config/collision_files/README
+src/RelaxedIK/Config/collision_nn/*
+!src/RelaxedIK/Config/collision_nn/README
+src/RelaxedIK/Config/collision_nn_python/*
+!src/RelaxedIK/Config/collision_nn_python/README
+src/RelaxedIK/Config/info_files/*
+!src/RelaxedIK/Config/info_files/README
+src/RelaxedIK/Config/joint_state_define_functions/*
+!src/RelaxedIK/Config/joint_state_define_functions/README
