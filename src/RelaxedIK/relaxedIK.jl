@@ -23,8 +23,8 @@ end
 # path_to_src = Base.source_dir()
 function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
-    weight_priors = [50.0, 49.0, 3.0 ,2.0, 2.0, 1.0, 1.0]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
+    weight_priors = [50.0, 49.0, 6.0 ,3.0, 2.0, 1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -33,13 +33,13 @@ function get_standard(path_to_src, info_file_name; solver_name = "slsqp", precon
     num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
     if num_chains == 2
-        relaxedIK = get_bimanual(path_to_src, loaded_robot)
+        relaxedIK = get_bimanual(path_to_src, info_file_name, preconfigured=preconfigured)
     elseif num_chains == 3
-        relaxedIK = get_3chain(path_to_src, loaded_robot)
+        relaxedIK = get_3chain(path_to_src, info_file_name, preconfigured=preconfigured)
     elseif num_chains == 4
-        relaxedIK = get_4chain(path_to_src, loaded_robot)
+        relaxedIK = get_4chain(path_to_src, info_file_name, preconfigured=preconfigured)
     elseif num_chains == 5
-        relaxedIK = get_5chain(path_to_src, loaded_robot)
+        relaxedIK = get_5chain(path_to_src, info_file_name, preconfigured=preconfigured)
     end
     return relaxedIK
 end
@@ -55,13 +55,13 @@ function get_base_ik(path_to_src, info_file_name; solver_name = "slsqp", preconf
     relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, groove_iter=60, max_time = 0.0023)
     num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
     if num_chains == 2
-        relaxedIK = get_bimanual_base_ik(path_to_src, loaded_robot)
+        relaxedIK = get_bimanual_base_ik(path_to_src, info_file_name)
     elseif num_chains == 3
-        relaxedIK = get_3chain_base_ik(path_to_src, loaded_robot)
+        relaxedIK = get_3chain_base_ik(path_to_src, info_file_name)
     elseif num_chains == 4
-        relaxedIK = get_4chain_base_ik(path_to_src, loaded_robot)
+        relaxedIK = get_4chain_base_ik(path_to_src, info_file_name)
     elseif num_chains == 5
-        relaxedIK = get_5chain_base_ik(path_to_src, loaded_robot)
+        relaxedIK = get_5chain_base_ik(path_to_src, info_file_name)
     end
     return relaxedIK
 end
@@ -69,7 +69,7 @@ end
 # path_to_src = Base.source_dir()
 function get_bimanual(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 4.0 ,0.5, 0.2, 1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
@@ -91,7 +91,7 @@ end
 
 function get_3chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 5.0 ,4.0, 0.1, 1.0, 2.0]
     inequality_constraints = []
     ineq_grad_types = []
@@ -113,7 +113,7 @@ end
 
 function get_4chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3, position_obj_4, rotation_obj_4, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 5.0 ,4.0, 0.1, 1.0, 2.0]
     inequality_constraints = []
     ineq_grad_types = []
@@ -135,7 +135,7 @@ end
 
 function get_5chain(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
     objectives = [position_obj_1, rotation_obj_1, position_obj_2, rotation_obj_2, position_obj_3, rotation_obj_3, position_obj_4, rotation_obj_4, position_obj_5, rotation_obj_5, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
-    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad"]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
     weight_priors = [50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 50.0, 49.0, 5.0 ,4.0, 0.1, 1.0, 2.0]
     inequality_constraints = []
     ineq_grad_types = []

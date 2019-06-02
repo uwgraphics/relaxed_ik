@@ -37,7 +37,7 @@ for i in xrange(num_chains):
 server.applyChanges()
 
 
-rate = rospy.Rate(80)
+rate = rospy.Rate(300)
 while not rospy.is_shutdown():
     eepg = EEPoseGoals()
 
@@ -69,4 +69,3 @@ while not rospy.is_shutdown():
     ee_pose_goal_pub.publish(eepg)
 
     rate.sleep()
-

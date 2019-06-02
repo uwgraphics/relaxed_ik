@@ -7,7 +7,7 @@ training_states: [ ]
 problem_states: [ ]
 boxes:
   - name: box1
-    parameters: [1,1,0.1] # r
+    parameters: [1,1,0.1]
     coordinate_frame: 0
     rotation: [0,0,0]
     translation: [1,0,0]
@@ -20,4 +20,3 @@ spheres:
 ellipsoids:
 capsules:
 cylinders:
-

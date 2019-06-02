@@ -3,6 +3,7 @@ import LinearAlgebra, Rotations, StaticArrays
 using BenchmarkTools
 
 mutable struct Arm
+    joint_names
     axis_types
     displacements
     original_displacements
@@ -28,7 +29,7 @@ mutable struct Arm
     static_out_frames
 end
 
-function Arm(axis_types, displacements, disp_offset, rot_offsets, joint_types, do_rot_offsets)
+function Arm(joint_names, axis_types, displacements, disp_offset, rot_offsets, joint_types, do_rot_offsets)
     rot_offset_matrices = [eulerTupleTo3x3(t) for t in rot_offsets]
     rot_mat_tmp = Array{MArray{Tuple{3,3},Float64,2,9}, 1}()
     count = 1
@@ -84,7 +85,7 @@ function Arm(axis_types, displacements, disp_offset, rot_offsets, joint_types, d
         push!(static_out_pts, SVector{3}( rand(3) ) )
     end
 
-    arm = Arm(axis_types, displacements, original_displacements, static_displacements,
+    arm = Arm(joint_names, axis_types, displacements, original_displacements, static_displacements,
         disp_offset, static_disp_offset, rot_offset_matrices, joint_types, do_rot_offsets, 0, 0, 0, 0, 0,
         homogeneous_matrices, rot_offset_present_arr, rot_mat_tmp, static_rot_mat_tmp, fk_results,
         static_rot_offsets, static_rot_matrices, static_out_pts, static_out_frames)

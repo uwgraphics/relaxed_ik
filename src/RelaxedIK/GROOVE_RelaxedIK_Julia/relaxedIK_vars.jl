@@ -2,6 +2,7 @@ include("../GROOVE_Julia/vars.jl")
 include("../Spacetime_Julia/arm.jl")
 include("../Spacetime_Julia/robot.jl")
 include("../Utils_Julia/nn_utils.jl")
+include("relaxedIK_objective.jl")
 
 using YAML
 using Rotations
@@ -70,11 +71,23 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
     if preconfigured == false
         collision_nn_file_name = y["collision_nn_file"]
         w = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name)[:w]
-        model = (x) -> predict(w, x)[1]
+        w_ = Array{Array{Float64,2},1}()
+        for i = 1:length(w)
+            push!(w_, w[i])
+        end
+        model = (x) -> predict(w_, x)[1]
         w2 = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_2")[:w2]
-        model2 = (x) -> predict(w2, x)[1]
+        w2_ = Array{Array{Float64,2},1}()
+        for i = 1:length(w2)
+            push!(w2_, w2[i])
+        end
+        model2 = (x) -> predict(w2_, x)[1]
         w3 = BSON.load(path_to_src * "/RelaxedIK/Config/collision_nn/" * collision_nn_file_name * "_3")[:w3]
-        model3 = (x) -> predict(w3, x)[1]
+        w3_ = Array{Array{Float64,2},1}()
+        for i = 1:length(w3)
+            push!(w3_, w3[i])
+        end
+        model3 = (x) -> predict(w3_, x)[1]
 
         #function model_nn(x, model, state_to_joint_pts_closure)
         #    return model(state_to_joint_pts_closure(x))
@@ -103,7 +116,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
             goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions,
-            init_ee_quats, 0, model, model2, model3, w, t_val, c_val, f_val, w2, t_val2, c_val2, f_val2, w3, t_val3, c_val3, f_val3, 0, 0)
+            init_ee_quats, 0, model, model2, model3, w_, t_val, c_val, f_val, w2_, t_val2, c_val2, f_val2, w3_, t_val3, c_val3, f_val3, 0, 0)
         initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
         rv.joint_pts = initial_joint_points
 
@@ -117,7 +130,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
     function in_collision(rv, x)
         state_to_joint_pts_inplace(x, rv)
-        val = model3(rv.joint_pts)
+        val = model2(rv.joint_pts)
         if val >= 1.0
             return true
         else
@@ -129,6 +142,18 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
     rv.in_collision = in_collision_c
 
     populate_vars!(vars, rv)
+
+    if preconfigured == false
+        for i = 1:length(grad_types)
+            if grad_types[i] == "nn"
+                # nn_grad_func_c = x->nn_grad_func(x, rv, rv.w, rv.nn_t, rv.nn_c, rv.nn_f)
+                nn∇ = get_nn_grad_func(rv, rv.w, rv.nn_t, rv.nn_c, rv.nn_f)
+                nn∇_2 = get_nn_grad_func(rv, rv.w2, rv.nn_t2, rv.nn_c2, rv.nn_f2)
+                nn∇_3 = get_nn_grad_func(rv, rv.w3, rv.nn_t3, rv.nn_c3, rv.nn_f3)
+                rv.vars.∇s[i] = nn∇_3
+            end
+        end
+    end
 
     return rv
 end
@@ -155,10 +180,26 @@ function yaml_block_to_arms(y)
     arms = []
 
     for i=1:num_chains
-        a = Arm(y["axis_types"][i], y["displacements"][i],  y["disp_offsets"][i],
+        a = Arm(y["joint_names"][i], y["axis_types"][i], y["displacements"][i],  y["disp_offsets"][i],
             y["rot_offsets"][i], y["joint_types"][i], true)
         push!(arms, a)
     end
 
     return arms
+end
+
+function get_nn_grad_func(relaxedIK_vars, w, nn_t, nn_c, nn_f)
+    function nn_grad_func(x)
+        ∇, nn_output = get_gradient_wrt_input(w, relaxedIK_vars.joint_pts)
+        get_linear_jacobian(relaxedIK_vars.robot, x)
+        jac = relaxedIK.relaxedIK_vars.robot.linear_jacobian
+        gld = groove_loss_derivative(nn_output[1], nn_t, 2, nn_c, nn_f, 2)
+        ∇ = gld*∇*jac
+        ret = Array{Float64, 1}()
+        for i in ∇
+            push!(ret, i)
+        end
+        return ret
+    end
+    return nn_grad_func
 end

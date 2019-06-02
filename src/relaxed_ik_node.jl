@@ -5,10 +5,10 @@ include("RelaxedIK/Utils_Julia/solver_output.jl")
 using YAML
 using RobotOS
 using Rotations
-using BenchmarkTools
+# using BenchmarkTools
 using ForwardDiff
-using Knet
-using Dates
+# using Knet
+# using Dates
 @rosimport relaxed_ik.msg : EEPoseGoals, JointAngles
 @rosimport std_msgs.msg: Float64MultiArray, Bool, Float32, Int8
 @rosimport geometry_msgs.msg: Point, Quaternion, Pose
@@ -60,11 +60,11 @@ println("loaded robot: $loaded_robot")
 init_node("relaxed_ik_node_jl")
 
 Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb)
-Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb)
+Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=1)
 Subscriber{BoolMsg}("relaxed_ik/reset", reset_cb)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 
-sleep(0.4)
+sleep(0.5)
 
 # d = Dates.format(now(), "yyyy-mm-dd HH:MM:SS")
 # so = Solver_Output(path_to_src, "relaxed_ik", "ur5", d)
@@ -84,7 +84,8 @@ end
 empty_eepg = eepg
 
 loop_rate = Rate(1000)
-while ! is_shutdown()
+quit = false
+while true
     global quit
     if quit == true
         println("quitting")

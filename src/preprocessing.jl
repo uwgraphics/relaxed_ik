@@ -153,7 +153,7 @@ cv = c.CollisionVars(path_to_src)
 # init_node("preprocessing")
 
 Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=3)
-
+0
 sleep(0.3)
 
 num_dof = relaxedIK.relaxedIK_vars.robot.num_dof
@@ -329,7 +329,7 @@ end
 # Make neural net ##############################################################
 # net_width = length(ins[1]) + 8
 # net_width = length(ins[1])
-net_width = 14
+net_width = 18
 rand_val = 1.0
 w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
     rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
@@ -338,7 +338,7 @@ w = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,
     rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
 
 
-net_width = 30
+net_width = 26
 rand_val = 1.0
 w2 = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
     rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),
@@ -347,7 +347,7 @@ w2 = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width
     rand_val*Knet.xavier(1, net_width), zeros(Float64,1,1)  ]
 
 
-net_width = 50
+net_width = 34
 rand_val = 1.0
 w3 = [ rand_val*Knet.xavier(net_width, length(ins[1]) ), zeros(Float64,net_width,1),
     rand_val*Knet.xavier(net_width, net_width), zeros(Float64,net_width,1),

@@ -12,6 +12,10 @@ function groove_loss(x_val, t, d, c, f, g)
     return (-2.718281828459^((-(x_val - t)^d) / (2.0 * c^2)) ) + f * (x_val - t)^g
 end
 
+function groove_loss_derivative(x_val, t, d, c, f, g)
+    return -2.718281828459^((-(x_val - t)^d) / (2.0 * c^2)) * ( (-d*(x_val-t) ) / (2. * c^2) ) + g*f*(x_val-t)
+end
+
 function position_obj_1(x, vars)
     vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])
     x_val = norm(vars.robot.arms[1].out_pts[end] - vars.goal_positions[1])
@@ -194,7 +198,7 @@ function collision_nn_obj(x, vars)
     # 0.2010929597597385, 0.5241930016229932, 1.1853951273805203
     # 0.2010929597597385, 0.5241930016229932, 1.1853951273805203
     # return groove_loss(  vars.nn_model( vars.joint_pts ) , 0.2010929597597385, 2, 0.52419, 1.1853951273805203, 2 )
-    return groove_loss(  vars.nn_model( vars.joint_pts ) , vars.nn_t, 2, vars.nn_c, vars.nn_f, 2 )
+    return groove_loss(  vars.nn_model3( vars.joint_pts ), vars.nn_t3, 2, vars.nn_c3, vars.nn_f3, 2 )
 end
 
 

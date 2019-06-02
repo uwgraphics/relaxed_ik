@@ -23,6 +23,7 @@ mutable struct Vars
     dummy_val
 end
 
+
 function Vars(init_state, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, bounds)
     xopt = copy(init_state) + 0.0000000001*ones(length(init_state))
     prev_state = copy(init_state) + 0.0000000001*ones(length(init_state))
