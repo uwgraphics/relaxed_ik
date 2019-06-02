@@ -13,7 +13,7 @@ mutable struct RelaxedIK
 end
 
 
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 15, max_time=0.0)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 11, max_time=0.0)
     relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
     groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter, max_time=max_time)
     ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
@@ -271,4 +271,13 @@ function get_ee_error(relaxedIK, xopt, goal_pos, goal_quat, armidx)
     rot_error = norm( quaternion_disp(ee_quat, goal_quat) )
 
     return pos_error, rot_error
+end
+
+
+function in_collision(relaxedIK, x)
+    return relaxedIK.relaxedIK_vars.in_collision(x)
+end
+
+function in_collision_groundtruth(relaxedIK, x)
+    return relaxedIK.relaxedIK_vars.in_collision_groundtruth(x)
 end

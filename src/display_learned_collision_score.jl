@@ -50,13 +50,46 @@ y = info_file_name_to_yaml_block(path_to_src, loaded_robot)
 joint_ordering = y["joint_ordering"]
 
 
+total_iters = 1.0
+false_positive_count = 0.0
+false_negative_count = 0.0
+true_positive_count = 0.0
+true_negative_count = 0.0
 
 loop_rate = Rate(100)
 while ! is_shutdown()
     if ! (joint_state == "")
         positions = get_positions_from_joint_state(joint_state, joint_ordering)
         state = state_to_joint_pts_withreturn(positions, relaxedIK.relaxedIK_vars)
-        println(relaxedIK.relaxedIK_vars.nn_model(state) )
+        model_score = relaxedIK.relaxedIK_vars.nn_model3(state)
+        incollision_m = in_collision(relaxedIK, positions)
+        incollision_g = in_collision_groundtruth(relaxedIK, positions)
+
+        if incollision_m == incollision_g
+            if incollision_g == true
+                global true_positive_count
+                true_positive_count += 1.0
+            else
+                global true_negative_count
+                true_negative_count += 1.0
+            end
+        else
+            if incollision_g == true
+                global false_positive_count
+                false_positive_count += 1.0
+            else
+                global false_negative_count
+                false_negative_count += 1.0
+            end
+        end
+
+        global total_iters
+        false_negative_perc = false_negative_count/total_iters
+        false_positive_perc = false_positive_count/total_iters
+        accuracy = (true_positive_count + true_negative_count)/total_iters
+        println("false negatives: $false_negative_count *** $false_negative_perc , false positives: $false_positive_count *** $false_positive_perc , true negatives: $true_negative_count , true positives: $true_positive_count, accuracy: $accuracy , num iters: $total_iters")
+
+        total_iters += 1.0
     end
     rossleep(loop_rate)
 end

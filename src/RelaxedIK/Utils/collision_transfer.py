@@ -5,11 +5,12 @@ from RelaxedIK.GROOVE_RelaxedIK.relaxedIK_vars import RelaxedIK_vars
 import os
 import rospy
 import yaml
+import numpy.random as r
 
 
 class CollisionVars:
     def __init__(self, path_to_src):
-        rospy.init_node('coll_test')
+        # rospy.init_node('coll_test')
         # print "got here!"
         # path_to_src = os.path.dirname(__file__)
         # print path_to_src

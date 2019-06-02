@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marker_ikgoal_driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/marker_ikgoal_driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display_learned_collision_score.jl" beforeDir="false" afterPath="$PROJECT_DIR$/display_learned_collision_score.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/relaxed_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reset_and_quit.py" beforeDir="false" afterPath="$PROJECT_DIR$/reset_and_quit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,18 +18,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/start_here.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10208">
-              <caret line="352" column="78" selection-start-line="352" selection-start-column="78" selection-end-line="352" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/marker_ikgoal_driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1355">
+            <state relative-caret-position="1537">
               <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
               <folding>
                 <element signature="e#19#31#0" expanded="true" />
@@ -38,14 +29,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="870">
-              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#19#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="58">
+              <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -171,8 +183,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_objective.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Multithread/relaxedIK_mt_vars.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK_subchain.py" />
         <option value="$PROJECT_DIR$/RelaxedIK/relaxedIK_multithread.py" />
         <option value="$PROJECT_DIR$/mt_test.py" />
@@ -222,6 +232,8 @@
         <option value="$PROJECT_DIR$/RelaxedIK/Utils/interactive_marker_utils.py" />
         <option value="$PROJECT_DIR$/marker_ikgoal_driver.py" />
         <option value="$PROJECT_DIR$/reset_and_quit.py" />
+        <option value="$PROJECT_DIR$/test5.py" />
+        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py" />
       </list>
     </option>
   </component>
@@ -237,6 +249,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -249,17 +262,10 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Utils" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -294,7 +300,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.marker_ikgoal_driver">
+  <component name="RunManager" selected="Python.test5">
     <configuration name="interactive_marker_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -329,27 +335,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/marker_ikgoal_driver.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="src" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -400,20 +385,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.test3" />
       <item itemvalue="Python.test2" />
       <item itemvalue="Python.marker_ikgoal_driver" />
       <item itemvalue="Python.interactive_marker_utils" />
+      <item itemvalue="Python.test5" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test5" />
         <item itemvalue="Python.marker_ikgoal_driver" />
         <item itemvalue="Python.interactive_marker_utils" />
         <item itemvalue="Python.test3" />
         <item itemvalue="Python.test2" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -443,7 +449,7 @@
     <frame x="129" y="13" width="3712" height="2148" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22122204" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22122204" />
       <window_info id="Structure" order="1" weight="0.24958587" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -467,20 +473,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jl" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/ur5_joint_state_define">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/ur5.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="23" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_info.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -751,6 +743,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/marker_ikgoal_driver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1537">
+          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+          <folding>
+            <element signature="e#19#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/interactive_marker_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1595">
@@ -811,22 +813,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/marker_ikgoal_driver.py">
+    <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1355">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        <state relative-caret-position="870">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
-            <element signature="e#19#31#0" expanded="true" />
+            <element signature="e#19#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
+    <entry file="file://$PROJECT_DIR$/test5.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+        <state relative-caret-position="58">
+          <caret line="2" column="6" lean-forward="true" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
-            <element signature="e#19#34#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

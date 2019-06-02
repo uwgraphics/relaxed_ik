@@ -147,5 +147,6 @@ while true
     publish(angles_pub, ja)
 
     println(xopt)
+    # println(in_collision(relaxedIK, xopt))
     rossleep(loop_rate)
 end
