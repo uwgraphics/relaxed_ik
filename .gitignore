@@ -130,3 +130,5 @@ src/RelaxedIK/Config/info_files/*
 !src/RelaxedIK/Config/info_files/README
 src/RelaxedIK/Config/joint_state_define_functions/*
 !src/RelaxedIK/Config/joint_state_define_functions/README
+
+src/RelaxedIK/MP/*
