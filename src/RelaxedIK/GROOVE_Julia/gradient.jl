@@ -12,7 +12,7 @@ function get_∇(func, grad_method)
     elseif grad_method == "finite_diff"
         return x->Calculus.gradient(func, x)
     elseif grad_method == "zygote"
-        return x->Calculus.gradient(func, x)
+        return x->Zygote.gradient(func, x)
     else
         return x->Calculus.gradient(func, x) # default to finite differencing
     end
