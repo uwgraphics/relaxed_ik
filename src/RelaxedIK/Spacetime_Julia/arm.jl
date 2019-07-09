@@ -174,7 +174,7 @@ function getFrames(arm::Arm, state)
         end
 
         if arm.joint_types[i] == "prismatic"
-            axis = self.axes[axis_idx]
+            axis = arm.axes[axis_idx]
             if axis == 'x'
                 arm.displacements[i][1] = arm.original_displacements[i][1] + state[axis_idx]
             elseif axis == 'y'

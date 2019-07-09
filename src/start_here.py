@@ -253,8 +253,8 @@ def joint_state_define(x):
 #   that appear to have been learned incorrectly on previous runs of the neural network learning, and you want to try to fix it on another run
 #   of the learning process.
 #
-#   Both the training_states and problem_states lists are optional parameters.  If you do not want to include states in these lists, leave them as
-#   empty lists (i.e., do NOT delete the [ ] characters in the yaml file).
+#   Both the training_states and problem_states lists are optional parameters.  If you do not want to include states in these lists, leave them as they are in the
+#	example file.
 #
 #   Again, feel free to use the urdf_viewer tool provided in the relaxed_ik package to select training_states and problem_states
 #
@@ -289,7 +289,22 @@ collision_file_name = ''
 
 
 ######################################################################################################
-# Step 5b: To see that your collision file was put together accurately, use the following command:
+# Step 5b: Generate a robot info file using the following command:
+#
+#   roslaunch relaxed_ik generate_info_file.launch
+######################################################################################################
+
+
+######################################################################################################
+# Step 5c: There should now be a robot info file corresponding to the robot you are currently setting up
+#   in the RelaxedIK/Config/info_files directory.  From now on, the solver will get all information directly
+#   from this file upon initialization
+######################################################################################################
+
+
+
+######################################################################################################
+# Step 6: To see that your collision file was put together accurately, use the following command:
 #   rosrun relaxed_ik urdf_viewer_with_collision_info.py
 #
 #   You will see an rviz scene with collision objects in their specified locations, including the
@@ -303,19 +318,6 @@ collision_file_name = ''
 ######################################################################################################
 
 
-
-######################################################################################################
-# Step 6a: Generate a robot info file using the following command:
-#
-#   roslaunch relaxed_ik generate_info_file.launch
-######################################################################################################
-
-
-######################################################################################################
-# Step 6b: There should now be a robot info file corresponding to the robot you are currently setting up
-#   in the RelaxedIK/Config/info_files directory.  From now on, the solver will get all information directly
-#   from this file upon initialization
-######################################################################################################
 
 
 ######################################################################################################

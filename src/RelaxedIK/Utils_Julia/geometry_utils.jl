@@ -1,4 +1,5 @@
 using LinearAlgebra
+using Distances
 
 function closest_point_on_2_lines(u1, u2, v1, v2)
     u = u2 - u1
@@ -32,10 +33,31 @@ function dis_between_line_segments(u1, u2, v1, v2)
     return norm(p1-p2)
 end
 
-function pt_dis_to_line_seg(pt, a, b)
+function pt_dis_to_line_seg(pt::Array{Float64, 1}, a::Array{Float64, 1}, b::Array{Float64, 1})
     u = dot((pt - a), (b - a)) / max(norm(a-b)^2, 0.00000000000001)
     u = min( max(u,0.) , 1.)
     p = a + u*(b - a)
     dis = norm(p - pt)
-    return dis
+    return dis, p
+end
+
+function pt_dis_to_line(pt::AbstractArray, a::AbstractArray, b::AbstractArray)
+    u = dot((pt - a), (b - a)) / euclidean(a,b)^2
+    # u = min( max(u,0.) , 1.)
+    p = a + u*(b - a)
+    # dis = norm(p - pt)
+    dis = euclidean(p, pt)
+    return dis, p
+end
+
+function pt_dis_to_line_and_segment(pt::AbstractArray, a::AbstractArray, b::AbstractArray)
+    u1 = dot((pt - a), (b - a)) / euclidean(a,b)^2
+    u2 = min( max(u1,0.) , 1.)
+    p1 = a + u1*(b - a)
+    p2 = a + u2*(b - a)
+
+    # dis = norm(p - pt)
+    dis1 = euclidean(p1, pt)
+    dis2 = euclidean(p2, pt)
+    return dis1, p1, u1, dis2, p2, u2
 end
