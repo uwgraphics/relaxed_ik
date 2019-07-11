@@ -4,7 +4,7 @@
 
 DEVELOPMENT BRANCH
 
-<b> NOTE: The dev branch is not quite ready for public use. I'm still testing out many of the new features, and the documentation has not been updated to reflect the changes. I would recommend sticking with the master branch for now - I'll be merging the dev branch to master when it's all ready to go in a few weeks </b>
+<b> NOTE: If you have any problems setting up the solver with your robot, let me know!  I've set up many robots from kinova, UR, Kuka, Rethink, Rainbow, ABB, etc. in the solver, so chances are I could quickly ease the setup process for you if you encounter issues.  </b>
 
 Welcome to RelaxedIK! This solver implements the methods discussed in our paper <i> RelaxedIK: Real-time Synthesis of Accurate and Feasible Robot Arm Motion </i> (http://www.roboticsproceedings.org/rss14/p43.html)
 
