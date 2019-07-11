@@ -273,7 +273,6 @@ function get_ee_error(relaxedIK, xopt, goal_pos, goal_quat, armidx)
     return pos_error, rot_error
 end
 
-
 function in_collision(relaxedIK, x)
     return relaxedIK.relaxedIK_vars.in_collision(x)
 end

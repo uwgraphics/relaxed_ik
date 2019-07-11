@@ -67,7 +67,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         push!(init_ee_positions, robot.arms[i].out_pts[end])
         push!(init_ee_quats, Quat(robot.arms[i].out_frames[end]))
         push!(goal_positions, SVector(0.0,0.0,0.0))
-        push!(goal_quats, rand(Quat))
+        push!(goal_quats, Quat(1.,0.,0.,0.))
         push!(goal_positions_relative, SVector(0.,0.,0.))
         push!(goal_quats_relative, Quat(1.,0.,0.,0.))
     end

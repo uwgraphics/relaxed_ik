@@ -124,17 +124,16 @@ joint_ordering =  [ ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [  ]
+ee_fixed_joints = [ ]
 ######################################################################################################
 
 
 ######################################################################################################
-# Step 3d: Please provide a starting configuration for the robot.  If you leave this blank, the starting
-#   configuration will be considered zeros for all joints
+# Step 3d: Please provide a starting configuration for the robot.
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [  ]
+starting_config = [ ]
 ######################################################################################################
 
 
@@ -295,6 +294,8 @@ collision_file_name = ''
 ######################################################################################################
 
 
+
+
 ######################################################################################################
 # Step 5c: There should now be a robot info file corresponding to the robot you are currently setting up
 #   in the RelaxedIK/Config/info_files directory.  From now on, the solver will get all information directly
@@ -303,8 +304,19 @@ collision_file_name = ''
 
 
 
+
 ######################################################################################################
-# Step 6: To see that your collision file was put together accurately, use the following command:
+# Step 6: load the newly created info file by changing the info_file_name argument in the load_info_file
+#   launch file and running the following command:
+#
+#   roslaunch relaxed_ik load_info_file.launch
+#######################################################################################################
+
+
+
+
+######################################################################################################
+# Step 7: To see that your collision file was put together accurately, use the following command:
 #   rosrun relaxed_ik urdf_viewer_with_collision_info.py
 #
 #   You will see an rviz scene with collision objects in their specified locations, including the
@@ -317,15 +329,6 @@ collision_file_name = ''
 #   This will usually consist of changing the states in the sample_states list.
 ######################################################################################################
 
-
-
-
-######################################################################################################
-# Step 7: load the newly created info file by changing the info_file_name argument in the load_info_file
-#   launch file and running the following command:
-#
-#   roslaunch relaxed_ik load_info_file.launch
-#######################################################################################################
 
 
 

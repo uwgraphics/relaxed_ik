@@ -4,3 +4,4 @@ float64 ee_pos_precision
 float64 ee_rot_precision
 ---
 relaxed_ik/JointAngles joint_angles
+bool success

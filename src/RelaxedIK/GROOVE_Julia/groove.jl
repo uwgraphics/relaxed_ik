@@ -100,6 +100,10 @@ function groove_solve(groove; prev_state = nothing, ftol_abs=0.0, max_time=0.0, 
         maxeval!(groove.opt, max_iter)
     end
     =#
+    if max_iter > 0
+        maxeval!(groove.opt, max_iter)
+    end
+
 
     #xtol_rel!(groove.opt, 0.0001)
     # println(xtol_rel(groove.opt))
