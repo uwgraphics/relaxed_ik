@@ -2,7 +2,7 @@
 <launch>
 <!-- Must correspond to a file in the src/RelaxedIK/Config/info_files directory -->
 <!-- ex: value= "ur5_info.yaml" -->
-   <arg name="info_file_name" default="mico_info.yaml" />
+   <arg name="info_file_name" default="" />
 
 <!-- ##################################################################################### -->
 
