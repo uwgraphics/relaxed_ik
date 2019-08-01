@@ -120,7 +120,7 @@ Once Julia is installed, initialize a Julia environment using the following comm
 
 then run the following commands to install Julia dependencies for RelaxedIK:
 <pre> using Pkg </pre>
-<pre> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra", "Zygote"]) </pre>
+<pre> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra", "Zygote", "Distances"]) </pre>
 
 in the same Julia session, configure PyCall within Julia by running the following commands:
 <pre> ENV["PYTHON"] = "/usr/bin/python2.7" </pre>
