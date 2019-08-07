@@ -5,6 +5,7 @@ using LinearAlgebra
 using StaticArrays
 using Rotations
 include("../Utils_Julia/transformations.jl")
+include("../Utils_Julia/joint_utils.jl")
 include("../Utils_Julia/geometry_utils.jl")
 include("../Utils_Julia/nn_utils.jl")
 
@@ -32,7 +33,7 @@ function position_obj_2(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
     x_val = norm(vars.robot.arms[2].out_pts[end] - vars.goal_positions[2])
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2.0, 2.02637, 100.789, 2.0)
 end
 
@@ -40,7 +41,7 @@ function position_obj_3(x, vars)
     vars.robot.arms[3].getFrames(x[vars.robot.subchain_indices[3]])
     x_val = norm(vars.robot.arms[3].out_pts[end] - vars.goal_positions[3])
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2.0, 2.02637, 100.789, 2.0)
 end
 
@@ -48,7 +49,7 @@ function position_obj_4(x, vars)
     vars.robot.arms[4].getFrames(x[vars.robot.subchain_indices[4]])
     x_val = norm(vars.robot.arms[4].out_pts[end] - vars.goal_positions[4])
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2.0, 2.02637, 100.789, 2.0)
 end
 
@@ -56,7 +57,7 @@ function position_obj_5(x, vars)
     vars.robot.arms[5].getFrames(x[vars.robot.subchain_indices[5]])
     x_val = norm(vars.robot.arms[5].out_pts[end] - vars.goal_positions[5])
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2.0, 2.02637, 100.789, 2.0)
 end
 
@@ -94,7 +95,7 @@ function rotation_obj_2(x, vars)
 
     x_val = min(disp, disp2)
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2., -0.00910925, 32.1129, 2.)
 end
 
@@ -112,7 +113,7 @@ function rotation_obj_3(x, vars)
 
     x_val = min(disp, disp2)
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2., -0.00910925, 32.1129, 2.)
 end
 
@@ -130,7 +131,7 @@ function rotation_obj_4(x, vars)
 
     x_val = min(disp, disp2)
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2., -0.00910925, 32.1129, 2.)
 end
 
@@ -148,8 +149,14 @@ function rotation_obj_5(x, vars)
 
     x_val = min(disp, disp2)
 
-    return groove_loss(x_val, 0., 2, 0.23065358014379128, 0.10204081632653063, 2)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
     # return groove_loss(x_val, 0., 2., -0.00910925, 32.1129, 2.)
+end
+
+function joint_goal_obj(x, vars)
+    goal, ret_k = interpolate_to_joint_limits(vars.vars.xopt, vars.joint_goal, t=0.033, joint_velocity_limits=vars.robot.velocity_limits)
+    x_val = euclidean(x, goal)
+    return groove_loss(x_val, 0., 2, .1, 10., 2)
 end
 
 function min_jt_vel_obj(x, vars)

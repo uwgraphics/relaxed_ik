@@ -82,7 +82,7 @@ end
 
 
 function get_rand_state_with_bounds(relaxedIK_vars)
-    sample = []
+    sample = Array{Float64,1}()
     bounds = relaxedIK_vars.vars.bounds
     for b in bounds
         push!(sample, rand(Uniform(b[1], b[2])))

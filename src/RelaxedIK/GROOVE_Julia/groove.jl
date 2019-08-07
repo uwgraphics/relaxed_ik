@@ -6,7 +6,7 @@ mutable struct Groove
     opt
 end
 
-function get_groove(vars, solver_name; max_iter=12, max_time = 0.0)
+function get_groove(vars, solver_name; max_iter=12, max_time = 0.05)
     #=
     solver name options:
     "slsqp", "mma", "ccsaq", "bobyqa", "cobyla"
@@ -77,7 +77,6 @@ function get_groove(vars, solver_name; max_iter=12, max_time = 0.0)
     end
 
     return Groove(vars, opt)
-
 end
 
 function groove_solve(groove; prev_state = nothing, ftol_abs=0.0, max_time=0.0, max_iter = 0)

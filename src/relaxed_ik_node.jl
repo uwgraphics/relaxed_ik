@@ -45,16 +45,6 @@ close(loaded_robot_file)
 relaxedIK = get_standard(path_to_src, loaded_robot)
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
-if num_chains == 2
-    relaxedIK = get_bimanual(path_to_src, loaded_robot)
-elseif num_chains == 3
-    relaxedIK = get_3chain(path_to_src, loaded_robot)
-elseif num_chains == 4
-    relaxedIK = get_4chain(path_to_src, loaded_robot)
-elseif num_chains == 5
-    relaxedIK = get_5chain(path_to_src, loaded_robot)
-end
-
 println("loaded robot: $loaded_robot")
 
 init_node("relaxed_ik_node_jl")
@@ -65,9 +55,6 @@ Subscriber{BoolMsg}("relaxed_ik/reset", reset_cb)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 
 sleep(0.5)
-
-# d = Dates.format(now(), "yyyy-mm-dd HH:MM:SS")
-# so = Solver_Output(path_to_src, "relaxed_ik", "ur5", d)
 
 eepg = EEPoseGoals()
 pose = Pose()
@@ -105,15 +92,6 @@ while true
         # relaxedIK.relaxedIK_vars.vars.prev_state3 = relaxedIK.relaxedIK_vars.vars.init_state
         relaxedIK = get_standard(path_to_src, loaded_robot)
 
-        if relaxedIK.relaxedIK_vars.robot.num_chains == 2
-            relaxedIK = get_bimanual(path_to_src, loaded_robot)
-        elseif relaxedIK.relaxedIK_vars.robot.num_chains == 3
-            relaxedIK = get_3chain(path_to_src, loaded_robot)
-        elseif relaxedIK.relaxedIK_vars.robot.num_chains == 4
-            relaxedIK = get_4chain(path_to_src, loaded_robot)
-        elseif relaxedIK.relaxedIK_vars.robot.num_chains == 5
-            relaxedIK = get_5chain(path_to_src, loaded_robot)
-        end
         eepg = empty_eepg
     end
 

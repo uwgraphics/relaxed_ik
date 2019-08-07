@@ -130,6 +130,7 @@ while true
     end
 
     xopt, try_idx, valid_sol, pos_error, rot_error = solve_precise(relaxedIK, pos_goals, quat_goals)
+    println(xopt)
     # println(relaxedIK.relaxedIK_vars.vars.objective_closures[end](xopt))
     if valid_sol
         ja = JointAngles()
@@ -137,8 +138,7 @@ while true
             push!(ja.angles.data, xopt[i])
         end
         publish(angles_pub, ja)
-
-        println(xopt)
+        println("valid: $xopt")
     else
         prev_state = get_rand_state_with_bounds(relaxedIK.relaxedIK_vars.robot.bounds)
         xopt, try_idx, valid_sol, pos_error, rot_error = solve_precise(relaxedIK, pos_goals, quat_goals, prev_state=prev_state)

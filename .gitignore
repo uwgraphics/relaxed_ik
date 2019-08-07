@@ -132,5 +132,9 @@ src/RelaxedIK/Config/joint_state_define_functions/*
 !src/RelaxedIK/Config/joint_state_define_functions/README
 planner_keyboard.py
 planner_tester*.jl
-
+src/RelaxedIK/relaxedMP.jl
 src/RelaxedIK/MP/*
+src/RelaxedIK/MP2/*
+src/RelaxedIK/MP3/*
+src/RelaxedIK/MP4/*
+point_cloud_pub.py

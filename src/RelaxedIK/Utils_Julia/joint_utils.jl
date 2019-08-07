@@ -9,8 +9,8 @@ function interpolate_to_joint_limits(from_q, to_q; t=0.1, joint_velocity_limits=
     :param joint_velocity_limits:
     :return:
     =#
-    ret_q = []
-    ret_k = []
+    ret_q = Array{Float64,1}()
+    ret_k = Array{Float64,1}()
     numDOF = length(from_q)
 
     if joint_velocity_limits == nothing

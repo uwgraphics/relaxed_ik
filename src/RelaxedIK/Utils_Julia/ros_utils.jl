@@ -220,3 +220,41 @@ function draw_linelist_in_rviz(publisher, frame_id, points, color; id=3, width =
 
     publish(publisher, marker)
 end
+
+function draw_cube_list_in_rviz(publisher, frame_id, points, scale, color; id=4)
+    # marker_pub = Publisher("/visualization_marker", Marker, queue_size = 3)
+    # @rosimport visualization_msgs.msg: Marker
+    # @rosimport geometry_msgs.msg: Point
+    # rostypegen()
+    # using .visualization_msgs.msg
+    # using .geometry_msgs.msg
+    marker = Marker()
+    marker.header.frame_id = frame_id
+    marker.header.stamp = RobotOS.now()
+
+    marker.type = 6
+    marker.id = id
+
+    marker.color.r = color[1]
+    marker.color.g = color[2]
+    marker.color.b = color[3]
+    marker.color.a = color[4]
+
+    marker.scale.x = scale[1]
+    marker.scale.y = scale[2]
+    marker.scale.z = scale[3]
+
+    for i = 1:length(points)
+        p = Point()
+        p.x = points[i][1]
+        p.y = points[i][2]
+        if length(points[i]) > 2
+            p.z = points[i][3]
+        else
+            p.z = 0.0
+        end
+        push!(marker.points, p)
+    end
+
+    publish(publisher, marker)
+end

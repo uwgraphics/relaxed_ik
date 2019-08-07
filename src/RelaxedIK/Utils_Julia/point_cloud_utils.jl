@@ -34,6 +34,27 @@ function list_of_points_to_matrix_of_points(list_of_points)
     return mat
 end
 
+function list_of_points_to_matrix_of_points_2d(list_of_points)
+    num_pts = length(list_of_points)
+    mat = zeros(2, num_pts)
+    for i = 1:num_pts
+        mat[1,i] = list_of_points[i][1]
+        mat[2,i] = list_of_points[i][2]
+    end
+    return mat
+end
+
+function list_of_points_to_matrix_of_points_nd(list_of_points)
+    num_pts = length(list_of_points)
+    mat = zeros(length(list_of_points[1]), num_pts)
+    for i = 1:num_pts
+        for j = 1:length(list_of_points[i])
+            mat[j,i] = list_of_points[i][j]
+        end
+    end
+    return mat
+end
+
 function get_kdtree_from_point_cloud(point_cloud_data)
     # point cloud data is assumed to already be in matrix format from the second cb
     return KDTree(point_cloud_data)
@@ -46,6 +67,15 @@ function get_nearest_neighbors(kdtree, point, point_cloud_data; k=1)
         push!(nn, point_cloud_data[:, idxs[i]])
     end
     return nn, dists
+end
+
+function get_nearest_neighbors_with_idxs(kdtree, point, point_cloud_data; k=1)
+    idxs, dists = knn(kdtree, point, k, true)
+    nn = []
+    for i = 1:k
+        push!(nn, point_cloud_data[:, idxs[i]])
+    end
+    return nn, dists, idxs
 end
 
 function get_robot_distance_from_point_cloud(x, relaxedIK, kdtree, point_cloud_data)
@@ -73,9 +103,18 @@ function get_robot_distance_from_point_cloud(x, relaxedIK, kdtree, point_cloud_d
     return closest_cloud_pt, closest_robot_pt, min_dis
 end
 
-function is_robot_colliding_with_point_cloud(x, relaxedIK, kdtree, point_cloud_data; collision_radius = 0.07)
+function is_robot_colliding_with_point_cloud(x, relaxedIK, kdtree, point_cloud_data; collision_radius = 0.05)
     closest_cloud_pt, closest_robot_pt, min_dis = get_robot_distance_from_point_cloud(x, relaxedIK, kdtree, point_cloud_data)
     if min_dis < collision_radius
+        return true
+    else
+        return false
+    end
+end
+
+function is_point_colliding_with_point_cloud(x, kdtree, point_cloud_data; collision_radius = 0.05)
+    nn, dists = get_nearest_neighbors(kdtree, x, point_cloud_data, k=1)
+    if dists[1] < collision_radius
         return true
     else
         return false

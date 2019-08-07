@@ -22,6 +22,7 @@ mutable struct RelaxedIK_vars
     goal_quats
     goal_positions_relative
     goal_quats_relative
+    joint_goal
     init_ee_positions
     init_ee_quats
     joint_pts
@@ -44,7 +45,6 @@ mutable struct RelaxedIK_vars
     in_collision_groundtruth
     additional_vars
 end
-
 
 function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false)
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
@@ -71,6 +71,8 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         push!(goal_positions_relative, SVector(0.,0.,0.))
         push!(goal_quats_relative, Quat(1.,0.,0.,0.))
     end
+
+    joint_goal = zeros(length(vars.init_state))
 
     if preconfigured == false
         collision_nn_file_name = y["collision_nn_file"]
@@ -119,7 +121,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         close(fp)
 
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
-            goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions,
+            goal_quats, goal_positions_relative, goal_quats_relative, joint_goal, init_ee_positions,
             init_ee_quats, 0, model, model2, model3, w_, t_val, c_val, f_val, w2_, t_val2, c_val2, f_val2, w3_, t_val3, c_val3, f_val3, 0, 0, 0)
         initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
         rv.joint_pts = initial_joint_points
@@ -129,7 +131,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         # rv.collision_nn = collision_nn
     else
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
-        goal_quats, goal_positions_relative, goal_quats_relative, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        goal_quats, goal_positions_relative, goal_quats_relative, joint_goal, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     end
 
     function in_collision(rv, x)
