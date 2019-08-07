@@ -25,6 +25,7 @@ rotation_r = [1,0,0,0]
 position_l = [0,0,0]
 rotation_l = [1,0,0,0]
 
+seq = 1
 rate = rospy.Rate(1000)
 while not rospy.is_shutdown():
     pose = PoseStamped()
@@ -190,6 +191,8 @@ while not rospy.is_shutdown():
     ee_pose_goals.ee_poses.append(pose_r)
     ee_pose_goals.ee_poses.append(pose_l)
 
+    ee_pose_goals.header.seq = seq
+    seq += 1
     ee_pose_goals_pub.publish(ee_pose_goals)
 
     q = Bool()

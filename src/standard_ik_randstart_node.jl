@@ -137,6 +137,10 @@ while true
         for i = 1:length(xopt)
             push!(ja.angles.data, xopt[i])
         end
+        ja.header.seq = eepg.header.seq
+        ja.header.stamp = eepg.header.stamp
+        ja.header.frame_id = eepg.header.frame_id
+
         publish(angles_pub, ja)
 
         println(xopt)
