@@ -98,6 +98,9 @@ scipy:
 Pyyaml:
 <pre> sudo pip install PyYaml </pre>
 
+Lastly, update your version of numpy:
+<pre> sudo pip install --upgrade numpy </pre>
+
 <br>
 
 To use the Julia version of the solver (which is the recommended option), you will first need to install Julia.
