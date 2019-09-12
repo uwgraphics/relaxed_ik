@@ -125,6 +125,8 @@ then run the following commands to install Julia dependencies for RelaxedIK:
 <pre> using Pkg </pre>
 <pre> Pkg.add(["YAML", "BenchmarkTools", "ForwardDiff", "Calculus", "ReverseDiff", "StaticArrays", "Rotations", "Flux", "BSON", "NLopt", "Knet", "Random", "RobotOS", "Distributions", "PyCall", "Dates", "LinearAlgebra", "Zygote", "Distances"]) </pre>
 
+<b> NOTE: Knet version 1.2.5 appears to cause an error during preprocessing.  I will look into permanently addressing this issue by updating RelaxedIK to be compatible with this new version or potentially switching to Flux.  In the meantime, please revert to Knet version 1.2.4.  </b>
+
 in the same Julia session, configure PyCall within Julia by running the following commands:
 <pre> ENV["PYTHON"] = "/usr/bin/python2.7" </pre>
 <pre> Pkg.build("PyCall") </pre>
