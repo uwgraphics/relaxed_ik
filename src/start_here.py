@@ -51,14 +51,15 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = ''
+from sensor_msgs.msg import JointState
+urdf_file_name = 'ur5_allegro.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = ''
+fixed_frame = 'base'
 ######################################################################################################
 
 
@@ -69,7 +70,6 @@ fixed_frame = ''
 #   you should see rviz start up, and your robot platform should be visible.  You can rotate the joints
 #       in rviz by using the GUI pop-up
 ######################################################################################################
-
 
 
 ######################################################################################################
@@ -85,7 +85,17 @@ fixed_frame = ''
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [ ]
+
+finger_joints = [['joint_' + str(i) for i in range(j*4, 4*j+4)] +
+                 ['adapter_sensor_tip_' + str(j)] for j in range(4)]
+
+arm_joints = ['base_link', "base_link-base_fixed_joint", 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint',
+              'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
+
+joint_names = [arm_joints + ['ee_fixed_joint']] + \
+    [arm_joints + ['wrist_3_link-tool0_fixed_joint', 'tool_mount',
+                   'mount_allegro'] + finger[:-1] for finger in finger_joints]
+
 ######################################################################################################
 
 
@@ -105,7 +115,10 @@ joint_names = [ ]
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering = [ ]
+# joint_ordering = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint',
+#                   'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'
+#                   ] + [joint for finger in finger_joints for joint in finger[:-1]]
+joint_ordering = [joint for finger in finger_joints for joint in finger[:-1]] + arm_joints[2:]
 ######################################################################################################
 
 
@@ -120,7 +133,8 @@ joint_ordering = [ ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [ ]
+ee_fixed_joints = ['ee_fixed_joint'] + [finger[-1] for finger in finger_joints]
+
 ######################################################################################################
 
 
@@ -130,7 +144,9 @@ ee_fixed_joints = [ ]
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ ]
+starting_config = [0.0, -4.899999999999349e-05, -0.0001991000000000076, -6.499999999998174e-05, 0.0, -0.0011326000000000114, -0.001328899999999994, -6.499999999998174e-05, 0.0, -
+                   0.0022162000000000015, 0.001893800000000001, -0.0006184999999999663, 0.8293867, -9.599999999998499e-06, -1.7700000000009375e-05, -0.001174499999999995, 0.0, -0.27143360527017624, 0.0, 0.0, 0.0, 0.0]
+
 ######################################################################################################
 
 
@@ -194,9 +210,15 @@ starting_config = [ ]
 #
 
 # TODO: fill out this function, or leave it how it is for the default option
-from sensor_msgs.msg import JointState
+
+
 def joint_state_define(x):
-    return None
+    js = JointState()
+    # js.header.frame_id = 'base_frame'
+    js.name = joint_ordering
+    # print(len(x))
+    js.position = x#[s for s in x]
+    return js
 
 ######################################################################################################
 
@@ -223,7 +245,7 @@ def joint_state_define(x):
 #   a configuration where two links are natively and safely close together.  THIS STEP IS VERY IMPORTANT FOR THE NEURAL
 #   NETWORK TO LEARN A GOOD COLLISION FUNCTION.  A set of 5 - 10 configurations where the robot is not in collision has been
 #   seen to work well, but more will always be better.  Good candidates for "sample states" are robot configurations that are
-#   somewhat close to collisions states, but do not exhibit a collision.  If it seems like the robot is being too cautious after 
+#   somewhat close to collisions states, but do not exhibit a collision.  If it seems like the robot is being too cautious after
 #   training the neural network (i.e., it is staying too far away from collision states), include more sample states that are closer to
 #   collision states without colliding.
 #
@@ -260,9 +282,8 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = ''
+collision_file_name = 'collision_ur5_allegro.yaml'
 ###########################################################################################################
-
 
 
 ######################################################################################################
@@ -354,8 +375,8 @@ config_file_name = ''
 #       std_msgs/Header header
 #       std_msgs/Float32[] angles
 #
-#   The header is a standard header that corresponds to the exact header from the input EEPoseGoals message 
-#   (the header sequence number can be used to get a correspondence between input pose goals and output joint solutions 
+#   The header is a standard header that corresponds to the exact header from the input EEPoseGoals message
+#   (the header sequence number can be used to get a correspondence between input pose goals and output joint solutions
 #   in a stream of solutions)
 #   The angles field contains the joint angle solutions as Float32 values, adhering to the naming order
 #   provided in step 3b when the configuration file was created.
@@ -363,13 +384,3 @@ config_file_name = ''
 
 
 # Step-by-step guide ends here!
-
-
-
-
-
-
-
-
-
-
