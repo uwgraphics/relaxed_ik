@@ -332,8 +332,8 @@ class Collision_Mesh(Collision_Object):
         if not len(self.params) == 2:
             raise TypeError(bc.FAIL + 'ERROR: parameters for collision mesh must be a dictionary consisting of a list of verts and tris.' + bc.ENDC)
 
-        if not len(self.params['verts']) == len(self.params['tris']):
-            raise TypeError(bc.FAIL + 'ERROR: number of tris must equal the number of verts in collision mesh.' + bc.ENDC)
+        # if not len(self.params['verts']) == len(self.params['tris']):
+        #     raise TypeError(bc.FAIL + 'ERROR: number of tris must equal the number of verts in collision mesh.' + bc.ENDC)
 
         self.verts = np.array(self.params['verts'])
         self.tris = np.array(self.params['tris'])
