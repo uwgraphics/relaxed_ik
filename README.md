@@ -150,6 +150,18 @@ Then, make sure that the terminal that that command was entered into has focus (
 
 RelaxedIK has been rewritten in Julia to substantially boost performance.  This version of the solver is currently in a beta test on this branch.  If you have feedback based on your experience using this version of the solver (positive or negative), please email me at rakita@cs.wisc.edu.  Thanks!
 
+==================================================================================================================== Development update 10/10/19
+
+The RelaxedIK solver has presented two main options over the past six months: (1) For a stable, reliable, yet relatively slow version of the solver, use the python implementation on the main branch; or (2) for a less stable, less reliable, yet much faster version of the solver, use the Julia implementation on the dev branch. My goal was always to iterate on the Julia version to become just as stable and reliable as its Python counterpart, and eventually unite these two camps into one on the main branch with the Julia version as the centerpiece.
+
+However, there are a few idiosyncrasies that come along with the Julia programming language that have precluded those plans. First, the Julia version of relaxedIK takes at least a minute to do its JIT compilation and start from scratch each time. This is unacceptable for a stable release of a solver that should be convenient and lightweight to use. Plus, it makes development on top of the base solver incredibly tedious, since each little change requires this full JIT compilation. While the people developing the Julia programming language seem to be well aware of this issue for large projects developed in the language, and they may have a sufficient solution for this problem down the road, just waiting around and hoping this gets fixed does not seem like a good option. Second, while ros is somewhat supported in julia through RobotOS.jl, this library leads to mysterious errors too often to be the foundation of a stable release. With both of these issues in mind, I'd rather be proactive and just turn the page away from Julia and plan future development elsewhere.
+
+So, over the next couple of months, I will be re-implementing relaxedIK in a fully statically compiled language (still TBD). Given recent testing, I anticipate the new solver will be even faster than the Julia version, without the JIT compilation hassle and stability issues. Everything will remain ROS compatible. The Julia and python versions will remain in the new release for backwards compatibility, but I anticipate new features will just be officially added and supported in the new language.
+
+Along with the new language, I plan to add in a few other features as part of a "major" new release, such as better support for fast, standard IK solver options. The tools that make relaxedIK actually afford incredibly fast standard IK solver options (i.e., "standard" meaning just hitting end-effector pose goals accurately, without the motion continuity, collision avoidance, and other feasibility considerations included in relaxedIK). We've used these "standard" IK options in our prior work and, in our testing, it is faster and more reliable than other numerical IK solvers we have tried. I plan to make these features more publicly accessible and well documented.
+
+If you have any comments or questions on any of this, feel free to use the iusse thread titled "Development update" to foster conversation. Or, if you prefer, feel free to email me directly at rakita@cs.wisc.edu
+
 <b> Change Log </b>
 
 Version 1.1 (8/16/18): added support for prismatic and fixed joints
