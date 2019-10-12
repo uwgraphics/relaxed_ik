@@ -147,3 +147,4 @@ src/RelaxedIK/FileIO/mist_outputs/*
 src/RelaxedIK/FileIO/solver_outputs/*
 src/RelaxedIK/FileIO/point_clouds/*
 src/RelaxedIK/FileIO/objs/*
+src/RelaxedIK/FileIO/task_recordings/*
