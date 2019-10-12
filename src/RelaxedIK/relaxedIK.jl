@@ -5,6 +5,7 @@ include("GROOVE_Julia/groove.jl")
 include("GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl")
 include("Utils_Julia/transformations.jl")
 include("Utils_Julia/ema_filter.jl")
+using Distributions
 
 mutable struct RelaxedIK
     relaxedIK_vars
@@ -12,19 +13,41 @@ mutable struct RelaxedIK
     ema_filter
 end
 
-
-function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 11, max_time=0.0)
-    relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured)
+function RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", solver_name="slsqp", preconfigured=false, groove_iter = 11, max_time=0.0, starting_config="")
+    relaxedIK_vars = RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, position_mode = position_mode, rotation_mode = rotation_mode, preconfigured=preconfigured, starting_config=starting_config)
     groove = get_groove(relaxedIK_vars.vars, solver_name, max_iter = groove_iter, max_time=max_time)
     ema_filter = EMA_filter(relaxedIK_vars.vars.init_state)
     return RelaxedIK(relaxedIK_vars, groove, ema_filter)
 end
 
 # path_to_src = Base.source_dir()
-function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+function get_standard(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false, starting_config="")
     objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, collision_nn_obj]
     grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
-    weight_priors = [50.0, 49.0, 6.0 ,3.0, 2.0, 1.0, 1.0]
+    weight_priors = [50.0, 49.0, 3.0 ,1.0, 1.0, 1.0, 1.0]
+    inequality_constraints = []
+    ineq_grad_types = []
+    equality_constraints = []
+    eq_grad_types = []
+    relaxedIK = RelaxedIK(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types, solver_name = solver_name, preconfigured=preconfigured, starting_config=starting_config)
+    num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
+
+    if num_chains == 2
+        relaxedIK = get_bimanual(path_to_src, info_file_name, preconfigured=preconfigured)
+    elseif num_chains == 3
+        relaxedIK = get_3chain(path_to_src, info_file_name, preconfigured=preconfigured)
+    elseif num_chains == 4
+        relaxedIK = get_4chain(path_to_src, info_file_name, preconfigured=preconfigured)
+    elseif num_chains == 5
+        relaxedIK = get_5chain(path_to_src, info_file_name, preconfigured=preconfigured)
+    end
+    return relaxedIK
+end
+
+function get_fixed_freq(path_to_src, info_file_name; solver_name = "slsqp", preconfigured=false)
+    objectives = [position_obj_1, rotation_obj_1, min_jt_vel_obj, min_jt_accel_obj, min_jt_jerk_obj, joint_limit_obj, joint_vel_limit_obj, collision_nn_obj]
+    grad_types = ["forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "forward_ad", "nn"]
+    weight_priors = [50.0, 49.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     inequality_constraints = []
     ineq_grad_types = []
     equality_constraints = []
@@ -279,4 +302,13 @@ end
 
 function in_collision_groundtruth(relaxedIK, x)
     return relaxedIK.relaxedIK_vars.in_collision_groundtruth(x)
+end
+
+function get_rand_state(relaxedIK)
+    sample = Array{Float64,1}()
+    bounds = relaxedIK.relaxedIK_vars.vars.bounds
+    for b in bounds
+        push!(sample, rand(Uniform(b[1], b[2])))
+    end
+    return sample
 end

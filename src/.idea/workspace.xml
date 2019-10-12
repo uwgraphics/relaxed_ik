@@ -3,19 +3,108 @@
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/src.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/src.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn_python/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn_python/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/info_files/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/info_files/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/test_file" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/arcs.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/arcs.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/blockobstacles.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/blockobstacles.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/ceilingandfloor.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/ceilingandfloor.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/cube.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/lotsofboxes.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/lotsofboxes.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/table.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/table.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/twocubes.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/twocubes.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/arcs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/arcs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/blockobstacles" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/blockobstacles" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/ceilingandfloor" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/ceilingandfloor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/cube" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/cube" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/lotsofboxes" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/lotsofboxes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/objects" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/objects" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/table1" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/table1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes2" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twotables" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twotables" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/vertical" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/vertical" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboSquare" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboSquare" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/mp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/mp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/pst" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/pst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingR" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/gd" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mma" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/pst" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/pst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/slsqp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/slsqp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/square" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/circle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingL" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/feeding" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/feeding" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboCircle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboSquare" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/rotations" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/square" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/MP/moveit.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/MP/moveit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/joint_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/joint_utils.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/nn_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/nn_utils.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/point_cloud_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/point_cloud_utils.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ros_utils.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ros_utils.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/standard_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/standard_ik_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/standard_ik_randstart_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/standard_ik_randstart_node.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display_learned_collision_score.jl" beforeDir="false" afterPath="$PROJECT_DIR$/display_learned_collision_score.jl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relaxed_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.jl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,93 +113,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test15.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="26" column="92" selection-start-line="26" selection-start-column="92" selection-end-line="26" selection-end-column="92" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/start_here.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/MP/moveit.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/yumi_info.yaml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_yumi.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1015">
-              <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/kinova_info.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco_test.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2349">
-              <caret line="81" column="97" selection-start-line="81" selection-start-column="97" selection-end-line="81" selection-end-column="97" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8410">
-              <caret line="290" column="1" selection-end-line="305" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="17" column="21" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -118,145 +120,17 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>self.r</find>
-      <find>groove</find>
-      <find>Float32</find>
-      <find>optimization_</find>
-      <find>x</find>
-      <find>unconstrai</find>
-      <find>id</find>
-      <find>child</find>
-      <find>parent</find>
-      <find>_a</find>
-      <find>&lt;!--</find>
-      <find>DR</find>
-      <find>added by</find>
-      <find>disp</find>
-      <find>link name</find>
-      <find>base</find>
-      <find>robot</find>
-      <find>right_arm_mount</find>
-      <find>offset</find>
-      <find>joint</find>
-      <find>right_j6</find>
-      <find>goal_dis</find>
-      <find>b_value</find>
-      <find>collision_nn_file</find>
-      <find>os</find>
-      <find>path_to_src</find>
-      <find>init_ee</find>
-      <find>Point</find>
-      <find>link</find>
-      <find>joint name</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/generate_info_file.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/geometry_utils.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7.urdf" />
-        <option value="$PROJECT_DIR$/urdf_viewer.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_info.yaml" />
-        <option value="$PROJECT_DIR$/move_jaco_sample.py" />
-        <option value="$PROJECT_DIR$/stop.py" />
-        <option value="$PROJECT_DIR$/quit.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/transformations.py" />
-        <option value="$PROJECT_DIR$/quaternion_test.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_utils.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_and_ur5.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_and_ur5_info.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_and_ur5.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/jaco7_pair_info.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7_pair.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/jaco7_pair.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_sawyer.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/urdfs/ur5_and_sawyer.urdf" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5_and_sawyer.yaml" />
-        <option value="$PROJECT_DIR$/keyboard_camera_buttons.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/config_engine.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py" />
-        <option value="$PROJECT_DIR$/preprocessing.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_panda.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/info_files/panda_info.yaml" />
-        <option value="$PROJECT_DIR$/keyboard_ikgoal_driver.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py" />
-        <option value="$PROJECT_DIR$/relaxed_ik_node.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/test2.py" />
-        <option value="$PROJECT_DIR$/test3.py" />
-        <option value="$PROJECT_DIR$/calibrate_nns.jl" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_mico.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/interactive_marker_utils.py" />
-        <option value="$PROJECT_DIR$/marker_ikgoal_driver.py" />
-        <option value="$PROJECT_DIR$/reset_and_quit.py" />
-        <option value="$PROJECT_DIR$/test5.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py" />
-        <option value="$PROJECT_DIR$/test9.py" />
-        <option value="$PROJECT_DIR$/test15.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco_test.yaml" />
-        <option value="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_yumi.yaml" />
-        <option value="$PROJECT_DIR$/start_here.py" />
-        <option value="$PROJECT_DIR$/RelaxedIK/MP/moveit.py" />
-      </list>
-    </option>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="oBoCZPnI" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="998" />
-    <option name="y" value="254" />
-    <option name="width" value="1855" />
-    <option name="height" value="1540" />
-  </component>
+  <component name="ProjectId" id="1PKNBZmfX15DeH0OYZXZ8aBuZo0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="Config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="src" type="b2602c69:ProjectViewProjectNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RelaxedIK" type="462c0819:PsiDirectoryNode" />
-              <item name="MP" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../mimicry_control/bin" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -268,11 +142,11 @@
       <recent name="$PROJECT_DIR$/RelaxedIK" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/RelaxedIK/Utils" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/MP" />
+      <recent name="$PROJECT_DIR$/RelaxedIK/MP6" />
       <recent name="$PROJECT_DIR$/RelaxedIK/Config/collision_files" />
       <recent name="$PROJECT_DIR$/RelaxedIK/urdfs" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings" />
-      <recent name="$PROJECT_DIR$/builddir" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -287,28 +161,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.moveit">
-    <configuration name="marker_ikgoal_driver" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="src" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/marker_ikgoal_driver.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test8">
     <configuration name="moveit" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -330,7 +183,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test15" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="moveit4" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -338,11 +191,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RelaxedIK/MP" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test15.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RelaxedIK/MP/moveit4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -351,7 +204,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -363,7 +216,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test5.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test8" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test8.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -394,19 +268,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.marker_ikgoal_driver" />
-      <item itemvalue="Python.test5" />
-      <item itemvalue="Python.test9" />
-      <item itemvalue="Python.test15" />
+      <item itemvalue="Python.test3" />
       <item itemvalue="Python.moveit" />
+      <item itemvalue="Python.moveit4" />
+      <item itemvalue="Python.test8" />
+      <item itemvalue="Python.test9" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.moveit" />
-        <item itemvalue="Python.test15" />
+        <item itemvalue="Python.test8" />
         <item itemvalue="Python.test9" />
-        <item itemvalue="Python.test5" />
-        <item itemvalue="Python.marker_ikgoal_driver" />
+        <item itemvalue="Python.test3" />
+        <item itemvalue="Python.moveit4" />
+        <item itemvalue="Python.moveit" />
       </list>
     </recent_temporary>
   </component>
@@ -432,405 +306,20 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="155" y="988" width="1855" height="1540" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2076201" />
-      <window_info id="Structure" order="1" weight="0.24958587" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3257024" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.45962903" side_tool="true" visible="true" weight="0.58114374" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.540371" weight="0.38761705" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49972722" weight="0.3298647" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="8" sideWeight="0.49972722" weight="0.3298647" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.26841244" weight="0.3298647" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Data View" order="3" />
-    </layout>
-  </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.jl" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/ur5_and_sawyer.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12555">
-          <caret line="837" column="32" selection-start-line="837" selection-start-column="32" selection-end-line="837" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/ur5_and_sawyer_info.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keyboard_camera_buttons.py" />
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7230">
-          <caret line="482" column="10" selection-start-line="6" selection-start-column="2" selection-end-line="482" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/urdf_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
-          <folding>
-            <element signature="e#413#479#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing.jl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_objective.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="342" lean-forward="true" selection-start-line="342" selection-end-line="342" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo8.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-105">
-          <caret line="340" selection-start-line="340" selection-end-line="371" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/hubo8_joint_state_define">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/preprocessing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_panda.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="72" selection-start-line="2" selection-start-column="72" selection-end-line="2" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/panda_info.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/panda_arm_hand.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2475">
-          <caret line="165" column="31" selection-start-line="165" selection-start-column="15" selection-end-line="165" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/neural_net_trainer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.jl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="29" lean-forward="true" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Spacetime/arm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12064">
-          <caret line="424" column="31" selection-start-line="424" selection-start-column="31" selection-end-line="424" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/test2.py" />
-    <entry file="file://$PROJECT_DIR$/test3.py" />
-    <entry file="file://$PROJECT_DIR$/rviz_viewer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/config_engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1624">
-          <caret line="62" column="31" selection-start-line="62" selection-start-column="31" selection-end-line="62" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_hubo.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6757">
-          <caret line="233" column="6" selection-start-line="233" selection-start-column="6" selection-end-line="233" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_sawyer.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8526">
-          <caret line="294" selection-start-line="294" selection-end-line="295" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/hubo8_info.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calibrate_nns.jl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1661">
-          <caret line="100" column="2" selection-start-line="100" selection-start-column="2" selection-end-line="100" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/mico_info.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="14" column="161" selection-start-line="14" selection-start-column="161" selection-end-line="14" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_mico.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5017">
-          <caret line="173" column="15" selection-start-line="173" selection-start-column="15" selection-end-line="173" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_ur5.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3306">
-          <caret line="114" selection-start-line="114" selection-end-line="115" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/mico.urdf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/marker_ikgoal_driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1537">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
-          <folding>
-            <element signature="e#19#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/interactive_marker_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1595">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
-          <folding>
-            <element signature="e#1937#2005#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK/relaxedIK_vars.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4437">
-          <caret line="169" column="30" selection-start-line="169" selection-start-column="13" selection-end-line="169" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/relaxedIK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/relaxed_ik_node.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="47" />
-          <folding>
-            <element signature="e#415#427#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keyboard_ikgoal_driver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4785">
-          <caret line="170" column="13" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="19" />
-          <folding>
-            <element signature="e#19#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test9.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/collision_transfer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reset_and_quit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#19#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/urdfs/yumi.urdf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test15.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="26" column="92" selection-start-line="26" selection-start-column="92" selection-end-line="26" selection-end-column="92" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/start_here.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/yumi_info.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_yumi.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1015">
-          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/info_files/kinova_info.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco_test.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2349">
-          <caret line="81" column="97" selection-start-line="81" selection-start-column="97" selection-end-line="81" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_jaco7.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8410">
-          <caret line="290" column="1" selection-end-line="305" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="17" column="21" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RelaxedIK/MP/moveit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

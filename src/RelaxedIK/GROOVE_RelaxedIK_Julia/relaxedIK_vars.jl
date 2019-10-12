@@ -43,16 +43,21 @@ mutable struct RelaxedIK_vars
     nn_f3
     in_collision
     in_collision_groundtruth
+    joint_vel_slider
     additional_vars
 end
 
-function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false)
+function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, weight_priors, inequality_constraints, ineq_grad_types, equality_constraints, eq_grad_types; position_mode = "relative", rotation_mode = "relative", preconfigured=false, starting_config="")
     y = info_file_name_to_yaml_block(path_to_src, info_file_name)
 
     robot = yaml_block_to_robot(y)
-    vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
-
-    robot.getFrames(y["starting_config"])
+    if starting_config == ""
+        vars = Vars(y["starting_config"], objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
+        robot.getFrames(y["starting_config"])
+    else
+        vars = Vars(starting_config, objectives, grad_types, weight_priors, inequality_constraints, [], equality_constraints, [], y["joint_limits"])
+        robot.getFrames(starting_config)
+    end
 
     num_chains = robot.num_chains
 
@@ -122,7 +127,7 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
 
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
             goal_quats, goal_positions_relative, goal_quats_relative, joint_goal, init_ee_positions,
-            init_ee_quats, 0, model, model2, model3, w_, t_val, c_val, f_val, w2_, t_val2, c_val2, f_val2, w3_, t_val3, c_val3, f_val3, 0, 0, 0)
+            init_ee_quats, 0, model, model2, model3, w_, t_val, c_val, f_val, w2_, t_val2, c_val2, f_val2, w3_, t_val3, c_val3, f_val3, 0, 0, 1.0, 0)
         initial_joint_points = state_to_joint_pts_withreturn(rand(length(vars.init_state)), rv)
         rv.joint_pts = initial_joint_points
 
@@ -131,13 +136,13 @@ function RelaxedIK_vars(path_to_src, info_file_name, objectives, grad_types, wei
         # rv.collision_nn = collision_nn
     else
         rv = RelaxedIK_vars(vars, robot, position_mode, rotation_mode, goal_positions,
-        goal_quats, goal_positions_relative, goal_quats_relative, joint_goal, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        goal_quats, goal_positions_relative, goal_quats_relative, joint_goal, init_ee_positions, init_ee_quats, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.0, 0)
     end
 
     function in_collision(rv, x)
         state_to_joint_pts_inplace(x, rv)
         val = model2(rv.joint_pts)
-        if val >= 1.0
+        if val >= 5.0
             return true
         else
             return false

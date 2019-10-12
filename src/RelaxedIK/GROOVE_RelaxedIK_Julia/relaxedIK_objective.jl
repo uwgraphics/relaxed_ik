@@ -80,7 +80,6 @@ function rotation_obj_1(x, vars)
     return groove_loss(x_val, 0., 2, .1, 10., 2)
 end
 
-
 function rotation_obj_2(x, vars)
     vars.robot.arms[2].getFrames(x[vars.robot.subchain_indices[2]])
     eeMat = vars.robot.arms[2].out_frames[end]
@@ -174,7 +173,6 @@ function min_jt_jerk_obj(x, vars)
     return groove_loss( norm( ( (x - vars.vars.xopt) - (vars.vars.xopt - vars.vars.prev_state) ) - ( (vars.vars.xopt - vars.vars.prev_state) - (vars.vars.prev_state - vars.vars.prev_state2) ) ),  0.0, 2, .1, 10.0, 2  )
 end
 
-
 function joint_limit_obj(x, vars)
     sum = 0.0
     penalty_cutoff = 0.85
@@ -208,7 +206,25 @@ function collision_nn_obj(x, vars)
     return groove_loss(  vars.nn_model3( vars.joint_pts ), vars.nn_t3, 2, vars.nn_c3, vars.nn_f3, 2 )
 end
 
+function joint_vel_limit_obj(x, vars)
+    joint_vel_slider = vars.joint_vel_slider
 
+    fixed_frequency = 125.
+    velocity_limits = vars.robot.velocity_limits
+    num_joints = length(velocity_limits)
+    prev_config = vars.vars.xopt
+    sum = 0.0
+
+    for i = 1:num_joints
+        diff = abs(x[i] - prev_config[i])
+        allowable_diff = joint_vel_slider * (velocity_limits[i] / fixed_frequency)
+        turning_point = allowable_diff
+        a = 0.01 / (turning_point)^100.
+        sum += a*diff^100.
+    end
+
+    return sum
+end
 
 function bimanual_line_seg_collision_avoid_obj(x, vars)
     vars.robot.arms[1].getFrames(x[vars.robot.subchain_indices[1]])

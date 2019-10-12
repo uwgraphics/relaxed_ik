@@ -137,4 +137,13 @@ src/RelaxedIK/MP/*
 src/RelaxedIK/MP2/*
 src/RelaxedIK/MP3/*
 src/RelaxedIK/MP4/*
+src/RelaxedIK/MP5/*
+src/RelaxedIK/MP6/*
+src/RelaxedIK/MP7/*
+src/RelaxedIK/MP8/*
+src/relaxed_ik_fixed_frequency_node.jl
 point_cloud_pub.py
+src/RelaxedIK/FileIO/mist_outputs/*
+src/RelaxedIK/FileIO/solver_outputs/*
+src/RelaxedIK/FileIO/point_clouds/*
+src/RelaxedIK/FileIO/objs/*

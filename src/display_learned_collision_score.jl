@@ -87,7 +87,8 @@ while ! is_shutdown()
         false_negative_perc = false_negative_count/total_iters
         false_positive_perc = false_positive_count/total_iters
         accuracy = (true_positive_count + true_negative_count)/total_iters
-        println("false negatives: $false_negative_count *** $false_negative_perc , false positives: $false_positive_count *** $false_positive_perc , true negatives: $true_negative_count , true positives: $true_positive_count, accuracy: $accuracy , num iters: $total_iters")
+        # println("false negatives: $false_negative_count *** $false_negative_perc , false positives: $false_positive_count *** $false_positive_perc , true negatives: $true_negative_count , true positives: $true_positive_count, accuracy: $accuracy , num iters: $total_iters")
+        println(incollision_m)
 
         total_iters += 1.0
     end

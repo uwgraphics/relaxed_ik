@@ -45,6 +45,17 @@ close(loaded_robot_file)
 relaxedIK = get_standard(path_to_src, loaded_robot)
 num_chains = relaxedIK.relaxedIK_vars.robot.num_chains
 
+reset_config = relaxedIK.relaxedIK_vars.vars.init_state
+function reset_config_cb(data::JointAngles)
+    global reset_config
+    reset_config = Array{Float64,1}()
+    l = length(data.angles.data)
+    for i = 1:l
+        push!(reset_config, data.angles.data[i])
+    end
+end
+
+
 println("loaded robot: $loaded_robot")
 
 init_node("relaxed_ik_node_jl")
@@ -52,6 +63,7 @@ init_node("relaxed_ik_node_jl")
 Subscriber{EEPoseGoals}("/relaxed_ik/ee_pose_goals", eePoseGoals_cb)
 Subscriber{BoolMsg}("/relaxed_ik/quit", quit_cb, queue_size=1)
 Subscriber{BoolMsg}("relaxed_ik/reset", reset_cb)
+Subscriber{JointAngles}("relaxed_ik/reset_config", reset_config_cb)
 angles_pub = Publisher("/relaxed_ik/joint_angle_solutions", JointAngles, queue_size = 3)
 
 sleep(0.5)
@@ -90,8 +102,13 @@ while true
         # relaxedIK.relaxedIK_vars.vars.prev_state = relaxedIK.relaxedIK_vars.vars.init_state
         # relaxedIK.relaxedIK_vars.vars.prev_state2 = relaxedIK.relaxedIK_vars.vars.init_state
         # relaxedIK.relaxedIK_vars.vars.prev_state3 = relaxedIK.relaxedIK_vars.vars.init_state
-        relaxedIK = get_standard(path_to_src, loaded_robot)
-
+        # relaxedIK.relaxedIK_vars.vars.xopt = reset_config
+        # relaxedIK.relaxedIK_vars.vars.prev_state = reset_config
+        # relaxedIK.relaxedIK_vars.vars.prev_state2 = reset_config
+        # relaxedIK.relaxedIK_vars.vars.prev_state3 = reset_config
+        # ema_filter = EMA_filter(reset_config)
+        # relaxedIK.ema_filter = ema_filter
+        relaxedIK = get_standard(path_to_src, loaded_robot, starting_config=reset_config)
         eepg = empty_eepg
     end
 
