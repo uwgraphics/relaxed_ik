@@ -3,109 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/src.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/src.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files/collision_example.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn_python/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_nn_python/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/info_files/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/info_files/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/joint_state_define_functions/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/arcs.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/arcs.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/blockobstacles.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/blockobstacles.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/ceilingandfloor.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/ceilingandfloor.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/cube.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/lotsofboxes.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/lotsofboxes.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/table.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/table.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/twocubes.obj" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/objs/twocubes.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/arcs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/arcs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/blockobstacles" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/blockobstacles" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/ceilingandfloor" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/ceilingandfloor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/cube" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/cube" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/lotsofboxes" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/lotsofboxes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/objects" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/objects" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/table1" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/table1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes2" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twocubes2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twotables" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/twotables" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/vertical" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/point_clouds/vertical" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/README" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/huboSquare" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/hubo8/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/iiwa/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/sawyer/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/finite_diff/ur5/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/huboSquare" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/hubo8/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/iiwa/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/mp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/mp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/pst" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/pst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/sawyer/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/gd" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/gd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mma" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/mp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/pst" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/pst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/slsqp" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/slsqp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/solver_outputs/relaxed_ik/ur5/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/circle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/circle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingL" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingL" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingR" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/cookingR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/feeding" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/feeding" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboCircle" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboCircle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboSquare" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/huboSquare" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/rotations" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/rotations" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/square" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/FileIO/task_recordings/square" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_objective.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/GROOVE_RelaxedIK_Julia/relaxedIK_vars.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils_Julia/ema_filter.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/relaxedIK.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/urdfs/hubo_description.urdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display_learned_collision_score.jl" beforeDir="false" afterPath="$PROJECT_DIR$/display_learned_collision_score.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboard_ikgoal_driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/relaxed_ik_node.jl" beforeDir="false" afterPath="$PROJECT_DIR$/relaxed_ik_node.jl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +28,8 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/RelaxedIK_Rust" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -283,6 +182,10 @@
         <item itemvalue="Python.moveit" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
   </component>
   <component name="SvnConfiguration">
     <configuration />

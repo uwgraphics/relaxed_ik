@@ -148,3 +148,7 @@ src/RelaxedIK/FileIO/solver_outputs/*
 src/RelaxedIK/FileIO/point_clouds/*
 src/RelaxedIK/FileIO/objs/*
 src/RelaxedIK/FileIO/task_recordings/*
+
+#rust related
+src/RelaxedIK_Rust/target
+**/*.rs.bk

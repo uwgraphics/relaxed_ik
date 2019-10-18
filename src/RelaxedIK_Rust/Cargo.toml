@@ -1,0 +1,15 @@
+[package]
+name = "RelaxedIK_Rust"
+version = "0.1.0"
+authors = ["djrakita <djrakita@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+nalgebra = "0.18.1"
+yaml-rust = "0.4"
+nn = "0.1.6"
+optimization_engine = "0.6.0"
+
+
