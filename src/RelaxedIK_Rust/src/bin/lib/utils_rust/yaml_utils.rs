@@ -12,7 +12,6 @@ pub fn get_yaml_obj(fp: &str) -> Vec<Yaml> {
     docs
 }
 
-
 pub struct InfoFileParser {
     pub urdf_file_name: String,
     pub fixed_frame: String,
