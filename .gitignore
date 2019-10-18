@@ -23,7 +23,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/
 lib64/
 parts/
 sdist/
@@ -151,4 +151,3 @@ src/RelaxedIK/FileIO/task_recordings/*
 
 #rust related
 src/RelaxedIK_Rust/target
-**/*.rs.bk
