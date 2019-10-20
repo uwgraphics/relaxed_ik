@@ -1,4 +1,5 @@
 use nalgebra;
+use nalgebra::{UnitQuaternion, Unit};
 
 pub struct Arm {
     pub axis_types: Vec<String>,
@@ -7,10 +8,12 @@ pub struct Arm {
     pub pos_offsets: Vec<nalgebra::Vector3<f64>>,
     pub rot_offsets: Vec<Vec<f64>>,
     pub rot_offset_matrices: Vec<nalgebra::Matrix3<f64>>,
+    pub rot_offset_quats: Vec<nalgebra::UnitQuaternion<f64>>,
     pub joint_types: Vec<String>,
     pub num_dof: usize,
     pub out_positions: Vec<nalgebra::Vector3<f64>>,
     pub out_rot_mats: Vec<nalgebra::Matrix3<f64>>,
+    pub out_rot_quats: Vec<nalgebra::UnitQuaternion<f64>>,
     __do_rot_offset: Vec<bool>,
     __is_prismatic: Vec<bool>,
     __is_revolute_or_continuous: Vec<bool>,
@@ -47,18 +50,24 @@ impl Arm{
         }
 
         let mut rot_offset_matrices: Vec<nalgebra::Matrix3<f64>> = Vec::new();
+        let mut rot_offset_quats: Vec<nalgebra::UnitQuaternion<f64>> = Vec::new();
         for i in 0..rot_offsets.len() {
             rot_offset_matrices.push( euler_triple_to_3x3(&rot_offsets[i]) );
+            let r = nalgebra::Rotation3::from_matrix_unchecked(rot_offset_matrices[i]);
+            rot_offset_quats.push( UnitQuaternion::from_rotation_matrix(&r)  );
         }
 
         let mut out_positions: Vec<nalgebra::Vector3<f64>> = Vec::new();
         let mut out_rot_mats: Vec<nalgebra::Matrix3<f64>> = Vec::new();
+        let mut out_rot_quats: Vec<nalgebra::UnitQuaternion<f64>> = Vec::new();
         for i in 0..rot_offsets.len() {
             out_positions.push(nalgebra::Vector3::new(0.,0.,0.));
             out_rot_mats.push(nalgebra::Matrix3::identity());
+            out_rot_quats.push(nalgebra::UnitQuaternion::identity());
         }
         out_positions[0] = disp_offset;
         out_rot_mats[0] = rot_offset_matrices[0];
+        out_rot_quats[0] = rot_offset_quats[0];
 
         let mut __is_prismatic: Vec<bool> = Vec::new();
         let mut __is_revolute_or_continuous: Vec<bool> = Vec::new();
@@ -119,10 +128,9 @@ impl Arm{
             }
         }
 
-        println!("{:?}", __is_z);
 
-        Arm{axis_types, displacements, disp_offset, pos_offsets, rot_offsets, rot_offset_matrices,
-            joint_types, num_dof, out_positions, out_rot_mats, __do_rot_offset, __is_prismatic,
+        Arm{axis_types, displacements, disp_offset, pos_offsets, rot_offsets, rot_offset_matrices, rot_offset_quats,
+            joint_types, num_dof, out_positions, out_rot_mats, out_rot_quats, __do_rot_offset, __is_prismatic,
             __is_revolute_or_continuous, __is_fixed, __is_x, __is_y, __is_z, __is_neg_x, __is_neg_y,
             __is_neg_z, __aux_matrix}
     }
@@ -176,116 +184,131 @@ impl Arm{
                        __is_z: bool, __is_neg_x: bool, __is_neg_y: bool, __is_neg_z: bool) {
 
         self.out_rot_mats[i + 1] = self.out_rot_mats[i];
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i];
 
         if __is_x {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(joint_val, 0., 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(joint_val, 0., 0.);
         }
         else if __is_y {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., joint_val, 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., joint_val, 0.);
         }
         else if __is_z {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., joint_val);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., joint_val);
         }
         else if __is_neg_x {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(-joint_val, 0., 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(-joint_val, 0., 0.);
         }
         else if __is_neg_y {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., -joint_val, 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., -joint_val, 0.);
         }
         else if __is_neg_z {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., -joint_val);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., -joint_val);
         }
     }
 
     fn __update_prismatic_ro(&mut self, i: usize, joint_val: f64, __is_x: bool, __is_y: bool,
                        __is_z: bool, __is_neg_x: bool, __is_neg_y: bool, __is_neg_z: bool) {
 
-        self.out_rot_mats[i + 1] = self.out_rot_mats[i];
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i];
 
         if __is_x {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(joint_val, 0., 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(joint_val, 0., 0.);
         }
         else if __is_y {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., joint_val, 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., joint_val, 0.);
         }
         else if __is_z {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., joint_val);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., joint_val);
         }
         else if __is_neg_x {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(-joint_val, 0., 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(-joint_val, 0., 0.);
         }
         else if __is_neg_y {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., -joint_val, 0.);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., -joint_val, 0.);
         }
         else if __is_neg_z {
-            self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., -joint_val);
+            self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i] + nalgebra::Vector3::new(0., 0., -joint_val);
         }
 
-        self.out_rot_mats[i + 1] = self.out_rot_mats[i + 1] * self.rot_offset_matrices[i+1];
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i + 1] * self.rot_offset_quats[i+1];
+        self.out_rot_mats[i + 1] = *self.out_rot_quats[i + 1].to_rotation_matrix().matrix()
 
     }
 
     fn __update_revolute_or_continuous(&mut self, i: usize, joint_val: f64, __is_x: bool, __is_y: bool,
                        __is_z: bool, __is_neg_x: bool, __is_neg_y: bool, __is_neg_z: bool) {
         if __is_x {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_x(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_x(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_x(joint_val);
         }
         else if __is_y {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_y(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_y(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_y(joint_val);
         }
         else if __is_z {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_z(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_z(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_z(joint_val);
         }
         else if __is_neg_x {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_x(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_x(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_x(joint_val);
         }
         else if __is_neg_y {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_y(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_y(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_y(joint_val);
         }
         else if __is_neg_z {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_z(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_z(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_x(joint_val);
         }
 
-        self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i];
+        self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i];
+        self.out_rot_mats[i + 1] = *self.out_rot_quats[i + 1].to_rotation_matrix().matrix();
     }
 
     fn __update_revolute_or_continuous_ro(&mut self, i: usize, joint_val: f64, __is_x: bool, __is_y: bool,
                        __is_z: bool, __is_neg_x: bool, __is_neg_y: bool, __is_neg_z: bool) {
         if __is_x {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_rot_x(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_x(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_x(joint_val);
         }
         else if __is_y {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_rot_y(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_y(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_y(joint_val);
         }
         else if __is_z {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_rot_z(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_rot_z(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_quat_z(joint_val);
         }
         else if __is_neg_x {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_neg_rot_x(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_x(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_x(joint_val);
         }
         else if __is_neg_y {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_neg_rot_y(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_y(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_y(joint_val);
         }
         else if __is_neg_z {
-            self.out_rot_mats[i + 1] = self.out_rot_mats[i]  * get_neg_rot_z(joint_val);
+            // self.out_rot_mats[i + 1] = self.out_rot_mats[i] * get_neg_rot_z(joint_val);
+            self.out_rot_quats[i + 1] = self.out_rot_quats[i] * get_neg_quat_x(joint_val);
         }
 
-        self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i];
-        self.out_rot_mats[i + 1] = self.out_rot_mats[i + 1] * self.rot_offset_matrices[i+1];
-
+        self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i];
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i + 1] * self.rot_offset_quats[i+1];
+        self.out_rot_mats[i + 1] = *self.out_rot_quats[i + 1].to_rotation_matrix().matrix();
     }
 
     fn __update_fixed(&mut self, i: usize) {
-        self.out_rot_mats[i + 1] = self.out_rot_mats[i];
-        self.out_positions[i + 1] = self.out_rot_mats[i + 1] * self.displacements[i] + self.out_positions[i];
-
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i];
+        self.out_positions[i + 1] = self.out_rot_quats[i + 1] * self.displacements[i] + self.out_positions[i];
+        self.out_rot_mats[i + 1] = *self.out_rot_quats[i].to_rotation_matrix().matrix();
     }
 
     fn __update_fixed_ro(&mut self, i: usize) {
-        self.out_positions[i + 1] = self.out_rot_mats[i] * self.displacements[i] + self.out_positions[i];
-        self.out_rot_mats[i + 1] = self.out_rot_mats[i] * self.rot_offset_matrices[i];
+        self.out_positions[i + 1] = self.out_rot_quats[i] * self.displacements[i] + self.out_positions[i];
+        self.out_rot_quats[i + 1] = self.out_rot_quats[i] * self.rot_offset_quats[i];
+        self.out_rot_mats[i + 1] = *self.out_rot_quats[i].to_rotation_matrix().matrix();
     }
-
 }
 
 pub fn get_rot_x(val: f64) -> nalgebra::Matrix3<f64> {
@@ -310,6 +333,30 @@ pub fn get_neg_rot_y(val: f64) -> nalgebra::Matrix3<f64> {
 
 pub fn get_neg_rot_z(val: f64) -> nalgebra::Matrix3<f64> {
     get_rot_z(-val)
+}
+
+pub fn get_quat_x(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    UnitQuaternion::from_euler_angles(val, 0., 0.)
+}
+
+pub fn get_quat_y(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    UnitQuaternion::from_euler_angles(0., val, 0.)
+}
+
+pub fn get_quat_z(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    UnitQuaternion::from_euler_angles(0., 0., val)
+}
+
+pub fn get_neg_quat_x(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    get_quat_x(-val)
+}
+
+pub fn get_neg_quat_y(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    get_quat_y(-val)
+}
+
+pub fn get_neg_quat_z(val: f64) -> nalgebra::UnitQuaternion<f64> {
+    get_quat_z(-val)
 }
 
 pub fn euler_triple_to_3x3(t: &Vec<f64>) -> nalgebra::Matrix3<f64>{

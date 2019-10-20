@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main3.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main3.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main4.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main4.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
