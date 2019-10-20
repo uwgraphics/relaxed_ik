@@ -151,6 +151,21 @@ impl Arm{
         }
     }
 
+    pub fn get_ee_position(&mut self, x: Vec<f64>) -> nalgebra::Vector3<f64> {
+        self.get_frames(x);
+        self.out_positions[self.num_dof].clone()
+    }
+
+    pub fn get_ee_rot_mat(&mut self, x: Vec<f64>) -> nalgebra::Matrix3<f64> {
+        self.get_frames(x);
+        self.out_rot_mats[self.num_dof].clone()
+    }
+
+    pub fn get_ee_quat(&mut self, x: Vec<f64>) -> nalgebra::UnitQuaternion<f64> {
+        self.get_frames(x);
+        self.out_rot_quats[self.num_dof].clone()
+    }
+
     fn __update_frames(&mut self, i: usize, joint_val: f64, __do_rot_offset: bool, __is_prismatic: bool,
                        __is_revolute_or_continuous: bool, __is_fixed: bool, __is_x: bool, __is_y: bool,
                        __is_z: bool, __is_neg_x: bool, __is_neg_y: bool, __is_neg_z: bool) {
