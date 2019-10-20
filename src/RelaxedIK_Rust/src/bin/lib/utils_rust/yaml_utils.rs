@@ -27,6 +27,7 @@ pub struct InfoFileParser {
     pub joint_limits: Vec< [f64; 2] >,
     pub displacements: Vec<Vec<nalgebra::Vector3<f64>>>,
     pub disp_offsets: Vec<nalgebra::Vector3<f64>>,
+    pub rot_offsets: Vec<Vec<Vec<f64>>>,
     pub joint_types: Vec<Vec<String>>,
     pub joint_state_define_func_file: String,
 }
@@ -50,6 +51,7 @@ impl InfoFileParser {
         let mut joint_limits: Vec<[ f64; 2] > = Vec::new();
         let mut displacements: Vec<Vec<nalgebra::Vector3<f64>>> = Vec::new();
         let mut disp_offsets: Vec<nalgebra::Vector3<f64>> = Vec::new();
+        let mut rot_offsets: Vec<Vec<Vec<f64>>> = Vec::new();
         let mut joint_types: Vec<Vec<String>> = Vec::new();
         let joint_state_define_func_file = String::from(doc["joint_state_define_func_file"].as_str().unwrap() );
 
@@ -113,6 +115,16 @@ impl InfoFileParser {
             disp_offsets.push( nalgebra::Vector3::new( disp_offsets_arr[i][0].as_f64().unwrap(), disp_offsets_arr[i][1].as_f64().unwrap(), disp_offsets_arr[i][2].as_f64().unwrap()  ) )
         }
 
+        let rot_offsets_arr = doc["rot_offsets"].as_vec().unwrap();
+        for i in 0..rot_offsets_arr.len() {
+            let r: Vec<Vec<f64>> = Vec::new();
+            rot_offsets.push(r);
+            let rot_offsets_arr2 = rot_offsets_arr[i].as_vec().unwrap();
+            for j in 0..rot_offsets_arr2.len() {
+                rot_offsets[i].push( vec![ rot_offsets_arr2[j][0].as_f64().unwrap(), rot_offsets_arr2[j][1].as_f64().unwrap(), rot_offsets_arr2[j][2].as_f64().unwrap() ] )
+            }
+        }
+
         let joint_types_arr = doc["joint_types"].as_vec().unwrap();
         for i in 0..joint_types_arr.len() {
             let str_vec: Vec<String> = Vec::new();
@@ -125,6 +137,6 @@ impl InfoFileParser {
 
 
         InfoFileParser{urdf_file_name, fixed_frame, joint_names, joint_ordering, ee_fixed_joints, starting_config, collision_file_name, collision_nn_file, path_to_src, axis_types, velocity_limits,
-            joint_limits, displacements, disp_offsets, joint_types, joint_state_define_func_file}
+            joint_limits, displacements, disp_offsets, rot_offsets, joint_types, joint_state_define_func_file}
     }
 }

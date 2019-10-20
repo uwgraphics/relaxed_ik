@@ -11,5 +11,11 @@ nalgebra = "0.18.1"
 yaml-rust = "0.4"
 nn = "0.1.6"
 optimization_engine = "0.6.0"
+ndarray = "0.13.0"
 
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+opt-level = 3
 

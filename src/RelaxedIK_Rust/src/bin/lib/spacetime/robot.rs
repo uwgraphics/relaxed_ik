@@ -21,7 +21,7 @@ impl Robot {
         let mut arms: Vec<arm::Arm> = Vec::new();
         for i in 0..num_chains {
             let a = arm::Arm::new(ifp.axis_types[i].clone(), ifp.displacements[i].clone(),
-                              ifp.disp_offsets[i].clone(), ifp.joint_types[i].clone());
+                              ifp.disp_offsets[i].clone(), ifp.rot_offsets[i].clone(), ifp.joint_types[i].clone());
             arms.push(a);
         }
 

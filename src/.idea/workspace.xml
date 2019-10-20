@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +33,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/RelaxedIK_Rust" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -60,7 +65,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test8">
+  <component name="RunManager" selected="Python.test9">
     <configuration name="moveit" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -175,8 +180,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test8" />
         <item itemvalue="Python.test9" />
+        <item itemvalue="Python.test8" />
         <item itemvalue="Python.test3" />
         <item itemvalue="Python.moveit4" />
         <item itemvalue="Python.moveit" />
