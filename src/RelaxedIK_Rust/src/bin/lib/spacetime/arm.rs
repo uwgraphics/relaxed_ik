@@ -135,7 +135,7 @@ impl Arm{
             __is_neg_z, __aux_matrix}
     }
 
-    pub fn get_frames(&mut self, x: Vec<f64>) {
+    pub fn get_frames(&mut self, x: &[f64]) {
         let mut joint_idx: usize = 0;
         for i in 0..self.displacements.len() {
 
@@ -151,17 +151,17 @@ impl Arm{
         }
     }
 
-    pub fn get_ee_position(&mut self, x: Vec<f64>) -> nalgebra::Vector3<f64> {
+    pub fn get_ee_position(&mut self, x: &[f64]) -> nalgebra::Vector3<f64> {
         self.get_frames(x);
         self.out_positions[self.num_dof].clone()
     }
 
-    pub fn get_ee_rot_mat(&mut self, x: Vec<f64>) -> nalgebra::Matrix3<f64> {
+    pub fn get_ee_rot_mat(&mut self, x: &[f64]) -> nalgebra::Matrix3<f64> {
         self.get_frames(x);
         self.out_rot_mats[self.num_dof].clone()
     }
 
-    pub fn get_ee_quat(&mut self, x: Vec<f64>) -> nalgebra::UnitQuaternion<f64> {
+    pub fn get_ee_quat(&mut self, x: &[f64]) -> nalgebra::UnitQuaternion<f64> {
         self.get_frames(x);
         self.out_rot_quats[self.num_dof].clone()
     }

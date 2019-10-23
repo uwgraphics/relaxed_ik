@@ -21,11 +21,8 @@ pub fn quaternion_exp(v: Vector3<f64>) -> UnitQuaternion<f64> {
         let c = sina/a;
         qv *= c;
     }
-    println!("{:?}", a.cos());
-
     UnitQuaternion::from_quaternion(Quaternion::new(a.cos(), qv[1], qv[2], qv[3]))
 }
-
 
 pub fn quaternion_disp(q: UnitQuaternion<f64>, q_prime: UnitQuaternion<f64>) -> Vector3<f64> {
     quaternion_log( q.inverse()*q_prime )

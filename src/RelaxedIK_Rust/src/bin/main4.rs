@@ -6,7 +6,7 @@ use lib::{utils_rust, spacetime};
 
 fn main() {
     let mut robot = spacetime::robot::Robot::from_yaml_path("/home/rakita/catkin_ws/src/relaxed_ik/src/RelaxedIK/Config/info_files/ur5_info.yaml");
-    robot.arms[0].get_frames(vec![1.,0.,0.,0.,0.,0.]);
+    robot.arms[0].get_frames(&[1.,0.,0.,0.,0.,0.]);
     let mut uq: UnitQuaternion<f64> = UnitQuaternion::from_matrix(&robot.arms[0].out_rot_mats[5]);
     let mut rot_mat = uq.to_rotation_matrix();
     let start = Instant::now();
