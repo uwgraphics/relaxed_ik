@@ -1,6 +1,6 @@
 
 /*
-pub fn forward_finite_diff1(f: &impl FnMut(&[f64]) -> f64, x: &[f64], h: f64, output_grad: &mut [f64]) {
+pub fn forward_finite_diff1(f: &impl Fn(&[f64]) -> f64, x: &[f64], h: f64, output_grad: &mut [f64]) {
     assert_eq!(x.len(), output_grad.len());
     let val_0 = f(x);
     for (i, val) in x.iter().enumerate() {
@@ -10,7 +10,7 @@ pub fn forward_finite_diff1(f: &impl FnMut(&[f64]) -> f64, x: &[f64], h: f64, ou
     }
 }
 
-pub fn backward_finite_diff1(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
+pub fn backward_finite_diff1(f: &dyn Fn(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
     assert_eq!(x.len(), output_grad.len());
     let val_0 = f(x);
     for (i, val) in x.iter().enumerate() {
@@ -20,7 +20,7 @@ pub fn backward_finite_diff1(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f
     }
 }
 
-pub fn central_finite_diff1(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
+pub fn central_finite_diff1(f: &dyn Fn(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
     assert_eq!(x.len(), output_grad.len());
     let mut x_hf = x.clone();
     let mut x_hb = x.clone();
@@ -34,7 +34,7 @@ pub fn central_finite_diff1(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f6
     }
 }
 
-pub fn central_finite_diff2(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
+pub fn central_finite_diff2(f: &dyn Fn(&Vec<f64>) -> f64, x: &Vec<f64>, h: f64, output_grad: &mut Vec<f64>) {
     assert_eq!(x.len(), output_grad.len());
 
     let mut x_hf1 = x.clone();
@@ -58,7 +58,7 @@ pub fn central_finite_diff2(f: &dyn FnMut(&Vec<f64>) -> f64, x: &Vec<f64>, h: f6
 
 /*
 pub trait GradientFinder<'a> {
-    fn new(dim: usize, f: &'a dyn FnMut(&[f64]) -> f64) -> Self;
+    fn new(dim: usize, f: &'a dyn Fn(&[f64]) -> f64) -> Self;
     fn compute_gradient(&mut self, x: &[f64]);
     fn compute_and_return_gradient(&mut self, x: &[f64]) -> Vec<f64>;
     fn reset(&mut self, x: &[f64]);
@@ -66,13 +66,13 @@ pub trait GradientFinder<'a> {
 
 pub struct ForwardFiniteDiff<'a> {
     pub dim: usize,
-    pub f: &'a dyn FnMut(&[f64]) -> f64,
+    pub f: &'a dyn Fn(&[f64]) -> f64,
     pub h: f64,
     pub out_grad: Vec<f64>,
     __x_h: Vec<f64>
 }
 impl<'a> GradientFinder<'a> for ForwardFiniteDiff<'a> {
-    fn new(dim: usize, f: &'a dyn FnMut(&[f64]) -> f64) -> ForwardFiniteDiff<'a> {
+    fn new(dim: usize, f: &'a dyn Fn(&[f64]) -> f64) -> ForwardFiniteDiff<'a> {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
         for i in 0..dim {
             out_grad.push(0.0);
@@ -108,14 +108,14 @@ impl<'a> GradientFinder<'a> for ForwardFiniteDiff<'a> {
 
 pub struct CentralFiniteDiff<'a> {
     pub dim: usize,
-    pub f: &'a dyn FnMut(&[f64]) -> f64,
+    pub f: &'a dyn Fn(&[f64]) -> f64,
     pub h: f64,
     pub out_grad: Vec<f64>,
     __x_hf: Vec<f64>,
     __x_hb: Vec<f64>
 }
 impl<'a> GradientFinder<'a> for CentralFiniteDiff<'a> {
-    fn new(dim: usize, f: &'a dyn FnMut(&[f64]) -> f64) -> CentralFiniteDiff<'a> {
+    fn new(dim: usize, f: &'a dyn Fn(&[f64]) -> f64) -> CentralFiniteDiff<'a> {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
         for i in 0..dim {
             out_grad.push(0.0);
@@ -158,7 +158,7 @@ impl<'a> GradientFinder<'a> for CentralFiniteDiff<'a> {
 
 pub struct CentralFiniteDiff2<'a> {
     pub dim: usize,
-    pub f: &'a dyn FnMut(&[f64]) -> f64,
+    pub f: &'a dyn Fn(&[f64]) -> f64,
     pub h: f64,
     pub out_grad: Vec<f64>,
     __x_hf1: Vec<f64>,
@@ -167,7 +167,7 @@ pub struct CentralFiniteDiff2<'a> {
     __x_hb2: Vec<f64>
 }
 impl<'a> GradientFinder<'a> for CentralFiniteDiff2<'a> {
-    fn new(dim: usize, f: &'a dyn FnMut(&[f64]) -> f64) -> CentralFiniteDiff2<'a> {
+    fn new(dim: usize, f: &'a dyn Fn(&[f64]) -> f64) -> CentralFiniteDiff2<'a> {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
         for i in 0..dim {
             out_grad.push(0.0);
@@ -222,15 +222,16 @@ impl<'a> GradientFinder<'a> for CentralFiniteDiff2<'a> {
 */
 
 pub trait GradientFinder<F>
-where F: FnMut(&[f64]) -> f64 {
+where F: Fn(&[f64]) -> f64 {
     fn new(dim: usize, f: F) -> Self;
     fn compute_gradient(&mut self, x: &[f64]);
     fn compute_and_return_gradient(&mut self, x: &[f64]) -> Vec<f64>;
+    fn compute_gradient_immutable(&self, x: &[f64]) -> Vec<f64>;
     fn reset(&mut self, x: &[f64]);
 }
 
 pub struct ForwardFiniteDiff<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     pub dim: usize,
     pub f: F,
@@ -239,7 +240,7 @@ where F: FnMut(&[f64]) -> f64
     __x_h: Vec<f64>
 }
 impl<F> GradientFinder<F> for ForwardFiniteDiff<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     fn new(dim: usize, f: F) -> Self {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
@@ -268,6 +269,17 @@ where F: FnMut(&[f64]) -> f64
         self.out_grad.clone()
     }
 
+    fn compute_gradient_immutable(&self, x: &[f64]) -> Vec<f64> {
+        let mut out: Vec<f64> = Vec::new();
+        let val_0 = (self.f)(x);
+        for (i, val) in x.iter().enumerate() {
+            let mut x_h = x.clone().to_vec();
+            x_h[i] += self.h;
+            out[i] = (-val_0 + (self.f)(x_h.as_slice())) / self.h;
+        }
+        out
+    }
+
     fn reset(&mut self, x: &[f64]) {
         for i in 0..self.dim {
             self.__x_h[i] = x[i];
@@ -276,7 +288,7 @@ where F: FnMut(&[f64]) -> f64
 }
 
 pub struct CentralFiniteDiff<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     pub dim: usize,
     pub f: F,
@@ -286,7 +298,7 @@ where F: FnMut(&[f64]) -> f64
     __x_hb: Vec<f64>
 }
 impl<F> GradientFinder<F> for CentralFiniteDiff<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     fn new(dim: usize, f: F) -> CentralFiniteDiff<F> {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
@@ -307,7 +319,6 @@ where F: FnMut(&[f64]) -> f64
     }
 
     fn compute_gradient(&mut self, x: &[f64]) {
-        let val_0 = (self.f)(x);
         for (i, val) in x.iter().enumerate() {
             self.reset(x);
             self.__x_hf[i] += self.h;
@@ -321,6 +332,19 @@ where F: FnMut(&[f64]) -> f64
         self.out_grad.clone()
     }
 
+    fn compute_gradient_immutable(&self, x: &[f64]) -> Vec<f64> {
+        let mut out: Vec<f64> = Vec::new();
+        for (i, val) in x.iter().enumerate() {
+            let mut x_hf = x.clone().to_vec();
+            let mut x_hb = x.clone().to_vec();
+            x_hf[i] += self.h;
+            x_hb[i] -= self.h;
+            out[i] = (-0.5 * (self.f)(x_hb.as_slice()) + 0.5 * (self.f)(x_hf.as_slice())) / self.h;
+        }
+        out
+    }
+
+
     fn reset(&mut self, x: &[f64]) {
         for i in 0..self.dim {
             self.__x_hf[i] = x[i];
@@ -330,7 +354,7 @@ where F: FnMut(&[f64]) -> f64
 }
 
 pub struct CentralFiniteDiff2<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     pub dim: usize,
     pub f: F,
@@ -342,7 +366,7 @@ where F: FnMut(&[f64]) -> f64
     __x_hb2: Vec<f64>
 }
 impl<F> GradientFinder<F> for CentralFiniteDiff2<F>
-where F: FnMut(&[f64]) -> f64
+where F: Fn(&[f64]) -> f64
 {
     fn new(dim: usize, f: F) -> CentralFiniteDiff2<F> {
         let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
@@ -371,7 +395,6 @@ where F: FnMut(&[f64]) -> f64
     }
 
     fn compute_gradient(&mut self, x: &[f64]) {
-        let val_0 = (self.f)(x);
         for (i, val) in x.iter().enumerate() {
             self.reset(x);
             self.__x_hf1[i] += self.h;
@@ -386,6 +409,23 @@ where F: FnMut(&[f64]) -> f64
         self.compute_gradient(x);
         self.out_grad.clone()
     }
+
+    fn compute_gradient_immutable(&self, x: &[f64]) -> Vec<f64> {
+        let mut out: Vec<f64> = Vec::new();
+        for (i, val) in x.iter().enumerate() {
+            let mut x_hf1 = x.clone().to_vec();
+            let mut x_hb1 = x.clone().to_vec();
+            let mut x_hf2 = x.clone().to_vec();
+            let mut x_hb2 = x.clone().to_vec();
+            x_hf1[i] += self.h;
+            x_hb1[i] -= self.h;
+            x_hf2[i] += 2.0*self.h;
+            x_hb2[i] -= 2.0*self.h;
+            out[i] = ((1. / 12.) * (self.f)(x_hb2.as_slice()) + -(2. / 3.) * (self.f)(x_hb1.as_slice()) + (2. / 3.) * (self.f)(x_hf1.as_slice()) - (1. / 12.) * (self.f)(x_hf2.as_slice())) / self.h;
+        }
+        out
+    }
+
 
     fn reset(&mut self, x: &[f64]) {
         for i in 0..self.dim {
