@@ -133,7 +133,10 @@ impl Robot {
         for i in 0..num_chains {
             for j in 0..joint_names[i].len() {
                 let idx = Robot::get_index_from_joint_order(joint_ordering, &joint_names[i][j]);
-                out[i].push(idx);
+                if  idx == 101010101010 {
+                } else {
+                    out[i].push(idx);
+                }
             }
         }
         out
@@ -145,7 +148,7 @@ impl Robot {
                 return i
             }
         }
-        0
+        101010101010
     }
 
 
