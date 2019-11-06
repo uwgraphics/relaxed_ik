@@ -146,8 +146,78 @@ impl OptimizationEngineNLoptImmutable {
     }
 }
 
+/*
+pub struct OptimizationEngineNLopt;
+impl OptimizationEngineNLopt {
+    pub fn new() -> Self { OptimizationEngineNLopt{} }
+
+    /*
+    pub fn optimize(&mut self, x_out: &mut [f64], v1: &mut RelaxedIKVars, v2: &mut RelaxedIKVars, om: &ObjectiveMasterRIK, max_iter: u32) {
+        let num_dim = v1.robot.num_dof;
+        let obj = |x: &[f64]| om.call(x, v1);
+        let mut gradient_finder= ForwardFiniteDiffImmutable::new(v1.robot.num_dof, obj);
+
+        // ForwardFiniteDiff<impl FnMut(&[f64]) -> f64>
+        // println!("{:?}", workspace.gradient_finder.out_grad);
+
+        let obj_f = |x: &[f64], _gradient: Option<&mut [f64]>, _params: &mut ()| -> f64 {
+            if _gradient.is_none() {
+            } else {
+                let mut grad = gradient_finder.compute_gradient_immutable(x);
+                let g = _gradient.unwrap();
+                for i in 0..grad.len() {
+                    g[i] = grad[i];
+                }
+            }
+            obj(x)
+        };
+
+        let mut opt = Nlopt::new(Algorithm::Slsqp, num_dim, obj_f, Target::Minimize, ());
+        opt.set_ftol_rel(0.0000001);
+
+        let mut x_init = x_out.to_vec();
+        let res = opt.optimize(x_init.as_mut_slice());
+
+        // println!("Result: {:?}", res);
+        // println!("X vals: {:?}\n", &x_init[..num_dim]);
+    }
+    */
+
+    pub fn optimize_lite(&mut self, x_out: &mut [f64], v1: &mut RelaxedIKVars, v2: &mut RelaxedIKVars, om: &ObjectiveMasterRIK, max_iter: u32) {
+        let num_dim = v1.robot.num_dof;
+        let obj = |x: &[f64]| om.call(x, v1);
+        let mut gradient_finder= ForwardFiniteDiff2::new(v1.robot.num_dof, &obj);
+        let mut workspace = OptimizationWorkspace{vars: v2, gradient_finder: &gradient_finder};
+
+        // ForwardFiniteDiff<impl FnMut(&[f64]) -> f64>
+        // println!("{:?}", workspace.gradient_finder.out_grad);
+
+        let obj_f = |x: &[f64], _gradient: Option<&mut [f64]>, _params: &mut OptimizationWorkspace| -> f64 {
+            if _gradient.is_none() {
+            } else {
+                _params.gradient_finder.compute_gradient(x);
+                let mut grad = _params.gradient_finder.out_grad;
+                let g = _gradient.unwrap();
+                for i in 0..grad.len() {
+                    g[i] = grad[i];
+                }
+            }
+            obj(x)
+        };
+
+        let mut opt = Nlopt::new(Algorithm::Slsqp, num_dim, obj_f, Target::Minimize,  workspace);
+        opt.set_ftol_rel(0.0000001);
+
+        let mut x_init = x_out.to_vec();
+        let res = opt.optimize(x_init.as_mut_slice());
+
+        // println!("Result: {:?}", res);
+        // println!("X vals: {:?}\n", &x_init[..num_dim]);
+    }
+}
 
 pub struct OptimizationWorkspace<'a> {
     pub vars: &'a mut RelaxedIKVars,
-    pub gradient_finder: ForwardFiniteDiff< fn(&[f64]) -> f64 >
+    pub gradient_finder: ForwardFiniteDiff2<'a, &'a Fn(&[f64]) -> f64 >
 }
+*/

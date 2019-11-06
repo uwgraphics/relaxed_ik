@@ -399,3 +399,61 @@ where F: FnMut(&[f64]) -> f64
 
 
 
+
+
+
+/*
+pub trait GradientFinder2<'a, F>
+where F: FnMut(&[f64]) -> f64 {
+    fn new(dim: usize, f: &'a F) -> Self;
+    fn compute_gradient(&mut self, x: &[f64]);
+    fn compute_and_return_gradient(&mut self, x: &[f64]) -> Vec<f64>;
+    fn reset(&mut self, x: &[f64]);
+}
+
+pub struct ForwardFiniteDiff2<'a, F>
+where F: FnMut(&[f64]) -> f64
+{
+    pub dim: usize,
+    pub f: &'a F,
+    pub h: f64,
+    pub out_grad: Vec<f64>,
+    __x_h: Vec<f64>
+}
+impl<'a, F> GradientFinder2<'a, F> for ForwardFiniteDiff2<'a, F>
+where F: FnMut(&[f64]) -> f64
+{
+    fn new(dim: usize, f: &'a F) -> Self {
+        let mut out_grad: Vec<f64> = Vec::with_capacity(dim);
+        for i in 0..dim {
+            out_grad.push(0.0);
+        }
+
+        let mut __x_h: Vec<f64> = Vec::with_capacity(dim);
+        for i in 0..dim {
+            __x_h.push(0.0);
+        }
+        ForwardFiniteDiff2{dim, f, h: 0.00001, out_grad, __x_h}
+    }
+
+    fn compute_gradient(&mut self, x: &[f64]) {
+        let val_0 = (self.f)(x);
+        for (i, val) in x.iter().enumerate() {
+            self.reset(x);
+            self.__x_h[i] += self.h;
+            self.out_grad[i] = (-val_0 + (self.f)(&self.__x_h)) / self.h;
+        }
+    }
+
+    fn compute_and_return_gradient(&mut self, x: &[f64]) -> Vec<f64> {
+        self.compute_gradient(x);
+        self.out_grad.clone()
+    }
+
+    fn reset(&mut self, x: &[f64]) {
+        for i in 0..self.dim {
+            self.__x_h[i] = x[i];
+        }
+    }
+}
+*/

@@ -1,5 +1,5 @@
 use crate::lib::spacetime::arm;
-use crate::utils_rust::{geometry_utils, yaml_utils};
+use crate::lib::utils_rust::{geometry_utils, yaml_utils};
 
 #[derive(Clone, Debug)]
 pub struct Robot {
@@ -41,7 +41,7 @@ impl Robot {
             num_chains, num_dof, subchain_indices, bounds: ifp.joint_limits.clone(), velocity_limits: ifp.velocity_limits.clone(), __subchain_outputs}
     }
 
-    pub fn from_yaml_path(fp: &str) -> Robot {
+    pub fn from_yaml_path(fp: String) -> Robot {
         let ifp = yaml_utils::InfoFileParser::from_yaml_path(fp);
         Robot::from_info_file_parser(&ifp)
     }

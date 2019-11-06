@@ -148,6 +148,10 @@ src/RelaxedIK/FileIO/solver_outputs/*
 src/RelaxedIK/FileIO/point_clouds/*
 src/RelaxedIK/FileIO/objs/*
 src/RelaxedIK/FileIO/task_recordings/*
+src/RelaxedIK/Config/collision_inputs_and_outputs/*
+!src/RelaxedIK/Config/collision_inputs_and_outputs/README
+src/RelaxedIK/Config/collision_nn_rust/*
+!src/RelaxedIK/Config/collision_nn_rust/README
 
 #rust related
 src/RelaxedIK_Rust/target

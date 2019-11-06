@@ -41,9 +41,9 @@ pub struct RelaxedIKVars {
     pub rotation_mode_relative: bool, // if false, will be absolute
 }
 impl RelaxedIKVars {
-    pub fn from_yaml_path(fp: &str, position_mode_relative: bool, rotation_mode_relative: bool) -> Self {
-        let ifp = InfoFileParser::from_yaml_path(fp);
-        let mut robot = Robot::from_yaml_path(fp);
+    pub fn from_yaml_path(fp: String, position_mode_relative: bool, rotation_mode_relative: bool) -> Self {
+        let ifp = InfoFileParser::from_yaml_path(fp.clone());
+        let mut robot = Robot::from_yaml_path(fp.clone());
         let num_chains = ifp.joint_names.len();
 
         let mut goal_positions: Vec<Vector3<f64>> = Vec::new();
@@ -71,8 +71,8 @@ impl RelaxedIKVars {
             goal_positions, goal_quats, init_ee_positions, init_ee_quats, position_mode_relative, rotation_mode_relative}
     }
 
-    pub fn from_yaml_path_with_init(fp: &str, init_state: Vec<f64>, position_mode_relative: bool, rotation_mode_relative: bool) -> Self {
-        let mut robot = Robot::from_yaml_path(fp);
+    pub fn from_yaml_path_with_init(fp: String, init_state: Vec<f64>, position_mode_relative: bool, rotation_mode_relative: bool) -> Self {
+        let mut robot = Robot::from_yaml_path(fp.clone());
         let num_chains = robot.num_chains;
 
         let mut goal_positions: Vec<Vector3<f64>> = Vec::new();

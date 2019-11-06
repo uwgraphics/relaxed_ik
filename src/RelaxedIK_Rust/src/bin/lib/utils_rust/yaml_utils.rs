@@ -2,9 +2,10 @@ use std::fs::File;
 use std::io::prelude::*;
 use yaml_rust::{YamlLoader, Yaml};
 use nalgebra;
+use nalgebra::{DMatrix, DVector};
 
-pub fn get_yaml_obj(fp: &str) -> Vec<Yaml> {
-    let mut file = File::open(fp).unwrap();
+pub fn get_yaml_obj(fp: String) -> Vec<Yaml> {
+    let mut file = File::open(fp.as_str()).unwrap();
     let mut contents = String::new();
     let res = file.read_to_string(&mut contents).unwrap();
 
@@ -33,7 +34,7 @@ pub struct InfoFileParser {
 }
 
 impl InfoFileParser {
-    pub fn from_yaml_path(fp: &str) -> InfoFileParser {
+    pub fn from_yaml_path(fp: String) -> InfoFileParser {
         let docs = get_yaml_obj(fp);
         let doc = &docs[0];
 
@@ -139,4 +140,134 @@ impl InfoFileParser {
         InfoFileParser{urdf_file_name, fixed_frame, joint_names, joint_ordering, ee_fixed_joints, starting_config, collision_file_name, collision_nn_file, path_to_src, axis_types, velocity_limits,
             joint_limits, displacements, disp_offsets, rot_offsets, joint_types, joint_state_define_func_file}
     }
+}
+
+
+pub struct CollisionFileParser {
+    pub states: Vec<Vec<f64>>,
+    pub jt_pts: Vec<Vec<f64>>,
+    pub collision_scores: Vec<f64>
+}
+
+impl CollisionFileParser {
+    pub fn from_yaml_path(fp: String) -> Self {
+        let docs = get_yaml_obj(fp);
+        let doc = &docs[0];
+
+        let mut states: Vec<Vec<f64>> = Vec::new();
+        let mut jt_pts: Vec<Vec<f64>> = Vec::new();
+        let mut collision_scores: Vec<f64> = Vec::new();
+
+        let mut states_arr = doc["states"].as_vec().unwrap();
+        for i in 0..states_arr.len() {
+            let s: Vec<f64> = Vec::new();
+            states.push(s);
+            let states_arr_2 = states_arr[i].as_vec().unwrap();
+            for j in 0..states_arr_2.len() {
+                states[i].push( states_arr_2[j].as_f64().unwrap() )
+            }
+        }
+
+        let jt_pts_arr = doc["jt_pts"].as_vec().unwrap();
+        for i in 0..jt_pts_arr.len() {
+            let s: Vec<f64> = Vec::new();
+            jt_pts.push(s);
+            let jt_pts_arr_2 = jt_pts_arr[i].as_vec().unwrap();
+            for j in 0..jt_pts_arr_2.len() {
+                jt_pts[i].push(jt_pts_arr_2[j].as_f64().unwrap());
+            }
+        }
+
+        let collision_values_arr = doc["collision_scores"].as_vec().unwrap();
+        for i in 0..collision_values_arr.len() {
+            collision_scores.push(collision_values_arr[i].as_f64().unwrap());
+        }
+
+        CollisionFileParser{states, jt_pts, collision_scores}
+    }
+}
+
+
+
+pub struct CollisionNeuralNetParser {
+    pub coefs: Vec<Vec<Vec<f64>>>,
+    pub intercepts: Vec<Vec<f64>>,
+    pub coef_matrices: Vec<DMatrix<f64>>,
+    pub intercept_vectors: Vec<DMatrix<f64>>
+}
+
+impl CollisionNeuralNetParser {
+    pub fn from_yaml_path(fp: String) -> Self {
+        let docs = get_yaml_obj(fp);
+        let doc = &docs[0];
+
+        let mut coefs: Vec<Vec<Vec<f64>>> = Vec::new();
+        let mut intercepts: Vec<Vec<f64>> = Vec::new();
+        let mut coef_matrices: Vec<DMatrix<f64>> = Vec::new();
+        let mut intercept_vectors: Vec<DMatrix<f64>> = Vec::new();
+
+        coefs = parse_list_of_floats_3(&doc["coefs"]);
+        intercepts = parse_list_of_floats_2(&doc["intercepts"]);
+
+        for i in 0..coefs.len() {
+            let mut m = DMatrix::from_element( coefs[i].len(), coefs[i][0].len(), 0.0 );
+            for j in 0..coefs[i].len() {
+                for k in 0..coefs[i][j].len() {
+                    m[(j,k)] = coefs[i][j][k];
+                }
+            }
+            coef_matrices.push(m);
+        }
+
+        for i in 0..intercepts.len() {
+            let mut v = DMatrix::from_element(1, intercepts[i].len(),0.0);
+            for j in 0..intercepts[i].len() {
+                v[j] = intercepts[i][j];
+            }
+            intercept_vectors.push(v);
+        }
+
+        Self{coefs, intercepts, coef_matrices, intercept_vectors}
+    }
+}
+
+
+pub fn parse_list_of_floats_1(y: &Yaml) -> Vec<f64> {
+    let mut ret: Vec<f64> = Vec::new();
+
+    let v1 = y.as_vec().unwrap();
+    for i in 0..v1.len() {
+        ret.push(v1[i].as_f64().unwrap());
+    }
+    ret
+}
+
+pub fn parse_list_of_floats_2(y: &Yaml) -> Vec<Vec<f64>> {
+    let mut ret: Vec<Vec<f64>> = Vec::new();
+
+    let v1 = y.as_vec().unwrap();
+    for i in 0..v1.len() {
+        ret.push( parse_list_of_floats_1(&v1[i]) );
+    }
+    ret
+}
+
+pub fn parse_list_of_floats_3(y: &Yaml) -> Vec<Vec<Vec<f64>>> {
+    let mut ret: Vec<Vec<Vec<f64>>> = Vec::new();
+
+    let v1 = y.as_vec().unwrap();
+    for i in 0..v1.len() {
+        ret.push( parse_list_of_floats_2(&v1[i]) );
+    }
+    ret
+}
+
+pub fn parse_list_of_floats_4(y: &Yaml) -> Vec<Vec<Vec<Vec<f64>>>> {
+    let mut ret: Vec<Vec<Vec<Vec<f64>>>> = Vec::new();
+
+    let v1 = y.as_vec().unwrap();
+    for i in 0..v1.len() {
+        ret.push( parse_list_of_floats_3(&v1[i]) );
+    }
+    ret
 }
