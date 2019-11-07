@@ -89,7 +89,7 @@ impl CollisionNN {
         x_vec[0]
     }
 
-    pub fn gradient(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
+    pub fn gradient2(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
         let mut out: Vec<f64> = Vec::new();
         let mut grad: DMatrix<f64> = DMatrix::from_element(1, x.len(), 0.0);
 
@@ -117,7 +117,7 @@ impl CollisionNN {
         (x_vec[0], out)
     }
 
-    pub fn gradient2(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
+    pub fn gradient(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
         let mut out: Vec<f64> = Vec::new();
         let mut grad: DMatrix<f64> = DMatrix::from_element(1, x.len(), 0.0);
 

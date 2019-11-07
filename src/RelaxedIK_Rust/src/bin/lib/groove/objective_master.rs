@@ -4,15 +4,54 @@ use crate::lib::groove::vars::RelaxedIKVars;
 
 pub struct ObjectiveMaster {
     objectives: Vec<Objective>,
-    weight_priors: Vec<f64>
+    weight_priors: Vec<f64>,
+    lite: bool,
+    finite_diff_grad: bool
 }
 
 impl ObjectiveMaster {
     pub fn standard_ik() -> Self {
-        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals)], weight_priors: vec![2., 1.9]}
+        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals)], weight_priors: vec![2., 1.9], lite: true, finite_diff_grad: true}
+    }
+
+    pub fn relaxed_ik() -> Self {
+        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals), NNSelfCollisionObj(NNSelfCollision)],
+            weight_priors: vec![2., 1.9, 1.0], lite: true, finite_diff_grad: false}
     }
 
     pub fn call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
+        if self.lite {
+            self.__call_lite(x, vars)
+        } else {
+            self.__call(x, vars)
+        }
+    }
+
+    pub fn gradient(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
+        if self.lite {
+            if self.finite_diff_grad {
+                self.__gradient_finite_diff_lite(x, vars)
+            } else {
+                self.__gradient_lite(x, vars)
+            }
+        } else {
+            if self.finite_diff_grad {
+                self.__gradient_finite_diff(x, vars)
+            } else {
+                self.__gradient(x, vars)
+            }
+        }
+    }
+
+    pub fn gradient_finite_diff(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
+        if self.lite {
+            self.__gradient_finite_diff_lite(x, vars)
+        } else {
+            self.__gradient_finite_diff(x, vars)
+        }
+    }
+
+    fn __call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
         let mut out = 0.0;
         let frames = vars.robot.get_frames_immutable(x);
         for i in 0..self.objectives.len() {
@@ -21,7 +60,7 @@ impl ObjectiveMaster {
         out
     }
 
-    pub fn call_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
+    fn __call_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
         let mut out = 0.0;
         let poses = vars.robot.get_ee_pos_and_quat_immutable(x);
         for i in 0..self.objectives.len() {
@@ -30,7 +69,7 @@ impl ObjectiveMaster {
         out
     }
 
-    pub fn gradient(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
+    fn __gradient(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
         let mut grad: Vec<f64> = vec![0. ; x.len()];
         let mut obj = 0.0;
 
@@ -68,7 +107,7 @@ impl ObjectiveMaster {
         (obj, grad)
     }
 
-    pub fn gradient_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
+    fn __gradient_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
         let mut grad: Vec<f64> = vec![0. ; x.len()];
         let mut obj = 0.0;
 
@@ -106,7 +145,7 @@ impl ObjectiveMaster {
         (obj, grad)
     }
 
-    pub fn gradient_finite_diff(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>)  {
+    fn __gradient_finite_diff(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>)  {
         let mut grad: Vec<f64> = vec![0. ; x.len()];
         let mut f_0 = self.call(x, vars);
 
@@ -120,14 +159,14 @@ impl ObjectiveMaster {
         (f_0, grad)
     }
 
-    pub fn gradient_finite_diff_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
+    fn __gradient_finite_diff_lite(&self, x: &[f64], vars: &RelaxedIKVars) -> (f64, Vec<f64>) {
         let mut grad: Vec<f64> = vec![0. ; x.len()];
         let mut f_0 = self.call(x, vars);
 
         for i in 0..x.len() {
             let mut x_h = x.to_vec();
             x_h[i] += 0.000001;
-            let f_h = self.call_lite(x_h.as_slice(), vars);
+            let f_h = self.__call_lite(x_h.as_slice(), vars);
             grad[i] = (-f_0 + f_h) / 0.000001;
         }
 

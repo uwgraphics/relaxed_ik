@@ -3,7 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main17.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main17.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/collision_nn.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/collision_nn.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/groove.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/groove_old.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main10.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main10.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main12.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main12.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main18.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main18.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +39,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/RelaxedIK_Rust" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>

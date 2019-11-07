@@ -15,35 +15,40 @@ pub fn groove_loss_derivative(x_val: f64, t: f64, d: i32, c: f64, f: f64, g: i32
 
 pub enum Objective {
     MatchEEPosGoalsObj(MatchEEPosGoals),
-    MatchEEQuatGoalsObj(MatchEEQuatGoals)
+    MatchEEQuatGoalsObj(MatchEEQuatGoals),
+    NNSelfCollisionObj(NNSelfCollision)
 }
 
 impl Objective {
     pub fn call(&self, x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call(x, v, frames),
-            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call(x, v, frames)
+            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call(x, v, frames),
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call(x, v, frames)
         }
     }
 
     pub fn call_lite(&self, x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call_lite(x, v, ee_poses),
-            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call_lite(x, v, ee_poses)
+            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call_lite(x, v, ee_poses),
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call_lite(x, v, ee_poses)
         }
     }
 
     pub fn gradient(&self, x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> (f64, Vec<f64>) {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient(x, v, frames),
-            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient(x, v, frames)
+            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient(x, v, frames),
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient(x, v, frames)
         }
     }
 
     pub fn gradient_lite(&self, x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> (f64, Vec<f64>) {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
-            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses)
+            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient_lite(x, v, ee_poses)
         }
     }
 
@@ -51,7 +56,8 @@ impl Objective {
         // manual diff = 0, finite diff = 1
         match *self {
             Objective::MatchEEPosGoalsObj(_) => 1,
-            Objective::MatchEEQuatGoalsObj(_) => 1
+            Objective::MatchEEQuatGoalsObj(_) => 1,
+            Objective::NNSelfCollisionObj(_) => 0
         }
     }
 
@@ -133,5 +139,36 @@ impl MatchEEQuatGoals {
             x_val += disp.min(disp2);
         }
         groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+    }
+}
+
+pub struct NNSelfCollision;
+impl NNSelfCollision {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = v.collision_nn.predict(&x.to_vec());
+        groove_loss(x_val, 0., 2, 1.3, 0.002, 4)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = v.collision_nn.predict(&x.to_vec());
+        groove_loss(x_val, 0., 2, 1.3, 0.002, 4)
+    }
+
+    pub fn gradient(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> (f64, Vec<f64>) {
+        let (x_val, mut grad) = v.collision_nn.gradient(&x.to_vec());
+        let g_prime = groove_loss_derivative(x_val, 0., 2, 1.3, 0.002, 4);
+        for i in 0..grad.len() {
+            grad[i] *= g_prime;
+        }
+        (x_val, grad)
+    }
+
+    pub fn gradient_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> (f64, Vec<f64>) {
+        let (x_val, mut grad) = v.collision_nn.gradient(&x.to_vec());
+        let g_prime = groove_loss_derivative(x_val, 0., 2, 1.3, 0.002, 4);
+        for i in 0..grad.len() {
+            grad[i] *= g_prime;
+        }
+        (x_val, grad)
     }
 }
