@@ -22,6 +22,19 @@ pub fn get_relu_jacobian(x: &DMatrix<f64>) -> DMatrix<f64> {
     out
 }
 
+pub fn get_relu_jacobian_mul(x: &DMatrix<f64>, c: &DMatrix<f64>) -> DMatrix<f64> {
+    // let mut out: DMatrix<f64> = DMatrix::from_element(x.shape().1, x.shape().1, 0.0);
+    let mut out: DMatrix<f64> = DMatrix::from_element(c.shape().0, c.shape().1, 0.0);
+    for i in 0..c.shape().0 {
+        for j in 0..c.shape().1 {
+            // out[(i,i)] = relu_prime(x[i]) * c[(i,i)];
+            out[(i,j)] = relu_prime(x[i]) * c[(i,j)];
+        }
+    }
+
+    out
+}
+
 pub struct CollisionNN {
     pub coef_matrices: Vec<DMatrix<f64>>,
     pub intercept_vectors: Vec<DMatrix<f64>>,
@@ -76,7 +89,7 @@ impl CollisionNN {
         x_vec[0]
     }
 
-    pub fn gradient(&self, x: &Vec<f64>) -> Vec<f64> {
+    pub fn gradient(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
         let mut out: Vec<f64> = Vec::new();
         let mut grad: DMatrix<f64> = DMatrix::from_element(1, x.len(), 0.0);
 
@@ -101,10 +114,39 @@ impl CollisionNN {
         for i in 0..grad.len() {
             out.push(grad[i]);
         }
-        out
+        (x_vec[0], out)
     }
 
-    pub fn gradient_finite_diff(&self, x: &Vec<f64>) -> Vec<f64> {
+    pub fn gradient2(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
+        let mut out: Vec<f64> = Vec::new();
+        let mut grad: DMatrix<f64> = DMatrix::from_element(1, x.len(), 0.0);
+
+        let mut x_vec = DMatrix::from_element(1, self.input_length, 0.0);
+        for i in 0..self.input_length {
+            x_vec[i] = x[i];
+        }
+
+        let mut first = true;
+        for i in 0..self.coef_matrices.len() {
+            x_vec =  x_vec * &self.coef_matrices[i] + &self.intercept_vectors[i];
+            x_vec.apply(relu);
+            if first {
+                let j = get_relu_jacobian_mul(&x_vec, &self.coef_matrices[i].transpose());
+                grad = j;
+                first = false;
+            } else {
+                let j = get_relu_jacobian_mul(&x_vec, &self.coef_matrices[i].transpose());
+                grad = j * grad;
+            }
+        }
+
+        for i in 0..grad.len() {
+            out.push(grad[i]);
+        }
+        (x_vec[0], out)
+    }
+
+    pub fn gradient_finite_diff(&self, x: &Vec<f64>) -> (f64, Vec<f64>) {
         let mut out: Vec<f64> = Vec::new();
 
         let f_0 = self.predict(&x);
@@ -115,7 +157,7 @@ impl CollisionNN {
             out.push( (-f_0 + f_h) / 0.000001);
         }
 
-        out
+        (f_0, out)
     }
 }
 

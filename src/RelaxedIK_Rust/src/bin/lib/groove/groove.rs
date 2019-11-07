@@ -1,4 +1,4 @@
-use crate::lib::groove::objective::{ObjectiveMasterRIK, ObjectiveMasterRIKImmutable, ObjectiveMasterRIKImmutableLite};
+use crate::lib::groove::objective_old::{ObjectiveMasterRIK, ObjectiveMasterRIKImmutable, ObjectiveMasterRIKImmutableLite};
 use crate::lib::groove::gradient::{ForwardFiniteDiff, CentralFiniteDiff, GradientFinder, ForwardFiniteDiffImmutable, CentralFiniteDiffImmutable, GradientFinderImmutable};
 use crate::lib::groove::vars::{RelaxedIKVars};
 use optimization_engine::{constraints::*, panoc::*, *};

@@ -2,11 +2,11 @@ mod lib;
 
 use lib::groove::vars::{Vars, RelaxedIKVars};
 use lib::{utils_rust, spacetime};
-use lib::groove::objective::{*};
+use lib::groove::objective_old::{*};
 use nalgebra::geometry::UnitQuaternion;
 use std::time::{Instant, Duration};
 use crate::lib::groove::gradient::{ForwardFiniteDiff, CentralFiniteDiff, GradientFinder};
-use crate::lib::groove::objective::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK};
+use crate::lib::groove::objective_old::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK};
 
 fn main() {
     let mut v = RelaxedIKVars::from_yaml_path_with_init("/home/rakita/catkin_ws/src/relaxed_ik/src/RelaxedIK/Config/info_files/sawyer_info.yaml", vec![1.,1.,0.,0.,0.,0.,0.], false, false);

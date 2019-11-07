@@ -15,7 +15,7 @@ fn relu(x: f64) -> f64 {
 
 fn main() {
     let mut cnn = CollisionNN::from_yaml_path("/home/rakita/catkin_ws/src/relaxed_ik/src/RelaxedIK/Config/collision_nn_rust/hubo_description_nn.yaml".to_string());
-    let x = vec![0., 0., 0., 0., 0., 0.,0., 0., 0., 0., 0., 0., 0.,0., 0.];
+    let x = vec![0., 0., 0., 0., 0., 0.,1.,0., 0., 0., 0., 0., 0.,1.,0.];
     let start = Instant::now();
     for i in 0..1000 {
         cnn.predict(&x);
@@ -31,8 +31,23 @@ fn main() {
     let duration = start.elapsed();
     println!("{:?}", duration);
 
+    let start = Instant::now();
+    for i in 0..1000 {
+        cnn.gradient2(&x);
+    }
+    let duration = start.elapsed();
+    println!("{:?}", duration);
+
+    let start = Instant::now();
+    for i in 0..1000 {
+        cnn.gradient_finite_diff(&x);
+    }
+    let duration = start.elapsed();
+    println!("{:?}", duration);
+
     println!("{:?}", cnn.predict(&x));
     println!("{:?}", cnn.gradient_finite_diff(&x));
     println!("{:?}", cnn.gradient(&x));
+    println!("{:?}", cnn.gradient2(&x));
 
 }

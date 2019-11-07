@@ -2,12 +2,12 @@ mod lib;
 
 use lib::groove::vars::{Vars, RelaxedIKVars};
 use lib::{utils_rust, spacetime};
-use lib::groove::objective::{*};
+use lib::groove::objective_old::{*};
 use lib::groove::groove::{OptimizationEngineOpen, OptimizationEngineNLoptImmutable};
 use nalgebra::geometry::UnitQuaternion;
 use std::time::{Instant, Duration};
 use crate::lib::groove::gradient::{ForwardFiniteDiff, CentralFiniteDiff, CentralFiniteDiff2, GradientFinder};
-use crate::lib::groove::objective::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK, ObjectiveMasterRIKImmutableLite};
+use crate::lib::groove::objective_old::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK, ObjectiveMasterRIKImmutableLite};
 
 fn main() {
     let mut v1 = RelaxedIKVars::from_yaml_path("/home/rakita/catkin_ws/src/relaxed_ik/src/RelaxedIK/Config/info_files/ur5_info.yaml".to_string(), false, false);

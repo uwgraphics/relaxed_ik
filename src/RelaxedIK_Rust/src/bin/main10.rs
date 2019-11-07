@@ -2,12 +2,12 @@ mod lib;
 
 use lib::groove::vars::{Vars, RelaxedIKVars};
 use lib::{utils_rust, spacetime};
-use lib::groove::objective::{*};
+use lib::groove::objective_old::{*};
 use lib::groove::groove::OptimizationEngineOpen;
 use nalgebra::geometry::UnitQuaternion;
 use std::time::{Instant, Duration};
 use crate::lib::groove::gradient::{ForwardFiniteDiff, CentralFiniteDiff, CentralFiniteDiff2, GradientFinder};
-use crate::lib::groove::objective::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK, ObjectiveMasterRIKImmutableLite};
+use crate::lib::groove::objective_old::{ObjectiveMasterRIKImmutable, ObjectiveMasterRIK, ObjectiveMasterRIKImmutableLite};
 
 pub fn approximate_gradient(x0: &[f64], f: &dyn Fn(&[f64]) -> f64, grad: &mut [f64]) {
     let n = x0.len();

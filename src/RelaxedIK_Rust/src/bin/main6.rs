@@ -4,7 +4,7 @@ mod lib;
 use lib::groove::vars::Vars;
 use lib::{utils_rust, spacetime};
 use lib::groove::tools::RelaxedIKTools;
-use lib::groove::objective::*;
+use lib::groove::objective_old::*;
 use std::marker::PhantomData;
 use std::time::{Instant, Duration};
 

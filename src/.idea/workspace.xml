@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Utils/yaml_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/gradient.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/gradient.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/groove.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/groove.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/tools.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/tools.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/robot.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/yaml_utils.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main12.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main12.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main17.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main17.rs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,28 +60,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.preprocessing_rust">
-    <configuration name="collision_crawler" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="src" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collision_crawler.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test5">
     <configuration name="collision_crawler_regression" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -158,6 +124,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test9" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -180,19 +167,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.collision_crawler" />
       <item itemvalue="Python.collision_crawler_regression" />
       <item itemvalue="Python.test9" />
       <item itemvalue="Python.preprocessing_rust" />
       <item itemvalue="Python.generate_input_and_output_pairs2" />
+      <item itemvalue="Python.test5" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test5" />
         <item itemvalue="Python.preprocessing_rust" />
         <item itemvalue="Python.generate_input_and_output_pairs2" />
         <item itemvalue="Python.test9" />
         <item itemvalue="Python.collision_crawler_regression" />
-        <item itemvalue="Python.collision_crawler" />
       </list>
     </recent_temporary>
   </component>

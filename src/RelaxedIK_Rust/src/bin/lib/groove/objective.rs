@@ -4,156 +4,134 @@ use nalgebra::geometry::{UnitQuaternion, Quaternion};
 use std::cmp;
 use crate::lib::groove::vars::RelaxedIKVars;
 
-// (-math.e ** ((-(x_val - t) ** d) / (2.0 * c ** 2)) ) + f * (x_val - t) ** g
-
-// function groove_loss(x_val, t, d, c, f, g)
-//    return (-2.718281828459^((-(x_val - t)^d) / (2.0 * c^2)) ) + f * (x_val - t)^g
-// end
-
-
 
 pub fn groove_loss(x_val: f64, t: f64, d: i32, c: f64, f: f64, g: i32) -> f64 {
     -( (-(x_val - t).powi(d)) / (2.0 * c.powi(2) ) ).exp() + f * (x_val - t).powi(g)
 }
 
-pub fn test(x: &[f64], v: &mut vars::RelaxedIKVars) -> f64 {
-    v.robot.arms[0].get_frames(v.xopt.as_slice());
-    v.xopt[0] + v.robot.arms[0].out_positions[3][2]
+pub fn groove_loss_derivative(x_val: f64, t: f64, d: i32, c: f64, f: f64, g: i32) -> f64 {
+    -( (-(x_val - t).powi(d)) / (2.0 * c.powi(2) ) ).exp() *  ((-d as f64 * (x_val - t)) /  (2.0 * c.powi(2))) + g as f64 * f * (x_val - t)
 }
 
-pub fn match_ee_pos_goals_obj(x: &[f64], v: &mut vars::RelaxedIKVars) -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        let last_elem = v.robot.arms[i].out_positions.len() - 1;
-        x_val += (v.robot.arms[i].out_positions[last_elem] - v.goal_positions[i]).norm()
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+pub enum Objective {
+    MatchEEPosGoalsObj(MatchEEPosGoals),
+    MatchEEQuatGoalsObj(MatchEEQuatGoals)
 }
 
-pub fn match_ee_pos_goals_obj_immutable(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)> )  -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        let last_elem = frames[i].0.len() - 1;
-       // x_val += (v.robot.arms[i].out_positions[v.robot.arms[i].num_dof] - v.goal_positions[i]).norm()
-        x_val += ( frames[i].0[last_elem] - v.goal_positions[i] ).norm();
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
-}
-
-pub fn match_ee_pos_goals_obj_immutable_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)> ) -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        x_val += ( ee_poses[i].0 - v.goal_positions[i] ).norm();
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
-}
-
-pub fn match_ee_quat_goals_obj(x: &[f64], v: &mut vars::RelaxedIKVars) -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
-        let ee_quat2 = UnitQuaternion::from_quaternion(e);
-
-        let last_elem = v.robot.arms[i].out_rot_quats.len() - 1;
-        let disp = angle_between(v.robot.arms[i].out_rot_quats[last_elem], v.goal_quats[i]);
-        let disp2 = angle_between(v.robot.arms[i].out_rot_quats[last_elem], v.goal_quats[i]);
-        x_val += disp.min(disp2);
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
-}
-
-pub fn match_ee_quat_goals_obj_immutable(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)> ) -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
-        let ee_quat2 = UnitQuaternion::from_quaternion(e);
-
-        let last_elem = frames[i].1.len() - 1;
-        let disp = angle_between(frames[i].1[last_elem], v.goal_quats[i]);
-        let disp2 = angle_between(frames[i].1[last_elem], ee_quat2);
-        x_val += disp.min(disp2);
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
-}
-
-pub fn match_ee_quat_goals_obj_immutable_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)> ) -> f64 {
-    let mut x_val = 0.0;
-    for i in 0..v.robot.num_chains {
-        let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
-        let ee_quat2 = UnitQuaternion::from_quaternion(e);
-
-        let disp = angle_between(ee_poses[i].1, v.goal_quats[i]);
-        let disp2 = angle_between(ee_poses[i].1, v.goal_quats[i]);
-        x_val += disp.min(disp2);
-    }
-    groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
-}
-
-
-pub struct ObjectiveMasterRIK {
-    objectives: Vec<fn(&[f64], v: &mut RelaxedIKVars) -> f64>,
-    weight_priors: Vec<f64>
-}
-impl ObjectiveMasterRIK {
-    pub fn get_standard_ik() -> Self {
-        let objectives: Vec<fn(&[f64], v: &mut RelaxedIKVars) -> f64> = vec![match_ee_pos_goals_obj, match_ee_quat_goals_obj];
-        let weight_priors = vec![2.0, 1.5];
-        ObjectiveMasterRIK{objectives, weight_priors}
-    }
-
-    pub fn call(&self, x: &[f64], v: &mut RelaxedIKVars) -> f64 {
-        v.robot.get_frames(x);
-        let mut sum = 0.0;
-        for i in 0..self.weight_priors.len() {
-            sum += self.weight_priors[i] * (self.objectives[i])(x, v);
+impl Objective {
+    pub fn call(&self, x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        match *self {
+            Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call(x, v, frames),
+            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call(x, v, frames)
         }
-        sum
-    }
-}
-
-
-pub struct ObjectiveMasterRIKImmutable {
-    objectives: Vec<fn(&[f64], v: &RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64>,
-    weight_priors: Vec<f64>
-}
-impl ObjectiveMasterRIKImmutable {
-    pub fn get_standard_ik() -> Self {
-        let objectives: Vec<fn(&[f64], &RelaxedIKVars, &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64> =
-            vec![match_ee_pos_goals_obj_immutable, match_ee_quat_goals_obj_immutable];
-        let weight_priors = vec![2.0, 1.5];
-        ObjectiveMasterRIKImmutable{objectives, weight_priors}
     }
 
-    pub fn call(&self, x: &[f64], v: &RelaxedIKVars) -> f64 {
-        let frames = v.robot.get_frames_immutable(x);
-        let mut sum = 0.0;
-        for i in 0..self.weight_priors.len() {
-            sum += self.weight_priors[i] * (self.objectives[i])(x, v, &frames);
+    pub fn call_lite(&self, x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        match *self {
+            Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call_lite(x, v, ee_poses),
+            Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call_lite(x, v, ee_poses)
         }
-        sum
-    }
-}
-
-pub struct ObjectiveMasterRIKImmutableLite {
-    objectives: Vec<fn(&[f64], v: &RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64>,
-    weight_priors: Vec<f64>
-}
-impl ObjectiveMasterRIKImmutableLite {
-    pub fn get_standard_ik() -> Self {
-        let objectives: Vec<fn(&[f64], &RelaxedIKVars, &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64> =
-            vec![match_ee_pos_goals_obj_immutable_lite, match_ee_quat_goals_obj_immutable_lite];
-        let weight_priors = vec![2.0, 1.5];
-        ObjectiveMasterRIKImmutableLite{objectives, weight_priors}
     }
 
-    pub fn call(&self, x: &[f64], v: &RelaxedIKVars) -> f64 {
-        let ee_poses = v.robot.get_ee_pos_and_quat_immutable(x);
-        let mut sum = 0.0;
-        for i in 0..self.weight_priors.len() {
-            sum += self.weight_priors[i] * (self.objectives[i])(x, v, &ee_poses);
+    pub fn gradient(&self, x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> (f64, Vec<f64>) {
+        match *self {
+            Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient(x, v, frames),
+            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient(x, v, frames)
         }
-        sum
+    }
+
+    pub fn gradient_lite(&self, x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> (f64, Vec<f64>) {
+        match *self {
+            Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
+            Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses)
+        }
+    }
+
+    pub fn gradient_type(&self) -> usize {
+        // manual diff = 0, finite diff = 1
+        match *self {
+            Objective::MatchEEPosGoalsObj(_) => 1,
+            Objective::MatchEEQuatGoalsObj(_) => 1
+        }
+    }
+
+    fn __finite_diff_gradient(&self, x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> (f64, Vec<f64>) {
+        let mut grad: Vec<f64> = Vec::new();
+        let f_0 = self.call(x, v, frames);
+
+        for i in 0..x.len() {
+            let mut x_h = x.to_vec();
+            x_h[i] += 0.0000001;
+            let frames_h = v.robot.get_frames_immutable(x_h.as_slice());
+            let f_h = self.call(x_h.as_slice(), v, &frames_h);
+            grad.push( (-f_0 + f_h) / 0.0000001);
+        }
+
+        (f_0, grad)
+    }
+
+    fn __finite_diff_gradient_lite(&self, x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> (f64, Vec<f64>) {
+        let mut grad: Vec<f64> = Vec::new();
+        let f_0 = self.call_lite(x, v, ee_poses);
+
+        for i in 0..x.len() {
+            let mut x_h = x.to_vec();
+            x_h[i] += 0.0000001;
+            let ee_poses_h = v.robot.get_ee_pos_and_quat_immutable(x_h.as_slice());
+            let f_h = self.call_lite(x_h.as_slice(), v, &ee_poses_h);
+            grad.push( (-f_0 + f_h) / 0.0000001);
+        }
+
+        (f_0, grad)
     }
 }
 
+pub struct MatchEEPosGoals;
+impl MatchEEPosGoals {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..v.robot.num_chains {
+            let last_elem = frames[i].0.len() - 1;
+            x_val += ( frames[i].0[last_elem] - v.goal_positions[i] ).norm();
+        }
+        groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+    }
 
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..v.robot.num_chains {
+            x_val += ( ee_poses[i].0 - v.goal_positions[i] ).norm();
+        }
+        groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+    }
+}
+
+pub struct MatchEEQuatGoals;
+impl MatchEEQuatGoals {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..v.robot.num_chains {
+            let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
+            let ee_quat2 = UnitQuaternion::from_quaternion(e);
+
+            let last_elem = frames[i].1.len() - 1;
+            let disp = angle_between(frames[i].1[last_elem], v.goal_quats[i]);
+            let disp2 = angle_between(frames[i].1[last_elem], ee_quat2);
+            x_val += disp.min(disp2);
+        }
+        groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..v.robot.num_chains {
+            let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
+            let ee_quat2 = UnitQuaternion::from_quaternion(e);
+
+            let disp = angle_between(ee_poses[i].1, v.goal_quats[i]);
+            let disp2 = angle_between(ee_poses[i].1, v.goal_quats[i]);
+            x_val += disp.min(disp2);
+        }
+        groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
+    }
+}
