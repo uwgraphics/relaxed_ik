@@ -17,9 +17,9 @@ fn main() {
     let mut x = [ 3.14, -0.38, -1.2, -1.57, -1.57, -1.57 ];
 
     let start = Instant::now();
-    for i in 0..100 {
-        vars.goal_positions[0][0] -= 0.01;
-        oe.optimize(&mut x, &vars, &om, 100);
+    for i in 0..10000 {
+        vars.goal_positions[0][1] -= 0.000055;
+        oe.optimize(&mut x, &vars, &om, 200);
     }
     let duration = start.elapsed();
     println!("{:?}", duration);
