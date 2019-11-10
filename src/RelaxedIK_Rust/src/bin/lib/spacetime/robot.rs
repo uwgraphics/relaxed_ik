@@ -10,6 +10,8 @@ pub struct Robot {
     pub num_dof: usize,
     pub subchain_indices: Vec<Vec<usize>>,
     pub bounds: Vec< [f64; 2] >,
+    pub lower_bounds: Vec<f64>,
+    pub upper_bounds: Vec<f64>,
     pub velocity_limits: Vec<f64>,
     __subchain_outputs: Vec<Vec<f64>>
 }
@@ -37,8 +39,15 @@ impl Robot {
             }
         }
 
+        let mut upper_bounds: Vec<f64> = Vec::new();
+        let mut lower_bounds: Vec<f64> = Vec::new();
+        for i in 0..ifp.joint_limits.len() {
+            upper_bounds.push(ifp.joint_limits[i][1].clone());
+            lower_bounds.push(ifp.joint_limits[i][0].clone());
+        }
+
         Robot{arms, joint_names: ifp.joint_names.clone(), joint_ordering: ifp.joint_ordering.clone(),
-            num_chains, num_dof, subchain_indices, bounds: ifp.joint_limits.clone(), velocity_limits: ifp.velocity_limits.clone(), __subchain_outputs}
+            num_chains, num_dof, subchain_indices, bounds: ifp.joint_limits.clone(), lower_bounds, upper_bounds, velocity_limits: ifp.velocity_limits.clone(), __subchain_outputs}
     }
 
     pub fn from_yaml_path(fp: String) -> Robot {

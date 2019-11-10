@@ -30,7 +30,7 @@ impl EEPoseGoalsSubscriber {
     }
 }
 /*
-let arc = Arc::new(Mutex::new(EEPoseGoalsSubscriber::init()));
+let arc = Arc::new(Mutex::new(EEPoseGoalsSubscriber::new()));
 let arc2 = arc.clone();
 let subscriber = rosrust::subscribe("/relaxed_ik/ee_pose_goals", 3, move |v: msg::relaxed_ik::EEPoseGoals| {
     let mut g = arc2.lock().unwrap();

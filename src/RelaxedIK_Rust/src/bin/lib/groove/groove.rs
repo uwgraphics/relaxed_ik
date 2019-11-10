@@ -29,7 +29,8 @@ impl OptimizationEngineOpen {
             Ok(())
         };
 
-        let bounds = NoConstraints::new();
+        // let bounds = NoConstraints::new();
+        let bounds = Rectangle::new(Option::from(v.robot.lower_bounds.as_slice()), Option::from(v.robot.upper_bounds.as_slice()));
 
         /* PROBLEM STATEMENT */
         let problem = Problem::new(&bounds, df, f);

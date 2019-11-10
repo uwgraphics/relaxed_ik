@@ -4,7 +4,6 @@ use nalgebra::geometry::{UnitQuaternion, Quaternion};
 use std::cmp;
 use crate::lib::groove::vars::RelaxedIKVars;
 
-
 pub fn groove_loss(x_val: f64, t: f64, d: i32, c: f64, f: f64, g: i32) -> f64 {
     -( (-(x_val - t).powi(d)) / (2.0 * c.powi(2) ) ).exp() + f * (x_val - t).powi(g)
 }
@@ -16,7 +15,12 @@ pub fn groove_loss_derivative(x_val: f64, t: f64, d: i32, c: f64, f: f64, g: i32
 pub enum Objective {
     MatchEEPosGoalsObj(MatchEEPosGoals),
     MatchEEQuatGoalsObj(MatchEEQuatGoals),
-    NNSelfCollisionObj(NNSelfCollision)
+    NNSelfCollisionObj(NNSelfCollision),
+    JointLimitsObj(JointLimits),
+    MinimizeVelocityObj(MinimizeVelocity),
+    MinimizeAccelerationObj(MinimizeAcceleration),
+    MinimizeJerkObj(MinimizeJerk)
+
 }
 
 impl Objective {
@@ -24,7 +28,12 @@ impl Objective {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call(x, v, frames),
             Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call(x, v, frames),
-            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call(x, v, frames)
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call(x, v, frames),
+            Objective::JointLimitsObj(_) => self::JointLimits::call(x, v, frames),
+            Objective::MinimizeVelocityObj(_) => self::MinimizeVelocity::call(x, v, frames),
+            Objective::MinimizeAccelerationObj(_) => self::MinimizeAcceleration::call(x, v, frames),
+            Objective::MinimizeJerkObj(_) => self::MinimizeJerk::call(x, v, frames)
+
         }
     }
 
@@ -32,7 +41,12 @@ impl Objective {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self::MatchEEPosGoals::call_lite(x, v, ee_poses),
             Objective::MatchEEQuatGoalsObj(_) => self::MatchEEQuatGoals::call_lite(x, v, ee_poses),
-            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call_lite(x, v, ee_poses)
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::call_lite(x, v, ee_poses),
+            Objective::JointLimitsObj(_) => self::JointLimits::call_lite(x, v, ee_poses),
+            Objective::MinimizeVelocityObj(_) => self::MinimizeVelocity::call_lite(x, v, ee_poses),
+            Objective::MinimizeAccelerationObj(_) => self::MinimizeAcceleration::call_lite(x, v, ee_poses),
+            Objective::MinimizeJerkObj(_) => self::MinimizeJerk::call_lite(x, v, ee_poses)
+
         }
     }
 
@@ -40,7 +54,11 @@ impl Objective {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient(x, v, frames),
             Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient(x, v, frames),
-            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient(x, v, frames)
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient(x, v, frames),
+            Objective::JointLimitsObj(_) => self.__finite_diff_gradient(x, v, frames),
+            Objective::MinimizeVelocityObj(_) => self.__finite_diff_gradient(x, v, frames),
+            Objective::MinimizeAccelerationObj(_) => self.__finite_diff_gradient(x, v, frames),
+            Objective::MinimizeJerkObj(_) => self.__finite_diff_gradient(x, v, frames)
         }
     }
 
@@ -48,7 +66,11 @@ impl Objective {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
             Objective::MatchEEQuatGoalsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
-            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient_lite(x, v, ee_poses)
+            Objective::NNSelfCollisionObj(_) => self::NNSelfCollision::gradient_lite(x, v, ee_poses),
+            Objective::JointLimitsObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
+            Objective::MinimizeVelocityObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
+            Objective::MinimizeAccelerationObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses),
+            Objective::MinimizeJerkObj(_) => self.__finite_diff_gradient_lite(x, v, ee_poses)
         }
     }
 
@@ -57,7 +79,11 @@ impl Objective {
         match *self {
             Objective::MatchEEPosGoalsObj(_) => 1,
             Objective::MatchEEQuatGoalsObj(_) => 1,
-            Objective::NNSelfCollisionObj(_) => 0
+            Objective::NNSelfCollisionObj(_) => 0,
+            Objective::JointLimitsObj(_) => 1,
+            Objective::MinimizeVelocityObj(_) => 1,
+            Objective::MinimizeAccelerationObj(_) => 1,
+            Objective::MinimizeJerkObj(_) => 1
         }
     }
 
@@ -170,5 +196,114 @@ impl NNSelfCollision {
             grad[i] *= g_prime;
         }
         (x_val, grad)
+    }
+}
+
+pub struct JointLimits;
+impl JointLimits {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut sum = 0.0;
+        let penalty_cutoff: f64 = 0.9;
+        let a = 0.05 / (penalty_cutoff.powi(50));
+        for i in 0..v.robot.num_dof {
+            let l = v.robot.bounds[i][0];
+            let u = v.robot.bounds[i][1];
+            let r = (x[i] - l) / (u - l);
+            let n = 2.0 * (r - 0.5);
+            sum += a*n.powf(50.);
+        }
+        groove_loss(sum, 0.0, 2, 0.32950, 0.1, 2)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut sum = 0.0;
+        let penalty_cutoff: f64 = 0.85;
+        let a = 0.05 / (penalty_cutoff.powi(50));
+        for i in 0..v.robot.num_dof {
+            let l = v.robot.bounds[i][0];
+            let u = v.robot.bounds[i][1];
+            let r = (x[i] - l) / (u - l);
+            let n = 2.0 * (r - 0.5);
+            sum += a*n.powi(50);
+        }
+        groove_loss(sum, 0.0, 2, 0.32950, 0.1, 2)
+    }
+}
+
+pub struct MinimizeVelocity;
+impl MinimizeVelocity {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+           x_val += (x[i] - v.xopt[i]).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+           x_val += (x[i] - v.xopt[i]).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
+    }
+
+}
+
+pub struct MinimizeAcceleration;
+impl MinimizeAcceleration {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+            let v1 = x[i] - v.xopt[i];
+            let v2 = v.xopt[i] - v.prev_state[i];
+            x_val += (v1 - v2).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+            let v1 = x[i] - v.xopt[i];
+            let v2 = v.xopt[i] - v.prev_state[i];
+            x_val += (v1 - v2).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
+    }
+}
+
+pub struct MinimizeJerk;
+impl MinimizeJerk {
+    pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+            let v1 = x[i] - v.xopt[i];
+            let v2 = v.xopt[i] - v.prev_state[i];
+            let v3 = v.prev_state[i] - v.prev_state2[i];
+            let a1 = v1 - v2;
+            let a2 = v2 - v3;
+            x_val += (a1 - a2).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
+    }
+
+    pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
+        let mut x_val = 0.0;
+        for i in 0..x.len() {
+            let v1 = x[i] - v.xopt[i];
+            let v2 = v.xopt[i] - v.prev_state[i];
+            let v3 = v.prev_state[i] - v.prev_state2[i];
+            let a1 = v1 - v2;
+            let a2 = v2 - v3;
+            x_val += (a1 - a2).powi(2);
+        }
+        x_val = x_val.sqrt();
+        groove_loss(x_val, 0.0, 2, 0.1, 10.0, 2)
     }
 }

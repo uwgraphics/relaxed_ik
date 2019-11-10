@@ -54,17 +54,8 @@ impl RelaxedIKVars {
         let init_ee_quats = robot.get_ee_quats(ifp.starting_config.as_slice());
 
         for i in 0..num_chains {
-            if position_mode_relative {
-                goal_positions.push(nalgebra::Vector3::identity());
-            } else {
-                goal_positions.push(init_ee_positions[i]);
-            }
-
-            if rotation_mode_relative {
-                goal_quats.push(nalgebra::UnitQuaternion::identity());
-            } else {
-                goal_quats.push(init_ee_quats[i]);
-            }
+            goal_positions.push(init_ee_positions[i]);
+            goal_quats.push(init_ee_quats[i]);
         }
 
         let collision_nn_path = ifp.path_to_src + "/RelaxedIK/Config/collision_nn_rust/" + ifp.collision_nn_file.as_str() + ".yaml";

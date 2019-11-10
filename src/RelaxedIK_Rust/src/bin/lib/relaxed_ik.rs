@@ -2,11 +2,14 @@ use crate::lib::groove::vars::RelaxedIKVars;
 use crate::lib::groove::groove::{OptimizationEngineOpen, OptimizationEngineNLopt};
 use crate::lib::groove::objective_master::ObjectiveMaster;
 use crate::lib::utils_rust::file_utils::{*};
+use crate::lib::utils_rust::subscriber_utils::EEPoseGoalsSubscriber;
+use crate::lib::utils_rust::transformations::{*};
+use nalgebra::{Vector3, UnitQuaternion, Quaternion};
 
 pub struct RelaxedIK {
     pub vars: RelaxedIKVars,
-    pub groove: OptimizationEngineOpen,
-    pub om: ObjectiveMaster
+    pub om: ObjectiveMaster,
+    pub groove: OptimizationEngineOpen
 }
 
 impl RelaxedIK {
@@ -22,9 +25,11 @@ impl RelaxedIK {
         if mode == 0 {
             om = ObjectiveMaster::standard_ik();
         }
-        let groove = OptimizationEngineOpen::new(vars.robot.num_dof);
 
-        Self{vars, groove, om}
+        let groove = OptimizationEngineOpen::new(vars.robot.num_dof.clone());
+        // let groove = OptimizationEngineNLopt::new();
+
+        Self{vars, om, groove}
     }
 
     pub fn from_loaded(mode: usize) -> Self {
@@ -33,4 +38,38 @@ impl RelaxedIK {
         let info_file_name = get_file_contents(fp1);
         RelaxedIK::from_info_file_name(info_file_name.clone(), mode.clone())
     }
+
+    pub fn solve(&mut self, ee_sub: &EEPoseGoalsSubscriber) -> Vec<f64> {
+        let mut out_x = self.vars.xopt.clone();
+
+        if self.vars.rotation_mode_relative {
+            for i in 0..self.vars.robot.num_chains {
+                self.vars.goal_positions[i] = self.vars.init_ee_positions[i] + ee_sub.pos_goals[i];
+                self.vars.goal_quats[i] = quaternion_dispQ(ee_sub.quat_goals[i].clone(), self.vars.init_ee_quats[i]);
+            }
+        } else {
+            for i in 0..self.vars.robot.num_chains  {
+                self.vars.goal_positions[i] = ee_sub.pos_goals[i].clone();
+                self.vars.goal_quats[i] = ee_sub.quat_goals[i].clone();
+            }
+        }
+
+        self.groove.optimize(&mut out_x, &self.vars, &self.om, 100);
+
+        self.vars.update(out_x.clone());
+
+        out_x
+    }
+
+    pub fn solve_with_user_provided_goals(&mut self, pos_goals: Vec<Vec<f64>>, quat_goals: Vec<Vec<f64>>) -> Vec<f64> {
+        let mut ee_sub = EEPoseGoalsSubscriber::new();
+        for i in 0..pos_goals.len() {
+            ee_sub.pos_goals.push( Vector3::new( pos_goals[i][0], pos_goals[i][1], pos_goals[i][2] ) );
+            let tmp_quat = Quaternion::new(quat_goals[i][0], quat_goals[i][1], quat_goals[i][2], quat_goals[i][3]);
+            ee_sub.quat_goals.push( UnitQuaternion::from_quaternion(tmp_quat) );
+        }
+
+        self.solve(&ee_sub)
+    }
+
 }

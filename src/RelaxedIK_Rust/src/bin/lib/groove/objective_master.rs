@@ -15,8 +15,11 @@ impl ObjectiveMaster {
     }
 
     pub fn relaxed_ik() -> Self {
-        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals), NNSelfCollisionObj(NNSelfCollision)],
-            weight_priors: vec![2., 1.9, 1.0], lite: true, finite_diff_grad: false}
+        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals),
+                              MinimizeVelocityObj(MinimizeVelocity), MinimizeAccelerationObj(MinimizeAcceleration),
+                              MinimizeJerkObj(MinimizeJerk), NNSelfCollisionObj(NNSelfCollision),
+                              JointLimitsObj(JointLimits)],
+            weight_priors: vec![50., 49., 3.0, 1.0, 1.0, 1.0, 1.0], lite: true, finite_diff_grad: false}
     }
 
     pub fn call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
