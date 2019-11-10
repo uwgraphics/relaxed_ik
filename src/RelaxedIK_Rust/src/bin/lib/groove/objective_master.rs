@@ -19,7 +19,7 @@ impl ObjectiveMaster {
                               MinimizeVelocityObj(MinimizeVelocity), MinimizeAccelerationObj(MinimizeAcceleration),
                               MinimizeJerkObj(MinimizeJerk), NNSelfCollisionObj(NNSelfCollision),
                               JointLimitsObj(JointLimits)],
-            weight_priors: vec![50., 49., 3.0, 1.0, 1.0, 1.0, 1.0], lite: true, finite_diff_grad: false}
+            weight_priors: vec![20., 19., 11.0, 10.0, 10.0, 1.0, 1.0], lite: true, finite_diff_grad: false}
     }
 
     pub fn call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {

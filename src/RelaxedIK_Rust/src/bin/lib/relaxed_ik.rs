@@ -45,7 +45,7 @@ impl RelaxedIK {
         if self.vars.rotation_mode_relative {
             for i in 0..self.vars.robot.num_chains {
                 self.vars.goal_positions[i] = self.vars.init_ee_positions[i] + ee_sub.pos_goals[i];
-                self.vars.goal_quats[i] = quaternion_dispQ(ee_sub.quat_goals[i].clone(), self.vars.init_ee_quats[i]);
+                self.vars.goal_quats[i] = ee_sub.quat_goals[i] * self.vars.init_ee_quats[i];
             }
         } else {
             for i in 0..self.vars.robot.num_chains  {

@@ -143,12 +143,15 @@ impl MatchEEQuatGoals {
     pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
         let mut x_val = 0.0;
         for i in 0..v.robot.num_chains {
-            let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
-            let ee_quat2 = UnitQuaternion::from_quaternion(e);
+            // let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
+            // let ee_quat2 = UnitQuaternion::from_quaternion(e);
 
             let last_elem = frames[i].1.len() - 1;
-            let disp = angle_between(frames[i].1[last_elem], v.goal_quats[i]);
-            let disp2 = angle_between(frames[i].1[last_elem], ee_quat2);
+            let tmp = Quaternion::new(-frames[i].1[last_elem].w, -frames[i].1[last_elem].i, -frames[i].1[last_elem].j, -frames[i].1[last_elem].k);
+            let ee_quat2 = UnitQuaternion::from_quaternion(tmp);
+
+            let disp = angle_between(v.goal_quats[i], frames[i].1[last_elem]);
+            let disp2 = angle_between(v.goal_quats[i], ee_quat2);
             x_val += disp.min(disp2);
         }
         groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
@@ -157,11 +160,14 @@ impl MatchEEQuatGoals {
     pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
         let mut x_val = 0.0;
         for i in 0..v.robot.num_chains {
-            let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
-            let ee_quat2 = UnitQuaternion::from_quaternion(e);
+            // let e = Quaternion::new( -v.goal_quats[i].w, -v.goal_quats[i].i, -v.goal_quats[i].j, -v.goal_quats[i].k);
+            // let ee_quat2 = UnitQuaternion::from_quaternion(e);
+            let tmp = Quaternion::new(-ee_poses[i].1.w, -ee_poses[i].1.i, -ee_poses[i].1.j, -ee_poses[i].1.k);
+            let ee_quat2 = UnitQuaternion::from_quaternion(tmp);
 
-            let disp = angle_between(ee_poses[i].1, v.goal_quats[i]);
-            let disp2 = angle_between(ee_poses[i].1, v.goal_quats[i]);
+
+            let disp = angle_between(v.goal_quats[i], ee_poses[i].1);
+            let disp2 = angle_between(v.goal_quats[i], ee_quat2);
             x_val += disp.min(disp2);
         }
         groove_loss(x_val, 0., 2, 0.1, 10.0, 2)
