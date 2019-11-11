@@ -140,11 +140,19 @@ impl Arm{
         let mut joint_idx: usize = 0;
         for i in 0..self.displacements.len() {
 
-            self.__update_frames(i, x[joint_idx], self.__do_rot_offset[i+1],
-                                 self.__is_prismatic[i], self.__is_revolute_or_continuous[i],
-                        self.__is_fixed[i], self.__is_x[joint_idx], self.__is_y[joint_idx],
-                                 self.__is_z[joint_idx], self.__is_neg_x[joint_idx],
-                                 self.__is_neg_y[joint_idx], self.__is_neg_z[joint_idx]);
+            if self.__is_revolute_or_continuous[i] || self.__is_prismatic[i] {
+                self.__update_frames(i, x[joint_idx], self.__do_rot_offset[i + 1],
+                                     self.__is_prismatic[i], self.__is_revolute_or_continuous[i],
+                                     self.__is_fixed[i], self.__is_x[joint_idx], self.__is_y[joint_idx],
+                                     self.__is_z[joint_idx], self.__is_neg_x[joint_idx],
+                                     self.__is_neg_y[joint_idx], self.__is_neg_z[joint_idx]);
+            } else {
+                if self.__do_rot_offset[i+1] {
+                    self.__update_fixed_ro(i)
+                } else {
+                    self.__update_fixed(i)
+                }
+            }
 
             if self.__is_revolute_or_continuous[i] || self.__is_prismatic[i] {
                 joint_idx += 1;

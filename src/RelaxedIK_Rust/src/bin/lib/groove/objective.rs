@@ -178,17 +178,17 @@ pub struct NNSelfCollision;
 impl NNSelfCollision {
     pub fn call(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> f64 {
         let mut x_val = v.collision_nn.predict(&x.to_vec());
-        groove_loss(x_val, 0., 2, 1.3, 0.002, 4)
+        groove_loss(x_val, 0., 2, 2.1, 0.0002, 4)
     }
 
     pub fn call_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> f64 {
         let mut x_val = v.collision_nn.predict(&x.to_vec());
-        groove_loss(x_val, 0., 2, 1.3, 0.002, 4)
+        groove_loss(x_val, 0., 2, 2.1, 0.0002, 4)
     }
 
     pub fn gradient(x: &[f64], v: &vars::RelaxedIKVars, frames: &Vec<(Vec<nalgebra::Vector3<f64>>, Vec<nalgebra::UnitQuaternion<f64>>)>) -> (f64, Vec<f64>) {
         let (x_val, mut grad) = v.collision_nn.gradient(&x.to_vec());
-        let g_prime = groove_loss_derivative(x_val, 0., 2, 1.3, 0.002, 4);
+        let g_prime = groove_loss_derivative(x_val, 0., 2, 2.1, 0.0002, 4);
         for i in 0..grad.len() {
             grad[i] *= g_prime;
         }
@@ -197,7 +197,7 @@ impl NNSelfCollision {
 
     pub fn gradient_lite(x: &[f64], v: &vars::RelaxedIKVars, ee_poses: &Vec<(nalgebra::Vector3<f64>, nalgebra::UnitQuaternion<f64>)>) -> (f64, Vec<f64>) {
         let (x_val, mut grad) = v.collision_nn.gradient(&x.to_vec());
-        let g_prime = groove_loss_derivative(x_val, 0., 2, 1.3, 0.002, 4);
+        let g_prime = groove_loss_derivative(x_val, 0., 2, 2.1, 0.0002, 4);
         for i in 0..grad.len() {
             grad[i] *= g_prime;
         }

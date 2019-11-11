@@ -54,7 +54,7 @@ impl RelaxedIK {
             }
         }
 
-        self.groove.optimize(&mut out_x, &self.vars, &self.om, 100);
+        self.groove.optimize(&mut out_x, &self.vars, &self.om, 200);
 
         self.vars.update(out_x.clone());
 

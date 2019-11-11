@@ -87,7 +87,7 @@ def get_highest_file_number(files):
 
     return highest
 
-total_number_of_examples = 40000
+total_number_of_examples = 100000
 lines_per_file = 1000
 if __name__ == '__main__':
     rospy.init_node('inupt_and_output_pairs_node')

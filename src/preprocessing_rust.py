@@ -176,7 +176,7 @@ class PreprocessorEngine:
 
     def train_nn(self):
         clf = MLPRegressor(solver='adam', alpha=1,
-                                hidden_layer_sizes=(15,15,15,15,15), max_iter=300000, verbose=True,
+                                hidden_layer_sizes=(20,20,20,20,20), max_iter=300000, verbose=True,
                                 learning_rate='adaptive')
         self.clf = clf
 
@@ -267,31 +267,9 @@ if __name__== '__main__':
     p = PreprocessorEngine(path_to_src)
     p.load_input_and_output_pairs(100000)
     p.train_nn()
-    # p.load_input_and_output_pairs(100000)
-    # p.train_nn()
-    # p.evaluate()
-    # p.load_clf()
-    # p.load_yaml()
+    p.evaluate()
     p.dump_yaml()
-    #print p.clf.get_params
-    # p.load_yaml()
-    # x = [0.0,0.0,0.0,0.,0.,0.0, 0.0]
 
-    # print p.clf.predict([x])
-    # print p.gradient(x)
-    # print p.manual_predict(x)
-    # print p.gradient(x)
-
-    # idx = 0
-    # print p.coefs[idx]
-    # print np.array(p.coefs[idx]).shape
-    # p.load_clf()
-    # p.dump_yaml()
-    # p.load_input_and_output_pairs(100000)
-    # p.train_nn()
-    # p.load_clf()
-    # p.evaluate()
-    # p.dump_yaml()
 
     '''
     rvec = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.000262779999999907, 0.0, 0.0, 0.0, 0.0, 0.0]
