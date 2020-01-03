@@ -111,7 +111,7 @@ https://www.rust-lang.org/learn/get-started
 If you plan to extend any of the Rust code, we recommend using the Jetbrains rust plugin.
   
 
-<b> Rust Dependencies (Completely Optional) </b>
+<b> Julia Dependencies (Completely Optional) </b>
 
 To use the Julia version of the solver (NOT the recommended option), you will first need to install Julia.
 https://julialang.org/
