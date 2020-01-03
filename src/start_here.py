@@ -377,9 +377,8 @@ collision_file_name = ''
 
 ######################################################################################################
 # Step 9a: Now that the solver has gone through its preprocessing, you can now use the relaxedIK
-#   solver as a standalone ROS node.  To start the default Rust solver, please first ensure that the 
-#   Rust code has been compiled first (explained in the preliminaries section of the ReadMe)! Next, load 
-#   a desired info file using the command found in Step 7.
+#   solver as a standalone ROS node.  To start the solver, first load a desired info file using the 
+#   command found in Step 7.
 #
 #   For the rust version of the solver (recommended), run the following command:
 #       roslaunch relaxed_ik relaxed_ik_rust.launch

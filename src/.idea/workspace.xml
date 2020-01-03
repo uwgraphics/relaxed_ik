@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/relaxed_ik_node.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/relaxed_ik_node.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing_rust.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing_rust.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
