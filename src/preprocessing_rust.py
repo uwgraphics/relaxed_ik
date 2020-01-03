@@ -456,14 +456,7 @@ if __name__== '__main__':
     p = PreprocessorEngine(path_to_src)
     p.train_nn()
     p.train_jointpoint_nn(init_load=False)
-    # p.load_clf(suffix='_jointpoint')
-    # x = [0.0, -0.8480205769590046, -0.10401204209194415, 1.2240800000000003, -1.73352986419518, 0.0, 0.0, 0.0, -1.366069205535962, 0.984365698124802, -1.5760800000000001, -2.312055370502719, -0.140045219180025, 0.0, 0.0]
-    # v = frames_to_jt_pt_vec(p.relaxedIK.vars.robot.getFrames(x))
-    # print p.clf.predict([v])
-    # print p.find_optimal_split_point_jointpoint()
-    # sp = p.find_optimal_split_point_jointpoint()
-    # print sp
-    # p.train_nn(layer_width = 21, num_layers = 5)
+
 
 
 

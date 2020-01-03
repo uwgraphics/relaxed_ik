@@ -309,7 +309,7 @@ collision_file_name = ''
 # Step 6: load the newly created info file by changing the info_file_name argument in the load_info_file
 #   launch file and running the following command:
 #
-#   roslaunch relaxed_ik load_info_file.launch
+#      roslaunch relaxed_ik load_info_file.launch
 #######################################################################################################
 
 
@@ -341,45 +341,62 @@ collision_file_name = ''
 #
 #   IMPORTANT: Make sure you are happy with the results in Step 5b before training the neural network!
 #
-#   To start this process, run the following command:
+#   To start this process, first run the following command:
+#
+#       rosrun relaxed_ik generate_input_and_output_pairs.py
+#
+#   As the name implies, this script will generate hundreds of thousands of input and output pairs to be
+#   used for the learning process.  After this script finishes (usually takes between 10 - 20 minutes),
+#   run the following command to initialize the learning process: 
+#
+#       roslaunch relaxed_ik preprocessing_rust.launch
+#
+#   The system will immediately start training the nueral network.
+#   This process will take about 5 - 20 minutes, depending on the robot and number of degrees of freedom
+######################################################################################################
+
+
+
+######################################################################################################
+# Step 8b (optional): If you would also like the option of running the python or julia variants of RelaxedIK,
+#   you will have to run separate preprocessing steps to learn neural networks in those environments.
+#   The python and julia versions of the solver run considerably slower than the default Rust version; however,
+#   we still want to support these versions going forward in case people would still like to use them.
+#
+#   To train the python version, run the following command:
+#
+#       roslaunch relaxed_ik preprocessing_python.launch
+#
+#
+#   To train the julia version, run the following command:
 #
 #   roslaunch relaxed_ik preprocessing_julia.launch
-#
-#   The system will immediately start producing input-output pairs for the neural network
-#   This process will take about 5 - 15 minutes, depending on the robot and number of degrees of freedom
-######################################################################################################
-
-
-
-######################################################################################################
-# Step 8b (optional): If you would also like the option of running the python variant of RelaxedIK,
-#   you will have to run a separate preprocessing step to learn a neural network in the python environment.
-#   The python version of the solver runs considerably slower than the default Julia version; however,
-#   we still want to support the Python version going forward in case people would still like to use it.
-#   To start this process, run the following command:
-#
-#   roslaunch relaxed_ik preprocessing_python.launch
-#
-#   The system will immediately start producing input-output pairs for the neural network
-#   This process will take about 5 - 15 minutes, depending on the robot and number of degrees of freedom
 ######################################################################################################
 
 
 
 ######################################################################################################
 # Step 9a: Now that the solver has gone through its preprocessing, you can now use the relaxedIK
-#   solver as a standalone ROS node.  To start the solver, first load a desired info file using the
-#   command found in Step 7.
+#   solver as a standalone ROS node.  To start the default Rust solver, please first ensure that the 
+#   Rust code has been compiled first (explained in the preliminaries section of the ReadMe)! Next, load 
+#   a desired info file using the command found in Step 7.
 #
-#   Next, start the node with one of the following commands:
+#   For the rust version of the solver (recommended), run the following command:
+#       roslaunch relaxed_ik relaxed_ik_rust.launch
+#
+#   Note: The first time this command is run, it will take a few minutes to compile.  It will only take
+#   this long the first time it's ever built though, after that it'll start immediately with this command.  
+#
+#   (optional)
+#   If you would like to start up the python or julia versions of the solver, please use one of the following
+#   commands:
+#
+#   For the Python version of the solver, run:
+#       roslaunch relaxed_ik relaxed_ik_python.launch
 #
 #   For the Julia version of the solver, run:
 #       roslaunch relaxed_ik relaxed_ik_julia.launch
 #   (NOTE: The julia version takes a little while to do its JIT compilation, ~20-40 seconds in testing)
-#
-#
-#   For the Python version of the solver, run:
-#       roslaunch relaxed_ik relaxed_ik_python.launch
 #
 #   Using one of these commands, your relaxed_ik solver will initialize in its own node and will await
 #   end-effector pose goal commands.  Refer to step 9b for instructions on publishing end-effector

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+   <node pkg="relaxed_ik" type="preprocessing_rust.py" name="preprocessing" output="screen"/>
+</launch>

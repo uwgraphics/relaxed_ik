@@ -31,13 +31,13 @@ impl ObjectiveMaster {
             objectives.push(Box::new(MatchEEQuatGoals::new(i)));
             weight_priors.push(9.0);
         }
-        objectives.push(Box::new(MinimizeVelocity));   weight_priors.push(2.0);
+        objectives.push(Box::new(MinimizeVelocity));   weight_priors.push(4.0);
         objectives.push(Box::new(MinimizeAcceleration));    weight_priors.push(1.0);
         objectives.push(Box::new(MinimizeJerk));    weight_priors.push(1.0);
         objectives.push(Box::new(JointLimits));    weight_priors.push(1.0);
         objectives.push(Box::new(NNSelfCollision));    weight_priors.push(1.0);
 
-        Self{objectives, num_chains, weight_priors, lite: true, finite_diff_grad: false}
+        Self{objectives, num_chains, weight_priors, lite: true, finite_diff_grad: true} // fix this
     }
 
     pub fn call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
@@ -120,7 +120,7 @@ impl ObjectiveMaster {
                 let frames_h = vars.robot.get_frames_immutable(x_h.as_slice());
                 for j in &finite_diff_list {
                     let f_h = self.objectives[*j].call(x, vars, &frames_h);
-                    grad[*j] += self.weight_priors[*j] * ((-f_0s[*j] + f_h) /  0.0000001);
+                    grad[i] += self.weight_priors[*j] * ((-f_0s[*j] + f_h) /  0.0000001);
                 }
             }
         }
@@ -158,7 +158,7 @@ impl ObjectiveMaster {
                 let poses_h = vars.robot.get_ee_pos_and_quat_immutable(x_h.as_slice());
                 for j in &finite_diff_list {
                     let f_h = self.objectives[*j].call_lite(x, vars, &poses_h);
-                    grad[*j] += self.weight_priors[*j] * ((-f_0s[*j] + f_h) /  0.0000001);
+                    grad[i] += self.weight_priors[*j] * ((-f_0s[*j] + f_h) /  0.0000001);
                 }
             }
         }

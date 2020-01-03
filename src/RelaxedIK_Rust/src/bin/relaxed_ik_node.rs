@@ -13,6 +13,8 @@ mod msg {
 fn main() {
     rosrust::init("relaxed_ik");
 
+    println!("solver initialized!");
+
     let mut r = relaxed_ik::RelaxedIK::from_loaded(1);
 
     let arc = Arc::new(Mutex::new(EEPoseGoalsSubscriber::new()));
