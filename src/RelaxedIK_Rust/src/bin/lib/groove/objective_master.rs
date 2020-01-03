@@ -1,25 +1,43 @@
-use crate::lib::groove::objective::{*};
-use crate::lib::groove::objective::Objective::{*};
+use crate::lib::groove::objective::*;
 use crate::lib::groove::vars::RelaxedIKVars;
 
 pub struct ObjectiveMaster {
-    objectives: Vec<Objective>,
-    weight_priors: Vec<f64>,
-    lite: bool,
-    finite_diff_grad: bool
+    pub objectives: Vec<Box<dyn ObjectiveTrait>>,
+    pub num_chains: usize,
+    pub weight_priors: Vec<f64>,
+    pub lite: bool,
+    pub finite_diff_grad: bool
 }
 
 impl ObjectiveMaster {
-    pub fn standard_ik() -> Self {
-        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals)], weight_priors: vec![1., 1.0], lite: true, finite_diff_grad: true}
+    pub fn standard_ik(num_chains: usize) -> Self {
+        let mut objectives: Vec<Box<dyn ObjectiveTrait>> = Vec::new();
+        let mut weight_priors: Vec<f64> = Vec::new();
+        for i in 0..num_chains {
+            objectives.push(Box::new(MatchEEPosGoals::new(i)));
+            weight_priors.push(1.0);
+            objectives.push(Box::new(MatchEEQuatGoals::new(i)));
+            weight_priors.push(1.0);
+        }
+        Self{objectives, num_chains, weight_priors, lite: true, finite_diff_grad: true}
     }
 
-    pub fn relaxed_ik() -> Self {
-        Self{objectives: vec![MatchEEPosGoalsObj(MatchEEPosGoals), MatchEEQuatGoalsObj(MatchEEQuatGoals),
-                              MinimizeVelocityObj(MinimizeVelocity), MinimizeAccelerationObj(MinimizeAcceleration),
-                              MinimizeJerkObj(MinimizeJerk), NNSelfCollisionObj(NNSelfCollision),
-                              JointLimitsObj(JointLimits)],
-            weight_priors: vec![20., 5., 11.0, 10.0, 10.0, 1.5, 0.0], lite: true, finite_diff_grad: false}
+    pub fn relaxed_ik(num_chains: usize) -> Self {
+        let mut objectives: Vec<Box<dyn ObjectiveTrait>> = Vec::new();
+        let mut weight_priors: Vec<f64> = Vec::new();
+        for i in 0..num_chains {
+            objectives.push(Box::new(MatchEEPosGoals::new(i)));
+            weight_priors.push(10.0);
+            objectives.push(Box::new(MatchEEQuatGoals::new(i)));
+            weight_priors.push(9.0);
+        }
+        objectives.push(Box::new(MinimizeVelocity));   weight_priors.push(2.0);
+        objectives.push(Box::new(MinimizeAcceleration));    weight_priors.push(1.0);
+        objectives.push(Box::new(MinimizeJerk));    weight_priors.push(1.0);
+        objectives.push(Box::new(JointLimits));    weight_priors.push(1.0);
+        objectives.push(Box::new(NNSelfCollision));    weight_priors.push(1.0);
+
+        Self{objectives, num_chains, weight_priors, lite: true, finite_diff_grad: false}
     }
 
     pub fn call(&self, x: &[f64], vars: &RelaxedIKVars) -> f64 {
@@ -176,10 +194,3 @@ impl ObjectiveMaster {
         (f_0, grad)
     }
 }
-
-
-
-
-
-
-

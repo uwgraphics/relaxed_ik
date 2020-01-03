@@ -1,9 +1,7 @@
-pub mod groove_old;
-pub mod objective_old;
-pub mod groove;
 pub mod objective;
-pub mod objective_master;
+pub mod groove;
 pub mod vars;
 pub mod gradient;
 pub mod tools;
 pub mod collision_nn;
+pub mod objective_master;

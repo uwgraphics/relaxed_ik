@@ -1,4 +1,3 @@
-use crate::lib::groove::objective_old::{ObjectiveMasterRIK, ObjectiveMasterRIKImmutable, ObjectiveMasterRIKImmutableLite};
 use crate::lib::groove::gradient::{ForwardFiniteDiff, CentralFiniteDiff, GradientFinder, ForwardFiniteDiffImmutable, CentralFiniteDiffImmutable, GradientFinderImmutable};
 use crate::lib::groove::vars::{RelaxedIKVars};
 use optimization_engine::{constraints::*, panoc::*, *};
@@ -29,12 +28,13 @@ impl OptimizationEngineOpen {
             Ok(())
         };
 
-        let bounds = NoConstraints::new();
-        // let bounds = Rectangle::new(Option::from(v.robot.lower_bounds.as_slice()), Option::from(v.robot.upper_bounds.as_slice()));
+        // let bounds = NoConstraints::new();
+        let bounds = Rectangle::new(Option::from(v.robot.lower_bounds.as_slice()), Option::from(v.robot.upper_bounds.as_slice()));
 
         /* PROBLEM STATEMENT */
         let problem = Problem::new(&bounds, df, f);
         let mut panoc = PANOCOptimizer::new(problem, &mut self.cache).with_max_iter(max_iter).with_tolerance(0.0005);
+        // let mut panoc = PANOCOptimizer::new(problem, &mut self.cache);
 
         // Invoke the solver
         let status = panoc.solve(x);

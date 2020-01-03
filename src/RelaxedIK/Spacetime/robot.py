@@ -1,4 +1,5 @@
 import arm
+import numpy as np
 from ..Utils.transformations import quaternion_from_matrix
 
 class Robot:
@@ -106,3 +107,18 @@ class Robot:
             all_frames.append(frames)
 
         return all_frames
+
+    def getMatrixConditioningMeasure(self, x):
+        condition_measures = []
+        subchains = self.split_state_into_subchains(x)
+        for i in xrange(self.numChains):
+            condition_measures.append(self.arms[i].getMatrixConditioningMeasure(subchains[i]))
+        return np.min( np.array(condition_measures) )
+
+    def getYoshikawaMeasure(self, x):
+        yoshikawa_measures = []
+        subchains = self.split_state_into_subchains(x)
+        for i in xrange(self.numChains):
+            yoshikawa_measures.append(self.arms[i].getYoshikawaMeasure(subchains[i]))
+        return np.min( np.array(yoshikawa_measures) )
+

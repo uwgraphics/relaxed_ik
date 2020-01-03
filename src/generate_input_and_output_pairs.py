@@ -47,7 +47,9 @@ def get_input_output_pair(relaxedIK):
     frames = relaxedIK.vars.robot.getFrames(rv)
     jt_pt_vec = frames_to_jt_pt_vec(frames)
     collision_score = relaxedIK.vars.collision_graph.get_collision_score(frames)
-    return rv, jt_pt_vec, collision_score
+    condition_score = relaxedIK.vars.robot.getMatrixConditioningMeasure(rv)
+    yoshiwaka_score = relaxedIK.vars.robot.getYoshikawaMeasure(rv)
+    return rv, jt_pt_vec, collision_score, condition_score, yoshiwaka_score
 
 def get_collision_score(relaxedIK, state):
     frames = relaxedIK.vars.robot.getFrames(state)
@@ -87,7 +89,7 @@ def get_highest_file_number(files):
 
     return highest
 
-total_number_of_examples = 100000
+total_number_of_examples = 200000
 lines_per_file = 1000
 if __name__ == '__main__':
     rospy.init_node('inupt_and_output_pairs_node')
@@ -130,15 +132,19 @@ if __name__ == '__main__':
         states = []
         jt_pts = []
         collision_scores = []
+        condition_scores = []
+        yoshiwaka_scores = []
         for j in xrange(lines_per_file):
             print 'file {}, line {}'.format(file_idx, j)
             tup = get_input_output_pair(relaxedIK)
             states.append(tup[0])
             jt_pts.append(tup[1])
             collision_scores.append(tup[2])
+            condition_scores.append(tup[3])
+            yoshiwaka_scores.append(tup[4])
             total_example_count += 1
 
-        d = (states, jt_pts, collision_scores)
+        d = (states, jt_pts, collision_scores, condition_scores, yoshiwaka_scores)
         pickle.dump(d, out_file)
         # out_file.write('states: {}\n'.format(list_of_list_of_values_to_string(states)))
         # out_file.write('jt_pts: {}\n'.format(list_of_list_of_values_to_string(jt_pts)))

@@ -146,9 +146,9 @@ impl InfoFileParser {
 pub struct CollisionFileParser {
     pub states: Vec<Vec<f64>>,
     pub jt_pts: Vec<Vec<f64>>,
-    pub collision_scores: Vec<f64>
+    pub collision_scores: Vec<f64>,
+    pub split_point: f64
 }
-
 impl CollisionFileParser {
     pub fn from_yaml_path(fp: String) -> Self {
         let docs = get_yaml_obj(fp);
@@ -183,20 +183,23 @@ impl CollisionFileParser {
             collision_scores.push(collision_values_arr[i].as_f64().unwrap());
         }
 
-        CollisionFileParser{states, jt_pts, collision_scores}
+        let split_point = doc["split_point"].as_f64().unwrap();
+
+        CollisionFileParser{states, jt_pts, collision_scores, split_point}
     }
 }
 
 
 
-pub struct CollisionNeuralNetParser {
+pub struct NeuralNetParser {
     pub coefs: Vec<Vec<Vec<f64>>>,
     pub intercepts: Vec<Vec<f64>>,
     pub coef_matrices: Vec<DMatrix<f64>>,
-    pub intercept_vectors: Vec<DMatrix<f64>>
+    pub intercept_vectors: Vec<DMatrix<f64>>,
+    pub split_point: f64
 }
 
-impl CollisionNeuralNetParser {
+impl NeuralNetParser {
     pub fn from_yaml_path(fp: String) -> Self {
         let docs = get_yaml_obj(fp);
         let doc = &docs[0];
@@ -205,9 +208,11 @@ impl CollisionNeuralNetParser {
         let mut intercepts: Vec<Vec<f64>> = Vec::new();
         let mut coef_matrices: Vec<DMatrix<f64>> = Vec::new();
         let mut intercept_vectors: Vec<DMatrix<f64>> = Vec::new();
+        let mut split_point = 0.0;
 
         coefs = parse_list_of_floats_3(&doc["coefs"]);
         intercepts = parse_list_of_floats_2(&doc["intercepts"]);
+        split_point = doc["split_point"].as_f64().unwrap();
 
         for i in 0..coefs.len() {
             let mut m = DMatrix::from_element( coefs[i].len(), coefs[i][0].len(), 0.0 );
@@ -227,7 +232,7 @@ impl CollisionNeuralNetParser {
             intercept_vectors.push(v);
         }
 
-        Self{coefs, intercepts, coef_matrices, intercept_vectors}
+        Self{coefs, intercepts, coef_matrices, intercept_vectors, split_point}
     }
 }
 

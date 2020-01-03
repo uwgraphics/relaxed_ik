@@ -86,6 +86,5 @@ if __name__ == '__main__':
         js.header.stamp.secs = now.secs
         js.header.stamp.nsecs = now.nsecs
         js_pub.publish(js)
-
-
+	
     rate.sleep()

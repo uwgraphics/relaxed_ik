@@ -116,6 +116,19 @@ def unspin(state, relaxedIK):
             new_state[i] -= 2.0 * math.pi
     return new_state
 
+def get_split_point(list, split_percent=0.05):
+    list = np.array(list)
+    list.sort()
+    idx = np.ceil(len(list) * split_percent)
+    return list[int(idx)]
+
+def interpolate_singularity_score(val, split_point):
+    if val == 0.0:
+        return 50.0
+    else:
+        v = 1.0/(split_point**2 * 2.0)
+        return min(1.0 / v * val**2, 50.0)
+
 class PreprocessorEngine:
     def __init__(self, path_to_src, mode='nn', info_file_name=''):
         self.path_to_src = path_to_src
@@ -133,6 +146,10 @@ class PreprocessorEngine:
         self.jt_pts = []
         self.collision_scores = []
         self.in_collision = []
+        self.condition_scores = []
+        self.yoshikawa_scores = []
+        self.singularity_scores = []
+        self.in_singularity = []
 
     def load_input_and_output_pairs(self, num_samples=40000):
         dir = self.path_to_src + '/RelaxedIK/Config/collision_inputs_and_outputs/' + self.robot_name
@@ -159,7 +176,18 @@ class PreprocessorEngine:
                     self.in_collision.append(-1.)
                 else:
                     self.in_collision.append(1.)
+                self.condition_scores.append(pk[3][i])
+                self.yoshikawa_scores.append(pk[4][i])
                 sample_idx += 1
+
+        split_point = get_split_point(self.yoshikawa_scores)
+        for i in xrange(len(self.yoshikawa_scores)):
+            self.singularity_scores.append(interpolate_singularity_score(self.yoshikawa_scores[i], split_point))
+            if self.yoshikawa_scores[i] < split_point:
+                self.in_singularity.append(-1.)
+            else:
+                self.in_singularity.append(1.)
+
         print bcolors.OKGREEN + 'samples all loaded.' + bcolors.ENDC
 
     def generate_input_and_output_pairs(self, num_samples=40000):
@@ -174,50 +202,211 @@ class PreprocessorEngine:
             else:
                 self.in_collision.append(1.)
 
-    def train_nn(self):
+    def train_nn(self, layer_width = 15, num_layers = 5, input_samples=200000, init_load=True):
+        if init_load:
+            self.load_input_and_output_pairs(input_samples)
+        hls = []
+        for i in xrange(num_layers):
+            hls.append(layer_width)
+        hls = tuple(hls)
         clf = MLPRegressor(solver='adam', alpha=1,
-                                hidden_layer_sizes=(20,20,20,20,20), max_iter=300000, verbose=True,
+                                hidden_layer_sizes=hls, max_iter=300000, verbose=True,
                                 learning_rate='adaptive')
+
+        clf.fit(self.states, self.collision_scores)
+
         self.clf = clf
+        t1 = self.find_optimal_split_point(2000)
+        print t1
+        self.dump_yaml(t1[0])
+        self.dump_clf()
 
-        self.clf.fit(self.states, self.collision_scores)
+        return clf
 
-        top_dir = path_to_src + '/RelaxedIK/Config/collision_nn_rust'
-        f1 = open(top_dir + '/' + self.y['collision_nn_file'], 'w')
-        joblib.dump(self.clf, f1)
+    def train_jointpoint_nn(self, layer_width = 15, num_layers = 5, input_samples=200000, init_load=True):
+        if init_load:
+            self.load_input_and_output_pairs(input_samples)
+        hls = []
+        for i in xrange(num_layers):
+            hls.append(layer_width)
+        hls = tuple(hls)
+        clf = MLPRegressor(solver='adam', alpha=1,
+                                hidden_layer_sizes=hls, max_iter=300000, verbose=True,
+                                learning_rate='adaptive')
 
-    def evaluate(self, num_samples=1000):
+        clf.fit(self.jt_pts, self.collision_scores)
+
+        self.clf = clf
+        t1 = self.find_optimal_split_point_jointpoint(2000)
+        print t1
+        self.dump_yaml(split_point=t1[0], suffix='_jointpoint')
+        self.dump_clf(suffix='_jointpoint')
+
+        return clf
+
+    def train_singularity_nn(self, layer_width = 10, num_layers = 5, input_samples=200000):
+        self.load_input_and_output_pairs(input_samples)
+        hls = []
+        for i in xrange(num_layers):
+            hls.append(layer_width)
+        hls = tuple(hls)
+        clf = MLPRegressor(solver='adam', alpha=1,
+                           hidden_layer_sizes=hls, max_iter=300000, verbose=True,
+                           learning_rate='adaptive')
+
+        clf.fit(self.states, self.singularity_scores)
+
+        self.clf = clf
+        # t1 = self.find_optimal_split_point(2000)
+        # print t1
+        # self.dump_yaml(t1[0])
+        # self.dump_clf()
+
+        return clf
+
+    def evaluate(self, num_samples=1000, split_point = 5.0):
+        false_positive_count = 0.
+        false_negative_count = 0.
+        true_positive_count = 0.
+        true_negative_count = 0.
+        total_count = 0.
+
+        false_positive_magnitudes = []
+        false_negative_magnitudes = []
+
         for i in xrange(num_samples):
             rvec = rand_vec(self.relaxedIK)
             pred = self.clf.predict([rvec])
             ground_truth = get_collision_score(self.relaxedIK, rvec)
-            print '{}, {}'.format(pred, ground_truth)
-            print
+            if pred >= split_point and ground_truth >= 5.0:
+                true_positive_count += 1.0
+            elif pred < split_point and ground_truth < 5.0:
+                true_negative_count += 1.0
+            elif pred >= split_point and ground_truth < 5.0:
+                false_negative_count += 1.0
+                false_negative_magnitudes.append(abs(pred - ground_truth))
+            else:
+                false_positive_count += 1.0
+                false_positive_magnitudes.append(abs(pred - ground_truth))
 
-    def load_clf(self):
-        top_dir = path_to_src + '/RelaxedIK/Config/collision_nn_rust'
+            total_count += 1.0
+
+        # mean_false_positive_magnitude = np.array(false_positive_magnitudes).mean()
+        # mean_false_negative_magnitude = np.array(false_negative_magnitudes).mean()
+        # max_false_positive_magnitude = np.array(false_positive_magnitudes).max()
+        # max_false_negative_magnitude = np.array(false_negative_magnitudes).max()
+
+        return (false_positive_count / total_count, false_negative_count / total_count, true_positive_count / total_count, true_negative_count / total_count)
+
+    def find_optimal_split_point(self, num_samples=1000):
+        predictions = []
+        ground_truths = []
+        for i in xrange(num_samples):
+            rvec = rand_vec(self.relaxedIK)
+            pred = self.clf.predict([rvec])
+            ground_truth = get_collision_score(self.relaxedIK, rvec)
+            predictions.append(pred)
+            ground_truths.append(ground_truth)
+
+        best_split = 5.0
+        best_split_score = 100000000000.
+        split_point = 8.0
+        best_false_positive_count = 0.0
+        best_false_negative_count = 0.0
+
+        while split_point > 0.0:
+            false_positive_count = 0.
+            false_negative_count = 0.
+            total_count = 0.
+            for i in xrange(num_samples):
+                if predictions[i] >= split_point and ground_truths[i] < 5.0:
+                    false_negative_count += 1.0
+                elif predictions[i] < split_point and ground_truths[i] >= 5.0:
+                    false_positive_count += 1.0
+                total_count += 1.0
+
+            split_score = 2.0*(false_positive_count / total_count) + (false_negative_count / total_count)
+            if split_score < best_split_score:
+                best_split_score = split_score
+                best_split = split_point
+                best_false_negative_count = false_negative_count
+                best_false_positive_count = false_positive_count
+
+            split_point -= 0.01
+
+        return best_split, best_false_positive_count/ total_count, best_false_negative_count / total_count
+
+    def find_optimal_split_point_jointpoint(self, num_samples=1000):
+        predictions = []
+        ground_truths = []
+        for i in xrange(num_samples):
+            rvec = rand_vec(self.relaxedIK)
+            frames = self.relaxedIK.vars.robot.getFrames(rvec)
+            jt_pt_vec = frames_to_jt_pt_vec(frames)
+            pred = self.clf.predict([jt_pt_vec])
+            ground_truth = get_collision_score(self.relaxedIK, rvec)
+            predictions.append(pred)
+            ground_truths.append(ground_truth)
+
+        best_split = 5.0
+        best_split_score = 100000000000.
+        split_point = 8.0
+        best_false_positive_count = 0.0
+        best_false_negative_count = 0.0
+
+        while split_point > 0.0:
+            false_positive_count = 0.
+            false_negative_count = 0.
+            total_count = 0.
+            for i in xrange(num_samples):
+                if predictions[i] >= split_point and ground_truths[i] < 5.0:
+                    false_negative_count += 1.0
+                elif predictions[i] < split_point and ground_truths[i] >= 5.0:
+                    false_positive_count += 1.0
+                total_count += 1.0
+
+            split_score = 3.0*(false_positive_count / total_count) + (false_negative_count / total_count)
+            if split_score < best_split_score:
+                best_split_score = split_score
+                best_split = split_point
+                best_false_negative_count = false_negative_count
+                best_false_positive_count = false_positive_count
+
+            split_point -= 0.01
+
+        return best_split, best_false_positive_count/ total_count, best_false_negative_count / total_count
+
+    def dump_clf(self, suffix=''):
+        top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
+        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'w')
+        joblib.dump(self.clf, f1)
+
+    def load_clf(self, suffix=''):
+        top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
         try:
-            f1 = open(top_dir + '/' + self.y['collision_nn_file'], 'r')
+            f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix, 'r')
             self.clf = joblib.load(f1)
             return True
         except:
             return False
 
-    def dump_yaml(self):
-        top_dir = path_to_src + '/RelaxedIK/Config/collision_nn_rust'
-        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + '.yaml', 'w')
+    def dump_yaml(self, split_point = 5.0, suffix=''):
+        top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
+        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix + '.yaml', 'w')
         out_str = ''
         out_str += 'coefs: '
         out_str +=  list_of_list_of_values_to_string(self.clf.coefs_)
         out_str += '\n'
         out_str += 'intercepts: '
         out_str += list_of_list_of_values_to_string(self.clf.intercepts_)
+        out_str += '\n'
+        out_str += 'split_point: {}'.format(split_point)
         f1.write(out_str)
         f1.close()
 
-    def load_yaml(self):
-        top_dir = path_to_src + '/RelaxedIK/Config/collision_nn_rust'
-        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + '.yaml', 'r')
+    def load_yaml(self, suffix=''):
+        top_dir = self.path_to_src + '/RelaxedIK/Config/collision_nn_rust'
+        f1 = open(top_dir + '/' + self.y['collision_nn_file'] + suffix + '.yaml', 'r')
         y = yaml.load(f1)
         self.coefs = y['coefs']
         self.intercepts = y['intercepts']
@@ -265,20 +454,17 @@ if __name__== '__main__':
 
     path_to_src = os.path.dirname(__file__)
     p = PreprocessorEngine(path_to_src)
-    p.load_input_and_output_pairs(100000)
     p.train_nn()
-    p.evaluate()
-    p.dump_yaml()
+    p.train_jointpoint_nn(init_load=False)
+    # p.load_clf(suffix='_jointpoint')
+    # x = [0.0, -0.8480205769590046, -0.10401204209194415, 1.2240800000000003, -1.73352986419518, 0.0, 0.0, 0.0, -1.366069205535962, 0.984365698124802, -1.5760800000000001, -2.312055370502719, -0.140045219180025, 0.0, 0.0]
+    # v = frames_to_jt_pt_vec(p.relaxedIK.vars.robot.getFrames(x))
+    # print p.clf.predict([v])
+    # print p.find_optimal_split_point_jointpoint()
+    # sp = p.find_optimal_split_point_jointpoint()
+    # print sp
+    # p.train_nn(layer_width = 21, num_layers = 5)
 
-
-    '''
-    rvec = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.000262779999999907, 0.0, 0.0, 0.0, 0.0, 0.0]
-    pred = p.clf.predict([rvec])
-    ground_truth = get_collision_score(p.relaxedIK, rvec)
-
-    print pred
-    print ground_truth
-    '''
 
 
 
