@@ -98,31 +98,16 @@ For full setup and usage details, please refer to start_here.py in the src direc
 
 <b> Coming Soon </b>
 
-RelaxedIK has been rewritten in Julia to substantially boost performance. If you would like to try out this version of RelaxedIK before it is pushed to the main branch, feel free to try it out as part of a beta testing phase.  To use it, please clone the "dev" branch using the following commands: 
+==================================================================================================================== Development update 12/3/20
+
+RelaxedIK has been substantially rewritten in the Rust programming language.  Everything is still completely ROS compatible and should serve as a drop-in replacement for older versions of the solver.  
+
+The Rust relaxedIK solver is MUCH faster than its python and julia alternatives.  Testing on my laptop has indicated that the solver can run at over 3000Hz for single arm robots (tested on ur3, ur5, jaco, sawyer, panda, kuka iiwa, etc) and about 2500Hz for bimanual robots (tested on ABB Yumi and Rainbow Robotics DRC-Hubo+). All of the new code has been pushed to the Development branch, and will be pushed to the main branch after a brief testing phase.  It is highly recommended that the development branch be used at this point, as it has many more features and options than the main branch.
 
 <pre> git clone -b dev https://github.com/uwgraphics/relaxed_ik.git </pre>
 
-install the proper dependenices, and follow the new set of instructions in the start_here.py file.  
+If you are working with an older version of relaxedIK, note that you will have to start from a fresh repo and go through the start_here.py procedures again to work with the Rust version of the solver.  
 
-If you have feedback on your experience using the new version of the solver (positive or negative), please email me at rakita@cs.wisc.edu .  The code will be moved to the main branch after this testing phase.  Thanks!
-
-====================================================================================================================
-Development update 10/10/19
-
-The RelaxedIK solver has presented two main options over the past six months: (1) For a stable, reliable, yet relatively slow version of the solver, use the python implementation on the main branch; or (2) for a less stable, less reliable, yet much faster version of the solver, use the Julia implementation on the dev branch. My goal was always to iterate on the Julia version to become just as stable and reliable as its Python counterpart, and eventually unite these two camps into one on the main branch with the Julia version as the centerpiece.
-
-However, there are a few idiosyncrasies that come along with the Julia programming language that have precluded those plans. First, the Julia version of relaxedIK takes at least a minute to do its JIT compilation and start from scratch each time. This is unacceptable for a stable release of a solver that should be convenient and lightweight to use. Plus, it makes development on top of the base solver incredibly tedious, since each little change requires this full JIT compilation. While the people developing the Julia programming language seem to be well aware of this issue for large projects developed in the language, and they may have a sufficient solution for this problem down the road, just waiting around and hoping this gets fixed does not seem like a good option. Second, while ros is somewhat supported in julia through RobotOS.jl, this library leads to mysterious errors too often to be the foundation of a stable release. With both of these issues in mind, I'd rather be proactive and just turn the page away from Julia and plan future development elsewhere.
-
-So, over the next couple of months, I will be re-implementing relaxedIK in a fully statically compiled language (still TBD). Given recent testing, I anticipate the new solver will be even faster than the Julia version, without the JIT compilation hassle and stability issues. Everything will remain ROS compatible. The Julia and python versions will remain in the new release for backwards compatibility, but I anticipate new features will just be officially added and supported in the new language.
-
-Along with the new language, I plan to add in a few other features as part of a "major" new release, such as better support for fast, standard IK solver options. The tools that make relaxedIK actually afford incredibly fast standard IK solver options (i.e., "standard" meaning just hitting end-effector pose goals accurately, without the motion continuity, collision avoidance, and other feasibility considerations included in relaxedIK). We've used these "standard" IK options in our prior work and, in our testing, it is faster and more reliable than other numerical IK solvers we have tried. I plan to make these features more publicly accessible and well documented.
-
-If you have any comments or questions on any of this, feel free to use the iusse thread titled "Development update" to foster conversation. Or, if you prefer, feel free to email me directly at rakita@cs.wisc.edu
-
-
-
-<b> Change Log </b>
-
-Version 1.1 (8/16/18): added support for prismatic and fixed joints
+If you have any comments or questions on any of this, or if you encounter any bugs in the new rust version of the solver, feel free to post an issue or email me directly at rakita@cs.wisc.edu
 
 
