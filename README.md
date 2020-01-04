@@ -1,6 +1,6 @@
 # relaxed_ik
 
-<b> Development update 12/3/20 </b>
+<b> Development update 1/3/20 </b>
 
 RelaxedIK has been substantially rewritten in the Rust programming language.  Everything is still completely ROS compatible and should serve as a drop-in replacement for older versions of the solver.  
 
