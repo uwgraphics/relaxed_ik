@@ -159,7 +159,7 @@ Then, make sure that the terminal that that command was entered into has focus (
 
 <b> Coming Soon </b>
 
-==================================================================================================================== Development update 12/3/20
+==================================================================================================================== Development update 1/3/20
 
 RelaxedIK has been substantially rewritten in the Rust programming language.  Everything is still completely ROS compatible and should serve as a drop-in replacement for older versions of the solver.  
 
