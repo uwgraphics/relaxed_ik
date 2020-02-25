@@ -38,15 +38,16 @@ fn main() {
 
     let rate = rosrust::rate(10000.);
     while rosrust::is_ok() {
-        let x = r.solve_precise(&arc.lock().unwrap());
-        println!("{:?}", x);
+        let x = r.solve_randstart(&arc.lock().unwrap());
+        if x.0 {
+            println!("{:?}", x.1);
 
-        let mut ja = msg::relaxed_ik::JointAngles::default();
-        for i in 0..x.len() {
-            ja.angles.data.push(x[i]);
+            let mut ja = msg::relaxed_ik::JointAngles::default();
+            for i in 0..x.1.len() {
+                ja.angles.data.push(x.1[i]);
+            }
+            publisher.send(ja);
         }
-        publisher.send(ja);
-
         rate.sleep();
     }
 }

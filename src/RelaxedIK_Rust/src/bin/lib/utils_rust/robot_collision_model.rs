@@ -1,0 +1,163 @@
+
+use crate::lib::spacetime::robot::Robot;
+use crate::lib::utils_rust::yaml_utils::{RobotCollisionSpecFileParser, InfoFileParser};
+use crate::lib::utils_rust::file_utils::get_path_to_src;
+use crate::lib::utils_rust::collision_object::CollisionObject;
+use time::ParseError::InvalidFormatSpecifier;
+use nalgebra::{UnitQuaternion, Vector3, UnitComplex};
+
+#[derive(Clone, Debug)]
+pub struct RobotCollisionLinkInfo {
+    pub link_type: usize, // 0 = auto capsule, 1 = user defined shape
+    pub chain_idx: usize,
+    pub joint_idx: usize,
+    pub stationary: bool,
+    pub shape_type: usize, // 0 = capsule, 1 = sphere, 2 = cuboid
+    pub init_quat: UnitQuaternion<f64>
+}
+
+impl RobotCollisionLinkInfo {
+    pub fn new(link_type: usize, chain_idx: usize, joint_idx: usize, stationary: bool, shape_type: usize, init_quat: UnitQuaternion<f64>) -> Self  {
+        Self {link_type, chain_idx, joint_idx, stationary, shape_type, init_quat}
+    }
+}
+
+pub struct RobotCollisionModel {
+    pub robot: Robot,
+    pub robot_collision_specs_file: RobotCollisionSpecFileParser,
+    pub collision_objects: Vec<CollisionObject>,
+    pub link_info_arr: Vec<RobotCollisionLinkInfo>
+}
+
+impl RobotCollisionModel {
+    pub fn from_robot_and_specs(robot: &Robot, specs: &RobotCollisionSpecFileParser, starting_config: &Vec<f64>) -> Self {
+        let mut collision_objects: Vec<CollisionObject> = Vec::new();
+        let mut link_info_arr: Vec<RobotCollisionLinkInfo> = Vec::new();
+
+        let frames = robot.get_frames_immutable(starting_config);
+        for i in 0..frames.len() {
+            for j in 0..frames[i].0.len()-1 {
+                let link_vector = (frames[i].0[j +1] - frames[i].0[j]);
+                let link_length = link_vector.norm();
+                if link_length > specs.robot_link_radius {
+                    let link_midpoint = (frames[i].0[j +1] + frames[i].0[j]) / 2.0;
+                    let mut collision_object = CollisionObject::new_capsule(((link_length*0.98)/2.0 - specs.robot_link_radius).max(0.000001), specs.robot_link_radius);
+                    collision_object.set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
+                    collision_object.align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
+                    collision_object.update_all_bounding_volumes();
+                    link_info_arr.push(RobotCollisionLinkInfo::new(0, i, j, false, 0, collision_object.curr_orientation.clone()));
+                    collision_objects.push(collision_object);
+                }
+            }
+        }
+
+        for i in 0..specs.spheres.len() {
+            let mut sphere = CollisionObject::new_ball(specs.spheres[i].radius);
+            sphere.update_all_bounding_volumes();
+
+            let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.spheres[i].coordinate_frame);
+            if specs.spheres[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 1, UnitQuaternion::identity()));
+                sphere.set_curr_translation(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
+            } else {
+                let mut chain_idx = 0 as usize;
+                let mut joint_idx = 0 as usize;
+                let mut found = false;
+                for j in 0..robot.num_chains {
+                    for k in 0..robot.subchain_indices.len() {
+                        if !found && idx == robot.subchain_indices[j][k] {
+                            found = true;
+                            chain_idx = j; joint_idx = k;
+                        }
+                    }
+                }
+
+                let mut sphere_position = Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
+                sphere_position = frames[chain_idx].1[joint_idx] * sphere_position;
+                sphere.set_curr_translation(sphere_position[0], sphere_position[1], sphere_position[2]);
+
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 1, UnitQuaternion::identity()));
+            }
+            collision_objects.push(sphere);
+        }
+
+        for i in 0..specs.cuboids.len() {
+            let mut cuboid = CollisionObject::new_cuboid(specs.cuboids[i].x_halflength, specs.cuboids[i].y_halflength, specs.cuboids[i].z_halflength);
+            let mut q = UnitQuaternion::from_euler_angles(specs.cuboids[i].rx, specs.cuboids[i].ry, specs.cuboids[i].rz);
+            cuboid.set_curr_orientation(q.w, q.i, q.j, q.k);
+            cuboid.update_all_bounding_volumes();
+
+            let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.cuboids[i].coordinate_frame);
+            if specs.cuboids[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 2, q.clone()));
+                cuboid.set_curr_translation(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
+            } else {
+                let mut chain_idx = 0 as usize;
+                let mut joint_idx = 0 as usize;
+
+                // link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 2, q.clone()));
+
+                let mut found = false;
+                for j in 0..robot.num_chains {
+                    for k in 0..robot.subchain_indices.len() {
+                        if !found && idx == robot.subchain_indices[j][k] {
+                            found = true;
+                            chain_idx = j; joint_idx = k;
+                        }
+                    }
+                }
+
+                let mut cube_position = Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
+                cube_position = frames[chain_idx].1[joint_idx] * cube_position;
+                cuboid.set_curr_translation(cube_position[0], cube_position[1], cube_position[2]);
+
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 2, q.clone()));
+            }
+
+            collision_objects.push(cuboid);
+        }
+
+        Self {robot: robot.clone(), robot_collision_specs_file: specs.clone(), collision_objects, link_info_arr}
+    }
+
+    pub fn from_yaml_path(fp: String) -> Self {
+        // yaml path to info file
+        let robot = Robot::from_yaml_path(fp.clone());
+        let ifp = InfoFileParser::from_yaml_path(fp.clone());
+        let collision_file_name = ifp.collision_file_name;
+        let fp2 = get_path_to_src() + "RelaxedIK/Config/collision_files_rust/" + collision_file_name.as_str();
+        let robot_collision_specs_file = RobotCollisionSpecFileParser::from_yaml_path(fp2.clone());
+        RobotCollisionModel::from_robot_and_specs(&robot, &robot_collision_specs_file, &ifp.starting_config)
+    }
+
+    pub fn from_info_file_name(info_file_name: String) -> Self {
+         let path_to_src = get_path_to_src();
+         let fp = path_to_src + "RelaxedIK/Config/info_files/" + info_file_name.as_str();
+         RobotCollisionModel::from_yaml_path(fp)
+     }
+
+    pub fn update_robot_transforms(&mut self, state: &Vec<f64>, update_bounding_spheres: bool, update_bounding_aabbs: bool) {
+        let frames = self.robot.get_frames_immutable(state);
+        for i in 0..self.link_info_arr.len() {
+            if self.link_info_arr[i].link_type == 0 { // if it's an auto capsule
+                let chain_idx = self.link_info_arr[i].chain_idx;
+                let joint_idx = self.link_info_arr[i].joint_idx;
+                let link_vector = (frames[chain_idx].0[joint_idx + 1] - frames[chain_idx].0[joint_idx]);
+                let link_midpoint = (frames[chain_idx].0[joint_idx + 1] + frames[chain_idx].0[joint_idx]) / 2.0;
+                self.collision_objects[i].set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
+                self.collision_objects[i].align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
+            } else { // else, if it's a user supplied shape
+
+            }
+
+            if update_bounding_spheres {
+                self.collision_objects[i].update_bounding_sphere();
+            }
+            if update_bounding_aabbs {
+                self.collision_objects[i].update_bounding_aabb();
+            }
+
+
+        }
+    }
+}

@@ -3,3 +3,8 @@ pub mod yaml_utils;
 pub mod transformations;
 pub mod file_utils;
 pub mod subscriber_utils;
+pub mod sampler;
+pub mod self_collision_engine;
+pub mod collision_object;
+pub mod shape_parser_utils;
+pub mod robot_collision_model;

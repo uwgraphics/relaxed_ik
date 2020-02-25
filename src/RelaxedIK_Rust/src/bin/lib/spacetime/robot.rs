@@ -151,7 +151,7 @@ impl Robot {
         out
     }
 
-    fn get_index_from_joint_order(joint_ordering: &Vec<String>, joint_name: &String) -> usize {
+    pub fn get_index_from_joint_order(joint_ordering: &Vec<String>, joint_name: &String) -> usize {
         for i in 0..joint_ordering.len() {
             if *joint_name == joint_ordering[i] {
                 return i

@@ -3,6 +3,7 @@ use std::io::prelude::*;
 use yaml_rust::{YamlLoader, Yaml};
 use nalgebra;
 use nalgebra::{DMatrix, DVector};
+use crate::lib::utils_rust::shape_parser_utils::{Cuboid, Sphere};
 
 pub fn get_yaml_obj(fp: String) -> Vec<Yaml> {
     let mut file = File::open(fp.as_str()).unwrap();
@@ -12,6 +13,7 @@ pub fn get_yaml_obj(fp: String) -> Vec<Yaml> {
     let docs = YamlLoader::load_from_str(contents.as_str()).unwrap();
     docs
 }
+
 
 pub struct InfoFileParser {
     pub urdf_file_name: String,
@@ -32,7 +34,6 @@ pub struct InfoFileParser {
     pub joint_types: Vec<Vec<String>>,
     pub joint_state_define_func_file: String,
 }
-
 impl InfoFileParser {
     pub fn from_yaml_path(fp: String) -> InfoFileParser {
         let docs = get_yaml_obj(fp);
@@ -190,7 +191,6 @@ impl CollisionFileParser {
 }
 
 
-
 pub struct NeuralNetParser {
     pub coefs: Vec<Vec<Vec<f64>>>,
     pub intercepts: Vec<Vec<f64>>,
@@ -198,7 +198,6 @@ pub struct NeuralNetParser {
     pub intercept_vectors: Vec<DMatrix<f64>>,
     pub split_point: f64
 }
-
 impl NeuralNetParser {
     pub fn from_yaml_path(fp: String) -> Self {
         let docs = get_yaml_obj(fp);
@@ -233,6 +232,73 @@ impl NeuralNetParser {
         }
 
         Self{coefs, intercepts, coef_matrices, intercept_vectors, split_point}
+    }
+}
+
+#[derive(Clone, Debug)]
+pub struct RobotCollisionSpecFileParser {
+    pub robot_link_radius: f64,
+    pub cuboids: Vec<Cuboid>,
+    pub spheres: Vec<Sphere>
+}
+impl RobotCollisionSpecFileParser {
+    pub fn from_yaml_path(fp: String) -> Self {
+        let docs = get_yaml_obj(fp);
+        let doc = &docs[0];
+        let mut cuboids_option = doc["boxes"].as_vec();
+        let mut spheres_option = doc["spheres"].as_vec();
+
+        let robot_link_radius = doc["robot_link_radius"].as_f64().unwrap();
+
+        let mut cuboids: Vec<Cuboid> = Vec::new();
+        let mut spheres: Vec<Sphere> = Vec::new();
+
+        if cuboids_option.is_some() {
+            let cuboids_list = cuboids_option.unwrap();
+            let l = cuboids_list.len();
+            for i in 0..l {
+                let name = cuboids_list[i]["name"].as_str().unwrap().to_string();
+                let params = cuboids_list[i]["parameters"].as_vec().unwrap();
+                let x_halflength = params[0].as_f64().unwrap();
+                let y_halflength = params[1].as_f64().unwrap();
+                let z_halflength = params[2].as_f64().unwrap();
+
+                let coordinate_frame = cuboids_list[i]["coordinate_frame"].as_str().unwrap().to_string();
+
+                let rots = cuboids_list[i]["rotation"].as_vec().unwrap();
+                let rx = rots[0].as_f64().unwrap();
+                let ry = rots[1].as_f64().unwrap();
+                let rz = rots[2].as_f64().unwrap();
+
+                let ts = cuboids_list[i]["translation"].as_vec().unwrap();
+                let tx = ts[0].as_f64().unwrap();
+                let ty = ts[1].as_f64().unwrap();
+                let tz = ts[2].as_f64().unwrap();
+
+                cuboids.push(Cuboid::new(name, x_halflength, y_halflength, z_halflength, coordinate_frame, rx, ry, rz, tx, ty, tz));
+            }
+        }
+
+        if spheres_option.is_some() {
+            let spheres_list = spheres_option.unwrap();
+            let l = spheres_list.len();
+
+            for i in 0..l {
+                let name = spheres_list[i]["name"].as_str().unwrap().to_string();
+                let radius = spheres_list[i]["parameters"].as_f64().unwrap();
+
+                let coordinate_frame = spheres_list[i]["coordinate_frame"].as_str().unwrap().to_string();
+
+                let ts = spheres_list[i]["translation"].as_vec().unwrap();
+                let tx = ts[0].as_f64().unwrap();
+                let ty = ts[1].as_f64().unwrap();
+                let tz = ts[2].as_f64().unwrap();
+
+                spheres.push(Sphere::new(name, radius, coordinate_frame, tx, ty, tz));
+            }
+        }
+
+        Self{robot_link_radius, cuboids, spheres}
     }
 }
 

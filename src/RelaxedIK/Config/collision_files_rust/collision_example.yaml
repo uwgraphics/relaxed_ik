@@ -1,0 +1,13 @@
+robot_link_radius: 0.05
+boxes:
+  - name: box1
+    parameters: [1.,1.,0.1]
+    coordinate_frame: static
+    rotation: [0.,0.,0.]
+    translation: [1.,0.,0.]
+spheres:
+  - name: sphere1
+    parameters: .02
+    coordinate_frame: static
+    rotation: [0.,0.,0.]
+    translation: [.115,0.025,-0.053]

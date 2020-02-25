@@ -70,7 +70,6 @@ impl OptimizationEngineNLopt {
         // let mut x_init = x_out.to_vec();
         let res = opt.optimize(x_out);
 
-        // println!("Result: {:?}", res);
         // println!("X vals: {:?}\n", &x_out[..num_dim]);
 
     }
