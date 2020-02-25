@@ -111,7 +111,7 @@ https://www.rust-lang.org/learn/get-started
 If you plan to extend any of the Rust code, we recommend using the Jetbrains rust plugin.
   
 
-<b> Rust Dependencies (Completely Optional) </b>
+<b> Julia Dependencies (Completely Optional) </b>
 
 To use the Julia version of the solver (NOT the recommended option), you will first need to install Julia.
 https://julialang.org/
@@ -159,7 +159,7 @@ Then, make sure that the terminal that that command was entered into has focus (
 
 <b> Coming Soon </b>
 
-==================================================================================================================== Development update 12/3/20
+==================================================================================================================== Development update 1/3/20
 
 RelaxedIK has been substantially rewritten in the Rust programming language.  Everything is still completely ROS compatible and should serve as a drop-in replacement for older versions of the solver.  
 
