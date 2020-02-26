@@ -3,8 +3,10 @@ use crate::lib::spacetime::robot::Robot;
 use crate::lib::utils_rust::yaml_utils::{RobotCollisionSpecFileParser, InfoFileParser};
 use crate::lib::utils_rust::file_utils::get_path_to_src;
 use crate::lib::utils_rust::collision_object::CollisionObject;
+use crate::lib::utils_rust::transformations;
 use time::ParseError::InvalidFormatSpecifier;
 use nalgebra::{UnitQuaternion, Vector3, UnitComplex};
+use ncollide3d::query::{Proximity, PointQuery};
 
 #[derive(Clone, Debug)]
 pub struct RobotCollisionLinkInfo {
@@ -13,12 +15,13 @@ pub struct RobotCollisionLinkInfo {
     pub joint_idx: usize,
     pub stationary: bool,
     pub shape_type: usize, // 0 = capsule, 1 = sphere, 2 = cuboid
-    pub init_quat: UnitQuaternion<f64>
+    pub init_quat: UnitQuaternion<f64>,
+    pub local_position: Vector3<f64>
 }
 
 impl RobotCollisionLinkInfo {
-    pub fn new(link_type: usize, chain_idx: usize, joint_idx: usize, stationary: bool, shape_type: usize, init_quat: UnitQuaternion<f64>) -> Self  {
-        Self {link_type, chain_idx, joint_idx, stationary, shape_type, init_quat}
+    pub fn new(link_type: usize, chain_idx: usize, joint_idx: usize, stationary: bool, shape_type: usize, init_quat: UnitQuaternion<f64>, local_position: Vector3<f64>) -> Self  {
+        Self {link_type, chain_idx, joint_idx, stationary, shape_type, init_quat, local_position}
     }
 }
 
@@ -45,7 +48,7 @@ impl RobotCollisionModel {
                     collision_object.set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
                     collision_object.align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
                     collision_object.update_all_bounding_volumes();
-                    link_info_arr.push(RobotCollisionLinkInfo::new(0, i, j, false, 0, collision_object.curr_orientation.clone()));
+                    link_info_arr.push(RobotCollisionLinkInfo::new(0, i, j, false, 0, collision_object.curr_orientation.clone(), Vector3::identity()));
                     collision_objects.push(collision_object);
                 }
             }
@@ -57,7 +60,7 @@ impl RobotCollisionModel {
 
             let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.spheres[i].coordinate_frame);
             if specs.spheres[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 1, UnitQuaternion::identity()));
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
                 sphere.set_curr_translation(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
             } else {
                 let mut chain_idx = 0 as usize;
@@ -73,10 +76,10 @@ impl RobotCollisionModel {
                 }
 
                 let mut sphere_position = Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
-                sphere_position = frames[chain_idx].1[joint_idx] * sphere_position;
+                sphere_position = frames[chain_idx].1[joint_idx+1] * sphere_position;
                 sphere.set_curr_translation(sphere_position[0], sphere_position[1], sphere_position[2]);
 
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 1, UnitQuaternion::identity()));
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
             }
             collision_objects.push(sphere);
         }
@@ -89,7 +92,7 @@ impl RobotCollisionModel {
 
             let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.cuboids[i].coordinate_frame);
             if specs.cuboids[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 2, q.clone()));
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
                 cuboid.set_curr_translation(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
             } else {
                 let mut chain_idx = 0 as usize;
@@ -108,10 +111,10 @@ impl RobotCollisionModel {
                 }
 
                 let mut cube_position = Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
-                cube_position = frames[chain_idx].1[joint_idx] * cube_position;
+                cube_position = frames[chain_idx].1[joint_idx + 1] * cube_position;
                 cuboid.set_curr_translation(cube_position[0], cube_position[1], cube_position[2]);
 
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 2, q.clone()));
+                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
             }
 
             collision_objects.push(cuboid);
@@ -136,28 +139,71 @@ impl RobotCollisionModel {
          RobotCollisionModel::from_yaml_path(fp)
      }
 
-    pub fn update_robot_transforms(&mut self, state: &Vec<f64>, update_bounding_spheres: bool, update_bounding_aabbs: bool) {
+    pub fn collision_check_full_shapes(&self, idx1: usize, idx2: usize) -> bool {
+        let proximity = self.collision_objects[idx1].proximity_check(&self.collision_objects[idx2]);
+        if proximity == Proximity::Intersecting {
+            return true;
+        } else {
+            return false
+        }
+    }
+
+    pub fn collision_check_bounding_aabbs(&self, idx1: usize, idx2: usize) -> bool {
+        self.collision_objects[idx1].bounding_aabb_intersect_check(&self.collision_objects[idx2])
+    }
+
+    pub fn collision_check_bounding_spheres(&self, idx1: usize, idx2: usize) -> bool {
+        self.collision_objects[idx1].bounding_sphere_intersect_check(&self.collision_objects[idx2])
+    }
+
+    pub fn update_robot_transforms(&mut self, state: &Vec<f64>) {
         let frames = self.robot.get_frames_immutable(state);
         for i in 0..self.link_info_arr.len() {
-            if self.link_info_arr[i].link_type == 0 { // if it's an auto capsule
+            if self.link_info_arr[i].link_type == 0 { // if it's an auto capsule...
                 let chain_idx = self.link_info_arr[i].chain_idx;
                 let joint_idx = self.link_info_arr[i].joint_idx;
                 let link_vector = (frames[chain_idx].0[joint_idx + 1] - frames[chain_idx].0[joint_idx]);
                 let link_midpoint = (frames[chain_idx].0[joint_idx + 1] + frames[chain_idx].0[joint_idx]) / 2.0;
+                // println!("{:?}", link_midpoint);
                 self.collision_objects[i].set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
                 self.collision_objects[i].align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
-            } else { // else, if it's a user supplied shape
-
+            } else { // else, if it's a user supplied shape...
+                if !self.link_info_arr[i].stationary { // if it's not a stationary shape...
+                    let parent_chain_idx = self.link_info_arr[i].chain_idx;
+                    let parent_joint_idx = self.link_info_arr[i].joint_idx;
+                    let curr_quat = frames[parent_chain_idx].1[parent_joint_idx + 1];
+                    let new_position = curr_quat * self.link_info_arr[i].local_position;
+                    self.collision_objects[i].set_curr_translation(new_position[0], new_position[1], new_position[2]);
+                    if self.link_info_arr[i].shape_type == 0 ||  self.link_info_arr[i].shape_type == 2 { // if it's capsule or cuboid, have to update orientation
+                        let init_quat = self.link_info_arr[i].init_quat.clone();
+                        let disp_quat = transformations::quaternion_dispQ(init_quat, curr_quat.clone());
+                        let new_quat = self.link_info_arr[i].init_quat * disp_quat;
+                        self.collision_objects[i].set_curr_orientation(new_quat.w, new_quat.i, new_quat.j, new_quat.k);
+                    }
+                }
             }
-
-            if update_bounding_spheres {
-                self.collision_objects[i].update_bounding_sphere();
-            }
-            if update_bounding_aabbs {
-                self.collision_objects[i].update_bounding_aabb();
-            }
-
-
         }
+    }
+
+    pub fn update_all_bounding_spheres(&mut self) {
+        let l = self.link_info_arr.len();
+        for i in 0..l {
+            self.collision_objects[i].update_bounding_sphere();
+        }
+    }
+
+    pub fn update_all_bounding_aabbs(&mut self) {
+        let l = self.link_info_arr.len();
+        for i in 0..l {
+            self.collision_objects[i].update_bounding_aabb();
+        }
+    }
+
+    pub fn update_bounding_sphere(&mut self, idx: usize) {
+        self.collision_objects[idx].update_bounding_sphere();
+    }
+
+    pub fn update_bounding_aabb(&mut self, idx: usize) {
+        self.collision_objects[idx].update_bounding_aabb();
     }
 }

@@ -4,6 +4,7 @@ use ncollide3d::shape::FeatureId;
 use ncollide3d::shape::{Ball, Cuboid, Cylinder, Capsule, Cone, ConvexHull, Shape, TriMesh};
 use ncollide3d::bounding_volume::{self, BoundingVolume, BoundingSphere, AABB};
 use ncollide3d::transformation;
+use crate::lib::utils_rust::transformations;
 use std::boxed::Box;
 use nalgebra::{UnitQuaternion, Vector3, Translation3, Quaternion, Isometry3, DVector, Rotation3, Matrix3};
 use std::borrow::BorrowMut;
@@ -12,23 +13,37 @@ use std::borrow::BorrowMut;
 pub struct CollisionObject {
     pub shape: Box<dyn Shape<f64>>,
     pub bounding_sphere: BoundingSphere<f64>,
+    pub base_bounding_sphere: BoundingSphere<f64>,
     pub bounding_aabb: AABB<f64>,
+    pub base_bounding_aabb: AABB<f64>,
     pub curr_translation: Translation3<f64>,
+    // pub curr_bounding_sphere_translation: Translation3<f64>,
+    // pub curr_bounding_aabb_translation: Translation3<f64>,
     pub curr_orientation: UnitQuaternion<f64>,
-    pub curr_isometry: Isometry3<f64>
+    // pub curr_bounding_sphere_orientation: UnitQuaternion<f64>,
+    // pub curr_bounding_aabb_orientation: UnitQuaternion<f64>,
+    pub curr_isometry: Isometry3<f64>,
 }
 
 impl CollisionObject {
     pub fn new(shape: Box<dyn Shape<f64>>) -> Self {
         let bounding_sphere = bounding_volume::bounding_sphere(&(*shape), &nalgebra::Isometry3::identity());
+        let base_bounding_sphere = bounding_volume::bounding_sphere(&(*shape), &nalgebra::Isometry3::identity());
         let bounding_aabb = bounding_volume::aabb(&(*shape), &nalgebra::Isometry3::identity());
+        let base_bounding_aabb = bounding_volume::aabb(&(*shape), &nalgebra::Isometry3::identity());
 
         let curr_translation = Translation3::new(0.,0.,0.);
+        // let curr_bounding_sphere_translation = Translation3::new(0.,0.,0.);
+        // let curr_bounding_aabb_translation = Translation3::new(0.,0.,0.);
+
         let curr_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
+        // let curr_bounding_sphere_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
+        // let curr_bounding_aabb_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
 
         let curr_isometry = Isometry3::from_parts(curr_translation.clone(), curr_orientation.clone());
 
-        Self {shape, bounding_sphere, bounding_aabb, curr_translation, curr_orientation, curr_isometry}
+        Self {shape, bounding_sphere, base_bounding_sphere, bounding_aabb, base_bounding_aabb, curr_translation,
+            curr_orientation, curr_isometry}
     }
 
     pub fn new_capsule(half_height: f64, radius: f64) -> Self {
@@ -104,11 +119,26 @@ impl CollisionObject {
     }
 
     pub fn update_bounding_sphere(&mut self) {
-        self.bounding_sphere = self.bounding_sphere.transform_by(&self.curr_isometry);
+        // let mut rel_translation = self.curr_translation.vector - self.curr_bounding_sphere_translation.vector;
+        // let rel_translation = Translation3::new(rel_translation[0], rel_translation[1], rel_translation[2]);
+        // let rel_orientation = transformations::quaternion_dispQ(self.curr_bounding_sphere_orientation, self.curr_orientation);
+        // let rel_isometry = Isometry3::from_parts(rel_translation, UnitQuaternion::identity());
+        // self.bounding_sphere = self.bounding_sphere.transform_by(&rel_isometry);
+        self.bounding_sphere = self.base_bounding_sphere.transform_by(&self.curr_isometry);
+        // self.curr_bounding_sphere_translation = self.curr_translation.clone();
+        // self.curr_bounding_sphere_orientation = self.curr_orientation.clone();
     }
 
     pub fn update_bounding_aabb(&mut self) {
-        self.bounding_aabb = self.bounding_aabb.transform_by(&self.curr_isometry);
+        // let mut rel_translation = self.curr_translation.vector - self.curr_bounding_aabb_translation.vector;
+        // let rel_translation = Translation3::new(rel_translation[0], rel_translation[1], rel_translation[2]);
+        // let rel_orientation = transformations::quaternion_dispQ(self.curr_bounding_aabb_orientation, self.curr_orientation);
+        // let rel_isometry = Isometry3::from_parts(rel_translation, rel_orientation);
+        // self.bounding_aabb = self.bounding_aabb.transform_by(&rel_isometry);
+        // self.bounding_aabb = bounding_volume::aabb(&(*self.shape), &self.curr_isometry);
+        self.bounding_aabb = self.base_bounding_aabb.transform_by(&self.curr_isometry);
+        // self.curr_bounding_aabb_translation = self.curr_translation.clone();
+        // self.curr_bounding_aabb_orientation = self.curr_orientation.clone();
     }
 
     pub fn update_all_bounding_volumes(&mut self) {
