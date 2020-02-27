@@ -17,11 +17,7 @@ pub struct CollisionObject {
     pub bounding_aabb: AABB<f64>,
     pub base_bounding_aabb: AABB<f64>,
     pub curr_translation: Translation3<f64>,
-    // pub curr_bounding_sphere_translation: Translation3<f64>,
-    // pub curr_bounding_aabb_translation: Translation3<f64>,
     pub curr_orientation: UnitQuaternion<f64>,
-    // pub curr_bounding_sphere_orientation: UnitQuaternion<f64>,
-    // pub curr_bounding_aabb_orientation: UnitQuaternion<f64>,
     pub curr_isometry: Isometry3<f64>,
 }
 
@@ -33,12 +29,8 @@ impl CollisionObject {
         let base_bounding_aabb = bounding_volume::aabb(&(*shape), &nalgebra::Isometry3::identity());
 
         let curr_translation = Translation3::new(0.,0.,0.);
-        // let curr_bounding_sphere_translation = Translation3::new(0.,0.,0.);
-        // let curr_bounding_aabb_translation = Translation3::new(0.,0.,0.);
 
         let curr_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
-        // let curr_bounding_sphere_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
-        // let curr_bounding_aabb_orientation = UnitQuaternion::from_quaternion(Quaternion::new(1.0, 0.0, 0.0, 0.0));
 
         let curr_isometry = Isometry3::from_parts(curr_translation.clone(), curr_orientation.clone());
 
@@ -81,26 +73,6 @@ impl CollisionObject {
     pub fn align_object_with_vector_vec3(&mut self, vector: &Vector3<f64>) {
         // Aligns the Y axis of the object with the given vector.  Most useful for the capsule object
         // to align it with robot links
-        /*
-        let mut y_vec = vector.clone();
-        y_vec = &y_vec / y_vec.norm();
-        y_vec[0] += 0.000000000001;
-        y_vec[1] += 0.000000000001;
-        y_vec[2] += 0.000000000001;
-        let mut tmp = DVector::from_element(3, 0.0);
-        tmp[2] = 1.0;
-        if y_vec[2] == 1.0 {
-            tmp[2] = 0.0;
-            tmp[0] = 1.0;
-        }
-        let mut x_vec = y_vec.cross(&tmp);
-        x_vec = &x_vec / x_vec.norm();
-        let mut z_vec = x_vec.cross(&y_vec);
-        z_vec = &z_vec / z_vec.norm();
-        let mat = Matrix3::new(x_vec[0], y_vec[0], z_vec[0], x_vec[1], y_vec[1], z_vec[1], x_vec[2], y_vec[2], z_vec[2]);
-        // let mat = Matrix3::new(x_vec[0], x_vec[1], x_vec[2], y_vec[0], y_vec[1], y_vec[2], z_vec[0], z_vec[1], z_vec[2]);
-        let unit_quat = UnitQuaternion::from_matrix(&mat);
-        */
         let mut unit_quat = UnitQuaternion::face_towards(vector, &Vector3::new(0.0000000001,0.00000000001,1.000000000000000001));
         let q2 = UnitQuaternion::from_euler_angles(std::f64::consts::FRAC_PI_2, 0., 0.);
         unit_quat = unit_quat * q2;
@@ -108,8 +80,6 @@ impl CollisionObject {
     }
 
     pub fn align_object_with_vector(&mut self, vector: Vec<f64>) {
-        // let mut dvec = DVector::from_element(3, 0.0);
-        // dvec[0] = vector[0]; dvec[1] = vector[1]; dvec[2] = vector[2];
         let mut vec3 = Vector3::new(vector[0], vector[1], vector[2]);
         self.align_object_with_vector_vec3(&vec3);
     }
@@ -119,26 +89,11 @@ impl CollisionObject {
     }
 
     pub fn update_bounding_sphere(&mut self) {
-        // let mut rel_translation = self.curr_translation.vector - self.curr_bounding_sphere_translation.vector;
-        // let rel_translation = Translation3::new(rel_translation[0], rel_translation[1], rel_translation[2]);
-        // let rel_orientation = transformations::quaternion_dispQ(self.curr_bounding_sphere_orientation, self.curr_orientation);
-        // let rel_isometry = Isometry3::from_parts(rel_translation, UnitQuaternion::identity());
-        // self.bounding_sphere = self.bounding_sphere.transform_by(&rel_isometry);
         self.bounding_sphere = self.base_bounding_sphere.transform_by(&self.curr_isometry);
-        // self.curr_bounding_sphere_translation = self.curr_translation.clone();
-        // self.curr_bounding_sphere_orientation = self.curr_orientation.clone();
     }
 
     pub fn update_bounding_aabb(&mut self) {
-        // let mut rel_translation = self.curr_translation.vector - self.curr_bounding_aabb_translation.vector;
-        // let rel_translation = Translation3::new(rel_translation[0], rel_translation[1], rel_translation[2]);
-        // let rel_orientation = transformations::quaternion_dispQ(self.curr_bounding_aabb_orientation, self.curr_orientation);
-        // let rel_isometry = Isometry3::from_parts(rel_translation, rel_orientation);
-        // self.bounding_aabb = self.bounding_aabb.transform_by(&rel_isometry);
-        // self.bounding_aabb = bounding_volume::aabb(&(*self.shape), &self.curr_isometry);
         self.bounding_aabb = self.base_bounding_aabb.transform_by(&self.curr_isometry);
-        // self.curr_bounding_aabb_translation = self.curr_translation.clone();
-        // self.curr_bounding_aabb_orientation = self.curr_orientation.clone();
     }
 
     pub fn update_all_bounding_volumes(&mut self) {

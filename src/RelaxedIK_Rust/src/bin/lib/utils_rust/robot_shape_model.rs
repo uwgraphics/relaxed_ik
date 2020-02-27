@@ -9,7 +9,7 @@ use nalgebra::{UnitQuaternion, Vector3, UnitComplex};
 use ncollide3d::query::{Proximity, PointQuery};
 
 #[derive(Clone, Debug)]
-pub struct RobotCollisionLinkInfo {
+pub struct RobotLinkShapeInfo {
     pub link_type: usize, // 0 = auto capsule, 1 = user defined shape
     pub chain_idx: usize,
     pub joint_idx: usize,
@@ -19,23 +19,23 @@ pub struct RobotCollisionLinkInfo {
     pub local_position: Vector3<f64>
 }
 
-impl RobotCollisionLinkInfo {
+impl RobotLinkShapeInfo {
     pub fn new(link_type: usize, chain_idx: usize, joint_idx: usize, stationary: bool, shape_type: usize, init_quat: UnitQuaternion<f64>, local_position: Vector3<f64>) -> Self  {
         Self {link_type, chain_idx, joint_idx, stationary, shape_type, init_quat, local_position}
     }
 }
 
-pub struct RobotCollisionModel {
+pub struct RobotShapeModel {
     pub robot: Robot,
     pub robot_collision_specs_file: RobotCollisionSpecFileParser,
     pub collision_objects: Vec<CollisionObject>,
-    pub link_info_arr: Vec<RobotCollisionLinkInfo>
+    pub link_info_arr: Vec<RobotLinkShapeInfo>
 }
 
-impl RobotCollisionModel {
+impl RobotShapeModel {
     pub fn from_robot_and_specs(robot: &Robot, specs: &RobotCollisionSpecFileParser, starting_config: &Vec<f64>) -> Self {
         let mut collision_objects: Vec<CollisionObject> = Vec::new();
-        let mut link_info_arr: Vec<RobotCollisionLinkInfo> = Vec::new();
+        let mut link_info_arr: Vec<RobotLinkShapeInfo> = Vec::new();
 
         let frames = robot.get_frames_immutable(starting_config);
         for i in 0..frames.len() {
@@ -48,7 +48,7 @@ impl RobotCollisionModel {
                     collision_object.set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
                     collision_object.align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
                     collision_object.update_all_bounding_volumes();
-                    link_info_arr.push(RobotCollisionLinkInfo::new(0, i, j, false, 0, collision_object.curr_orientation.clone(), Vector3::identity()));
+                    link_info_arr.push(RobotLinkShapeInfo::new(0, i, j, false, 0, collision_object.curr_orientation.clone(), Vector3::identity()));
                     collision_objects.push(collision_object);
                 }
             }
@@ -59,15 +59,16 @@ impl RobotCollisionModel {
             sphere.update_all_bounding_volumes();
 
             let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.spheres[i].coordinate_frame);
-            if specs.spheres[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
+            if specs.spheres[i].coordinate_frame == "static".to_string() {
+                link_info_arr.push(RobotLinkShapeInfo::new(1, usize::max_value(), usize::max_value(), true, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
                 sphere.set_curr_translation(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
             } else {
                 let mut chain_idx = 0 as usize;
                 let mut joint_idx = 0 as usize;
                 let mut found = false;
+
                 for j in 0..robot.num_chains {
-                    for k in 0..robot.subchain_indices.len() {
+                    for k in 0..robot.subchain_indices[j].len() {
                         if !found && idx == robot.subchain_indices[j][k] {
                             found = true;
                             chain_idx = j; joint_idx = k;
@@ -75,11 +76,11 @@ impl RobotCollisionModel {
                     }
                 }
 
-                let mut sphere_position = Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz);
-                sphere_position = frames[chain_idx].1[joint_idx+1] * sphere_position;
+                let mut sphere_position = Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz) + frames[chain_idx].0[joint_idx];
+                sphere_position = frames[chain_idx].1[joint_idx + 1] * sphere_position;
                 sphere.set_curr_translation(sphere_position[0], sphere_position[1], sphere_position[2]);
 
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
+                link_info_arr.push(RobotLinkShapeInfo::new(1, chain_idx, joint_idx, false, 1, UnitQuaternion::identity(), Vector3::new(specs.spheres[i].tx, specs.spheres[i].ty, specs.spheres[i].tz)));
             }
             collision_objects.push(sphere);
         }
@@ -91,8 +92,8 @@ impl RobotCollisionModel {
             cuboid.update_all_bounding_volumes();
 
             let idx = Robot::get_index_from_joint_order(&robot.joint_ordering, &specs.cuboids[i].coordinate_frame);
-            if specs.cuboids[i].coordinate_frame == "static".to_string() || idx == 101010101010 {
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, usize::max_value(), usize::max_value(), true, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
+            if specs.cuboids[i].coordinate_frame == "static".to_string() {
+                link_info_arr.push(RobotLinkShapeInfo::new(1, usize::max_value(), usize::max_value(), true, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
                 cuboid.set_curr_translation(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
             } else {
                 let mut chain_idx = 0 as usize;
@@ -102,7 +103,7 @@ impl RobotCollisionModel {
 
                 let mut found = false;
                 for j in 0..robot.num_chains {
-                    for k in 0..robot.subchain_indices.len() {
+                    for k in 0..robot.subchain_indices[j].len() {
                         if !found && idx == robot.subchain_indices[j][k] {
                             found = true;
                             chain_idx = j; joint_idx = k;
@@ -110,11 +111,11 @@ impl RobotCollisionModel {
                     }
                 }
 
-                let mut cube_position = Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz);
+                let mut cube_position = Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz) + frames[chain_idx].0[joint_idx];
                 cube_position = frames[chain_idx].1[joint_idx + 1] * cube_position;
                 cuboid.set_curr_translation(cube_position[0], cube_position[1], cube_position[2]);
 
-                link_info_arr.push(RobotCollisionLinkInfo::new(1, chain_idx, joint_idx, false, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
+                link_info_arr.push(RobotLinkShapeInfo::new(1, chain_idx, joint_idx, false, 2, q.clone(), Vector3::new(specs.cuboids[i].tx, specs.cuboids[i].ty, specs.cuboids[i].tz)));
             }
 
             collision_objects.push(cuboid);
@@ -130,13 +131,13 @@ impl RobotCollisionModel {
         let collision_file_name = ifp.collision_file_name;
         let fp2 = get_path_to_src() + "RelaxedIK/Config/collision_files_rust/" + collision_file_name.as_str();
         let robot_collision_specs_file = RobotCollisionSpecFileParser::from_yaml_path(fp2.clone());
-        RobotCollisionModel::from_robot_and_specs(&robot, &robot_collision_specs_file, &ifp.starting_config)
+        RobotShapeModel::from_robot_and_specs(&robot, &robot_collision_specs_file, &ifp.starting_config)
     }
 
     pub fn from_info_file_name(info_file_name: String) -> Self {
          let path_to_src = get_path_to_src();
          let fp = path_to_src + "RelaxedIK/Config/info_files/" + info_file_name.as_str();
-         RobotCollisionModel::from_yaml_path(fp)
+         RobotShapeModel::from_yaml_path(fp)
      }
 
     pub fn collision_check_full_shapes(&self, idx1: usize, idx2: usize) -> bool {
@@ -172,7 +173,7 @@ impl RobotCollisionModel {
                     let parent_chain_idx = self.link_info_arr[i].chain_idx;
                     let parent_joint_idx = self.link_info_arr[i].joint_idx;
                     let curr_quat = frames[parent_chain_idx].1[parent_joint_idx + 1];
-                    let new_position = curr_quat * self.link_info_arr[i].local_position;
+                    let new_position = curr_quat * (self.link_info_arr[i].local_position) + frames[parent_chain_idx].0[parent_joint_idx];
                     self.collision_objects[i].set_curr_translation(new_position[0], new_position[1], new_position[2]);
                     if self.link_info_arr[i].shape_type == 0 ||  self.link_info_arr[i].shape_type == 2 { // if it's capsule or cuboid, have to update orientation
                         let init_quat = self.link_info_arr[i].init_quat.clone();

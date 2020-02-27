@@ -1,3 +1,5 @@
 
 
-pub struct SelfCollisionEngine;
+pub struct SelfCollisionEngine {
+
+}
