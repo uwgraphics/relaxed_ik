@@ -1,12 +1,7 @@
 robot_link_radius: 0.05
 boxes:
   - name: sawyer_stand_box
-    parameters: [0.75,0.4,1.]
-    coordinate_frame: static
-    rotation: [0.,0.,0.]
-    translation: [-0.2,0.0,-0.6]
-  - name: sawyer_stand_box
-    parameters: [0.75,0.4,1.]
+    parameters: [0.375,0.2,0.5]
     coordinate_frame: static
     rotation: [0.,0.,0.]
     translation: [-0.2,0.0,-0.6]

@@ -22,9 +22,9 @@ fn main() {
     let start = Instant::now();
     for i in 0..1000 {
         // rcm.update_bounding_sphere(0);
-        rcm.update_robot_transforms(&vec![0.0, 0.0, 0.0, 0., 0., 0.,0., 0., 0., 0., 0., 0.,0.,0.,0.]);
+        // rcm.update_robot_transforms(&vec![0., 0., 0., 0., 0., 0.,0., 0., 0., 0., 0., 0.,0.,0.,0.]);
         rcm.update_all_bounding_spheres();
-        rcm.update_all_bounding_aabbs();
+        // rcm.update_all_bounding_aabbs();
         // rcm.collision_check_full_shapes(0,5);
     }
     let stop = start.elapsed();
