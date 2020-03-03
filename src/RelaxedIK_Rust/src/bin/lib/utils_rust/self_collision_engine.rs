@@ -82,11 +82,14 @@ impl SelfCollisionEngine {
         let l = self.link_pair_idxs.len();
 
 
+
         // start with the pair that was last seen to be in collision to try it as a short circuit
         let link_pair = self.link_pair_idxs[self.last_collision_pair_idx];
-        let in_collision = self.robot_shape_model.collision_check_full_shapes(link_pair.0, link_pair.1);
-        if in_collision {
-            return true;
+        if self.allowed_collision_matrix[link_pair.0][link_pair.1] {
+            let in_collision = self.robot_shape_model.collision_check_full_shapes(link_pair.0, link_pair.1);
+            if in_collision {
+                return true;
+            }
         }
 
         /*
@@ -107,10 +110,9 @@ impl SelfCollisionEngine {
             }
         }
         */
-
         for i in 0..l {
             let link_pair = self.link_pair_idxs[i];
-            if self.allowed_collision_matrix[link_pair.0][link_pair.1] { // bounding sphere check...
+            if self.allowed_collision_matrix[link_pair.0][link_pair.1] && !(i == self.last_collision_pair_idx){ // bounding sphere check...
                 self.robot_shape_model.update_bounding_sphere(link_pair.0);
                 self.robot_shape_model.update_bounding_sphere(link_pair.1);
                 let in_collision_bounding_sphere = self.robot_shape_model.collision_check_bounding_spheres(link_pair.0, link_pair.1);

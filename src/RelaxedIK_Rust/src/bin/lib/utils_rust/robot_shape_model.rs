@@ -44,7 +44,7 @@ impl RobotShapeModel {
                 let link_length = link_vector.norm();
                 if link_length > specs.robot_link_radius {
                     let link_midpoint = (frames[i].0[j +1] + frames[i].0[j]) / 2.0;
-                    let mut collision_object = CollisionObject::new_capsule(((link_length*1.0)/2.0 - specs.robot_link_radius).max(0.000001), specs.robot_link_radius);
+                    let mut collision_object = CollisionObject::new_capsule(((link_length*1.01)/2.0 - specs.robot_link_radius).max(0.000001), specs.robot_link_radius);
                     collision_object.set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
                     collision_object.align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
                     collision_object.update_all_bounding_volumes();

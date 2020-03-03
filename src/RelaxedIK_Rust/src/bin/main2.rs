@@ -6,13 +6,14 @@ use lib::utils_rust::sampler::{ThreadRobotSampler, ThreadSampler};
 
 
 fn main() {
-    let mut sce = SelfCollisionEngine::from_info_file_name("ur5_info.yaml".to_string());
+    let mut sce = SelfCollisionEngine::from_info_file_name("hubo_info.yaml".to_string());
 
 
     let start = Instant::now();
     for i in 0..1000 {
-        let sample = sce.sampler.sample();
-        sce.collision_check(&sample.data.as_vec());
+        // let sample = sce.sampler.sample();
+        // sce.collision_check(&sample.data.as_vec());
+        let check = sce.collision_check(&vec![0.,0.,0.001,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.]);
     }
     let end = start.elapsed();
     println!("{:?}", end);
@@ -20,7 +21,7 @@ fn main() {
     for i in 0..1 {
         // let sample = sce.sampler.sample();
         // println!("{:?}", sce.collision_check(&sample.data.as_vec()));
-        let check = sce.collision_check(&vec![0.,0.,3.1,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.]);
+        let check = sce.collision_check(&vec![0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.]);
         // println!("{:?}", sce.robot_shape_model.collision_objects[0].curr_isometry);
         // println!("{:?}", sce.robot_shape_model.collision_objects[2].curr_isometry);
         // println!("{:?}", sce.allowed_collision_matrix);
