@@ -160,28 +160,41 @@ impl RobotShapeModel {
 
     pub fn update_robot_transforms(&mut self, state: &Vec<f64>) {
         let frames = self.robot.get_frames_immutable(state);
+        self.update_robot_transforms_from_frames(&frames);
+    }
+
+    pub fn update_robot_transforms_from_frames(&mut self, frames: &Vec<(Vec<Vector3<f64>>, Vec<UnitQuaternion<f64>>)>) {
         for i in 0..self.link_info_arr.len() {
-            if self.link_info_arr[i].link_type == 0 { // if it's an auto capsule...
-                let chain_idx = self.link_info_arr[i].chain_idx;
-                let joint_idx = self.link_info_arr[i].joint_idx;
-                let link_vector = (frames[chain_idx].0[joint_idx + 1] - frames[chain_idx].0[joint_idx]);
-                let link_midpoint = (frames[chain_idx].0[joint_idx + 1] + frames[chain_idx].0[joint_idx]) / 2.0;
-                // println!("{:?}", link_midpoint);
-                self.collision_objects[i].set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
-                self.collision_objects[i].align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
-            } else { // else, if it's a user supplied shape...
-                if !self.link_info_arr[i].stationary { // if it's not a stationary shape...
-                    let parent_chain_idx = self.link_info_arr[i].chain_idx;
-                    let parent_joint_idx = self.link_info_arr[i].joint_idx;
-                    let curr_quat = frames[parent_chain_idx].1[parent_joint_idx + 1];
-                    let new_position = curr_quat * (self.link_info_arr[i].local_position) + frames[parent_chain_idx].0[parent_joint_idx];
-                    self.collision_objects[i].set_curr_translation(new_position[0], new_position[1], new_position[2]);
-                    if self.link_info_arr[i].shape_type == 0 ||  self.link_info_arr[i].shape_type == 2 { // if it's capsule or cuboid, have to update orientation
-                        let init_quat = self.link_info_arr[i].init_quat.clone();
-                        let disp_quat = transformations::quaternion_dispQ(init_quat, curr_quat.clone());
-                        let new_quat = self.link_info_arr[i].init_quat * disp_quat;
-                        self.collision_objects[i].set_curr_orientation(new_quat.w, new_quat.i, new_quat.j, new_quat.k);
-                    }
+            self.update_robot_link_transform_from_frames(i, frames);
+        }
+    }
+
+    pub fn update_robot_link_transform(&mut self, link_idx: usize, state: &Vec<f64>) {
+        let frames = self.robot.get_frames_immutable(state);
+        self.update_robot_link_transform_from_frames(link_idx, &frames);
+    }
+
+    pub fn update_robot_link_transform_from_frames(&mut self, link_idx: usize, frames: &Vec<(Vec<Vector3<f64>>, Vec<UnitQuaternion<f64>>)>) {
+        if self.link_info_arr[link_idx].link_type == 0 { // if it's an auto capsule...
+            let chain_idx = self.link_info_arr[link_idx].chain_idx;
+            let joint_idx = self.link_info_arr[link_idx].joint_idx;
+            let link_vector = (frames[chain_idx].0[joint_idx + 1] - frames[chain_idx].0[joint_idx]);
+            let link_midpoint = (frames[chain_idx].0[joint_idx + 1] + frames[chain_idx].0[joint_idx]) / 2.0;
+            // println!("{:?}", link_midpoint);
+            self.collision_objects[link_idx].set_curr_translation(link_midpoint[0], link_midpoint[1], link_midpoint[2]);
+            self.collision_objects[link_idx].align_object_with_vector(vec![link_vector[0], link_vector[1], link_vector[2]]);
+        } else { // else, if it's a user supplied shape...
+            if !self.link_info_arr[link_idx].stationary { // if it's not a stationary shape...
+                let parent_chain_idx = self.link_info_arr[link_idx].chain_idx;
+                let parent_joint_idx = self.link_info_arr[link_idx].joint_idx;
+                let curr_quat = frames[parent_chain_idx].1[parent_joint_idx + 1];
+                let new_position = curr_quat * (self.link_info_arr[link_idx].local_position) + frames[parent_chain_idx].0[parent_joint_idx];
+                self.collision_objects[link_idx].set_curr_translation(new_position[0], new_position[1], new_position[2]);
+                if self.link_info_arr[link_idx].shape_type == 0 ||  self.link_info_arr[link_idx].shape_type == 2 { // if it's capsule or cuboid, have to update orientation
+                    let init_quat = self.link_info_arr[link_idx].init_quat.clone();
+                    let disp_quat = transformations::quaternion_dispQ(init_quat, curr_quat.clone());
+                    let new_quat = self.link_info_arr[link_idx].init_quat * disp_quat;
+                    self.collision_objects[link_idx].set_curr_orientation(new_quat.w, new_quat.i, new_quat.j, new_quat.k);
                 }
             }
         }
