@@ -1,0 +1,38 @@
+robot_link_radius: 0.05
+boxes: 
+  - name: box2
+    parameters: [0.13, 0.15, 0.2]
+    coordinate_frame: WAIST
+    rotation: [0.0, 0.0, 0.0]
+    translation: [-0.03, 0.0, 0.39]
+  - name: box2
+    parameters: [0.13, 0.15, 0.2]
+    coordinate_frame: WAIST
+    rotation: [0.0, 0.0, 0.0]
+    translation: [-0.03, 0.0, 0.39]
+  - name: box3
+    parameters: [0.135, 0.19, 0.5]
+    coordinate_frame: static
+    rotation: [0.0, 0.0, 0.0]
+    translation: [0.0, 0.0, -0.4]
+  - name: box3
+    parameters: [1., 0.1, 1.0]
+    coordinate_frame: static
+    rotation: [0.0, 0.0, 0.0]
+    translation: [0.0, -0.47, 0.0]
+  - name: box3
+    parameters: [1., 0.1, 1.0]
+    coordinate_frame: static
+    rotation: [0.0, 0.0, 0.0]
+    translation: [0.0, 0.47, 0.0]
+  - name: box3
+    parameters: [0.1, 1.0, 1.9]
+    coordinate_frame: static
+    rotation: [0.0, 0.0, 0.0]
+    translation: [-0.35, 0.0, 0.0]
+  - name: box3
+    parameters: [1.0, 1.0, 0.1]
+    coordinate_frame: static
+    rotation: [0.0, 0.0, 0.0]
+    translation: [0.0, 0.0, 0.94]
+spheres: 

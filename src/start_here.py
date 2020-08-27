@@ -109,7 +109,7 @@ joint_names = [ [ ] ]
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  [  ]
+joint_ordering =  [ ]
 ######################################################################################################
 
 
@@ -202,6 +202,7 @@ from sensor_msgs.msg import JointState
 def joint_state_define(x):
 	return None
 
+
 ######################################################################################################
 
 
@@ -282,7 +283,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = ''
+collision_file_name = ' '
 ###########################################################################################################
 
 

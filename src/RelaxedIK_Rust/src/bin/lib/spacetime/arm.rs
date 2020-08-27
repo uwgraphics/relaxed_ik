@@ -292,21 +292,29 @@ impl Arm{
     }
 
     pub fn get_ee_position(&mut self, x: &[f64]) -> nalgebra::Vector3<f64> {
-        self.get_frames(x);
-        let last_index = self.out_positions.len() - 1;
-        self.out_positions[last_index].clone()
+        // self.get_frames(x);
+        let res = self.get_frames_immutable(&x);
+        let last_index = res.0.len() - 1;
+        // self.out_positions[last_index].clone()
+        return res.0[last_index];
     }
 
     pub fn get_ee_rot_mat(&mut self, x: &[f64]) -> nalgebra::Matrix3<f64> {
-        self.get_frames(x);
-        let last_index = self.out_rot_mats.len() - 1;
-        self.out_rot_mats[last_index].clone()
+        // self.get_frames(x);
+        let res = self.get_frames_immutable(x);
+        // let last_index = self.out_rot_mats.len() - 1;
+        let last_index = res.1.len() - 1;
+        // self.out_rot_mats[last_index].clone()
+        return res.1[last_index].to_rotation_matrix().matrix().clone();
     }
 
     pub fn get_ee_quat(&mut self, x: &[f64]) -> nalgebra::UnitQuaternion<f64> {
-        self.get_frames(x);
-        let last_index = self.out_rot_quats.len() - 1;
-        self.out_rot_quats[last_index].clone()
+        // self.get_frames(x);
+        let res = self.get_frames_immutable(x);
+        // let last_index = self.out_rot_quats.len() - 1;
+        let last_index = res.1.len() - 1;
+        // self.out_rot_quats[last_index].clone()
+        return res.1[last_index];
     }
 
     fn __update_frames(&mut self, i: usize, joint_val: f64, __do_rot_offset: bool, __is_prismatic: bool,

@@ -41,6 +41,7 @@ fn main() {
     while rosrust::is_ok() {
         let x = r.solve(&arc.lock().unwrap());
         println!("{:?}", x);
+        // println!("{:?}", r.vars.init_ee_positions);
 
         let mut ja = msg::relaxed_ik::JointAngles::default();
         for i in 0..x.len() {

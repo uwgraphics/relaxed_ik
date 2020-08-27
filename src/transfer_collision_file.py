@@ -102,6 +102,6 @@ def transfer_from_info_file(path_to_src, info_file_name):
 
 if __name__ == '__main__':
     path_to_src = os.path.dirname(__file__)
-    transfer_from_info_file(path_to_src, 'sawyer_info.yaml')
+    transfer_from_info_file(path_to_src, 'fetch_info.yaml')
 
 

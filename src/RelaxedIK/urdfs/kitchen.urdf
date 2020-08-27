@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<robot name="kitchen">
+  <link name="root"></link>
+  <link name="cupboard">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard.stl" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="dishwasher_door">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/dishwasher_door.stl" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/dishwasher_door.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="dishwasher_door_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0.33637 -0.72851 0.030766" />
+    <parent link="cupboard" />
+    <child link="dishwasher_door" />
+    <axis xyz="0 1 0" />
+  <limit effort="0.32" lower="-1.57" upper="0" velocity="1.57" />
+  </joint>
+  <link name="cupboard_door_l">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard_door_l.stl" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard_door_l.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="cupboard_door_l_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0.44637 0.54793 1.6839" />
+    <parent link="cupboard" />
+    <child link="cupboard_door_l" />
+    <axis xyz="0 0 1" />
+  <limit effort="0.32" lower="-3.14" upper="0.0" velocity="1.57" />
+  </joint>
+  <link name="cupboard_door_r">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard_door_r.stl" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/cupboard_door_r.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="cupboard_door_r_joint" type="revolute">
+    <origin rpy="0 0 0" xyz="0.44637 -1.1497 1.6839" />
+    <parent link="cupboard" />
+    <child link="cupboard_door_r" />
+    <axis xyz="0 0 1" />
+  <limit effort="0.32" lower="0.0" upper="3.14" velocity="1.57" />
+  </joint>
+  <link name="kitchen_counter">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/kitchen_counter.stl" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="file:///home/rakita/Desktop/urdf_scenes/kitchen_counter.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="cupboard_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="root" />
+    <child link="cupboard" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <joint name="kitchen_counter_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <parent link="root" />
+    <child link="kitchen_counter" />
+    <axis xyz="0 1 0" />
+  </joint>
+</robot>

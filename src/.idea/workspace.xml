@@ -2,13 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cca09db1-2a4e-4872-ab3d-ee79e1ea8bee" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz/joint_viewer.rviz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files_rust/collision_sawyer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files_rust/collision_sawyer.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/collision_files_rust/collision_ur5.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/collision_files_rust/collision_ur5.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/Config/loaded_robot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/robot_shape_model.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/robot_shape_model.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/self_collision_engine.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/utils_rust/self_collision_engine.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/main2.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK/urdfs/sawyer.urdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/objective_master.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/groove/vars.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/lib/spacetime/arm.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/relaxed_ik_node.rs" beforeDir="false" afterPath="$PROJECT_DIR$/RelaxedIK_Rust/src/bin/relaxed_ik_node.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start_here.py" beforeDir="false" afterPath="$PROJECT_DIR$/start_here.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transfer_collision_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/transfer_collision_file.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +37,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/RelaxedIK_Rust" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -65,7 +69,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.transfer_collision_info">
+  <component name="RunManager" selected="Python.movo_test">
     <configuration name="moveit" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,7 +91,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="moveit4" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="movo_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="src" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -95,11 +99,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/RelaxedIK/MP" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RelaxedIK/MP/moveit4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/movo_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,18 +177,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.preprocessing_rust" />
-      <item itemvalue="Python.moveit4" />
       <item itemvalue="Python.moveit" />
       <item itemvalue="Python.relaxed_ik_rust" />
       <item itemvalue="Python.transfer_collision_info" />
+      <item itemvalue="Python.movo_test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.movo_test" />
         <item itemvalue="Python.transfer_collision_info" />
         <item itemvalue="Python.relaxed_ik_rust" />
         <item itemvalue="Python.preprocessing_rust" />
         <item itemvalue="Python.moveit" />
-        <item itemvalue="Python.moveit4" />
       </list>
     </recent_temporary>
   </component>

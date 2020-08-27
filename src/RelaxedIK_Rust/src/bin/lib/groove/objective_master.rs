@@ -31,7 +31,7 @@ impl ObjectiveMaster {
             objectives.push(Box::new(MatchEEQuatGoals::new(i)));
             weight_priors.push(9.0);
         }
-        objectives.push(Box::new(MinimizeVelocity));   weight_priors.push(7.0);
+        objectives.push(Box::new(MinimizeVelocity));   weight_priors.push(10.0);
         objectives.push(Box::new(MinimizeAcceleration));    weight_priors.push(2.0);
         objectives.push(Box::new(MinimizeJerk));    weight_priors.push(1.0);
         objectives.push(Box::new(JointLimits));    weight_priors.push(1.0);

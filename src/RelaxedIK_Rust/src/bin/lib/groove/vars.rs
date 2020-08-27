@@ -54,7 +54,7 @@ impl RelaxedIKVars {
         let mut goal_positions: Vec<Vector3<f64>> = Vec::new();
         let mut goal_quats: Vec<UnitQuaternion<f64>> = Vec::new();
 
-        let init_ee_positions = robot.get_ee_positions(ifp.starting_config.as_slice());
+        let mut init_ee_positions = robot.get_ee_positions(ifp.starting_config.as_slice());
         let init_ee_quats = robot.get_ee_quats(ifp.starting_config.as_slice());
 
         for i in 0..num_chains {
