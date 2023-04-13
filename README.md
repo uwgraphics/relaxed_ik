@@ -1,7 +1,8 @@
 # relaxed_ik
 
-<b> Development update 10/26/21 </b>
+:pushpin:	We provide a seperate repository called [**relaxed_ik_core**](https://github.com/uwgraphics/relaxed_ik_core), which is complitable with more recent Rust version and Ubuntu 20.04 / ROS Noetic.
 
+<b> Development update 10/26/21 </b>
 
 Hi all, we are excited to share some updates to our relaxed_ik library.  Apologies for the delay, I have been attending to many unforeseen circumstances over the past few months.
 
